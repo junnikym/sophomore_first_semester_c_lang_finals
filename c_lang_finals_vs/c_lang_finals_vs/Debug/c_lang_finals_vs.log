@@ -1,0 +1,13 @@
+﻿  main.c
+C:\source\sophomore_first_semester_c_lang_finals\main.c(8,2): warning C4550: 식이 인수 목록이 없는 함수로 계산됩니다.
+  system.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(37,3): warning C4133: '=': 'GLFWwindow *'과(와) 'WINDOW *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(38,24): warning C4047: 'return': 'WINDOW *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(40,31): warning C4133: '함수': 'WINDOW *'과(와) 'GLFWwindow *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(42,27): warning C4133: '함수': 'WINDOW *'과(와) 'GLFWwindow *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(51,12): warning C4047: 'return': 'WINDOW *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(59,12): warning C4047: 'return': 'WINDOW *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(75,38): warning C4133: '함수': 'WINDOW *'과(와) 'GLFWwindow *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(92,25): warning C4133: '함수': 'WINDOW *'과(와) 'GLFWwindow *' 사이의 형식이 호환되지 않습니다.
+  코드를 생성하고 있습니다...
+  c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe
