@@ -1,10 +1,12 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "types.h"
+
 typedef struct _ENTITY {
-    2D_COORD position;
-    2D_COORD direction_vec;
-    2D_COORD force_vec;
+    COORD_2D position;
+    COORD_2D direction_vec;
+    COORD_2D force_vec;
 } ENTITY;
 
 #endif

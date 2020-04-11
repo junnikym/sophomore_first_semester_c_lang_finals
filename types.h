@@ -3,22 +3,20 @@
 
 #include <math.h>
 
-typedef struct _2D_COORD
+typedef struct _COORD_2D {
     union {
         struct {
             double x, y;
-        }
+        };
         double pos[2];
-    }
-} 2D_COORD;
+    };
+} COORD_2D;
 
-void zeroset_coord( 2D_COORD x );
+void zeroset_coord( COORD_2D x );
 
-double get_size( _2D_COORD x );
+double get_size(const COORD_2D* x);
 
-void normalize( 2D_COORD *vec , const int* vec_size );
-void normalize( 2D_COORD *vec );
-2D_COORD normalize( 2D_COORD vec, const int* vec_size );
-2D_COORD normalize( const 2D_COORD *vec );
+COORD_2D normalize(COORD_2D vec, const double* vec_size);
+void normalize_ref( COORD_2D *vec , const double* vec_size );
 
 #endif

@@ -1,37 +1,29 @@
 #include "types.h"
 
 // ───────────────────────────────────────────────────────
-// ───── 2D_COORD functions ──────────────────────────────
+// ───── COORD_2D functions ──────────────────────────────
 
-void zeroset_coord( 2D_COORD x ) {
+void zeroset_coord( COORD_2D x ) {
     x.x = 0;
     x.y = 0;
 }
 
 
-double get_size( const 2D_COORD* x ) {
-    sqrt( (x->x * x->x) + (x->y * x->y) );
+double get_size( const COORD_2D* x ) {
+    return sqrt( (x->x * x->x) + (x->y * x->y) );
 }
 
 
-void normalize( 2D_COORD *vec , const int* vec_size ) {
+void normalize_ref(COORD_2D *vec, const double* vec_size) {
     vec->x /= *vec_size;
     vec->y /= *vec_size;
 }
 
-void normalize( 2D_COORD *vec ) {
-    normalize( vec, get_size(vec) );
-}
-
-2D_COORD normalize( 2D_COORD vec, const int* vec_size ) {
+COORD_2D normalize(COORD_2D vec, const double* vec_size) {
     vec.x /= *vec_size;
     vec.y /= *vec_size;
 
-    return vec.x
-}
-
-2D_COORD normalize( const 2D_COORD *vec ) {
-    normalize( *vec, get_size(vec) );
+    return vec;
 }
 
 // ───────────────────────────────────────────────────────
