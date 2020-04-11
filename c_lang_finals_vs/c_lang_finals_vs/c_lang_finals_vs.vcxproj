@@ -140,9 +140,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\opengl\system.c" />
+    <ClCompile Include="..\..\physics.c" />
+    <ClCompile Include="..\..\types.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\entity.h" />
     <ClInclude Include="..\..\opengl\system.h" />
+    <ClInclude Include="..\..\physics.h" />
+    <ClInclude Include="..\..\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

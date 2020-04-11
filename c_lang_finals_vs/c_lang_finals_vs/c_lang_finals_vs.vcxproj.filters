@@ -27,10 +27,25 @@
     <ClCompile Include="..\..\opengl\system.c">
       <Filter>소스 파일\opengl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\physics.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\types.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\opengl\system.h">
       <Filter>헤더 파일\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\entity.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\physics.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\types.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
