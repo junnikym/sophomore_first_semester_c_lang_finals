@@ -1,15 +1,6 @@
 #include "system.h"
 
-void err_callback(int err_code, const char* err_description) {
-	fprintf(stderr, "Error : %s\n", err_description);
-}
-
-void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mods) {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)			// esc키 입력 시 종료
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-}
-
-WINDOW* gl_init(int width, int height, const char* title) {
+WINDOW* gl_system_init(int width, int height, const char* title) {
 	WINDOW* window = malloc(sizeof(WINDOW));
 
 	glfwSetErrorCallback(err_callback);
@@ -35,7 +26,7 @@ WINDOW* gl_init(int width, int height, const char* title) {
 		NULL,
 		NULL
 	);
-	if (!window)	return -1;
+	if (!window)	exit(EXIT_FAILURE);
 
 	glfwMakeContextCurrent(window);
 
@@ -48,7 +39,7 @@ WINDOW* gl_init(int width, int height, const char* title) {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err_code));
 
 		glfwTerminate();
-		return -1;
+		exit(EXIT_FAILURE);
 	}
 
 	// GLEW 3.3 버전이 아닐 경우 실행하지 않음
@@ -56,25 +47,42 @@ WINDOW* gl_init(int width, int height, const char* title) {
 		fprintf(stderr, "OpenGL 3.3 API is not available \n");
 
 		glfwTerminate();
-		return -1;
+		exit(EXIT_FAILURE);
+	}
+
+	if (gl_load_shaders("../../opengl/shader/vertex_shader.vs", "../../opengl/shader/fragment_shader.fs") < 0) {
+		fprintf(stderr, "fail to create shader program\n");
+
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+
+	if (gl_define_vertex_arr_obj() < 0) {
+		fprintf(stderr, "fail to create shader program\n");
+
+		glfwTerminate();
+		exit(EXIT_FAILURE);
 	}
 
 	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
 	glfwSwapInterval(1);
 
-	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
-	glfwSwapInterval(1);
+	
 
 	return window;
 }
 
-void gl_run(WINDOW* window) {
+void gl_system_run(WINDOW* window) {
 	double last_time = glfwGetTime();
+	double current_time = 0;
 	int n_frames = 0;
+
+	glUseProgram(triangle_shader_program_id);
+	glBindVertexArray(triangle_vertex_arr_obj);
 
 	while (!glfwWindowShouldClose(window)) {
 
-		double current_time = glfwGetTime();
+		current_time = glfwGetTime();
 		n_frames++;
 
 		if (current_time - last_time >= 1.0) {
@@ -88,8 +96,19 @@ void gl_run(WINDOW* window) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);		// 더블 버퍼링 사용
 		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
 	}
+}
+
+void gl_system_shutdown(WINDOW* window) {
+	glDeleteProgram(triangle_shader_program_id);
+	glDeleteBuffers(1, &triangle_pos_vertex_buf_obj_id);
+	glDeleteBuffers(1, &triangle_color_vertex_buf_obj_id);
+	glDeleteVertexArrays(1, &triangle_vertex_arr_obj);
+	glfwTerminate();
+
+	free(window);
 }

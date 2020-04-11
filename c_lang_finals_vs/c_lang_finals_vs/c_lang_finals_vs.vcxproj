@@ -84,8 +84,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -139,15 +139,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.c" />
+    <ClCompile Include="..\..\opengl\callback_funcs.c" />
+    <ClCompile Include="..\..\opengl\graphics.c" />
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\types.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\entity.h" />
+    <ClInclude Include="..\..\opengl\callback_funcs.h" />
+    <ClInclude Include="..\..\opengl\graphics.h" />
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\opengl\shader\fragment_shader.fs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExcludedFromBuild>
+    </None>
+    <None Include="..\..\opengl\shader\vertex_shader.vs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

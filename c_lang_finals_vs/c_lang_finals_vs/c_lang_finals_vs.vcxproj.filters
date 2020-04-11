@@ -33,6 +33,12 @@
     <ClCompile Include="..\..\types.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\opengl\callback_funcs.c">
+      <Filter>소스 파일\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opengl\graphics.c">
+      <Filter>소스 파일\opengl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\opengl\system.h">
@@ -47,5 +53,19 @@
     <ClInclude Include="..\..\types.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\opengl\graphics.h">
+      <Filter>헤더 파일\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opengl\callback_funcs.h">
+      <Filter>헤더 파일\opengl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\opengl\shader\vertex_shader.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="..\..\opengl\shader\fragment_shader.fs">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>
