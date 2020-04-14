@@ -63,7 +63,7 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	result = gl_load_shaders(
 		"../../opengl/shader/vertex_shader.vs",
 		"../../opengl/shader/fragment_shader.fs",
-		window_struct->program_id
+		&(window_struct->program_id)
 	);
 	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
@@ -73,7 +73,7 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	}
 
 
-	result = gl_define_vertex_arr_obj(window_struct->program_id);
+	result = gl_define_vertex_arr(&(window_struct->program_id), &vertex_arr_id, &vertex_buf, &color_buf);
 	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
 
@@ -93,7 +93,7 @@ void gl_system_run(WINDOW* window_struct) {
 	int n_frames = 0;
 
 	glUseProgram(window_struct->program_id);
-	glBindVertexArray(triangle_vertex_arr_obj);
+	glBindVertexArray(vertex_arr_id);
 
 	while (!glfwWindowShouldClose(window_struct->window)) {
 
@@ -107,7 +107,7 @@ void gl_system_run(WINDOW* window_struct) {
 			last_time = current_time;
 		}
 
-		glClearColor(0, 0, 0, 1);
+		glClearColor(0, 0, 0, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -124,6 +124,6 @@ void gl_system_shutdown(WINDOW* window_struct) {
 	glDeleteProgram(window_struct->program_id);
 	glDeleteBuffers(1, &vertex_buf);
 	glDeleteBuffers(1, &color_buf);
-	glDeleteVertexArrays(1, &triangle_vertex_arr_obj);
+	glDeleteVertexArrays(1, &vertex_arr_id);
 	glfwTerminate();
 }

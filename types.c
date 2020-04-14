@@ -27,7 +27,7 @@ void coord_2d_sub_ref(COORD_2D* target, const COORD_2D* rhs) {
     target->x -= rhs->x;
     target->y -= rhs->y;
 }
-
+          
 void coord_2d_mul_ref(COORD_2D* target, const double* w) {
     target->x *= *w;
     target->y *= *w;

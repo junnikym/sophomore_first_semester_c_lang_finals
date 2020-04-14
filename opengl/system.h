@@ -10,6 +10,10 @@
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
 
+static GLuint vertex_arr_id = 0;
+static GLuint vertex_buf = 0;
+static GLuint color_buf = 0;
+
 typedef struct _WINDOW {
     GLFWwindow* window;
     GLuint* program_id;

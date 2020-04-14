@@ -102,34 +102,35 @@ int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path
 	return 0;
 } // triangle_shader_program_id
 
-// !DOTO : start modify here
-int gl_define_vertex_arr_obj(GLuint *program_id) {
+
+// !TODO : make struct; this function's parameters -> struct members
+int gl_define_vertex_arr(GLuint *program_id, GLuint* vertex_arr_id, GLuint* vertex_buf, GLuint* color_buf) {
 	GLint position_attribute = 0;
 	GLint color_attribute = 0;
 
-	float position[] = {
+	float g_vertex_buf_data[] = {
 		 0.0f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
 	};
 
-	float color[] = {
+	float g_color_buf_data[] = {
 		1.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 1.0f,
 	};
 
 	// VBO
-	glGenBuffers(1, &vertex_buf);
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buf);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(position), position, GL_STATIC_DRAW);
+	glGenBuffers(1, vertex_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, *vertex_buf);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buf_data), g_vertex_buf_data, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &color_buf);
-	glBindBuffer(GL_ARRAY_BUFFER, color_buf);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+	glGenBuffers(1, color_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, *color_buf);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buf_data), g_color_buf_data, GL_STATIC_DRAW);
 
-	glGenVertexArrays(1, &triangle_vertex_arr_obj);
-	glBindVertexArray(triangle_vertex_arr_obj);
+	glGenVertexArrays(1, vertex_arr_id);
+	glBindVertexArray(*vertex_arr_id);
 
 	position_attribute = glGetAttribLocation(*program_id, "positionAttribute");
 	if (position_attribute == -1) {
@@ -138,7 +139,7 @@ int gl_define_vertex_arr_obj(GLuint *program_id) {
 		return -1;
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, *vertex_buf);
 	glVertexAttribPointer(position_attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(position_attribute);
 
@@ -149,7 +150,7 @@ int gl_define_vertex_arr_obj(GLuint *program_id) {
 		return -1;
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, color_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, *color_buf);
 	glVertexAttribPointer(color_attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(color_attribute);
 
