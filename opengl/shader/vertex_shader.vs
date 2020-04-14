@@ -1,5 +1,4 @@
 #version 330 core
-
 in vec3 positionAttribute;
 in vec3 colorAttribute;
 out vec3 passColorAttribute;

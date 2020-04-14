@@ -12,6 +12,7 @@
 
 typedef struct _WINDOW {
     GLFWwindow* window;
+    GLuint* program_id;
     int width, height;
     const char* title;
 } WINDOW;

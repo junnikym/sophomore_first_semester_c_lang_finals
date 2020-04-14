@@ -1,2 +1,6 @@
-﻿  graphics.c
+﻿  system.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(95,40): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(95,40): warning C4024: '__glewUseProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(124,43): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(124,43): warning C4024: '__glewDeleteProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
   c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe

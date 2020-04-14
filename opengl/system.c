@@ -1,7 +1,8 @@
 #include "system.h"
 
 WINDOW* gl_system_init(int width, int height, const char* title) {
-	WINDOW* window = malloc(sizeof(WINDOW));
+	WINDOW* window_struct = malloc(sizeof(WINDOW));
+	int result = 0;
 
 	glfwSetErrorCallback(err_callback);
 
@@ -19,18 +20,22 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);							// 윈도우 크기 고정
 	glfwWindowHint(GLFW_SAMPLES, 4);									// Anti-Aliasing 옵션을 4로 지정 
 																		// * Anti-Aliasing : 지나치게 뚜렷한 모서리를 뭉뚱그려 표현하여 자연스럽게 만듦
-	window = glfwCreateWindow(
+	window_struct->window = glfwCreateWindow(
 		width,		// window size	| x
 		height,		//				| y
-		title,	// title;
+		title,		// title;
 		NULL,
 		NULL
 	);
-	if (!window)	exit(EXIT_FAILURE);
+	if (!window_struct->window) {
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
 
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(window_struct->window);
 
-	glfwSetKeyCallback(window, key_callback);		// 키보드 콜백함수 등록
+	glfwSetKeyCallback(window_struct->window, key_callback);		// 키보드 콜백함수 등록
+	glfwSetFramebufferSizeCallback(window_struct->window, gl_frame_buf_size_callback);
 
 	// GLEW 초기화
 	glewExperimental = GL_TRUE;
@@ -50,14 +55,26 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 		exit(EXIT_FAILURE);
 	}
 
-	if (gl_load_shaders("../../opengl/shader/vertex_shader.vs", "../../opengl/shader/fragment_shader.fs") < 0) {
+	printf("OpenGL version : %s\n", glGetString(GL_VERSION));
+	printf("GLSL version : %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	printf("Vendor : %s\n", glGetString(GL_VENDOR));
+	printf("Renderer : %s\n", glGetString(GL_RENDERER));
+
+	result = gl_load_shaders(
+		"../../opengl/shader/vertex_shader.vs",
+		"../../opengl/shader/fragment_shader.fs",
+		window_struct->program_id
+	);
+	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
 
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	if (gl_define_vertex_arr_obj() < 0) {
+
+	result = gl_define_vertex_arr_obj(window_struct->program_id);
+	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
 
 		glfwTerminate();
@@ -67,20 +84,18 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
 	glfwSwapInterval(1);
 
-	
-
-	return window;
+	return window_struct;
 }
 
-void gl_system_run(WINDOW* window) {
+void gl_system_run(WINDOW* window_struct) {
 	double last_time = glfwGetTime();
 	double current_time = 0;
 	int n_frames = 0;
 
-	glUseProgram(triangle_shader_program_id);
+	glUseProgram(window_struct->program_id);
 	glBindVertexArray(triangle_vertex_arr_obj);
 
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window_struct->window)) {
 
 		current_time = glfwGetTime();
 		n_frames++;
@@ -92,23 +107,23 @@ void gl_system_run(WINDOW* window) {
 			last_time = current_time;
 		}
 
-		glClearColor(0, 0, 1, 0);
-
+		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glfwSwapBuffers(window);		// 더블 버퍼링 사용
+		glfwSwapBuffers(window_struct->window);		// 더블 버퍼링 사용
 		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
 	}
 }
 
-void gl_system_shutdown(WINDOW* window) {
-	glDeleteProgram(triangle_shader_program_id);
-	glDeleteBuffers(1, &triangle_pos_vertex_buf_obj_id);
-	glDeleteBuffers(1, &triangle_color_vertex_buf_obj_id);
+void gl_system_shutdown(WINDOW* window_struct) {
+	glUseProgram(0);
+	glBindVertexArray(0);
+
+	glDeleteProgram(window_struct->program_id);
+	glDeleteBuffers(1, &vertex_buf);
+	glDeleteBuffers(1, &color_buf);
 	glDeleteVertexArrays(1, &triangle_vertex_arr_obj);
 	glfwTerminate();
-
-	free(window);
 }
