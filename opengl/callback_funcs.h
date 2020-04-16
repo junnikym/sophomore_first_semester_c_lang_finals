@@ -1,6 +1,8 @@
 #ifndef OPEN_GL_CALLBACK_FUNCS_H
 #define OPEN_GL_CALLBACK_FUNCS_H
 
+#include "../input.h"
+
 #include <stdio.h>
 
 #include <GL/glew.h>

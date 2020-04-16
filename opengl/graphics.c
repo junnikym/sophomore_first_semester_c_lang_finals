@@ -56,7 +56,7 @@ int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path
 	if (!result) {
 		glGetShaderInfoLog(vertex_shader_id, 512, NULL, error_log);
 		fprintf(stderr, "fail to compile vertex shader : %s \n", error_log);
-		
+
 		glDeleteShader(vertex_shader_id);
 		return -1;
 	}
@@ -102,35 +102,50 @@ int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path
 	return 0;
 } // triangle_shader_program_id
 
+VERTEX_BUF* gl_define_buffer_obj(VERTEX_BUF* p_out, const BUF_OBJ_ATT* data) {
+	/*
+	// for test
+	static int i = 0;
+	//i += 0.1;
+	VEC2 delta = { 0, i };
+
+	float* moved_vertex = (float*)malloc(data->vertex_data_size * sizeof(float));
+	move_vertex_vec2(
+		moved_vertex,
+		data->vertex_data,
+		data->vertex_data_size,
+		&delta
+	);
+	*/
+	// VBO
+	glGenBuffers(1, &p_out->vertex_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, p_out->vertex_buffer);
+	glBufferData(GL_ARRAY_BUFFER, data->vertex_data_size, data->vertex_data, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &p_out->color_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, p_out->color_buffer);
+	glBufferData(GL_ARRAY_BUFFER, data->color_data_size, data->color_data, GL_STATIC_DRAW);
+
+	// VAO
+	glGenVertexArrays(1, &p_out->vertex_arr_id);
+	glBindVertexArray(p_out->vertex_arr_id);
+
+	// EBO
+	GLuint triangleElementBufferObject;
+	glGenBuffers(1, &triangleElementBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleElementBufferObject);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, data->elem_data_size, data->elem_data, GL_STATIC_DRAW);
+
+	//free(moved_vertex);
+
+	return p_out;
+}
+
 
 // !TODO : make struct; this function's parameters -> struct members
-int gl_define_vertex_arr(GLuint *program_id, GLuint* vertex_arr_id, GLuint* vertex_buf, GLuint* color_buf) {
+int gl_vertex_link(GLuint* program_id, const VERTEX_BUF* buffers) {
 	GLint position_attribute = 0;
 	GLint color_attribute = 0;
-
-	float g_vertex_buf_data[] = {
-		 0.0f,  0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-	};
-
-	float g_color_buf_data[] = {
-		1.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 1.0f,
-	};
-
-	// VBO
-	glGenBuffers(1, vertex_buf);
-	glBindBuffer(GL_ARRAY_BUFFER, *vertex_buf);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buf_data), g_vertex_buf_data, GL_STATIC_DRAW);
-
-	glGenBuffers(1, color_buf);
-	glBindBuffer(GL_ARRAY_BUFFER, *color_buf);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buf_data), g_color_buf_data, GL_STATIC_DRAW);
-
-	glGenVertexArrays(1, vertex_arr_id);
-	glBindVertexArray(*vertex_arr_id);
 
 	position_attribute = glGetAttribLocation(*program_id, "positionAttribute");
 	if (position_attribute == -1) {
@@ -139,7 +154,7 @@ int gl_define_vertex_arr(GLuint *program_id, GLuint* vertex_arr_id, GLuint* vert
 		return -1;
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, *vertex_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers->vertex_buffer);
 	glVertexAttribPointer(position_attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(position_attribute);
 
@@ -150,7 +165,7 @@ int gl_define_vertex_arr(GLuint *program_id, GLuint* vertex_arr_id, GLuint* vert
 		return -1;
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, *color_buf);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers->color_buffer);
 	glVertexAttribPointer(color_attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(color_attribute);
 

@@ -72,8 +72,9 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 		exit(EXIT_FAILURE);
 	}
 
+	gl_define_buffer_obj(&tester, &g_SQUARE_DATA);
 
-	result = gl_define_vertex_arr(&(window_struct->program_id), &vertex_arr_id, &vertex_buf, &color_buf);
+	result = gl_vertex_link(&(window_struct->program_id), &tester);
 	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
 
@@ -91,14 +92,16 @@ void gl_system_run(WINDOW* window_struct) {
 	double last_time = glfwGetTime();
 	double current_time = 0;
 	int n_frames = 0;
+	unsigned int transformLoc = 0;
 
 	glUseProgram(window_struct->program_id);
-	glBindVertexArray(vertex_arr_id);
+	glBindVertexArray(tester.vertex_arr_id);
 
 	while (!glfwWindowShouldClose(window_struct->window)) {
 
 		current_time = glfwGetTime();
 		n_frames++;
+		a += 0.05;
 
 		if (current_time - last_time >= 1.0) {
 			printf("%f ms/frame  %d fps \n", (1000.0 / (double)n_frames), n_frames);
@@ -107,10 +110,15 @@ void gl_system_run(WINDOW* window_struct) {
 			last_time = current_time;
 		}
 
-		glClearColor(0, 0, 0, 0);
+		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		transformLoc = glGetUniformLocation(window_struct->program_id, "transform");
+		glUniform4f(transformLoc, a, 0, 0, 0.0f);
+
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window_struct->window);		// 더블 버퍼링 사용
 		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
@@ -122,8 +130,8 @@ void gl_system_shutdown(WINDOW* window_struct) {
 	glBindVertexArray(0);
 
 	glDeleteProgram(window_struct->program_id);
-	glDeleteBuffers(1, &vertex_buf);
-	glDeleteBuffers(1, &color_buf);
-	glDeleteVertexArrays(1, &vertex_arr_id);
+	glDeleteBuffers(1, &tester.vertex_buffer);
+	glDeleteBuffers(1, &tester.color_buffer);
+	glDeleteVertexArrays(1, &tester.vertex_arr_id);
 	glfwTerminate();
 }

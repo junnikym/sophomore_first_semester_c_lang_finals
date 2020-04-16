@@ -1,5 +1,4 @@
 #include "opengl/system.h"
-#include "opengl/graphics.h"
 #include "types.h"
 
 int main() {

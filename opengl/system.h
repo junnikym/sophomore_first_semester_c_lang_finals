@@ -14,6 +14,8 @@ static GLuint vertex_arr_id = 0;
 static GLuint vertex_buf = 0;
 static GLuint color_buf = 0;
 
+static VERTEX_BUF tester;
+
 typedef struct _WINDOW {
     GLFWwindow* window;
     GLuint* program_id;

@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\input.c" />
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\opengl\callback_funcs.c" />
     <ClCompile Include="..\..\opengl\graphics.c" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\entity.h" />
+    <ClInclude Include="..\..\input.h" />
     <ClInclude Include="..\..\opengl\callback_funcs.h" />
     <ClInclude Include="..\..\opengl\graphics.h" />
     <ClInclude Include="..\..\opengl\system.h" />

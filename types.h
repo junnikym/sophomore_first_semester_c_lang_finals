@@ -3,41 +3,43 @@
 
 #include <math.h>
 
-typedef struct _COORD_2D {
+typedef struct _VEC2 {
     union {
         struct {
             double x, y;
         };
         double pos[2];
     };
-} COORD_2D;
+} VEC2;
 
 // 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// 式式式式式 COORD_2D functions 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// 式式式式式 VEC2 functions 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 
 // 式式式 setter functions
 
-void zeroset_coord( COORD_2D x );
+void zeroset_coord( VEC2 x );
 
 // 式式式 getter functions
 
-double get_size(const COORD_2D* x);
+double get_size(const VEC2* x);
 
 // 式式式 arithmetic functions 
 
-void coord_2d_add_ref(COORD_2D* target, const COORD_2D* rhs);
-void coord_2d_sub_ref(COORD_2D* target, const COORD_2D* rhs);
-void coord_2d_mul_ref(COORD_2D* target, const double* w);
-void coord_2d_div_ref(COORD_2D* target, const double* a);
-
-COORD_2D coord_2d_add(const COORD_2D* lhs, const COORD_2D* rhs);
-COORD_2D coord_2d_sub(const COORD_2D* lhs, const COORD_2D* rhs);
-COORD_2D coord_2d_mul(const COORD_2D* target, const double* w);
-COORD_2D coord_2d_div(const COORD_2D* target, const double* a);
+// assignment as arg
+void vec2_add_assn(VEC2* target, const VEC2* rhs);
+void vec2_sub_assn(VEC2* target, const VEC2* rhs);
+void vec2_mul_assn(VEC2* target, double w);
+void vec2_div_assn(VEC2* target, double a);
 
 
-COORD_2D normalize(COORD_2D vec, const double* vec_size);
-void normalize_ref(COORD_2D* vec, const double* vec_size);
+VEC2 vec2_add(const VEC2* lhs, const VEC2* rhs);
+VEC2 vec2_sub(const VEC2* lhs, const VEC2* rhs);
+VEC2 vec2_mul(const VEC2* target, const double* w);
+VEC2 vec2_div(const VEC2* target, const double* a);
+
+
+VEC2 normalize(VEC2 vec, const double* vec_size);
+void normalize_assn(VEC2* vec, const double* vec_size);
 
 // 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 

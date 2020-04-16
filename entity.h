@@ -4,9 +4,9 @@
 #include "types.h"
 
 typedef struct _ENTITY {
-    COORD_2D position;
-    COORD_2D direction_vec;
-    COORD_2D force_vec;
+    VEC2 position;
+    VEC2 direction_vec;
+    VEC2 force_vec;
 } ENTITY;
 
 #endif

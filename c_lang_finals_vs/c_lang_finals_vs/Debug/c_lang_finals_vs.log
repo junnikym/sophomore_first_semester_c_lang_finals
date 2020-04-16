@@ -1,12 +1,15 @@
-﻿  main.c
-  system.c
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(67,2): warning C4047: '함수': 'GLuint *'의 간접 참조 수준이 'GLuint **'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(67,2): warning C4024: 'gl_load_shaders': 형식 및 실제 매개 변수 3의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(76,60): warning C4047: '함수': 'GLuint *'의 간접 참조 수준이 'GLuint **'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(76,60): warning C4024: 'gl_define_vertex_arr': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(95,40): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(95,40): warning C4024: '__glewUseProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(124,43): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(124,43): warning C4024: '__glewDeleteProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-  코드를 생성하고 있습니다...
+﻿  system.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(63,26): warning C4013: 'gl_load_shaders'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(77,54): warning C4047: '함수': 'GLuint *'의 간접 참조 수준이 'GLuint **'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(77,54): warning C4024: 'gl_vertex_link': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(101,40): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(101,40): warning C4024: '__glewUseProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(108,12): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(120,64): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(120,64): warning C4024: '__glewGetUniformLocation': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(136,43): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(136,43): warning C4024: '__glewDeleteProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
   c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe
