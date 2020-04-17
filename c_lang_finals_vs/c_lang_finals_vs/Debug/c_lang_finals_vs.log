@@ -1,15 +1,20 @@
-﻿  system.c
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(57,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(63,26): warning C4013: 'gl_load_shaders'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(77,54): warning C4047: '함수': 'GLuint *'의 간접 참조 수준이 'GLuint **'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(77,54): warning C4024: 'gl_vertex_link': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(101,40): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(101,40): warning C4024: '__glewUseProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(108,12): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(120,64): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(120,64): warning C4024: '__glewGetUniformLocation': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(136,43): warning C4047: '함수': 'GLuint'의 간접 참조 수준이 'GLuint *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(136,43): warning C4024: '__glewDeleteProgram': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+﻿  main.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+  graphics.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(195,12): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+  system.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(62,26): warning C4013: 'gl_load_shaders'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(87,89): warning C4020: 'gl_create_vertex_buf': 실제 매개 변수가 너무 많습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(118,36): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(119,36): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(120,41): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
+  코드를 생성하고 있습니다...
   c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe

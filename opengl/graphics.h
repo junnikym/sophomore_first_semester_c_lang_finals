@@ -16,6 +16,7 @@ typedef struct _VERTEX_BUF {
 	GLuint vertex_buffer;
 	GLuint color_buffer;
 	GLuint elem_buffer;
+	char title[_TITLE_SIZE];
 } VERTEX_BUF;
 
 typedef struct _BUF_OBJ_ATT {
@@ -63,8 +64,14 @@ static const BUF_OBJ_ATT g_SQUARE_DATA = {
 	sizeof(g_SQUARE_ELEM)
 };
 
-VERTEX_BUF* gl_define_buffer_obj(VERTEX_BUF* p_out, const BUF_OBJ_ATT* data);
-int gl_vertex_link(GLuint* program_id, const VERTEX_BUF* buffers);
+static VERTEX_BUF vertex_buffers;
+
+void gl_define_buffer_obj(const char* title, VERTEX_BUF* p_out, const BUF_OBJ_ATT* data);
+int gl_vertex_link(const GLuint program_id, const VERTEX_BUF* buffers);
+void gl_create_vertex_buf(const char* title, const BUF_OBJ_ATT* attribute, GLuint program_id);
+
+void gl_rander(const GLuint* program_id);
+
 void gl_shutdown_graphics();
 
 #endif

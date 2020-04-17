@@ -1,7 +1,6 @@
 #include "system.h"
 
-WINDOW* gl_system_init(int width, int height, const char* title) {
-	WINDOW* window_struct = malloc(sizeof(WINDOW));
+int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	int result = 0;
 
 	glfwSetErrorCallback(err_callback);
@@ -9,7 +8,7 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	// GLFW 초기화
 	if (!glfwInit()) {
 		fprintf(stderr, "fail to initialize GLFW\n");
-		exit(EXIT_FAILURE);
+		return -1;
 	}
 
 	// window setting
@@ -20,22 +19,22 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);							// 윈도우 크기 고정
 	glfwWindowHint(GLFW_SAMPLES, 4);									// Anti-Aliasing 옵션을 4로 지정 
 																		// * Anti-Aliasing : 지나치게 뚜렷한 모서리를 뭉뚱그려 표현하여 자연스럽게 만듦
-	window_struct->window = glfwCreateWindow(
+	p_out->window = glfwCreateWindow(
 		width,		// window size	| x
 		height,		//				| y
 		title,		// title;
 		NULL,
 		NULL
 	);
-	if (!window_struct->window) {
+	if (!p_out->window) {
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		return -1;
 	}
 
-	glfwMakeContextCurrent(window_struct->window);
+	glfwMakeContextCurrent(p_out->window);
 
-	glfwSetKeyCallback(window_struct->window, key_callback);		// 키보드 콜백함수 등록
-	glfwSetFramebufferSizeCallback(window_struct->window, gl_frame_buf_size_callback);
+	glfwSetKeyCallback(p_out->window, key_callback);		// 키보드 콜백함수 등록
+	glfwSetFramebufferSizeCallback(p_out->window, gl_frame_buf_size_callback);
 
 	// GLEW 초기화
 	glewExperimental = GL_TRUE;
@@ -44,7 +43,7 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err_code));
 
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		return -1;
 	}
 
 	// GLEW 3.3 버전이 아닐 경우 실행하지 않음
@@ -52,7 +51,7 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 		fprintf(stderr, "OpenGL 3.3 API is not available \n");
 
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		return -1;
 	}
 
 	printf("OpenGL version : %s\n", glGetString(GL_VERSION));
@@ -63,29 +62,19 @@ WINDOW* gl_system_init(int width, int height, const char* title) {
 	result = gl_load_shaders(
 		"../../opengl/shader/vertex_shader.vs",
 		"../../opengl/shader/fragment_shader.fs",
-		&(window_struct->program_id)
+		&(p_out->program_id)
 	);
 	if (result != 0) {
 		fprintf(stderr, "fail to create shader program\n");
 
 		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
-
-	gl_define_buffer_obj(&tester, &g_SQUARE_DATA);
-
-	result = gl_vertex_link(&(window_struct->program_id), &tester);
-	if (result != 0) {
-		fprintf(stderr, "fail to create shader program\n");
-
-		glfwTerminate();
-		exit(EXIT_FAILURE);
+		return -1;
 	}
 
 	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
 	glfwSwapInterval(1);
 
-	return window_struct;
+	return 0;
 }
 
 void gl_system_run(WINDOW* window_struct) {
@@ -93,15 +82,17 @@ void gl_system_run(WINDOW* window_struct) {
 	double current_time = 0;
 	int n_frames = 0;
 	unsigned int transformLoc = 0;
+	int result = 0;
 
-	glUseProgram(window_struct->program_id);
-	glBindVertexArray(tester.vertex_arr_id);
+	gl_create_vertex_buf("test", &g_SQUARE_DATA, window_struct->program_id, &vertex_buffers);
+
+	glUseProgram(window_struct->program_id); // -> included gl_create_vertex_buf function
+
 
 	while (!glfwWindowShouldClose(window_struct->window)) {
 
 		current_time = glfwGetTime();
 		n_frames++;
-		a += 0.05;
 
 		if (current_time - last_time >= 1.0) {
 			printf("%f ms/frame  %d fps \n", (1000.0 / (double)n_frames), n_frames);
@@ -110,18 +101,11 @@ void gl_system_run(WINDOW* window_struct) {
 			last_time = current_time;
 		}
 
-		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT);
+		gl_rander(&window_struct->program_id);
 
-		transformLoc = glGetUniformLocation(window_struct->program_id, "transform");
-		glUniform4f(transformLoc, a, 0, 0, 0.0f);
-
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
 
 		glfwSwapBuffers(window_struct->window);		// 더블 버퍼링 사용
-		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
 	}
 }
 
@@ -130,8 +114,10 @@ void gl_system_shutdown(WINDOW* window_struct) {
 	glBindVertexArray(0);
 
 	glDeleteProgram(window_struct->program_id);
-	glDeleteBuffers(1, &tester.vertex_buffer);
-	glDeleteBuffers(1, &tester.color_buffer);
-	glDeleteVertexArrays(1, &tester.vertex_arr_id);
+	gl_shutdown_graphics();
+	glDeleteBuffers(1, &vertex_buffers);
+	glDeleteBuffers(1, &vertex_buffers);
+	glDeleteVertexArrays(1, &vertex_buffers);
+
 	glfwTerminate();
 }

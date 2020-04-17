@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+#define _TITLE_SIZE 32
+
 typedef struct _VEC2 {
     union {
         struct {

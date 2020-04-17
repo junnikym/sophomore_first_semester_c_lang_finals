@@ -2,11 +2,15 @@
 #include "types.h"
 
 int main() {
-	
-	WINDOW* g_window = gl_system_init(800, 600, "Test window");
+	int result = 0;
 
-	gl_system_run(g_window);
-	gl_system_shutdown(g_window);
+	WINDOW g_window;
+	result = gl_system_init(&g_window, 800, 600, "Test window");
+	if (result != 0)
+		return 0;
+
+	gl_system_run(&g_window);
+	gl_system_shutdown(&g_window);
 	
 	return 0;
 }

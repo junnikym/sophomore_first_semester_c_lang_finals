@@ -10,20 +10,14 @@
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
 
-static GLuint vertex_arr_id = 0;
-static GLuint vertex_buf = 0;
-static GLuint color_buf = 0;
-
-static VERTEX_BUF tester;
-
 typedef struct _WINDOW {
     GLFWwindow* window;
-    GLuint* program_id;
+    GLuint program_id;
     int width, height;
     const char* title;
 } WINDOW;
 
-WINDOW* gl_system_init(int width, int height, const char* title);
+int gl_system_init(WINDOW* p_out, int width, int height, const char* title);
 void gl_system_run(WINDOW* window);
 void gl_system_shutdown(WINDOW* window);
 
