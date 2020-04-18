@@ -145,6 +145,7 @@
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\types.c" />
+    <ClCompile Include="object.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\entity.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
+    <ClInclude Include="object.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\opengl\shader\fragment_shader.fs">

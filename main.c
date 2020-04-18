@@ -11,6 +11,8 @@ int main() {
 
 	gl_system_run(&g_window);
 	gl_system_shutdown(&g_window);
+
+	
 	
 	return 0;
 }

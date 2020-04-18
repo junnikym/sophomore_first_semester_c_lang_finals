@@ -209,5 +209,9 @@ int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path
  }
 
 void gl_shutdown_graphics() {
-	
+
+	// !TODO
+	glDeleteBuffers(1, &vertex_buffers.vertex_buffer);
+	glDeleteBuffers(1, &vertex_buffers.color_buffer);
+	glDeleteVertexArrays(1, &vertex_buffers.vertex_arr_id);
 }

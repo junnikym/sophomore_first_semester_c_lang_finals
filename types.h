@@ -5,6 +5,8 @@
 
 #define _TITLE_SIZE 32
 
+#define DYNAMIC_ARR_INC_UNIT 5
+
 typedef struct _VEC2 {
     union {
         struct {

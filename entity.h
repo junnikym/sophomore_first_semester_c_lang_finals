@@ -6,7 +6,7 @@
 typedef struct _ENTITY {
     VEC2 position;
     VEC2 direction_vec;
-    VEC2 force_vec;
+    VEC2* force_vec;
 } ENTITY;
 
 #endif

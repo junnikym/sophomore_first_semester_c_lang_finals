@@ -85,7 +85,7 @@ void gl_system_run(WINDOW* window_struct) {
 	int result = 0;
 
 	gl_create_vertex_buf("test", &g_SQUARE_DATA, window_struct->program_id, &vertex_buffers);
-
+ 
 	glUseProgram(window_struct->program_id); // -> included gl_create_vertex_buf function
 
 
@@ -115,9 +115,6 @@ void gl_system_shutdown(WINDOW* window_struct) {
 
 	glDeleteProgram(window_struct->program_id);
 	gl_shutdown_graphics();
-	glDeleteBuffers(1, &vertex_buffers);
-	glDeleteBuffers(1, &vertex_buffers);
-	glDeleteVertexArrays(1, &vertex_buffers);
-
+	
 	glfwTerminate();
 }
