@@ -9,4 +9,6 @@ typedef struct _ENTITY {
     VEC2* force_vec;
 } ENTITY;
 
+void append_array_entity(void* arr, int index, void* elem_addr);
+
 #endif

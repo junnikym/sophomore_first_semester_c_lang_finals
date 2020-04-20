@@ -5,8 +5,6 @@
 
 #define _TITLE_SIZE 32
 
-#define DYNAMIC_ARR_INC_UNIT 5
-
 typedef struct _VEC2 {
     union {
         struct {
@@ -16,7 +14,7 @@ typedef struct _VEC2 {
     };
 } VEC2;
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 // 式式式式式 VEC2 functions 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 
 // 式式式 setter functions

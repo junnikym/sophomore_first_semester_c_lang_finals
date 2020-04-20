@@ -1,38 +1,6 @@
-﻿  input.c
-C:\source\sophomore_first_semester_c_lang_finals\input.c(6,25): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(6,49): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(9,24): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(9,48): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(14,24): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(14,48): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\input.c(17,29): warning C4047: '==': 'const int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-  main.c
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-  callback_funcs.c
-  graphics.c
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(195,12): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(201,53): warning C4022: 'glDrawElements': 실제 매개 변수 4의 포인터가 일치하지 않습니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(214,36): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(215,36): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(216,41): warning C4133: '함수': 'VERTEX_BUF *'과(와) 'const GLuint *' 사이의 형식이 호환되지 않습니다.
-  system.c
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'float *'의 간접 참조 수준이 'const float (*)[12]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(58,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(62,26): warning C4013: 'gl_load_shaders'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(87,89): warning C4020: 'gl_create_vertex_buf': 실제 매개 변수가 너무 많습니다.
-  physics.c
-C:\source\sophomore_first_semester_c_lang_finals\physics.c(6,35): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\source\sophomore_first_semester_c_lang_finals\physics.c(6,68): warning C4133: '=': 'FORCE_ARRAY *'과(와) 'FORCE *' 사이의 형식이 호환되지 않습니다.
-C:\source\sophomore_first_semester_c_lang_finals\physics.c(14,10): warning C4013: 'realloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\source\sophomore_first_semester_c_lang_finals\physics.c(27,6): warning C4013: 'free'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  types.c
-C:\source\sophomore_first_semester_c_lang_finals\types.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+﻿  dynamic_array.c
   object.c
+C:\source\sophomore_first_semester_c_lang_finals\object.c(7,5): error C2061: 구문 오류: 식별자 'is'
+C:\source\sophomore_first_semester_c_lang_finals\object.c(7,5): error C2059: 구문 오류: ';'
+C:\source\sophomore_first_semester_c_lang_finals\object.c(8,1): fatal error C1004: 예기치 않은 파일의 끝이 나타났습니다.
   코드를 생성하고 있습니다...
-  c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe

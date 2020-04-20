@@ -16,17 +16,7 @@ typedef struct _FORCE {
     double delta_t;
 } FORCE;
 
-typedef struct _FORCE_ARRAY {
-    FORCE* elems;
-    int size;
-    int current;
-} FORCE_ARRAY;
-
-// manage force
-void init_force_arr(FORCE_ARRAY* arr);
-void push_force_arr(FORCE_ARRAY* arr, VEC2 vec, int id);
-void pop_force_arr(FORCE_ARRAY* arr);
-void release_force_arr(FORCE_ARRAY* arr);
+void append_array_force(void* arr, int index, void* elem_addr);
 
 void accelerate( VEC2 position, VEC2 accel );
 
