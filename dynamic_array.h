@@ -9,6 +9,8 @@ typedef struct {
 	void* elems;
 	int current;
 	int size;
+	char* _typename;
+	int _typesize;
 } DYNAMIC_ARRAY;
 
 void append_array_int(void* arr, int index, void* elem_addr);

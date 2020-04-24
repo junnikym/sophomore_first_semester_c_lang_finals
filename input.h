@@ -1,6 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include "user.h"
+#include "types.h"
+
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
 

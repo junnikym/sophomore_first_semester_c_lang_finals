@@ -50,16 +50,19 @@ VEC2 vec2_sub(const VEC2* lhs, const VEC2* rhs) {
     return result;
 }
 
-VEC2 vec2_mul(const VEC2* target, const double* w) {
-    VEC2 result = { target->x * *w, target->y * *w };
+VEC2 vec2_mul(const VEC2* target, double w) {
+    VEC2 result = { target->x * w, target->y * w };
     return result;
 }
 
-VEC2 vec2_div(const VEC2* target, const double* a) {
-    VEC2 result = { target->x / *a, target->y / *a };
+VEC2 vec2_div(const VEC2* target, double a) {
+    VEC2 result = { target->x / a, target->y / a };
     return result;
 }
 
+void append_array_vec2(void* arr, int index, void* elem_addr) {
+    ((VEC2*)(arr))[index] = *(VEC2*)elem_addr;
+}
 
 void normalize_assn(VEC2* vec, const double* vec_size) {
     vec->x /= *vec_size;

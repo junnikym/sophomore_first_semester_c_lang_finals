@@ -4,6 +4,9 @@
 #include "callback_funcs.h"
 #include "graphics.h"
 
+#include "../memory.h"
+#include "../object.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 

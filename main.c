@@ -1,5 +1,6 @@
 #include "opengl/system.h"
 #include "types.h"
+#include "memory.h"
 
 int main() {
 	int result = 0;
@@ -11,8 +12,6 @@ int main() {
 
 	gl_system_run(&g_window);
 	gl_system_shutdown(&g_window);
-
-	
 	
 	return 0;
 }

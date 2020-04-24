@@ -74,6 +74,10 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
 	glfwSwapInterval(1);
 
+	init_memory();
+
+	setting_for_test();
+
 	return 0;
 }
 
@@ -84,7 +88,7 @@ void gl_system_run(WINDOW* window_struct) {
 	unsigned int transformLoc = 0;
 	int result = 0;
 
-	gl_create_vertex_buf("test", &g_SQUARE_DATA, window_struct->program_id, &vertex_buffers);
+	gl_create_vertex_buf("test", &g_SQUARE_DATA, window_struct->program_id);
  
 	glUseProgram(window_struct->program_id); // -> included gl_create_vertex_buf function
 
@@ -110,6 +114,8 @@ void gl_system_run(WINDOW* window_struct) {
 }
 
 void gl_system_shutdown(WINDOW* window_struct) {
+	release_memory();
+
 	glUseProgram(0);
 	glBindVertexArray(0);
 

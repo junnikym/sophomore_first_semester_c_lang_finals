@@ -2,6 +2,7 @@
 #define OPEN_GL_GRAPHICS_H
 
 #include "../types.h"
+#include "../user.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +33,7 @@ typedef struct _BUF_OBJ_ATT {
 
 // Square Const Buffers
 
-static float g_SQUARE_VERTEX[] = {
+static const float g_SQUARE_VERTEX[] = {
 	-0.5f,  0.5f, 0.0f, //vertex 1 : Top-left
 	 0.5f,  0.5f, 0.0f, //vertex 2 : Top-right
 	 0.5f, -0.5f, 0.0f, //vertex 3 : Bottom-right
@@ -46,7 +47,7 @@ static const GLuint g_SQUARE_ELEM[] = {
 
 // -- for test
 
-const static float g_SQUARE_COLOR[] = {
+static const float g_SQUARE_COLOR[] = {
 	1.0f, 0.0f, 0.0f, //vertex 1 : RED (1,0,0)
 	0.0f, 1.0f, 0.0f, //vertex 2 : GREEN (0,1,0) 
 	0.0f, 0.0f, 1.0f,  //vertex 3 : BLUE (0,0,1)
@@ -66,6 +67,7 @@ static const BUF_OBJ_ATT g_SQUARE_DATA = {
 
 static VERTEX_BUF vertex_buffers;
 
+int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path, GLuint* program_id);
 void gl_define_buffer_obj(const char* title, VERTEX_BUF* p_out, const BUF_OBJ_ATT* data);
 int gl_vertex_link(const GLuint program_id, const VERTEX_BUF* buffers);
 void gl_create_vertex_buf(const char* title, const BUF_OBJ_ATT* attribute, GLuint program_id);

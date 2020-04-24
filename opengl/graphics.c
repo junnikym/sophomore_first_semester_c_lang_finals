@@ -185,24 +185,26 @@ int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path
  }
 
  void gl_rander(const GLuint* program_id) {
-	 GLuint transformLoc = 0;
+	 GLuint trans_form_location = 0;
 
 	 glClearColor(0, 0, 0, 1);
 	 glClear(GL_COLOR_BUFFER_BIT);
 
-	 static float a = 0;
-
-	 a += 0.01;
-
 	 // for change position
-	 transformLoc = glGetUniformLocation(*program_id, "transform");
-	 glUniform4f(transformLoc, a, 0.0f, 0.0f, 0.0f);
+	 trans_form_location = glGetUniformLocation(*program_id, "transform");
+	 glUniform4f(
+		 trans_form_location, 
+		 g_user_obj->center->position.x, 
+		 g_user_obj->center->position.x, 
+		 0.0f, 
+		 0.0f
+	 );
 	 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	 glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	 //glDrawArrays(GL_TRIANGLES, 0, 6);
 
-	 transformLoc = glGetUniformLocation(*program_id, "transform");
-	 glUniform4f(transformLoc, -a, 0.0f, 0.0f, 0.0f);
+	 trans_form_location = glGetUniformLocation(*program_id, "transform");
+	 glUniform4f(trans_form_location, 0.0f, 0.0f, 0.0f, 0.0f);
 	 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	 glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	 //glDrawArrays(GL_TRIANGLES, 0, 6);

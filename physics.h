@@ -5,10 +5,10 @@
 
 #include <math.h>
 
-enum PHY_FLAGS {
+enum __PHY_FLAGS__ {
     GRAVITY = 1 << 0,
     FRICTION = 1 << 1,
-};
+} _PHY_FLAGS_;
 
 typedef struct _FORCE {
     VEC2 force_vec;
