@@ -1,5 +1,8 @@
 #include "dynamic_array.h"
 
+// ------------------------------------------------------- //
+// ----- dyn_arr functions	------------------------------
+
 void dyn_arr_init( DYN_ARR* a, int type_size ) {
 	a->type_size = type_size;
 	a->capacity	= __VECTOR_INIT_CAPPACITY;
@@ -75,8 +78,11 @@ void dyn_arr_release( DYN_ARR* a) {
 	a->items = NULL;
 }
 
-
+// ------------------------------------------------------- //
+// ----- Basic Type's copy function	----------------------
 
 void copy_int( void* lhs, const void* rhs ) {
 	*(int*)lhs = *(int*)rhs;
 }
+
+// ------------------------------------------------------- //

@@ -15,6 +15,9 @@ typedef struct _DYNAMIC_ARRAY {
     int type_size;
 } DYN_ARR;
 
+// ------------------------------------------------------- //
+// ----- dyn_arr functions	------------------------------ 
+
 void        dyn_arr_init        ( DYN_ARR* a, int type_size );
 int         dyn_arr_size        ( const DYN_ARR* a );
 static void dyn_arr_resize      ( DYN_ARR* a, int capacity );
@@ -25,6 +28,11 @@ void*       dyn_arr_back        ( const DYN_ARR* a );
 void        dyn_arr_delete      ( DYN_ARR* a, int index, void (*copy__)(void*, const void*) );
 void        dyn_arr_release     ( DYN_ARR* a);
 
+// ------------------------------------------------------- //
+// ----- Basic Type's copy function	---------------------- 
+
 void copy_int( void* lhs, const void* rhs );
+
+// ------------------------------------------------------- //
 
 #endif
