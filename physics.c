@@ -8,6 +8,10 @@ void accelerate(VEC2 position, VEC2 accel) {
     
 }
 
+void transform_to_gravity( VEC2* g_force, const double* gravity_constant ) {
+
+}
+
 void friction(VEC2* force, const double* constant) {
     vec2_mul_assn(force, *constant);
 }

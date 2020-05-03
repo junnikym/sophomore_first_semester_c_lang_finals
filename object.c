@@ -1,45 +1,48 @@
 #include "object.h"
 
-void append_array_object(void* arr, int index, void* elem_addr) {
-	if (elem_addr == NULL) 
-		init_object(&((OBJECT*)(arr))[index]);
-	else 
-		((OBJECT*)(arr))[index] = *(OBJECT*)elem_addr;
+// ------------------------------------------------------- //
+// ----- object functions	------------------------------
+
+void init_obj ( OBJECT* obj ) {
+	dyn_arr_init( &(obj->entities), sizeof(ENTITY) );
+	
+	obj->center = NULL;
+	obj->direction = NULL;
 } 
 
-void release_array_object(OBJECT* obj) {
-	int i = 0;
+void copy_obj( void* lhs, const void* rhs) {
+	if(rhs == NULL) 
+		init_obj( (OBJECT*)lhs );
+	else
+		*(OBJECT*)lhs = *(OBJECT*)rhs;
+}
 
-	for (i = 0; i <= obj->entities.current; i++) {
-		release_array_entity( &((ENTITY*)(obj->entities.elems))[i] );
+void release_obj ( OBJECT* obj ) {
+	int i = 0;
+	ENTITY* ent_converter = (ENTITY*)(obj->entities.items);
+
+	for( i = 0; i <= obj->entities.size; i++) {
+		release_ent( &ent_converter[i] );
 	}
 
-	release_dynamic_array(&obj->entities.elems);
-}
+	dyn_arr_release( &obj->entities );
 
-void init_object(OBJECT* obj) {
-	init_entity(&obj->entities);
 	obj->center = NULL;
-	obj->direction_force = NULL;
+	obj->direction = NULL;
 }
 
-void set_center_obj(OBJECT* obj, int index) {
-	DYNAMIC_ARRAY* force_ptr = NULL;
-	
+// -- setting function
+
+void set_center_obj( OBJECT* obj, int index ) {
 	if (obj->center != NULL) {
 		// !TODO : detech_center_obj();
 	}
 
-	obj->center = &((ENTITY*)(obj->entities.elems))[index];
-
-	push_dynamic_array(
-		&(obj->center)->forces,
-		&V2_ZERO,
-		append_array_vec2,
-		sizeof(VEC2)
-	);
-	
-	force_ptr = &obj->center->forces;
-	obj->direction_force = &((VEC2*)(force_ptr->elems))[force_ptr->current];
+	obj->center = (ENTITY*)dyn_arr_get(&obj->entities, index);
 }
 
+void detech_center_obj (OBJECT* obj) {
+	
+}
+
+// ------------------------------------------------------- //

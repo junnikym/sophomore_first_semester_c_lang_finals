@@ -21,10 +21,10 @@ typedef struct _VEC2 {
     };
 } VEC2;
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// 式式式式式 VEC2 functions 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// -------------------------------------------------------
+// ----- VEC2 functions     ------------------------------
 
-// 式式式 const static
+// ----- const static
 
 static const VEC2 V2_ZERO       = {  0,  0 };
 static const VEC2 D_V2_LEFT     = { -1,  0 };
@@ -32,15 +32,15 @@ static const VEC2 D_V2_RIGHT    = {  1,  0 };
 static const VEC2 D_V2_UP       = {  0,  1 };
 static const VEC2 D_V2_DOWN     = {  0, -1 };
 
-// 式式式 setter functions
+// ----- setter functions
 
 void zeroset_coord( VEC2 x );
 
-// 式式式 getter functions
+// ----- getter functions
 
 double get_size(const VEC2* x);
 
-// 式式式 arithmetic functions 
+// ----- arithmetic functions 
 
 // assignment as arg
 void vec2_add_assn(VEC2* target, const VEC2* rhs);
@@ -58,6 +58,6 @@ void append_array_vec2(void* arr, int index, void* elem_addr);
 VEC2 normalize(VEC2 vec, const double* vec_size);
 void normalize_assn(VEC2* vec, const double* vec_size);
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// -------------------------------------------------------
 
 #endif

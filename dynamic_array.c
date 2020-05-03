@@ -1,37 +1,93 @@
 #include "dynamic_array.h"
 
-void append_array_int(void* arr, int index, void* elem_addr) {
-	((int*)(arr))[index] = *(int*)elem_addr;
+// ------------------------------------------------------- //
+// ----- dyn_arr functions	------------------------------
+
+void dyn_arr_init( DYN_ARR* a, int type_size ) {
+	a->type_size = type_size;
+	a->capacity	= __VECTOR_INIT_CAPPACITY;
+	a->size		= -1;
+	a->items	= malloc(type_size * a->capacity);
 }
 
-void append_array_double(void* arr, int index, void* elem_addr) {
-	((double*)(arr))[index] = *(double*)elem_addr;
+int dyn_arr_size( const DYN_ARR* a ) {
+	return a->size;
 }
 
-
-void init_dynamic_array(DYNAMIC_ARRAY* arr, int elems_size) {
-	arr->size = 1;
-	arr->current = -1;
-	arr->elems = malloc(elems_size * arr->size);
-}
-
-void push_dynamic_array( DYNAMIC_ARRAY* arr, void* elem_addr,
-						 void (*append_func)(void* arr, int index, void* elem_addr), int elem_size ) {
-
-	arr->current++;
-
-	if (arr->current > arr->size - 1) {
-		arr->size += DYNAMIC_ARR_INC_UNIT;
-		realloc(arr->elems, arr->size * elem_size);
+static void dyn_arr_resize( DYN_ARR* a, int capacity ) {
+	void* items = realloc(a->items, a->type_size * capacity);
+	if(items == NULL) {
+		/* ! TODO : Error Code */
 	}
-	append_func(arr->elems, arr->current, elem_addr);
+
+	a->items = items;
+	a->capacity = capacity;
 }
 
-void pop_dynamic_array(DYNAMIC_ARRAY* arr) {
-	arr->current--;
+void dyn_arr_push_back( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) ) {
+	a->size++;
+
+	if(a->capacity == a->size)
+		dyn_arr_resize( a, a->capacity * 2 );
+	
+	copy__( (a->items + (a->type_size * a->size)), elem );
 }
 
-void release_dynamic_array(DYNAMIC_ARRAY* arr) {
-	free(arr->elems);
-	arr->elems = NULL;
+void dyn_arr_insert( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) ) {
+	if(index >= 0 && index < a->size)
+		copy__((a->items + (a->type_size * index)), elem);
+	else {
+		/* ! TODO : Error Code */
+	}
 }
+
+void* dyn_arr_get( const DYN_ARR* a, int index ) {
+	void* addr = (a->items + (a->type_size * index));
+
+	if(index >= 0 && index <= a->size) 
+		return addr;
+
+	return NULL;
+}
+
+void* dyn_arr_back( const DYN_ARR* a ) {
+	return (a->items + (a->type_size * a->size));
+}
+
+void dyn_arr_delete( DYN_ARR* a, int index, void (*copy__)(void*, const void*) ) {
+	int i = 0;
+	void* i_ptr = NULL;
+	
+	if( (index < 0) || (index > a->size) )
+		return;	
+
+	for(i = 0; i < a->size; i++) {
+		i_ptr = (a->items + (a->type_size * i));
+		copy__( i_ptr, i_ptr + a->type_size );
+	}
+	a->size--;
+
+	if( (a->size > 0) && (a->size == a->capacity / 4) ) 
+		dyn_arr_resize(a, a->capacity / 2);
+}
+
+void dyn_arr_release( DYN_ARR* a) {
+	free(a->items);
+	a->items = NULL;
+}
+
+void dyn_arr_foreach( DYN_ARR* a, void (*func)(void* elem, int i, DYN_ARR* arr) ) {
+	int i = 0;
+	for( i = 0; i <= a->size; i++ ) {
+		func(dyn_arr_get(a, i), i, a);
+	}
+}
+
+// ------------------------------------------------------- //
+// ----- Basic Type's copy function	----------------------
+
+void copy_int( void* lhs, const void* rhs ) {
+	*(int*)lhs = *(int*)rhs;
+}
+
+// ------------------------------------------------------- //

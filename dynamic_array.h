@@ -1,25 +1,40 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-#define DYNAMIC_ARR_INC_UNIT 5
-
 #include <stdlib.h>
 
-typedef struct {
-	void* elems;
-	int current;
-	int size;
-	char* _typename;
-	int _typesize;
-} DYNAMIC_ARRAY;
+#include <stdio.h>
 
-void append_array_int(void* arr, int index, void* elem_addr);
-void append_array_double(void* arr, int index, void* elem_addr);
+#define __VECTOR_INIT_CAPPACITY 4;
 
-void init_dynamic_array(DYNAMIC_ARRAY* arr, int elems_size);
-void push_dynamic_array( DYNAMIC_ARRAY* arr, void* elem_addr,
-						 void (*append_func)(void* arr, int index, void* elem_addr), int elem_size );
-void pop_dynamic_array(DYNAMIC_ARRAY* arr);
-void release_dynamic_array(DYNAMIC_ARRAY* arr);
+typedef struct _DYNAMIC_ARRAY {
+    void* items;
+    int capacity;
+    int size;
+
+    int type_size;
+} DYN_ARR;
+
+// ------------------------------------------------------- //
+// ----- dyn_arr functions	------------------------------ 
+
+void        dyn_arr_init        ( DYN_ARR* a, int type_size );
+int         dyn_arr_size        ( const DYN_ARR* a );
+static void dyn_arr_resize      ( DYN_ARR* a, int capacity );
+void        dyn_arr_push_back   ( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) );
+void        dyn_arr_insert      ( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) );
+void*       dyn_arr_get         ( const DYN_ARR* a, int index );
+void*       dyn_arr_back        ( const DYN_ARR* a );
+void        dyn_arr_delete      ( DYN_ARR* a, int index, void (*copy__)(void*, const void*) );
+void        dyn_arr_release     ( DYN_ARR* a);
+
+void        dyn_arr_foreach     ( DYN_ARR* a, void (*func)(void* elem, int i, DYN_ARR* arr) );
+
+// ------------------------------------------------------- //
+// ----- Basic Type's copy function	---------------------- 
+
+void copy_int( void* lhs, const void* rhs );
+
+// ------------------------------------------------------- //
 
 #endif
