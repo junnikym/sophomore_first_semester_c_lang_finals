@@ -15,10 +15,11 @@
 
 typedef struct _WINDOW {
     GLFWwindow* window;
-    GLuint program_id;
     int width, height;
     const char* title;
 } WINDOW;
+
+static BUFFER_OBJECT g_buf_obj;
 
 int gl_system_init(WINDOW* p_out, int width, int height, const char* title);
 void gl_system_run(WINDOW* window);

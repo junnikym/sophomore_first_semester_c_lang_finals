@@ -1,9 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "types.h"
 #include "force.h"
-
 #include "dynamic_array.h"
 
 typedef struct _ENTITY {

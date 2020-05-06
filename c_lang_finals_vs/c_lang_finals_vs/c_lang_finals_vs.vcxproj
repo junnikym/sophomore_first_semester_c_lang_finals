@@ -87,6 +87,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,29 +141,32 @@
   <ItemGroup>
     <ClCompile Include="..\..\dynamic_array.c" />
     <ClCompile Include="..\..\entity.c" />
+    <ClCompile Include="..\..\force.c" />
     <ClCompile Include="..\..\input.c" />
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\memory.c" />
     <ClCompile Include="..\..\object.c" />
     <ClCompile Include="..\..\opengl\callback_funcs.c" />
     <ClCompile Include="..\..\opengl\graphics.c" />
+    <ClCompile Include="..\..\opengl\stb_image.c" />
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\types.c" />
-    <ClCompile Include="..\..\user.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\dynamic_array.h" />
     <ClInclude Include="..\..\entity.h" />
+    <ClInclude Include="..\..\force.h" />
+    <ClInclude Include="..\..\identify.h" />
     <ClInclude Include="..\..\input.h" />
     <ClInclude Include="..\..\memory.h" />
     <ClInclude Include="..\..\object.h" />
     <ClInclude Include="..\..\opengl\callback_funcs.h" />
     <ClInclude Include="..\..\opengl\graphics.h" />
+    <ClInclude Include="..\..\opengl\stb_image.h" />
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
-    <ClInclude Include="..\..\user.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\opengl\shader\fragment_shader.fs">
