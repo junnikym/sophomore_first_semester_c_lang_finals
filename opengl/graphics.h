@@ -2,7 +2,7 @@
 #define OPEN_GL_GRAPHICS_H
 
 #include "../types.h"
-#include "../user.h"
+#include "../memory.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,68 +12,67 @@
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
 
-typedef struct _VERTEX_BUF {
-	GLuint vertex_arr_id;
-	GLuint vertex_buffer;
-	GLuint color_buffer;
-	GLuint elem_buffer;
+typedef struct _BUFFER_OBJECT {
 	char title[_TITLE_SIZE];
-} VERTEX_BUF;
+	GLuint VBO, VAO, EBO;
+	GLuint ID;
+	GLuint texture;			// TODO MAKE -> ARRAY
+} BUFFER_OBJECT;
 
-typedef struct _BUF_OBJ_ATT {
-	float* vertex_data;
-	int vertex_data_size;
-	float* color_data;
-	int color_data_size;
-	int* elem_data;
-	int elem_data_size;
+typedef struct _BUFFER_ATTRIBUTES {
+	float* vertices_data;
+	int vertices_size;
+	GLuint* indices_data;
+	int indices_size;
+} BUFFER_ATTRIBUTES;
 
-	VEC2 position;
-} BUF_OBJ_ATT;
+// ------------------------------------------------------- //
+// ----- STD BUFFERS		------------------------------
 
-// Square Const Buffers
+// --- Square Const Buffers
 
-static const float g_SQUARE_VERTEX[] = {
-	-0.5f,  0.5f, 0.0f, //vertex 1 : Top-left
-	 0.5f,  0.5f, 0.0f, //vertex 2 : Top-right
-	 0.5f, -0.5f, 0.0f, //vertex 3 : Bottom-right
-	-0.5f, -0.5f, 0.0f //vertex 4 : Bottom-left
+static const float g_SQUARE_VERTICES[] = {
+	// positions		// colors			// texture coords
+	0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+	0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+	-0.5f, -0.5f, 0.0f,	0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+	-0.5f,  0.5f, 0.0f,	1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 };
 
-static const GLuint g_SQUARE_ELEM[] = {
+static const GLuint g_SQUARE_INDICES[] = {
 	0, 1, 2,
 	2, 3, 0
 };
 
-// -- for test
-
-static const float g_SQUARE_COLOR[] = {
-	1.0f, 0.0f, 0.0f, //vertex 1 : RED (1,0,0)
-	0.0f, 1.0f, 0.0f, //vertex 2 : GREEN (0,1,0) 
-	0.0f, 0.0f, 1.0f,  //vertex 3 : BLUE (0,0,1)
-	1.0f, 1.0f, 1.0f  //vertex 4 : WHITE (1,1,1)
+static const BUFFER_ATTRIBUTES g_SQUARE_DATA = {
+	&g_SQUARE_VERTICES,
+	sizeof(g_SQUARE_VERTICES),
+	&g_SQUARE_INDICES,
+	sizeof(g_SQUARE_INDICES)
 };
 
-//--
+// ------------------------------------------------------- //
+// ----- OpenGL Graphics functions		------------------
 
-static const BUF_OBJ_ATT g_SQUARE_DATA = {
-	&g_SQUARE_VERTEX,
-	sizeof(g_SQUARE_VERTEX),
-	&g_SQUARE_COLOR,
-	sizeof(g_SQUARE_COLOR),
-	&g_SQUARE_ELEM,
-	sizeof(g_SQUARE_ELEM)
-};
+GLuint*	gl_load_shaders		 ( const char* vertex_file_path, const char* fragment_file_path, GLuint* program_id );
+void	gl_define_buf_obj	 ( const char* title, BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
 
-static VERTEX_BUF vertex_buffers;
+GLuint*	gl_load_texture		 ( const GLuint* program_id, const char* filename, GLuint* p_out );
+void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
 
-int gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path, GLuint* program_id);
-void gl_define_buffer_obj(const char* title, VERTEX_BUF* p_out, const BUF_OBJ_ATT* data);
-int gl_vertex_link(const GLuint program_id, const VERTEX_BUF* buffers);
-void gl_create_vertex_buf(const char* title, const BUF_OBJ_ATT* attribute, GLuint program_id);
+//int		gl_vertex_link		 ( const GLuint program_id, const BUFFER_OBJECT* buffers );
+//void	gl_create_vertex_buf ( const char* title, const BUFFER_ATTRIBUTES* attribute, GLuint program_id );
 
-void gl_rander(const GLuint* program_id);
+int		gl_create_shader_buf ( BUFFER_OBJECT* p_out, 
+							   const char* title, 
+							   const BUFFER_ATTRIBUTES* attribute );
 
-void gl_shutdown_graphics();
+//void	gl_init_graphics	 ( const GLuint* id );
+void	gl_clear_screen		 ();
+void	gl_draw_obj			 ( const BUFFER_OBJECT* shader );
+void	gl_rander			 ( /* OBJ Array */ );
+void	gl_shutdown_graphics( BUFFER_OBJECT* x );
+
+// ------------------------------------------------------- //
 
 #endif

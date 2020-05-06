@@ -30,19 +30,19 @@ void dyn_arr_push_back( DYN_ARR* a, const void* elem, void (*copy__)(void*, cons
 	if(a->capacity == a->size)
 		dyn_arr_resize( a, a->capacity * 2 );
 	
-	copy__( (a->items + (a->type_size * a->size)), elem );
+	copy__( ((char*)(a->items) + (a->type_size * a->size)), elem );
 }
 
 void dyn_arr_insert( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) ) {
 	if(index >= 0 && index < a->size)
-		copy__((a->items + (a->type_size * index)), elem);
+		copy__(((char*)(a->items) + (a->type_size * index)), elem);
 	else {
 		/* ! TODO : Error Code */
 	}
 }
 
 void* dyn_arr_get( const DYN_ARR* a, int index ) {
-	void* addr = (a->items + (a->type_size * index));
+	void* addr = ((char*)(a->items) + (a->type_size * index));
 
 	if(index >= 0 && index <= a->size) 
 		return addr;
@@ -51,7 +51,7 @@ void* dyn_arr_get( const DYN_ARR* a, int index ) {
 }
 
 void* dyn_arr_back( const DYN_ARR* a ) {
-	return (a->items + (a->type_size * a->size));
+	return ((char*)(a->items) + (a->type_size * a->size));
 }
 
 void dyn_arr_delete( DYN_ARR* a, int index, void (*copy__)(void*, const void*) ) {
@@ -62,8 +62,8 @@ void dyn_arr_delete( DYN_ARR* a, int index, void (*copy__)(void*, const void*) )
 		return;	
 
 	for(i = 0; i < a->size; i++) {
-		i_ptr = (a->items + (a->type_size * i));
-		copy__( i_ptr, i_ptr + a->type_size );
+		i_ptr = ((char*)(a->items) + (a->type_size * i));
+		copy__( i_ptr, (char*)i_ptr + a->type_size );
 	}
 	a->size--;
 

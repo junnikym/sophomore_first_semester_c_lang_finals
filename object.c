@@ -33,7 +33,7 @@ void release_obj ( OBJECT* obj ) {
 
 // -- setting function
 
-void set_center_obj( OBJECT* obj, int index ) {
+void set_center_obj ( OBJECT* obj, int index ) {
 	if (obj->center != NULL) {
 		// !TODO : detech_center_obj();
 	}
@@ -41,7 +41,7 @@ void set_center_obj( OBJECT* obj, int index ) {
 	obj->center = (ENTITY*)dyn_arr_get(&obj->entities, index);
 }
 
-void detech_center_obj (OBJECT* obj) {
+void detech_center_obj ( OBJECT* obj ) {
 	
 }
 

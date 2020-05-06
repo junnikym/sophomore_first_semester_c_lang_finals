@@ -59,24 +59,17 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	printf("Vendor : %s\n", glGetString(GL_VENDOR));
 	printf("Renderer : %s\n", glGetString(GL_RENDERER));
 
-	result = gl_load_shaders(
-		"../../opengl/shader/vertex_shader.vs",
-		"../../opengl/shader/fragment_shader.fs",
-		&(p_out->program_id)
-	);
-	if (result != 0) {
-		fprintf(stderr, "fail to create shader program\n");
-
-		glfwTerminate();
-		return -1;
-	}
-
 	// VSync 설정 : 화면 재생률에 따라 프레임을 고정
 	glfwSwapInterval(1);
 
-	init_memory();
-
-	setting_for_test();
+	gl_create_shader_buf ( &g_buf_obj, "main", &g_SQUARE_DATA );
+	
+	gl_load_texture ( &g_buf_obj.ID, "../../resource/texture/wall.bmp", &g_buf_obj.texture ),
+	gl_define_texture ( 
+		&g_buf_obj.ID,
+		&g_buf_obj.texture,
+		0
+	);
 
 	return 0;
 }
@@ -87,11 +80,6 @@ void gl_system_run(WINDOW* window_struct) {
 	int n_frames = 0;
 	unsigned int transformLoc = 0;
 	int result = 0;
-
-	gl_create_vertex_buf("test", &g_SQUARE_DATA, window_struct->program_id);
- 
-	glUseProgram(window_struct->program_id); // -> included gl_create_vertex_buf function
-
 
 	while (!glfwWindowShouldClose(window_struct->window)) {
 
@@ -105,7 +93,9 @@ void gl_system_run(WINDOW* window_struct) {
 			last_time = current_time;
 		}
 
-		gl_rander(&window_struct->program_id);
+		gl_clear_screen();
+
+		gl_draw_obj ( &g_buf_obj );
 
 		glfwPollEvents();				// 이벤트 항시 대기 <-> glfwWaitEvents() : 이벤트가 있을때만 실행
 
@@ -114,13 +104,11 @@ void gl_system_run(WINDOW* window_struct) {
 }
 
 void gl_system_shutdown(WINDOW* window_struct) {
-	release_memory();
-
 	glUseProgram(0);
 	glBindVertexArray(0);
 
-	glDeleteProgram(window_struct->program_id);
-	gl_shutdown_graphics();
+	glDeleteProgram( g_buf_obj.ID );
+	gl_shutdown_graphics( &g_buf_obj );
 	
 	glfwTerminate();
 }

@@ -1,8 +1,12 @@
 #version 330 core
+out vec4 FragColor;
+  
+in vec3 ourColor;
+in vec2 TexCoord;
 
-in vec3 passColorAttribute;
-out vec4 fragmentColor;
+uniform sampler2D ourTexture;
 
-void main() {
-    fragmentColor = vec4(passColorAttribute, 1.0);
+void main()
+{
+    FragColor = texture(ourTexture, TexCoord);
 }
