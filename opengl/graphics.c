@@ -1,5 +1,4 @@
 #include "graphics.h"
-#include "stb_image.h"
 
 GLuint* gl_load_shaders(const char* vertex_file_path, const char* fragment_file_path, GLuint* program_id) {
 	FILE* fp;
@@ -279,6 +278,8 @@ int gl_create_shader_buf ( BUFFER_OBJECT * p_out,
 	}
 
 	gl_define_buf_obj ( title, p_out, attribute );
+	
+	return 0;
 }
 
 void gl_clear_screen ( ) {

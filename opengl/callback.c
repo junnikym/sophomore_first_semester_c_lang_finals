@@ -1,11 +1,11 @@
-#include "callback_funcs.h"
+#include "callback.h"
 
 void err_callback(int err_code, const char* err_description) {
 	fprintf(stderr, "Error : %s\n", err_description);
 }
 
 void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mods) {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)			// escÅ° ÀÔ·Â ½Ã Á¾·á
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)			// escÅ° ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	
 	game_control(&key, &action);

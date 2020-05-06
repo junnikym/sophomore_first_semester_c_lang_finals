@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
+
+#ifdef _WIN32
+	#include <malloc.h>
+#endif
 
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
