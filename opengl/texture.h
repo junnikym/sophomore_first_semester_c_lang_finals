@@ -1,5 +1,7 @@
-#ifndef TEXTURE_HPP
-#define TEXTURE_HPP
+#ifndef GL_TEXTURE_H
+#define GL_TEXTURE_H
+
+#include <GL/glew.h>
 
 // Load a .BMP file using our custom loader
 GLuint loadBMP_custom(const char * imagepath);
@@ -8,4 +10,4 @@ GLuint loadBMP_custom(const char * imagepath);
 GLuint loadDDS(const char * imagepath);
 
 
-#endif
+#endif /* GL_TEXTURE_H */

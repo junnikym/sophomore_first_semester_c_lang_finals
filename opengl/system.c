@@ -53,7 +53,7 @@ void gl_system_run(WINDOW* window) {
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		
+		gl_rander();
 		
 		// Swap buffers
 		glfwSwapBuffers(window->window);
