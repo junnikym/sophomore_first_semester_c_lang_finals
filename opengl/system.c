@@ -1,4 +1,4 @@
-#include "system.h"
+﻿#include "system.h"
 
 int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	// Initialise GLFW
@@ -36,22 +36,65 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	
 	glfwSwapInterval(1);
 
+	// -!-!- for test -!-!-
+
+	g_buf_obj.ID = gl_load_shader (
+		"../../opengl/shader/TransformVertexShader.vs",
+		"../../opengl/shader/TextureFragmentShader.fs" 
+	);
+
+	gl_define_buf_obj ( "obj", &g_buf_obj, &g_SQUARE_DATA );
+
+	g_buf_obj.texture = gl_load_BMP("../../resource/texture/wall.bmp");
+
+	gl_define_texture ( &g_buf_obj.ID, &g_buf_obj.texture, 0 );
+
+	// -!-!-!-!-!-!-!-!-!-!-
+
 	return 0;
 }
 
 void gl_system_run(WINDOW* window) {
 
+	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	mat4 Projection = GLM_MAT4_IDENTITY_INIT;
+
+	// Camera matrix
+	mat4 View = GLM_MAT4_IDENTITY_INIT;
+	
+	// Model matrix : an identity matrix (model will be at the origin)
+	mat4 Model = GLM_MAT4_IDENTITY_INIT;
+
+	// Our ModelViewProjection : multiplication of our 3 matrices
+	mat4 MVP = GLM_MAT4_IDENTITY_INIT;
+
+	glm_perspective ( 45.0f, 1024.0f / 768.0f, 0.1f, 100.0f, Projection );
+	
+	glm_lookat (
+		(vec3) { 3, 3, 3 }, 	// Camera is at (4,3,3), in World Space
+		(vec3) { 0, 0, 0 }, 	// and looks at the origin
+		(vec3) { 0, 1, 0 }, 	// Head is up (set to 0,-1,0 to look upside-down)
+		View
+	);
+
+	glm_mat4_mul ( Projection, View, MVP );
+	glm_mat4_mul ( MVP, Model, MVP ); // Remember, matrix multiplication is the other way around
+
+
 	// Dark blue background
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	gl_clear_screen();
 	
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
+
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 	
 	do {
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		gl_draw_obj ( &g_buf_obj, &g_2D_ATTR_SIZE, &MVP );
 		
 		gl_rander();
 		
@@ -64,5 +107,6 @@ void gl_system_run(WINDOW* window) {
 }
 
 void gl_system_shutdown(WINDOW* window) {
+	gl_shutdown_graphics( &g_buf_obj );
 	glfwTerminate();
 }

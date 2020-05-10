@@ -4,10 +4,10 @@
 #include <GL/glew.h>
 
 // Load a .BMP file using our custom loader
-GLuint loadBMP_custom(const char * imagepath);
+GLuint gl_load_BMP (const char * imagepath);
 
 // Load a .DDS file using GLFW's own loader
-GLuint loadDDS(const char * imagepath);
+GLuint gl_load_DDS (const char * imagepath);
 
 
 #endif /* GL_TEXTURE_H */

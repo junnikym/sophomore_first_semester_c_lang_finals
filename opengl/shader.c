@@ -10,7 +10,7 @@
 
 #include "shader.h"
 
-GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path){
+GLuint gl_load_shader (const char * vertex_file_path, const char * fragment_file_path){
 	FILE* fp = NULL;
 	int file_size = 0;
 	

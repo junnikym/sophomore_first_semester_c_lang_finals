@@ -71,6 +71,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\cglm\include;$(IncludePath)</IncludePath>
+    <ReferencePath>C:\cglm\win\x64\Release;$(ReferencePath)</ReferencePath>
+    <LibraryPath>C:\cglm\win\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -146,10 +149,11 @@
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\memory.c" />
     <ClCompile Include="..\..\object.c" />
-    <ClCompile Include="..\..\opengl\callback_funcs.c" />
+    <ClCompile Include="..\..\opengl\callback.c" />
     <ClCompile Include="..\..\opengl\graphics.c" />
-    <ClCompile Include="..\..\opengl\stb_image.c" />
+    <ClCompile Include="..\..\opengl\shader.c" />
     <ClCompile Include="..\..\opengl\system.c" />
+    <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\types.c" />
   </ItemGroup>
@@ -161,22 +165,17 @@
     <ClInclude Include="..\..\input.h" />
     <ClInclude Include="..\..\memory.h" />
     <ClInclude Include="..\..\object.h" />
-    <ClInclude Include="..\..\opengl\callback_funcs.h" />
+    <ClInclude Include="..\..\opengl\callback.h" />
     <ClInclude Include="..\..\opengl\graphics.h" />
-    <ClInclude Include="..\..\opengl\stb_image.h" />
+    <ClInclude Include="..\..\opengl\shader.h" />
     <ClInclude Include="..\..\opengl\system.h" />
+    <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\opengl\shader\fragment_shader.fs">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExcludedFromBuild>
-    </None>
-    <None Include="..\..\opengl\shader\vertex_shader.vs">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExcludedFromBuild>
-    </None>
+    <None Include="..\..\opengl\shader\TextureFragmentShader.fs" />
+    <None Include="..\..\opengl\shader\TransformVertexShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
