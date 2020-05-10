@@ -4,13 +4,23 @@
 #include "../types.h"
 #include "../memory.h"
 
+#include "texture.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
+
+#ifdef _WIN32
+	#include <malloc.h>
+#endif
 
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
+#include <cglm/cglm.h>
+
+
+// ------------------------------------------------------- //
+// ----- Buffer Structure	------------------------------
 
 typedef struct _BUFFER_OBJECT {
 	char title[_TITLE_SIZE];
@@ -20,56 +30,52 @@ typedef struct _BUFFER_OBJECT {
 } BUFFER_OBJECT;
 
 typedef struct _BUFFER_ATTRIBUTES {
-	float* vertices_data;
+	GLfloat* vertices_data;
 	int vertices_size;
 	GLuint* indices_data;
 	int indices_size;
+	int attr_arr_size[3];
 } BUFFER_ATTRIBUTES;
 
 // ------------------------------------------------------- //
-// ----- STD BUFFERS		------------------------------
+// ----- STD BUFFERS	----------------------------------
+
+// 2D ATTRIBUTE SIZE ARRAY
+
+static const GLfloat g_2D_ATTR_SIZE[3] = { 3, 3, 2 };
 
 // --- Square Const Buffers
 
-static const float g_SQUARE_VERTICES[] = {
-	// positions		// colors			// texture coords
-	0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-	0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-	-0.5f, -0.5f, 0.0f,	0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-	-0.5f,  0.5f, 0.0f,	1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+const static GLfloat g_SQUARE_VERTICES[] = {
+	// positions          // colors           // texture coords
+	 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+	 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // bottom right
+	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f, // bottom left
+	-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left 
 };
 
-static const GLuint g_SQUARE_INDICES[] = {
-	0, 1, 2,
-	2, 3, 0
+const static GLuint g_SQUARE_INDICES[] = {
+	0, 1, 3, // first triangle
+	1, 2, 3  // second triangle
 };
 
 static const BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 	&g_SQUARE_VERTICES,
 	sizeof(g_SQUARE_VERTICES),
 	&g_SQUARE_INDICES,
-	sizeof(g_SQUARE_INDICES)
+	sizeof(g_SQUARE_INDICES),
+	g_2D_ATTR_SIZE
 };
 
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
-GLuint*	gl_load_shaders		 ( const char* vertex_file_path, const char* fragment_file_path, GLuint* program_id );
 void	gl_define_buf_obj	 ( const char* title, BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
-
-GLuint*	gl_load_texture		 ( const GLuint* program_id, const char* filename, GLuint* p_out );
 void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
+void	gl_disable_attr_arr  ();
 
-//int		gl_vertex_link		 ( const GLuint program_id, const BUFFER_OBJECT* buffers );
-//void	gl_create_vertex_buf ( const char* title, const BUFFER_ATTRIBUTES* attribute, GLuint program_id );
-
-int		gl_create_shader_buf ( BUFFER_OBJECT* p_out, 
-							   const char* title, 
-							   const BUFFER_ATTRIBUTES* attribute );
-
-//void	gl_init_graphics	 ( const GLuint* id );
 void	gl_clear_screen		 ();
-void	gl_draw_obj			 ( const BUFFER_OBJECT* shader );
+void 	gl_draw_obj 		 ( const BUFFER_OBJECT* shader, int attr_size[3], mat4* MVP );
 void	gl_rander			 ( /* OBJ Array */ );
 void	gl_shutdown_graphics( BUFFER_OBJECT* x );
 
