@@ -60,7 +60,7 @@ void gl_clear_screen ( ) {
 	glUniformMatrix4fv( mvp_id, 1, GL_FALSE, &MVP[0][0] );
 	glBindVertexArray ( shader->VAO );
 	glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
-	glDrawArrays ( GL_TRIANGLES, 0, 6 );
+	//glDrawArrays ( GL_TRIANGLES, 0, 6 );
 }
 
  void gl_rander ( /* OBJ Array */ ) {

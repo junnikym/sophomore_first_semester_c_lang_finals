@@ -1,6 +1,8 @@
 #ifndef GL_SYSTEM_H
 #define GL_SYSTEM_H
 
+#define __OPEN_GL__
+
 #include <stdio.h>
 #include <stdlib.h>
 

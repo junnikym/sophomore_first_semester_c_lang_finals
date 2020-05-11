@@ -34,7 +34,7 @@ typedef struct _BUFFER_ATTRIBUTES {
 	int vertices_size;
 	GLuint* indices_data;
 	int indices_size;
-	int attr_arr_size[3];
+	int* attr_arr_size;
 } BUFFER_ATTRIBUTES;
 
 // ------------------------------------------------------- //
@@ -42,7 +42,7 @@ typedef struct _BUFFER_ATTRIBUTES {
 
 // 2D ATTRIBUTE SIZE ARRAY
 
-static const GLfloat g_2D_ATTR_SIZE[3] = { 3, 3, 2 };
+const static GLfloat g_2D_ATTR_SIZE[] = { 3, 3, 2 };
 
 // --- Square Const Buffers
 
@@ -59,7 +59,7 @@ const static GLuint g_SQUARE_INDICES[] = {
 	1, 2, 3  // second triangle
 };
 
-static const BUFFER_ATTRIBUTES g_SQUARE_DATA = {
+const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 	&g_SQUARE_VERTICES,
 	sizeof(g_SQUARE_VERTICES),
 	&g_SQUARE_INDICES,
@@ -75,7 +75,7 @@ void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, i
 void	gl_disable_attr_arr  ();
 
 void	gl_clear_screen		 ();
-void 	gl_draw_obj 		 ( const BUFFER_OBJECT* shader, int attr_size[3], mat4* MVP );
+void 	gl_draw_obj 		 ( const BUFFER_OBJECT* shader, int attr_size[3], mat4 MVP );
 void	gl_rander			 ( /* OBJ Array */ );
 void	gl_shutdown_graphics( BUFFER_OBJECT* x );
 

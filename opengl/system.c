@@ -1,4 +1,4 @@
-﻿#include "system.h"
+#include "system.h"
 
 int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	// Initialise GLFW
@@ -57,44 +57,50 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 void gl_system_run(WINDOW* window) {
 
 	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	mat4 Projection = GLM_MAT4_IDENTITY_INIT;
+	mat4 projection = GLM_MAT4_IDENTITY_INIT;
 
 	// Camera matrix
-	mat4 View = GLM_MAT4_IDENTITY_INIT;
+	mat4 view = GLM_MAT4_IDENTITY_INIT;
 	
 	// Model matrix : an identity matrix (model will be at the origin)
-	mat4 Model = GLM_MAT4_IDENTITY_INIT;
+	mat4 model = GLM_MAT4_IDENTITY_INIT;
 
 	// Our ModelViewProjection : multiplication of our 3 matrices
-	mat4 MVP = GLM_MAT4_IDENTITY_INIT;
-
-	glm_perspective ( 45.0f, 1024.0f / 768.0f, 0.1f, 100.0f, Projection );
-	
-	glm_lookat (
-		(vec3) { 3, 3, 3 }, 	// Camera is at (4,3,3), in World Space
-		(vec3) { 0, 0, 0 }, 	// and looks at the origin
-		(vec3) { 0, 1, 0 }, 	// Head is up (set to 0,-1,0 to look upside-down)
-		View
-	);
-
-	glm_mat4_mul ( Projection, View, MVP );
-	glm_mat4_mul ( MVP, Model, MVP ); // Remember, matrix multiplication is the other way around
-
+	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
 
 	// Dark blue background
 	gl_clear_screen();
 	
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
-
+	//glEnable(GL_CULL_FACE);
+	
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 	
+	float a = 0;
+	
 	do {
+		//a += 0.1;
+		
+		glm_perspective ( 45.0f, 1024.0f / 768.0f, 0.1f, 100.0f, projection );
+		
+		glm_translate_to((mat4)GLM_MAT4_IDENTITY_INIT, (vec3){ a, 0.0f, 0.0f }, model);
+		
+		glm_lookat (
+			(vec3) { 0, 0, 3 }, 	// Camera is at (4,3,3), in World Space
+			(vec3) { 0, 0, 0 }, 	// and looks at the origin
+			(vec3) { 0, 1, 0 }, 	// Head is up (set to 0,-1,0 to look upside-down)
+			view
+		);
+
+		glm_mat4_mul ( projection, view, mvp );
+		glm_mat4_mul ( mvp, model, mvp ); // Remember, matrix multiplication is the other way around
+
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		gl_draw_obj ( &g_buf_obj, &g_2D_ATTR_SIZE, &MVP );
+		gl_draw_obj ( &g_buf_obj, &g_2D_ATTR_SIZE, &mvp[0][0] );
 		
 		gl_rander();
 		

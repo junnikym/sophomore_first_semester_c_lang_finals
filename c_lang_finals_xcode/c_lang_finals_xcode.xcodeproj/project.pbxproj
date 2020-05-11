@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275D235D24683AB70006766F /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = 275D235C24683AB70006766F /* camera.c */; };
+		275D236024683D110006766F /* control.c in Sources */ = {isa = PBXBuildFile; fileRef = 275D235F24683D110006766F /* control.c */; };
 		275FFB8C2462E44500DB3E96 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8B2462E44500DB3E96 /* OpenGL.framework */; };
 		275FFB8E2462E46B00DB3E96 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8D2462E46B00DB3E96 /* libglfw.3.3.dylib */; };
 		275FFB902462E48B00DB3E96 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8F2462E48B00DB3E96 /* libGLEW.2.1.0.dylib */; };
@@ -39,6 +41,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		275D235B24683AB70006766F /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = camera.h; path = ../../opengl/camera.h; sourceTree = "<group>"; };
+		275D235C24683AB70006766F /* camera.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = camera.c; path = ../../opengl/camera.c; sourceTree = "<group>"; };
+		275D235E24683D110006766F /* control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = control.h; path = ../../opengl/control.h; sourceTree = "<group>"; };
+		275D235F24683D110006766F /* control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = control.c; path = ../../opengl/control.c; sourceTree = "<group>"; };
 		275FFB802462E3D200DB3E96 /* c_lang_finals_xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = c_lang_finals_xcode; sourceTree = BUILT_PRODUCTS_DIR; };
 		275FFB8B2462E44500DB3E96 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		275FFB8D2462E46B00DB3E96 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
@@ -155,6 +161,10 @@
 				275FFBDA246324D900DB3E96 /* system.h */,
 				275FFBD4246324D800DB3E96 /* texture.c */,
 				275FFBD6246324D800DB3E96 /* texture.h */,
+				275D235B24683AB70006766F /* camera.h */,
+				275D235C24683AB70006766F /* camera.c */,
+				275D235E24683D110006766F /* control.h */,
+				275D235F24683D110006766F /* control.c */,
 			);
 			name = opengl;
 			sourceTree = "<group>";
@@ -226,6 +236,8 @@
 				275FFBAC2462E4EC00DB3E96 /* main.c in Sources */,
 				275FFBA82462E4EC00DB3E96 /* dynamic_array.c in Sources */,
 				275FFBAA2462E4EC00DB3E96 /* physics.c in Sources */,
+				275D235D24683AB70006766F /* camera.c in Sources */,
+				275D236024683D110006766F /* control.c in Sources */,
 				275FFBDD246324D900DB3E96 /* system.c in Sources */,
 				275FFBAB2462E4EC00DB3E96 /* force.c in Sources */,
 				275FFBDE246324D900DB3E96 /* texture.c in Sources */,
