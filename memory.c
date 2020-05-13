@@ -46,14 +46,22 @@ int push_force_into_g_obj ( FORCE* elem, int obj_index, int ent_index ) {
 	return 0;
 }
 
+void adapt_each_f_g_obj ( void* elem, int i, void* arg ) {
+	adapt_f_obj ( elem );
+}
+
+void adapt_f_g_obj ( ) {
+	g_obj_foreach( NULL, adapt_each_f_g_obj );
+}
+
 // -- wapper
 
 void g_obj_set_center(int obj_index, int ent_index) {
 	set_center_obj(&((OBJECT*)g_objects.items)[ent_index], ent_index);
 }
 
-void g_obj_foreach(void (*func)(void* elem, int i, DYN_ARR* arr)) {
-	dyn_arr_foreach(&g_objects, func);
+void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
+	dyn_arr_foreach(&g_objects, msger, func);
 }
 
 void set_g_user_obj(int index) {

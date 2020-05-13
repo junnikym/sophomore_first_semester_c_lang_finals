@@ -30,7 +30,6 @@ VEC2 output_force ( FORCE* f, double t ) {
 	if( f->start_t == 0.0 )
 		f->start_t = t;
 	else {
-		
 		if( f->identify & (F_ACCELERATE << __FORCE_ENUM_SHIFTER) ) {
 			return vec2_mul( &f->force_vec, SQUARE(t - f->start_t));
 		}

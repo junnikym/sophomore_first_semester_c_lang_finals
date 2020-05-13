@@ -83,9 +83,19 @@ void gl_system_run(WINDOW* window) {
 	do {
 		//a += 0.1;
 		
+		adapt_f_g_obj();
+		
 		glm_perspective ( 45.0f, 1024.0f / 768.0f, 0.1f, 100.0f, projection );
 		
-		glm_translate_to((mat4)GLM_MAT4_IDENTITY_INIT, (vec3){ a, 0.0f, 0.0f }, model);
+		glm_translate_to(
+			(mat4)GLM_MAT4_IDENTITY_INIT,
+			(vec3){
+				g_user_obj->center->position.x,
+				g_user_obj->center->position.y,
+				0.0f
+			},
+			model
+		);
 		
 		glm_lookat (
 			(vec3) { 0, 0, 3 }, 	// Camera is at (4,3,3), in World Space

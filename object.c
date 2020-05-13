@@ -31,6 +31,27 @@ void release_obj ( OBJECT* obj ) {
 	obj->direction = NULL;
 }
 
+void adapt_each_f_obj (void* elem, int i, void* pos) {
+	VEC2 ent_f = pass_by_f_ent ( elem );
+	
+	vec2_add_assn (
+		pos,
+		&ent_f
+	);
+}
+
+void adapt_f_obj ( OBJECT* obj ) {
+	VEC2 result = V2_ZERO;
+	dyn_arr_foreach(&obj->entities, &obj->center->position, adapt_each_f_obj);
+}
+
+VEC2 pass_by_f_obj ( OBJECT* obj ) {
+	VEC2 result = V2_ZERO;
+	dyn_arr_foreach(&obj->entities, &result, adapt_each_f_obj);
+
+	return result;
+}
+
 // -- setting function
 
 void set_center_obj ( OBJECT* obj, int index ) {

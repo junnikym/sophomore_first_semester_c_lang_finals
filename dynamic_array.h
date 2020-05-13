@@ -28,7 +28,7 @@ void*       dyn_arr_back        ( const DYN_ARR* a );
 void        dyn_arr_delete      ( DYN_ARR* a, int index, void (*copy__)(void*, const void*) );
 void        dyn_arr_release     ( DYN_ARR* a);
 
-void        dyn_arr_foreach     ( DYN_ARR* a, void (*func)(void* elem, int i, DYN_ARR* arr) );
+void        dyn_arr_foreach     ( DYN_ARR* a, void* msger, void (*func)(void* elem, int i, void* arg) );
 
 // ------------------------------------------------------- //
 // ----- Basic Type's copy function	---------------------- 

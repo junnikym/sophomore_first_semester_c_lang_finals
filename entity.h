@@ -13,7 +13,12 @@ typedef struct _ENTITY {
 } ENTITY;
 
 void init_ent       ( ENTITY* ent );
-void copy_ent       ( void* lhs, const void* rhs );
 void release_ent    ( ENTITY* ent );
+
+void copy_ent       ( void* lhs, const void* rhs );
+
+void adapt_each_f_ent ( void* f_in_e, int i, void* pos );
+void adapt_f_ent    ( ENTITY* ent );
+VEC2 pass_by_f_ent  ( ENTITY* ent );
 
 #endif

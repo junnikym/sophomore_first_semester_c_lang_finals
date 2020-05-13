@@ -76,10 +76,10 @@ void dyn_arr_release( DYN_ARR* a) {
 	a->items = NULL;
 }
 
-void dyn_arr_foreach( DYN_ARR* a, void (*func)(void* elem, int i, DYN_ARR* arr) ) {
+void dyn_arr_foreach ( DYN_ARR* a, void* msger, void (*func)(void* elem, int i, void* arg) ) {
 	int i = 0;
 	for( i = 0; i <= a->size; i++ ) {
-		func(dyn_arr_get(a, i), i, a);
+		func(dyn_arr_get(a, i), i, msger);
 	}
 }
 

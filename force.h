@@ -5,6 +5,8 @@
 #include "types.h"
 
 #include <stdlib.h>
+#include <GL/glew.h>
+#include  <GLFW/glfw3.h>
 
 #define FORCE_IDENTITY_INIT     {V2_ZERO, -1, 0}
 
