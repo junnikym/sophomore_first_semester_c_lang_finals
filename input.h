@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "memory.h"
+#include "entity.h"
 
 // -- Control Keys
 
@@ -11,7 +12,10 @@ static int __RIGHT_KEY = GLFW_KEY_RIGHT;
 static int __JUMP_KEY = 0;
 
 static int __KEY_PRESS = GLFW_PRESS;
-static int __KEY_RELESE = GLFW_RELEASE;
+static int __KEY_RELESE = GLFW_RELEASE;\
+
+static int g_left_key_buf = 0;
+static int g_right_key_buf = 0;
 
 // ------------------------------------------------------- //
 // ----- Key Setting function	--------------------------

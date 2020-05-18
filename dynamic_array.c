@@ -14,7 +14,7 @@ int dyn_arr_size( const DYN_ARR* a ) {
 	return a->size;
 }
 
-static void dyn_arr_resize( DYN_ARR* a, int capacity ) {
+void dyn_arr_resize( DYN_ARR* a, int capacity ) {
 	void* items = realloc(a->items, a->type_size * capacity);
 	if(items == NULL) {
 		/* ! TODO : Error Code */

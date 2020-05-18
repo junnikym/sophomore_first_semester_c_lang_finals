@@ -37,3 +37,21 @@ VEC2 pass_by_f_ent ( ENTITY* ent) {
 
 	return result;
 }
+
+void set_essential_f_ent ( ENTITY* ent ) {
+	FORCE inserter = (FORCE)FORCE_IDENTITY_INIT;
+	
+	dyn_arr_resize( &ent->forces, __N_ESSENTAL_FORCE );
+	
+	// -- CONTROL FORCES ------------
+	inserter.identify = F_FOR_CONTROL;
+	dyn_arr_insert( &ent->forces, 0, &inserter, copy_force);
+	
+	// -- PHY FORCES ----------------
+	inserter.identify = F_FOR_CONTROL;
+	dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
+	
+	// ------------------------------
+	
+	
+}

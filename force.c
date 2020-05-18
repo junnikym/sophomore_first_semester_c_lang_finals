@@ -18,6 +18,8 @@ void set_vec_force( FORCE* f, double x, double y ) {
 }
 
 VEC2 output_force ( FORCE* f, double t ) {
+	VEC2 result = V2_ZERO;
+	
 	if( f->identify & (F_PAUSE << __FORCE_ENUM_SHIFTER) ) {
 		f->start_t = 0.0;
 		return V2_ZERO;

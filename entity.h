@@ -4,6 +4,14 @@
 #include "force.h"
 #include "dynamic_array.h"
 
+#define __N_ESSENTIAL_FORCE__CONTROL 1
+#define __N_ESSENTIAL_FORCE__PHY 1
+
+#define __I_ESSENTIAL_FORCE__CONTROL 0
+static const int __I_ESSENTIAL_FORCE__PHY = __N_ESSENTIAL_FORCE__CONTROL + __I_ESSENTIAL_FORCE__CONTROL;
+
+static const int __N_ESSENTAL_FORCE = __N_ESSENTIAL_FORCE__CONTROL + __N_ESSENTIAL_FORCE__PHY;
+
 typedef struct _ENTITY {
     VEC2 position;
     VEC2 direction_vec;
@@ -19,6 +27,10 @@ void copy_ent       ( void* lhs, const void* rhs );
 
 void adapt_each_f_ent ( void* f_in_e, int i, void* pos );
 void adapt_f_ent    ( ENTITY* ent );
+
+// ! TODO : change function name -> pass_by_... -> pass_...
 VEC2 pass_by_f_ent  ( ENTITY* ent );
+
+void set_essential_f_ent ( ENTITY* ent );
 
 #endif
