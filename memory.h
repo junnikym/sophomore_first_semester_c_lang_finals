@@ -3,8 +3,8 @@
 
 #include "object.h"
 
-static DYN_ARR g_objects;
-static OBJECT* g_user_obj;	// TODO : maybe better index(int);
+extern DYN_ARR g_objects;
+extern OBJECT g_user_obj;
 
 // ------------------------------------------------------- //
 // ----- g_object functions	------------------------------
@@ -20,11 +20,9 @@ void	adapt_f_g_obj			( );
 
 // -- wapper
 
-void	g_obj_set_center	( int obj_index, int ent_index);
+void	g_obj_set_center		( int obj_index, int ent_index);
 
-void 	g_obj_foreach		 ( void* msger, void (*func)(void* elem, int i, void* arg) );
-
-void	set_g_user_obj		( int index );
+void 	g_obj_foreach		( void* msger, void (*func)(void* elem, int i, void* arg) );
 
 VEC2	g_obj_get_position	( int index );
 

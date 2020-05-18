@@ -2,15 +2,16 @@
 #define INPUT_H
 
 #include "types.h"
+#include "memory.h"
 
 // -- Control Keys
 
-static int __LEFT_KEY = 0;
-static int __RIGHT_KEY = 0;
+static int __LEFT_KEY = GLFW_KEY_LEFT;
+static int __RIGHT_KEY = GLFW_KEY_RIGHT;
 static int __JUMP_KEY = 0;
 
-static int __KEY_PRESS = 0;
-static int __KEY_RELESE = 0;
+static int __KEY_PRESS = GLFW_PRESS;
+static int __KEY_RELESE = GLFW_RELEASE;
 
 // ------------------------------------------------------- //
 // ----- Key Setting function	--------------------------

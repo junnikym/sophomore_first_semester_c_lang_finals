@@ -1,4 +1,5 @@
 #include "callback.h"
+#include <stdio.h>
 
 void err_callback(int err_code, const char* err_description) {
 	fprintf(stderr, "Error : %s\n", err_description);

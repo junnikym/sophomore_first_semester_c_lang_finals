@@ -1,5 +1,7 @@
 #include "system.h"
 
+extern OBJECT g_user_obj;
+
 int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	// Initialise GLFW
 	if ( !glfwInit() ) {
@@ -67,6 +69,8 @@ void gl_system_run(WINDOW* window) {
 
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
+	
+	VEC2 player_pos = V2_ZERO;
 
 	// Dark blue background
 	gl_clear_screen();
@@ -78,27 +82,28 @@ void gl_system_run(WINDOW* window) {
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 	
-	float a = 0;
-	
 	do {
 		//a += 0.1;
 		
 		adapt_f_g_obj();
+		adapt_f_obj ( &g_user_obj );
+		
+		player_pos = g_user_obj.center->position;
 		
 		glm_perspective ( 45.0f, 1024.0f / 768.0f, 0.1f, 100.0f, projection );
 		
 		glm_translate_to(
 			(mat4)GLM_MAT4_IDENTITY_INIT,
 			(vec3){
-				g_user_obj->center->position.x,
-				g_user_obj->center->position.y,
+				player_pos.x,
+				player_pos.y,
 				0.0f
 			},
 			model
 		);
 		
 		glm_lookat (
-			(vec3) { 0, 0, 3 }, 	// Camera is at (4,3,3), in World Space
+			(vec3) { 0, 0, 10 }, 	// Camera is at (4,3,3), in World Space
 			(vec3) { 0, 0, 0 }, 	// and looks at the origin
 			(vec3) { 0, 1, 0 }, 	// Head is up (set to 0,-1,0 to look upside-down)
 			view

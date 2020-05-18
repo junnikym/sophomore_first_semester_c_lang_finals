@@ -58,8 +58,9 @@ void set_center_obj ( OBJECT* obj, int index ) {
 	if (obj->center != NULL) {
 		// !TODO : detech_center_obj();
 	}
-
-	obj->center = (ENTITY*)dyn_arr_get(&obj->entities, index);
+	void* a = dyn_arr_get(&obj->entities, index);
+	
+	obj->center = a;
 }
 
 void detech_center_obj ( OBJECT* obj ) {

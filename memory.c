@@ -1,5 +1,8 @@
 #include "memory.h"
 
+DYN_ARR g_objects;
+OBJECT g_user_obj;
+
 // ------------------------------------------------------- //
 // ----- g_object function	------------------------------
 
@@ -64,10 +67,6 @@ void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
 	dyn_arr_foreach(&g_objects, msger, func);
 }
 
-void set_g_user_obj(int index) {
-	g_user_obj = &((OBJECT*)g_objects.items)[index];
-}
-
 VEC2 g_obj_get_position(int index) {
 	return ((OBJECT*)g_objects.items)[index].center->position;
 }
@@ -77,6 +76,7 @@ VEC2 g_obj_get_position(int index) {
 
 void init_memory ( ) {
 	dyn_arr_init( &g_objects, sizeof(OBJECT) );
+	init_obj( &g_user_obj );
 }
 
 void release_memory() {

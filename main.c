@@ -2,9 +2,14 @@
 #include "types.h"
 #include "memory.h"
 
+// --- for control memory.h's data
+extern DYN_ARR g_objects;
+extern OBJECT g_user_obj;
+
 int main() {
 	int result = 0;
 	OBJECT* obj_converter = 0;
+	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, F_FOR_CONTROL | F_PAUSE );
 
 // ----- Initialize	----------
 
@@ -17,12 +22,16 @@ int main() {
 	init_memory();
 
 	// -!-!- for test -!-!-
-	push_obj_into_g_obj( NULL );
-		push_ent_into_g_obj( NULL, 0 );
-		g_obj_set_center(0, 0);
-			push_force_into_g_obj(NULL, 0, 0);
 
-	set_g_user_obj(0);
+	dyn_arr_push_back( &g_user_obj.entities, NULL, copy_ent );
+	set_center_obj( &g_user_obj, 0 );
+	
+	f_inserter.force_vec.x = -0.1;
+	dyn_arr_push_back( &(g_user_obj.center->forces), &f_inserter, copy_force );	// [0] : left;
+	
+	f_inserter.force_vec.x = 0.1;
+	dyn_arr_push_back( &(g_user_obj.center->forces), &f_inserter, copy_force );	// [1] : right;
+	
 	// -!-!--!-!--!-!--!-!-
 
 // ---------------------------
