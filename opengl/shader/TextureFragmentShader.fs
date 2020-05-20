@@ -9,7 +9,10 @@ out vec4 outColor;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D Texture;
+uniform vec3 spriteColor;
+uniform vec2 texturePos;
 
 void main(){
-	outColor = texture( Texture, UV );
+	//outColor = vec4(spriteColor, 1.0) * texture(Texture, UV + texturePos);
+	outColor = texture(Texture, UV + texturePos);
 }

@@ -26,7 +26,7 @@ typedef struct _BUFFER_OBJECT {
 	char title[_TITLE_SIZE];
 	GLuint VBO, VAO, EBO;
 	GLuint ID;
-	GLuint texture;			// TODO MAKE -> ARRAY
+	GLuint texture;
 } BUFFER_OBJECT;
 
 typedef struct _BUFFER_ATTRIBUTES {
@@ -42,16 +42,17 @@ typedef struct _BUFFER_ATTRIBUTES {
 
 // 2D ATTRIBUTE SIZE ARRAY
 
-const static GLfloat g_2D_ATTR_SIZE[] = { 3, 3, 2 };
+// ! TODO : Delete g_2D_ATTR_SIZE
+// const static GLfloat g_2D_ATTR_SIZE[] = { 3, 3, 2 };
 
 // --- Square Const Buffers
 
 const static GLfloat g_SQUARE_VERTICES[] = {
 	// positions          // colors           // texture coords
-	 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-	 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // bottom right
-	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f, // bottom left
-	-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left 
+	 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f/16, 0.0f, // top right
+	 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f/16, 1.0f, // bottom right
+	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f, // bottom left
+	-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f  // top left
 };
 
 const static GLuint g_SQUARE_INDICES[] = {
@@ -63,8 +64,7 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 	&g_SQUARE_VERTICES,
 	sizeof(g_SQUARE_VERTICES),
 	&g_SQUARE_INDICES,
-	sizeof(g_SQUARE_INDICES),
-	g_2D_ATTR_SIZE
+	sizeof(g_SQUARE_INDICES)
 };
 
 // ------------------------------------------------------- //
@@ -72,11 +72,15 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 
 void	gl_define_buf_obj	 ( const char* title, BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
 void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
-void	gl_disable_attr_arr  ();
 
 void	gl_clear_screen		 ();
-void 	gl_draw_obj 		 ( const BUFFER_OBJECT* shader, int attr_size[3], mat4 MVP );
+
+void 	gl_draw_obj 		 ( const BUFFER_OBJECT* shader, mat4 MVP );
+void	gl_draw_sprite_obj ( const BUFFER_OBJECT* shader,
+							mat4 MVP,
+							const VEC2* current_sprite_pos );
 void	gl_rander			 ( /* OBJ Array */ );
+
 void	gl_shutdown_graphics( BUFFER_OBJECT* x );
 
 // ------------------------------------------------------- //

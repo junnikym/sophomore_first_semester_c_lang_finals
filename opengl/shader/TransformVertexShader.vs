@@ -12,6 +12,8 @@ out vec2 UV;
 // Values that stay constant for the whole mesh.
 uniform mat4 MVP;
 
+uniform vec2 sprite_UV;
+
 void main(){
 
 	// Output position of the vertex, in clip space : MVP * position

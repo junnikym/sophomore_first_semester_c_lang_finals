@@ -28,12 +28,17 @@ VEC2 output_force ( FORCE* f, double t ) {
 	if( f->start_t == 0.0 )
 		f->start_t = t;
 	else {
+		
 		if( f->identify & (F_ACCELERATE << __FORCE_ENUM_SHIFTER) ) {
+			printf("t - f->start_t : %f \n", t - f->start_t);
 			return vec2_mul( &f->force_vec, SQUARE(t - f->start_t));
 		}
+		
+		result = vec2_mul( &f->force_vec, (t - f->start_t) );
+		f->start_t = t;
 	}
 	
-	return vec2_mul( &f->force_vec, (t - f->start_t));
+	return result;
 }
 
 FORCE* search_id_force( DYN_ARR* arr, int id ) {

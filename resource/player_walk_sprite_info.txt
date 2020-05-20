@@ -1,0 +1,5 @@
+stand : 1
+start_walk : 2
+loop_begin : 4
+loop_end : 15
+end_walk : 16

@@ -47,7 +47,9 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 
 	gl_define_buf_obj ( "obj", &g_buf_obj, &g_SQUARE_DATA );
 
-	g_buf_obj.texture = gl_load_BMP("../../resource/texture/wall.bmp");
+	g_buf_obj.texture = gl_load_DDS(
+		"../../resource/texture/character/player_walk_sprite.dds"
+	);
 
 	gl_define_texture ( &g_buf_obj.ID, &g_buf_obj.texture, 0 );
 
@@ -57,6 +59,9 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 }
 
 void gl_system_run(WINDOW* window) {
+	VEC2 animation_coord = V2_ZERO;
+	animation_coord.y = 1.0f;
+	double last_time = glfwGetTime();
 
 	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	mat4 projection = GLM_MAT4_IDENTITY_INIT;
@@ -83,7 +88,14 @@ void gl_system_run(WINDOW* window) {
 	glDepthFunc(GL_LESS);
 	
 	do {
-		//a += 0.1;
+		if( glfwGetTime() - last_time > 0.05 ) {
+			animation_coord.x += 1/16.0f;
+			
+			if(animation_coord.x > 1)
+				animation_coord.x = 1/16.0f;
+			
+			last_time = glfwGetTime();
+		}
 		
 		adapt_f_g_obj();
 		adapt_f_obj ( &g_user_obj );
@@ -115,7 +127,7 @@ void gl_system_run(WINDOW* window) {
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		gl_draw_obj ( &g_buf_obj, &g_2D_ATTR_SIZE, &mvp[0][0] );
+		gl_draw_sprite_obj ( &g_buf_obj, &mvp[0][0], &animation_coord );
 		
 		gl_rander();
 		

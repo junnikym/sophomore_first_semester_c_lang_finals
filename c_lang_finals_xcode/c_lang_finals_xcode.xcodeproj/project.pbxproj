@@ -16,7 +16,7 @@
 		275FFBA62462E4EC00DB3E96 /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB952462E4EB00DB3E96 /* types.c */; };
 		275FFBA72462E4EC00DB3E96 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB962462E4EB00DB3E96 /* memory.c */; };
 		275FFBA82462E4EC00DB3E96 /* dynamic_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9D2462E4EB00DB3E96 /* dynamic_array.c */; };
-		275FFBA92462E4EC00DB3E96 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9E2462E4EB00DB3E96 /* input.c */; };
+		275FFBA92462E4EC00DB3E96 /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9E2462E4EB00DB3E96 /* user_control.c */; };
 		275FFBAA2462E4EC00DB3E96 /* physics.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9F2462E4EB00DB3E96 /* physics.c */; };
 		275FFBAB2462E4EC00DB3E96 /* force.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBA02462E4EB00DB3E96 /* force.c */; };
 		275FFBAC2462E4EC00DB3E96 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBA22462E4EB00DB3E96 /* main.c */; };
@@ -57,10 +57,10 @@
 		275FFB982462E4EB00DB3E96 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../../entity.h; sourceTree = "<group>"; };
 		275FFB992462E4EB00DB3E96 /* dynamic_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dynamic_array.h; path = ../../dynamic_array.h; sourceTree = "<group>"; };
 		275FFB9A2462E4EB00DB3E96 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memory.h; path = ../../memory.h; sourceTree = "<group>"; };
-		275FFB9B2462E4EB00DB3E96 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = input.h; path = ../../input.h; sourceTree = "<group>"; };
+		275FFB9B2462E4EB00DB3E96 /* user_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user_control.h; path = ../../user_control.h; sourceTree = "<group>"; };
 		275FFB9C2462E4EB00DB3E96 /* object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = object.h; path = ../../object.h; sourceTree = "<group>"; };
 		275FFB9D2462E4EB00DB3E96 /* dynamic_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dynamic_array.c; path = ../../dynamic_array.c; sourceTree = "<group>"; };
-		275FFB9E2462E4EB00DB3E96 /* input.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = input.c; path = ../../input.c; sourceTree = "<group>"; };
+		275FFB9E2462E4EB00DB3E96 /* user_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = user_control.c; path = ../../user_control.c; sourceTree = "<group>"; };
 		275FFB9F2462E4EB00DB3E96 /* physics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = physics.c; path = ../../physics.c; sourceTree = "<group>"; };
 		275FFBA02462E4EB00DB3E96 /* force.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = force.c; path = ../../force.c; sourceTree = "<group>"; };
 		275FFBA12462E4EB00DB3E96 /* force.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = force.h; path = ../../force.h; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 				275FFBA02462E4EB00DB3E96 /* force.c */,
 				275FFBA12462E4EB00DB3E96 /* force.h */,
 				275FFBA42462E4EC00DB3E96 /* identify.h */,
-				275FFB9E2462E4EB00DB3E96 /* input.c */,
-				275FFB9B2462E4EB00DB3E96 /* input.h */,
+				275FFB9E2462E4EB00DB3E96 /* user_control.c */,
+				275FFB9B2462E4EB00DB3E96 /* user_control.h */,
 				275FFBA22462E4EB00DB3E96 /* main.c */,
 				275FFB962462E4EB00DB3E96 /* memory.c */,
 				275FFB9A2462E4EB00DB3E96 /* memory.h */,
@@ -228,7 +228,7 @@
 			files = (
 				275FFBA52462E4EC00DB3E96 /* entity.c in Sources */,
 				275FFBA72462E4EC00DB3E96 /* memory.c in Sources */,
-				275FFBA92462E4EC00DB3E96 /* input.c in Sources */,
+				275FFBA92462E4EC00DB3E96 /* user_control.c in Sources */,
 				275FFBAD2462E4EC00DB3E96 /* object.c in Sources */,
 				275FFBDC246324D900DB3E96 /* callback.c in Sources */,
 				275FFBA62462E4EC00DB3E96 /* types.c in Sources */,

@@ -4,6 +4,8 @@
 #include "force.h"
 #include "dynamic_array.h"
 
+//#include "opengl/graphics.h"
+
 #define __N_ESSENTIAL_FORCE__CONTROL 1
 #define __N_ESSENTIAL_FORCE__PHY 1
 
@@ -18,6 +20,7 @@ typedef struct _ENTITY {
     DYN_ARR forces;   // VEC2
 
     // !TODO : Create attribute; (mass, meterial, ... )
+//	BUFFER_OBJECT* graphics_buf;
 } ENTITY;
 
 void init_ent       ( ENTITY* ent );
