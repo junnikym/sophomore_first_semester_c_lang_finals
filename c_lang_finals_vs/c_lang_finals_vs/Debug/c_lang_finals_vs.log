@@ -1,12 +1,51 @@
-﻿  graphics.c
+﻿  entity.c
+  main.c
+C:\cglm\include\cglm\common.h(12,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': 매크로 재정의
+C:\source\sophomore_first_semester_c_lang_finals\main.c : message : '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
+C:\cglm\include\cglm\vec2.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\simd\sse2\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\ray.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+  memory.c
+  object.c
+C:\source\sophomore_first_semester_c_lang_finals\object.c(44,7): warning C4101: 'result' :참조되지 않은 지역 변수입니다.
+  callback.c
+  graphics.c
 C:\cglm\include\cglm\common.h(12,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': 매크로 재정의
 C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c : message : '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
 C:\cglm\include\cglm\vec2.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\simd\sse2\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\ray.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(62,1): warning C4047: '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(62,1): warning C4047: '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(62,1): warning C4047: '초기화 중': 'int'의 간접 참조 수준이 'const GLfloat *'과(와) 다릅니다.
-C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(42,71): warning C4028: 정식 매개 변수 3이(가) 선언과 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(72,9): warning C4477: 'printf' : 서식 문자열 '%f'에 'double' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'const VEC2'입니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(75,54): warning C4244: '함수': 'const double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.c(75,77): warning C4244: '함수': 'const double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  system.c
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\common.h(12,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': 매크로 재정의
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c : message : '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
+C:\cglm\include\cglm\vec2.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\simd\sse2\quat.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\cglm\include\cglm\ray.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\graphics.h(63,1): warning C4047: '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(43,32): warning C4013: 'gl_load_shader'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(130,46): warning C4047: '함수': 'vec4 (*)'의 간접 참조 수준이 'float *'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(130,46): warning C4024: 'gl_draw_sprite_obj': 형식 및 실제 매개 변수 2의 형식이 서로 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\opengl\system.c(109,1): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  physics.c
+  user_control.c
+  utility.c
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(3,43): warning C4028: 정식 매개 변수 3이(가) 선언과 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(4,21): warning C4047: '<': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(5,16): warning C4047: '=': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(7,26): warning C4047: '>': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(8,16): warning C4047: '=': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\source\sophomore_first_semester_c_lang_finals\utility.c(10,16): warning C4047: 'return': 'int'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+  코드를 생성하고 있습니다...
   c_lang_finals_vs.vcxproj -> C:\source\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe

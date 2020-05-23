@@ -145,7 +145,6 @@
     <ClCompile Include="..\..\dynamic_array.c" />
     <ClCompile Include="..\..\entity.c" />
     <ClCompile Include="..\..\force.c" />
-    <ClCompile Include="..\..\input.c" />
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\memory.c" />
     <ClCompile Include="..\..\object.c" />
@@ -156,22 +155,26 @@
     <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\types.c" />
+    <ClCompile Include="..\..\user_control.c" />
+    <ClCompile Include="..\..\utility.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\dynamic_array.h" />
     <ClInclude Include="..\..\entity.h" />
     <ClInclude Include="..\..\force.h" />
     <ClInclude Include="..\..\identify.h" />
-    <ClInclude Include="..\..\input.h" />
     <ClInclude Include="..\..\memory.h" />
     <ClInclude Include="..\..\object.h" />
     <ClInclude Include="..\..\opengl\callback.h" />
     <ClInclude Include="..\..\opengl\graphics.h" />
+    <ClInclude Include="..\..\opengl\img_sprite.h" />
     <ClInclude Include="..\..\opengl\shader.h" />
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
+    <ClInclude Include="..\..\user_control.h" />
+    <ClInclude Include="..\..\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\opengl\shader\TextureFragmentShader.fs" />

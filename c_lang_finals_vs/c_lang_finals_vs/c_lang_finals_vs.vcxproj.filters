@@ -33,9 +33,6 @@
     <ClCompile Include="..\..\opengl\graphics.c">
       <Filter>소스 파일\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\input.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\object.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -63,6 +60,12 @@
     <ClCompile Include="..\..\opengl\callback.c">
       <Filter>소스 파일\opengl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\user_control.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\utility.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\opengl\system.h">
@@ -79,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="..\..\opengl\graphics.h">
       <Filter>헤더 파일\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\input.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\dynamic_array.h">
       <Filter>헤더 파일</Filter>
@@ -105,6 +105,15 @@
       <Filter>헤더 파일\opengl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\opengl\shader.h">
+      <Filter>헤더 파일\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\user_control.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\utility.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opengl\img_sprite.h">
       <Filter>헤더 파일\opengl</Filter>
     </ClInclude>
   </ItemGroup>
