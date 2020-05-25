@@ -19,7 +19,7 @@ static int __KEY_PRESS = GLFW_PRESS;
 static int __KEY_RELESE = GLFW_RELEASE;
 
 // ------------------------------------------------------- //
-// ----- Key Setting function	--------------------------
+// ----- Key Setting function		----------------------
 
 void set_control_key( int* which_key, int key_value );
 

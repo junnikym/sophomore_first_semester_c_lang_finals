@@ -1,6 +1,9 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-int loop_section ( int min, int max, int current );
+#include <stdlib.h>
+#include <math.h>
+
+int range_loop ( unsigned int min, unsigned int max, int* current );
 
 #endif

@@ -1,5 +1,5 @@
--- update in VS in window
+-- updated by mac, xcode
 
-utility.h .c
-
-opengl/img_sprite.h
+identify.c
+hash_map.h .c
+list.h .c

@@ -62,6 +62,9 @@ void gl_system_run(WINDOW* window) {
 	VEC2 animation_coord = V2_ZERO;
 	animation_coord.y = 1.0f;
 	double last_time = glfwGetTime();
+	double t = 0;
+	int animate_i = 0;
+	const double animate_speed = 0.075;
 
 	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	mat4 projection = GLM_MAT4_IDENTITY_INIT;
@@ -88,11 +91,14 @@ void gl_system_run(WINDOW* window) {
 	glDepthFunc(GL_LESS);
 	
 	do {
-		if( glfwGetTime() - last_time > 0.05 ) {
-			animation_coord.x += 1/16.0f;
+		t = glfwGetTime() - last_time;
+		
+		if( t > animate_speed ) {
+			animate_i += (int)(t / animate_speed);
 			
-			if(animation_coord.x > 1)
-				animation_coord.x = 1/16.0f;
+			animation_coord.x = (double)range_loop(4, 15, &animate_i)/16;
+			
+			printf("animate_i : %d // coord.x : %f \n", animate_i, animation_coord.x);
 			
 			last_time = glfwGetTime();
 		}

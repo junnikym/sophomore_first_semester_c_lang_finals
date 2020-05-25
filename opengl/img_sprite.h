@@ -4,10 +4,12 @@
 #include "../types.h"
 
 typedef struct {
-	char* img_path;		
+	char* img_path;
+	
 	VEC2 row_n_column_size;
 	VEC2 start_frame;
-	int frame_frame;
+	
+	int frame_speed;
 } IMG_SPRITE;
 
 #endif

@@ -14,6 +14,7 @@
 
 #include "../memory.h"
 #include "../object.h"
+#include "../utility.h"
 
 typedef struct _WINDOW {
     GLFWwindow* window;

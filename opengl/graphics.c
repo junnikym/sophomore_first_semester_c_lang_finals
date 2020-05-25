@@ -69,7 +69,7 @@ void	gl_draw_sprite_obj ( const BUFFER_OBJECT* shader,
 	GLuint trans_form_location = 0;
 	GLuint mvp_id;
 	
-	printf("animation_coord.x : %f \n", current_sprite_pos[0]);
+	//printf("animation_coord.x : %f \n", current_sprite_pos[0]);
 
 	GLint texture_location = glGetUniformLocation ( shader->ID, "texturePos" );
 	glUniform2f( texture_location, current_sprite_pos->x, current_sprite_pos->y);

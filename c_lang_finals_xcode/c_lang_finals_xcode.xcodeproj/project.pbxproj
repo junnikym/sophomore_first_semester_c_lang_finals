@@ -26,6 +26,11 @@
 		275FFBDE246324D900DB3E96 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD4246324D800DB3E96 /* texture.c */; };
 		275FFBDF246324D900DB3E96 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD8246324D900DB3E96 /* shader.c */; };
 		275FFBE0246324D900DB3E96 /* graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD9246324D900DB3E96 /* graphics.c */; };
+		27DAC49424790DBF002A8F62 /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49024790DBF002A8F62 /* user_control.c */; };
+		27DAC49524790DBF002A8F62 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49224790DBF002A8F62 /* utility.c */; };
+		27DAC49824792809002A8F62 /* identify.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49724792808002A8F62 /* identify.c */; };
+		27DAC49B24792A0F002A8F62 /* hash_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49A24792A0F002A8F62 /* hash_table.c */; };
+		27DAC49E247933F6002A8F62 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49C247933F6002A8F62 /* list.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +83,16 @@
 		275FFBD9246324D900DB3E96 /* graphics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = graphics.c; path = ../../opengl/graphics.c; sourceTree = "<group>"; };
 		275FFBDA246324D900DB3E96 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = system.h; path = ../../opengl/system.h; sourceTree = "<group>"; };
 		275FFBDB246324D900DB3E96 /* callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callback.h; path = ../../opengl/callback.h; sourceTree = "<group>"; };
+		27DAC49024790DBF002A8F62 /* user_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = user_control.c; path = ../../user_control.c; sourceTree = "<group>"; };
+		27DAC49124790DBF002A8F62 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../../utility.h; sourceTree = "<group>"; };
+		27DAC49224790DBF002A8F62 /* utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utility.c; path = ../../utility.c; sourceTree = "<group>"; };
+		27DAC49324790DBF002A8F62 /* user_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user_control.h; path = ../../user_control.h; sourceTree = "<group>"; };
+		27DAC49624791732002A8F62 /* img_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = img_sprite.h; path = ../../opengl/img_sprite.h; sourceTree = "<group>"; };
+		27DAC49724792808002A8F62 /* identify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = identify.c; path = ../../identify.c; sourceTree = "<group>"; };
+		27DAC49924792A0F002A8F62 /* hash_table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hash_table.h; path = ../../hash_table.h; sourceTree = "<group>"; };
+		27DAC49A24792A0F002A8F62 /* hash_table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = hash_table.c; path = ../../hash_table.c; sourceTree = "<group>"; };
+		27DAC49C247933F6002A8F62 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = list.c; path = ../../list.c; sourceTree = "<group>"; };
+		27DAC49D247933F6002A8F62 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,16 +129,25 @@
 		275FFB822462E3D200DB3E96 /* c_lang_finals_xcode */ = {
 			isa = PBXGroup;
 			children = (
+				275FFBA22462E4EB00DB3E96 /* main.c */,
+				275FFBA42462E4EC00DB3E96 /* identify.h */,
+				27DAC49724792808002A8F62 /* identify.c */,
+				27DAC49024790DBF002A8F62 /* user_control.c */,
+				27DAC49324790DBF002A8F62 /* user_control.h */,
+				27DAC49224790DBF002A8F62 /* utility.c */,
+				27DAC49124790DBF002A8F62 /* utility.h */,
+				27DAC49C247933F6002A8F62 /* list.c */,
+				27DAC49D247933F6002A8F62 /* list.h */,
+				27DAC49924792A0F002A8F62 /* hash_table.h */,
+				27DAC49A24792A0F002A8F62 /* hash_table.c */,
 				275FFB9D2462E4EB00DB3E96 /* dynamic_array.c */,
 				275FFB992462E4EB00DB3E96 /* dynamic_array.h */,
 				275FFB942462E4EB00DB3E96 /* entity.c */,
 				275FFB982462E4EB00DB3E96 /* entity.h */,
 				275FFBA02462E4EB00DB3E96 /* force.c */,
 				275FFBA12462E4EB00DB3E96 /* force.h */,
-				275FFBA42462E4EC00DB3E96 /* identify.h */,
 				275FFB9E2462E4EB00DB3E96 /* user_control.c */,
 				275FFB9B2462E4EB00DB3E96 /* user_control.h */,
-				275FFBA22462E4EB00DB3E96 /* main.c */,
 				275FFB962462E4EB00DB3E96 /* memory.c */,
 				275FFB9A2462E4EB00DB3E96 /* memory.h */,
 				275FFBA32462E4EC00DB3E96 /* object.c */,
@@ -151,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				275FFBD1246324D800DB3E96 /* callback.c */,
+				27DAC49624791732002A8F62 /* img_sprite.h */,
 				275FFBDB246324D900DB3E96 /* callback.h */,
 				275FFBD9246324D900DB3E96 /* graphics.c */,
 				275FFBD2246324D800DB3E96 /* graphics.h */,
@@ -232,14 +257,19 @@
 				275FFBAD2462E4EC00DB3E96 /* object.c in Sources */,
 				275FFBDC246324D900DB3E96 /* callback.c in Sources */,
 				275FFBA62462E4EC00DB3E96 /* types.c in Sources */,
+				27DAC49824792809002A8F62 /* identify.c in Sources */,
+				27DAC49524790DBF002A8F62 /* utility.c in Sources */,
+				27DAC49424790DBF002A8F62 /* user_control.c in Sources */,
 				275FFBE0246324D900DB3E96 /* graphics.c in Sources */,
 				275FFBAC2462E4EC00DB3E96 /* main.c in Sources */,
 				275FFBA82462E4EC00DB3E96 /* dynamic_array.c in Sources */,
+				27DAC49B24792A0F002A8F62 /* hash_table.c in Sources */,
 				275FFBAA2462E4EC00DB3E96 /* physics.c in Sources */,
 				275D235D24683AB70006766F /* camera.c in Sources */,
 				275D236024683D110006766F /* control.c in Sources */,
 				275FFBDD246324D900DB3E96 /* system.c in Sources */,
 				275FFBAB2462E4EC00DB3E96 /* force.c in Sources */,
+				27DAC49E247933F6002A8F62 /* list.c in Sources */,
 				275FFBDE246324D900DB3E96 /* texture.c in Sources */,
 				275FFBDF246324D900DB3E96 /* shader.c in Sources */,
 			);
