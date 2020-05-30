@@ -21,7 +21,7 @@ typedef struct _DYNAMIC_ARRAY {
 void        dyn_arr_init        ( DYN_ARR* a, int type_size );
 int         dyn_arr_size        ( const DYN_ARR* a );
 void 		dyn_arr_resize      ( DYN_ARR* a, int capacity );
-void        dyn_arr_push_back   ( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) );
+void*       dyn_arr_push_back   ( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) );
 void        dyn_arr_insert      ( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) );
 void*       dyn_arr_get         ( const DYN_ARR* a, int index );
 void*       dyn_arr_back        ( const DYN_ARR* a );

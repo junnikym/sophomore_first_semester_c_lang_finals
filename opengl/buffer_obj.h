@@ -1,6 +1,7 @@
 #ifndef BUFFER_OBJ_H
 #define BUFFER_OBJ_H
 
+#include "../vector2.h"
 #include "../types.h"
 #include "texture.h"
 

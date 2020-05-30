@@ -20,7 +20,7 @@ void set_vec_force( FORCE* f, double x, double y ) {
 VEC2 output_force ( FORCE* f, double t ) {
 	VEC2 result = V2_ZERO;
 	
-	if( f->identify & (F_PAUSE << __FORCE_ENUM_SHIFTER) ) {
+	if( f->identify & (__F_PAUSE__ << __FORCE_ENUM_SHIFTER) ) {
 		f->start_t = 0.0;
 		return V2_ZERO;
 	}
@@ -29,7 +29,7 @@ VEC2 output_force ( FORCE* f, double t ) {
 		f->start_t = t;
 	else {
 		
-		if( f->identify & (F_ACCELERATE << __FORCE_ENUM_SHIFTER) ) {
+		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ) {
 			printf("t - f->start_t : %f \n", t - f->start_t);
 			return vec2_mul( &f->force_vec, SQUARE(t - f->start_t));
 		}

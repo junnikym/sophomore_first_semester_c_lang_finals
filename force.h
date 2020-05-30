@@ -3,6 +3,7 @@
 
 #include "identify.h"
 #include "types.h"
+#include "vector2.h"
 #include "dynamic_array.h"
 
 #include <stdlib.h>
@@ -12,9 +13,9 @@
 #define FORCE_IDENTITY_INIT     {V2_ZERO, -1, 0}
 
 typedef enum __FORCE_FLAGS__ {
-	F_ACCELERATE = 1 << 0,
-	F_PAUSE = 1 << 1,
-	F_FOR_CONTROL = 1 << 2,
+	__F_ACCELERATE__	= 1 << 0,
+	__F_PAUSE__			= 1 << 1,
+	__F_FOR_CONTROL__	= 1 << 2,
 } _FORCE_FALGS_;
 
 typedef struct _FORCE {

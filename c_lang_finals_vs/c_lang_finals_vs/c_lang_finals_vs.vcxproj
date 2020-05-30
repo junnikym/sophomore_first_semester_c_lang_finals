@@ -145,6 +145,9 @@
     <ClCompile Include="..\..\dynamic_array.c" />
     <ClCompile Include="..\..\entity.c" />
     <ClCompile Include="..\..\force.c" />
+    <ClCompile Include="..\..\hash_table.c" />
+    <ClCompile Include="..\..\identify.c" />
+    <ClCompile Include="..\..\list.c" />
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\memory.c" />
     <ClCompile Include="..\..\object.c" />
@@ -154,7 +157,7 @@
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
-    <ClCompile Include="..\..\types.c" />
+    <ClCompile Include="..\..\vector2.c" />
     <ClCompile Include="..\..\user_control.c" />
     <ClCompile Include="..\..\utility.c" />
   </ItemGroup>
@@ -162,7 +165,9 @@
     <ClInclude Include="..\..\dynamic_array.h" />
     <ClInclude Include="..\..\entity.h" />
     <ClInclude Include="..\..\force.h" />
+    <ClInclude Include="..\..\hash_table.h" />
     <ClInclude Include="..\..\identify.h" />
+    <ClInclude Include="..\..\list.h" />
     <ClInclude Include="..\..\memory.h" />
     <ClInclude Include="..\..\object.h" />
     <ClInclude Include="..\..\opengl\callback.h" />
@@ -173,6 +178,7 @@
     <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\types.h" />
+    <ClInclude Include="..\..\vector2.h" />
     <ClInclude Include="..\..\user_control.h" />
     <ClInclude Include="..\..\utility.h" />
   </ItemGroup>

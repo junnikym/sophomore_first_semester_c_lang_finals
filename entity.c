@@ -70,11 +70,11 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	dyn_arr_resize( &ent->forces, __N_ESSENTAL_FORCE );
 	
 	// -- CONTROL FORCES ------------
-	inserter.identify = F_FOR_CONTROL;
+	inserter.identify = __F_FOR_CONTROL__;
 	dyn_arr_insert( &ent->forces, 0, &inserter, copy_force);
 	
 	// -- PHY FORCES ----------------
-	inserter.identify = F_FOR_CONTROL;
+	inserter.identify = __F_FOR_CONTROL__;
 	dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
 	
 	// ------------------------------

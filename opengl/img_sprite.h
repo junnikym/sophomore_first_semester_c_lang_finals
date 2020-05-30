@@ -1,7 +1,7 @@
 #ifndef IMG_SPRITE_H
 #define IMG_SPRITE_H
 
-#include "../types.h"
+#include "../vector2.h"
 
 typedef struct {
 	char* img_path;

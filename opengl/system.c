@@ -1,7 +1,5 @@
 #include "system.h"
 
-extern OBJECT g_user_obj;
-
 int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	// Initialise GLFW
 	if ( !glfwInit() ) {
@@ -53,7 +51,7 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 
 	gl_define_texture ( &g_buf_obj.ID, &g_buf_obj.texture, 0 );
 	
-	g_user_obj.center->graphics_buf = &g_buf_obj;
+	//g_user_obj.center->graphics_buf = &g_buf_obj;
 	
 	// -!-!-!-!-!-!-!-!-!-!-
 	

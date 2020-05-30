@@ -1,7 +1,7 @@
 #ifndef USER_CONTROL_H
 #define USER_CONTROL_H
 
-#include "types.h"
+#include "vector2.h"
 #include "memory.h"
 #include "entity.h"
 

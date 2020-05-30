@@ -1,13 +1,19 @@
 #include "opengl/system.h"
-#include "types.h"
+#include "vector2.h"
 #include "memory.h"
 
 int main() {
 	int result = 0;
 	OBJECT* obj_converter = 0;
-	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, F_FOR_CONTROL );
+	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, __F_FOR_CONTROL__ );
 
 // ----- Initialize	----------
+
+	// ----- OpenGl
+	WINDOW g_window;
+	result = gl_system_init ( &g_window, 800, 600, "Test window" );
+	if ( result != 0 )
+		return 0;
 
 	// ----- System Memmory
 	init_memory();
@@ -15,36 +21,33 @@ int main() {
 
 // ===== set elements 		=====
 // =	==== OBJECT 0	================================================== //
-	push_obj_into_g_obj( NULL ); // OBJ 0
-		push_ent_into_g_obj( NULL, 0 );	// ENT 0-> 0
-			push_force_into_g_obj( NULL, 0, 0 );	// FORCE 0-> 0-> 0
-			push_force_into_g_obj( NULL, 0, 0 );	// FORCE 0-> 0-> 1
-			push_force_into_g_obj( NULL, 0, 0 );	// FORCE 0-> 0-> 2
-		push_ent_into_g_obj( NULL, 0 );	// ENT 0-> 1
-			push_force_into_g_obj( NULL, 0, 1 );	// FORCE 0-> 1-> 0
-			push_force_into_g_obj( NULL, 0, 1 );	// FORCE 0-> 1-> 1
-		push_ent_into_g_obj( NULL, 0 );	// ENT 0-> 2
-			push_force_into_g_obj( NULL, 0, 2 );	// FORCE 0-> 2-> 0
-		push_ent_into_g_obj( NULL, 0 );	// ENT 0-> 3
+	g_obj_push_thing ( __OBJECT__, NULL ); // OBJ 0
+		g_obj_push_thing ( __ENTITY__, NULL, 0 );	// ENT 0-> 0
+			g_obj_push_thing ( __FORCE__, NULL, 0, 0 );	// FORCE 0-> 0-> 0
+
+	g_obj_set_center_ent ( 0, 0 );
+	g_obj_set_user_obj(0);
 		
 // =	==== OBJECT 1	================================================== //
-	push_obj_into_g_obj( NULL );	// OBJ 1
-		push_ent_into_g_obj( NULL, 1 );	// ENT 1-> 0
-			push_force_into_g_obj( NULL, 1, 0 );	// FORCE 1-> 0-> 0
-			push_force_into_g_obj( NULL, 1, 0 );	// FORCE 1-> 0-> 1
-		push_ent_into_g_obj( NULL, 1 );	// ENT 1-> 1
-			push_force_into_g_obj( NULL, 1, 1 );	// FORCE 1-> 1-> 0
-		push_ent_into_g_obj( NULL, 1 );	// ENT 1-> 2
+	g_obj_push_thing ( __OBJECT__, NULL );	// OBJ 1
+		g_obj_push_thing ( __ENTITY__, NULL, 1 );	// ENT 1-> 0
+			g_obj_push_thing ( __FORCE__, NULL, 1, 0 );	// FORCE 1-> 0-> 0
+
+	g_obj_set_center_ent ( 1, 0 );
 		
 // =	==== OBJECT 2	================================================== //
-	push_obj_into_g_obj( NULL );	// OBJ 2
-		push_ent_into_g_obj( NULL, 2 );	// ENT 2-> 0
-			push_force_into_g_obj( NULL, 2, 0 );	// FORCE 2-> 0-> 0
-		push_ent_into_g_obj( NULL, 2 );	// ENT 2-> 1
+	g_obj_push_thing ( __OBJECT__, NULL );	// OBJ 2
+		g_obj_push_thing ( __ENTITY__, NULL, 2 );	// ENT 2-> 0
+			g_obj_push_thing ( __FORCE__, NULL, 2, 0 );	// FORCE 2-> 0-> 0
+
+	g_obj_set_center_ent ( 2, 0 );
 		
 // =	==== OBJECT 3	================================================== //
-	push_obj_into_g_obj( NULL );	// OBJ 3
-		push_ent_into_g_obj( NULL, 3 );	// ENT 3-> 0
+	g_obj_push_thing ( __OBJECT__, NULL );	// OBJ 3
+		g_obj_push_thing ( __ENTITY__, NULL, 2 );	// ENT 3-> 0
+			g_obj_push_thing ( __FORCE__, NULL, 2, 0 );	// FORCE 3-> 0-> 0
+
+	g_obj_set_center_ent ( 3, 0 );
 	
 // =	================================================================== //
 
@@ -56,12 +59,6 @@ int main() {
 	//dyn_arr_push_back( &(g_user_obj.center->forces), &f_inserter, copy_force );
 	
 	// -!-!--!-!--!-!--!-!-
-	
-	// ----- OpenGl
-	WINDOW g_window;
-	result = gl_system_init(&g_window, 800, 600, "Test window");
-	if (result != 0)
-		return 0;
 
 // ---------------------------
 // ----- run	--------------
@@ -73,7 +70,7 @@ int main() {
 
 	// ----- OpenGl
 	gl_system_shutdown(&g_window);
-	// ----- System Memmory
+	// ----- System Memeory
 	release_memory();
 
 // ---------------------------

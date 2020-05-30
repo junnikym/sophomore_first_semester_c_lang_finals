@@ -1,7 +1,5 @@
 #include "user_control.h"
 
-extern OBJECT g_user_obj;
-
 // ------------------------------------------------------- //
 // ----- Key Setting function	--------------------------
 
@@ -12,6 +10,7 @@ void set_control_key( int* which_key, int key_value ) {
 // ------------------------------------------------------- //
 
 void game_control(const int* key, const int* key_act) {
+	// ! TODO : modify 
 	FORCE* converter = g_user_obj.center->forces.items;
 	
 	static int left_key_buf = 0;

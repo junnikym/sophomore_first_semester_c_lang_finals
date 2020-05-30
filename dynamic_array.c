@@ -24,13 +24,18 @@ void dyn_arr_resize( DYN_ARR* a, int capacity ) {
 	a->capacity = capacity;
 }
 
-void dyn_arr_push_back( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) ) {
+void* dyn_arr_push_back( DYN_ARR* a, const void* elem, void (*copy__)(void*, const void*) ) {
+	void* lhs = NULL;
+
 	a->size++;
 
 	if(a->capacity == a->size)
 		dyn_arr_resize( a, a->capacity * 2 );
 	
-	copy__( ((char*)(a->items) + (a->type_size * a->size)), elem );
+	lhs = ((char*)(a->items) + (a->type_size * a->size));
+	copy__( lhs, elem );
+
+	return lhs;
 }
 
 void dyn_arr_insert( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) ) {

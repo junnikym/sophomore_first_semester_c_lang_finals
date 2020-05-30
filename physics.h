@@ -1,7 +1,7 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "types.h"
+#include "vector2.h"
 #include "force.h"
 #include "entity.h"
 

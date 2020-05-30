@@ -1,5 +1,3 @@
--- updated by mac, xcode
+-- updated -- windows VS
 
-identify.c
-hash_map.h .c
-list.h .c
+- vector2.h .c
