@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		273D691D247D6B46005235D8 /* buffer_obj.c in Sources */ = {isa = PBXBuildFile; fileRef = 273D691C247D6B46005235D8 /* buffer_obj.c */; };
 		275D235D24683AB70006766F /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = 275D235C24683AB70006766F /* camera.c */; };
 		275D236024683D110006766F /* control.c in Sources */ = {isa = PBXBuildFile; fileRef = 275D235F24683D110006766F /* control.c */; };
 		275FFB8C2462E44500DB3E96 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8B2462E44500DB3E96 /* OpenGL.framework */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		273D691B247D6B46005235D8 /* buffer_obj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = buffer_obj.h; path = ../../opengl/buffer_obj.h; sourceTree = "<group>"; };
+		273D691C247D6B46005235D8 /* buffer_obj.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = buffer_obj.c; path = ../../opengl/buffer_obj.c; sourceTree = "<group>"; };
 		275D235B24683AB70006766F /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = camera.h; path = ../../opengl/camera.h; sourceTree = "<group>"; };
 		275D235C24683AB70006766F /* camera.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = camera.c; path = ../../opengl/camera.c; sourceTree = "<group>"; };
 		275D235E24683D110006766F /* control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = control.h; path = ../../opengl/control.h; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				275D235C24683AB70006766F /* camera.c */,
 				275D235E24683D110006766F /* control.h */,
 				275D235F24683D110006766F /* control.c */,
+				273D691B247D6B46005235D8 /* buffer_obj.h */,
+				273D691C247D6B46005235D8 /* buffer_obj.c */,
 			);
 			name = opengl;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				275FFBA52462E4EC00DB3E96 /* entity.c in Sources */,
+				273D691D247D6B46005235D8 /* buffer_obj.c in Sources */,
 				275FFBA72462E4EC00DB3E96 /* memory.c in Sources */,
 				275FFBA92462E4EC00DB3E96 /* user_control.c in Sources */,
 				275FFBAD2462E4EC00DB3E96 /* object.c in Sources */,

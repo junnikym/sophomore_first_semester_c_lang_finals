@@ -52,6 +52,15 @@ VEC2 pass_by_f_obj ( OBJECT* obj ) {
 	return result;
 }
 
+void update_each_obj (void* elem, int i, void* pos) {
+	adapt_each_f_obj ( elem, i, pos );
+	draw_ent( elem );
+}
+
+void update_obj ( OBJECT* obj ) {
+	dyn_arr_foreach(&obj->entities, &obj->center->position, update_each_obj);
+}
+
 // -- setting function
 
 void set_center_obj ( OBJECT* obj, int index ) {

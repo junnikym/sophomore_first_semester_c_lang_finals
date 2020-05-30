@@ -3,8 +3,11 @@
 void init_ent( ENTITY* ent ) {
 	dyn_arr_init( &ent->forces, sizeof(FORCE) );
 
-	ent->direction_vec = V2_ZERO;
-	ent->position = V2_ZERO;
+	ent->direction_vec 	= V2_ZERO;
+	ent->position 		= V2_ZERO;
+	
+	ent->graphics_buf 	= NULL;
+	ent->texture_pos	= NULL;
 }
 
 void release_ent( ENTITY* ent) {
@@ -36,6 +39,29 @@ VEC2 pass_by_f_ent ( ENTITY* ent) {
 	dyn_arr_foreach ( &ent->forces, &result, adapt_each_f_ent );
 
 	return result;
+}
+
+void draw_ent ( const ENTITY* ent ) {
+	mat4 model = GLM_MAT4_IDENTITY_INIT;
+	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
+	
+	VEC2 frame_pos = (VEC2){1/16.0f, 1/16.0f};
+	
+	glm_translate_to(
+		(mat4)GLM_MAT4_IDENTITY_INIT,
+		(vec3) {
+			ent->position.x,
+			ent->position.y,
+			0.0f
+		},
+		model
+	);
+	
+	gl_update_cam();
+	gl_get_mvp(model, mvp);
+	
+	// ! TODO : for test code
+	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, frame_pos );
 }
 
 void set_essential_f_ent ( ENTITY* ent ) {

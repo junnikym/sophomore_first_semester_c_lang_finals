@@ -4,7 +4,7 @@
 #include "force.h"
 #include "dynamic_array.h"
 
-//#include "opengl/graphics.h"
+#include "opengl/buffer_obj.h"
 
 #define __N_ESSENTIAL_FORCE__CONTROL 1
 #define __N_ESSENTIAL_FORCE__PHY 1
@@ -18,9 +18,9 @@ typedef struct _ENTITY {
     VEC2 position;
     VEC2 direction_vec;
     DYN_ARR forces;   // VEC2
-
     // !TODO : Create attribute; (mass, meterial, ... )
-//	BUFFER_OBJECT* graphics_buf;
+	BUFFER_OBJECT* graphics_buf;
+	VEC2* texture_pos;
 } ENTITY;
 
 void init_ent       ( ENTITY* ent );
@@ -33,6 +33,8 @@ void adapt_f_ent    ( ENTITY* ent );
 
 // ! TODO : change function name -> pass_by_... -> pass_...
 VEC2 pass_by_f_ent  ( ENTITY* ent );
+
+void draw_ent		( const ENTITY* ent );
 
 void set_essential_f_ent ( ENTITY* ent );
 

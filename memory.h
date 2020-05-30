@@ -3,8 +3,8 @@
 
 #include "object.h"
 
-extern DYN_ARR g_objects;
-extern OBJECT g_user_obj;
+static DYN_ARR g_objects;
+static OBJECT g_user_obj;
 
 // ------------------------------------------------------- //
 // ----- g_object functions	------------------------------
@@ -15,8 +15,8 @@ void 	push_obj_into_g_obj 	( OBJECT* elem );
 int 	push_ent_into_g_obj 	( ENTITY* elem, int obj_index );				//	ERROR CODE : -1
 int 	push_force_into_g_obj	( FORCE* elem, int obj_index, int ent_index );	//	ERROR CODE : -1
 
-void	adapt_each_f_g_obj		( void* elem, int i, void* pos );
-void	adapt_f_g_obj			( );
+void	update_each_g_obj		( void* elem, int i, void* pos );
+void	update_g_obj			( );
 
 // -- wapper
 

@@ -59,8 +59,6 @@ void game_control(const int* key, const int* key_act) {
 		}
 		
 	}
-	
-	printf ("left key : %d, right key : %d \n", left_key_buf, right_key_buf);
 
 	if ( *key == __JUMP_KEY && *key_act == __KEY_RELESE) {
 		// preliminary motion 

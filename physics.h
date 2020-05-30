@@ -12,10 +12,10 @@ typedef enum __PHY_FLAGS__ {
     FRICTION = 1 << 1,
 } _PHY_FLAGS_;
 
-// -- Transform force
+// -- (append / update) force
 void transform_to_gravity( VEC2* g_force, const double* gravity_constant );
 
-// -- Applay to force 
+// -- Apply to force 
 void friction( VEC2* force, const double* constant );
 
 

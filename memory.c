@@ -1,12 +1,15 @@
 #include "memory.h"
 
-DYN_ARR g_objects;
-OBJECT g_user_obj;
-
 // ------------------------------------------------------- //
 // ----- g_object function	------------------------------
 
 // -- push_back elements into g_object
+
+int push_thing_into_g ( void* packet, ... ) {
+	
+	
+	return -1;
+}
 
 void push_obj_into_g_obj ( OBJECT* elem ) {
 	dyn_arr_push_back( &g_objects, elem, copy_obj);
@@ -49,12 +52,12 @@ int push_force_into_g_obj ( FORCE* elem, int obj_index, int ent_index ) {
 	return 0;
 }
 
-void adapt_each_f_g_obj ( void* elem, int i, void* arg ) {
-	adapt_f_obj ( elem );
+void update_each_g_obj ( void* elem, int i, void* arg ) {
+	update_obj ( elem );
 }
 
-void adapt_f_g_obj ( ) {
-	g_obj_foreach( NULL, adapt_each_f_g_obj );
+void update_g_obj ( ) {
+	g_obj_foreach( NULL, update_each_g_obj );
 }
 
 // -- wapper

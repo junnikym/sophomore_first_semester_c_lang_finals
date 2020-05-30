@@ -18,8 +18,11 @@ void copy_obj 		( void* lhs, const void* rhs);
 void release_obj 	( OBJECT* obj );
 
 void adapt_each_f_obj ( void* elem, int i, void* pos );
-void adapt_f_obj ( OBJECT* obj );
-VEC2 pass_by_f_obj ( OBJECT* obj );
+void adapt_f_obj 	( OBJECT* obj );
+VEC2 pass_by_f_obj 	( OBJECT* obj );
+
+void update_each_obj (void* elem, int i, void* pos);
+void update_obj		( OBJECT* obj );
 
 // -- setting function
 
