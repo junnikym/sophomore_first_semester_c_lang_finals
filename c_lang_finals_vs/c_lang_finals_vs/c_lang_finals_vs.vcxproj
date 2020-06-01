@@ -157,6 +157,7 @@
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
+    <ClCompile Include="..\..\screen_form.c" />
     <ClCompile Include="..\..\vector2.c" />
     <ClCompile Include="..\..\user_control.c" />
     <ClCompile Include="..\..\utility.c" />
@@ -177,6 +178,7 @@
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
+    <ClInclude Include="..\..\screen_form.h" />
     <ClInclude Include="..\..\types.h" />
     <ClInclude Include="..\..\vector2.h" />
     <ClInclude Include="..\..\user_control.h" />

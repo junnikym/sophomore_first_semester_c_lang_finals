@@ -11,8 +11,8 @@ static int g_User_Speed = 1;
 
 // -- Control Keys
 
-static int __LEFT_KEY = GLFW_KEY_LEFT;
-static int __RIGHT_KEY = GLFW_KEY_RIGHT;
+static int __LEFT_KEY = GLFW_KEY_A;				//¿ÞÂÊ 
+static int __RIGHT_KEY = GLFW_KEY_RIGHT;		//
 static int __JUMP_KEY = 0;
 
 static int __KEY_PRESS = GLFW_PRESS;
