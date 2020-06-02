@@ -38,8 +38,6 @@ VEC2 output_force ( FORCE* f, double t ) {
 		f->start_t = t;
 	}
 	
-	printf("return : %lf \n", result.x);
-	
 	return result;
 }
 

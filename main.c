@@ -9,12 +9,6 @@ int main() {
 
 // ----- Initialize	----------
 
-	// ----- OpenGl
-	WINDOW g_window;
-	result = gl_system_init ( &g_window, 800, 600, "Test window" );
-	if ( result != 0 )
-		return 0;
-
 	// ----- System Memmory
 	init_memory();
 	printf(" * init_complate \n\n");
@@ -22,8 +16,7 @@ int main() {
 // ===== set elements 		=====
 // =	==== OBJECT 0	================================================== //
 	g_obj_push_thing ( __OBJECT__, NULL ); // OBJ 0
-		g_obj_push_thing ( __ENTITY__, NULL, 0 );	// ENT 0-> 0
-			g_obj_push_thing ( __FORCE__, NULL, 0, 0 );	// FORCE 0-> 0-> 0
+		g_obj_push_thing ( __ENTITY__, NULL, 0 );	// ENT 0-> 0 // setting on system.h
 
 	g_obj_set_center_ent ( 0, 0 );
 	g_obj_set_user_obj(0);
@@ -60,6 +53,12 @@ int main() {
 	
 	// -!-!--!-!--!-!--!-!-
 
+	// ----- OpenGl
+	WINDOW g_window;
+	result = gl_system_init ( &g_window, 800, 600, "Test window" );
+	if ( result != 0 )
+		return 0;
+	
 // ---------------------------
 // ----- run	--------------
 

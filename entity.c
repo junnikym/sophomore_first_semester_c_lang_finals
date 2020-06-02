@@ -41,7 +41,11 @@ VEC2 pass_by_f_ent ( ENTITY* ent) {
 	return result;
 }
 
+// ! TODO : Modify -> summative entity ( entities that except center )
 void draw_ent ( const ENTITY* ent ) {
+	if(ent->graphics_buf == NULL)
+		return;
+	
 	mat4 model = GLM_MAT4_IDENTITY_INIT;
 	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
 	
@@ -71,13 +75,18 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	
 	// -- CONTROL FORCES ------------
 	inserter.identify = __F_FOR_CONTROL__;
+	if ( (ent->forces).size == -1 )
+		dyn_arr_push_back( &ent->forces, &inserter, copy_force );
+	
 	dyn_arr_insert( &ent->forces, 0, &inserter, copy_force);
 	
 	// -- PHY FORCES ----------------
 	inserter.identify = __F_FOR_CONTROL__;
+	
+	if ( (ent->forces).size == 0 )
+		dyn_arr_push_back( &ent->forces, &inserter, copy_force );
+	
 	dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
 	
 	// ------------------------------
-	
-	
 }

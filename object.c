@@ -63,13 +63,13 @@ void update_obj ( OBJECT* obj ) {
 
 // -- setting function
 
-void set_center_obj ( OBJECT* obj, int index ) {
+void* set_center_obj ( OBJECT* obj, int index ) {
 	if (obj->center != NULL) {
 		// !TODO : detech_center_obj();
 	}
 	void* a = dyn_arr_get(&obj->entities, index);
 	
-	obj->center = a;
+	return (obj->center = a);
 }
 
 void detech_center_obj ( OBJECT* obj ) {

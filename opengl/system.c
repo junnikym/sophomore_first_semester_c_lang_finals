@@ -37,7 +37,9 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	glfwSwapInterval(1);
 
 	// -!-!- for test -!-!-
-
+	ENTITY inserter;
+	init_ent(&inserter);
+	
 	g_buf_obj.ID = gl_load_shader (
 		"../../opengl/shader/TransformVertexShader.vs",
 		"../../opengl/shader/TextureFragmentShader.fs" 
@@ -50,8 +52,10 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	);
 
 	gl_define_texture ( &g_buf_obj.ID, &g_buf_obj.texture, 0 );
+	inserter.graphics_buf = &g_buf_obj;
+	set_essential_f_ent(&inserter);
 	
-	//g_user_obj.center->graphics_buf = &g_buf_obj;
+	g_obj_alter( __ENTITY__, &inserter, g_user_obj_i, -1 );
 	
 	// -!-!-!-!-!-!-!-!-!-!-
 	
@@ -88,7 +92,6 @@ void gl_system_run(WINDOW* window) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		update_g_obj();
-		update_obj ( &g_user_obj );
 
 		gl_rander();
 		

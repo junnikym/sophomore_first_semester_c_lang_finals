@@ -16,31 +16,46 @@ void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
 	switch ( type ) {
 		// --------------------------------------------------
 		case __FORCE__:
+			// -- Get chosen OBJECT
 			i = va_arg ( ap, int );
-			// -- is in range
-			if ( i < 0 && i > g_objects.size )
-				return NULL;		// ERROR
-
-			target = &((OBJECT*)g_objects.items)[i];
-			i = va_arg ( ap, int );
-			if ( i < 0 && i > ((OBJECT*)target)->entities.size )
-				return -1;		// ERROR
-
-			// -- push and result
-			target = &( (ENTITY*) ( ((OBJECT*)target)->entities.items ) )[i].forces;
 			
+			if ( i < 0 && i > g_objects.size ) {	// is in range
+				printf("ERROR in g_obj_push_thing func -> out of range \n");
+				printf("\t push : FORCE / error : g_objects index \n");
+				return NULL;		// ERROR
+			}
+			
+			target = dyn_arr_get(&g_objects, i);
+			
+			// -- Get chosen ENTITY
+			i = va_arg ( ap, int );
+			
+			if( i == __CENTER_ENTITY ) {
+				target = ((OBJECT*)target)->center;
+			}
+			else {
+				if ( i < 0 && i > ((OBJECT*)target)->entities.size ) {	// is in range
+					printf("ERROR in g_obj_push_thing func -> out of range \n");
+					printf("\t push : FORCE / error : ENTITY index \n");
+					return NULL;	// ERROR
+				}
+			
+				target = dyn_arr_get( &((OBJECT*)target)->entities, i );
+			}
+			
+			// -- push and return result
+			target = &((ENTITY*)target)->forces;
 			return dyn_arr_push_back ( target, item, copy_ent );
 		// --------------------------------------------------
 		case __ENTITY__:
 			i = va_arg(ap, int);
-
+			
 			// -- is in range
 			if ( i < 0 && i > g_objects.size )
 				return NULL;
 
 			// -- push and result
 			target = &((OBJECT*)g_objects.items)[i].entities;
-
 			return dyn_arr_push_back ( target, item, copy_ent );
 		// --------------------------------------------------
 		case __OBJECT__:
@@ -62,9 +77,70 @@ OBJECT* g_obj_set_user_obj ( int i ) {
 }
 
 ENTITY* g_obj_set_center_ent ( int obj_i, int ent_i ) {
-	set_center_obj ( dyn_arr_get ( &g_objects, obj_i ), ent_i );
+	return set_center_obj ( dyn_arr_get ( &g_objects, obj_i ), ent_i );
 }
 
+void* g_obj_alter ( _OBJ_ELEM_ type, void* elem, ... ) {
+	va_list ap;
+	
+	int i = 0;
+	void* target = NULL;
+	
+	va_start(ap, elem);
+	
+	// -- Get OBJECT
+	i = va_arg ( ap, int );		// OBJECT[i]
+	
+	target = dyn_arr_get( &g_objects, i );
+	
+	switch ( type ) {
+		case __FORCE__:
+			// -- Get ENTITY
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
+			
+			if( i == __CENTER_ENTITY )
+				target = ((OBJECT*)target)->center;
+			else
+				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
+			
+			// -- Get FORCE
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i] -> FORCE[i]
+			target = dyn_arr_get( &(((ENTITY*)target)->forces), i );
+			
+			// -- Alter
+			copy_force ( target, elem );
+			
+			return target;
+		case __ENTITY__:
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
+			
+			if( i == __CENTER_ENTITY )
+				target = ((OBJECT*)target)->center;
+			else
+				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
+			
+			copy_ent ( target, elem );
+			
+			return target;
+		case __OBJECT__:
+			copy_obj ( target, elem );
+			
+			return target;
+	}
+	
+	return NULL;
+}
+
+void g_obj_set_essential_f ( int obj_i, int ent_i ) {
+	void* target = dyn_arr_get (&g_objects, obj_i);
+	
+	if(ent_i == -1)
+		target = ((OBJECT*)target)->center;
+	else
+		target = dyn_arr_get( &(((OBJECT*)target)->entities), ent_i );
+	
+	set_essential_f_ent(target);
+}
 
 // -- Update functions
 
@@ -90,7 +166,8 @@ VEC2 g_obj_get_position(int index) {
 
 void init_memory ( ) {
 	dyn_arr_init( &g_objects, sizeof(OBJECT) );
-	init_obj( &g_user_obj );
+	g_user_obj = NULL;
+	g_user_obj_i = -1;
 }
 
 void release_memory() {

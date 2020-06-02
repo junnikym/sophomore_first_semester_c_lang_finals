@@ -38,12 +38,16 @@ void* dyn_arr_push_back( DYN_ARR* a, const void* elem, void (*copy__)(void*, con
 	return lhs;
 }
 
-void dyn_arr_insert( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) ) {
-	if(index >= 0 && index < a->size)
-		copy__(((char*)(a->items) + (a->type_size * index)), elem);
-	else {
-		/* ! TODO : Error Code */
+void* dyn_arr_insert( DYN_ARR* a, int index, void* elem, void (*copy__)(void*, const void*) ) {
+	void* target = ((char*)(a->items) + (a->type_size * index));
+	
+	if(index >= 0 && index < a->size) {
+		copy__( target, elem );
+	
+		return target;
 	}
+	
+	return NULL;
 }
 
 void* dyn_arr_get( const DYN_ARR* a, int index ) {

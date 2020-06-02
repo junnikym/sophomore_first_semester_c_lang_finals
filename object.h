@@ -26,8 +26,8 @@ void update_obj		( OBJECT* obj );
 
 // -- setting function
 
-void set_center_obj		( OBJECT* obj, int index );
-void detech_center_obj	( OBJECT* obj);
+void* 	set_center_obj		( OBJECT* obj, int index );
+void 	detech_center_obj	( OBJECT* obj);
 
 // ------------------------------------------------------- //
 

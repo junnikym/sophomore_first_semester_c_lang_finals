@@ -1,6 +1,8 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <math.h>
+
 // - D  : Direction
 // - N  : Number (integer)
 // - V2 : VEC2 (struct)

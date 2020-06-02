@@ -14,7 +14,6 @@
 		275FFB8E2462E46B00DB3E96 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8D2462E46B00DB3E96 /* libglfw.3.3.dylib */; };
 		275FFB902462E48B00DB3E96 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275FFB8F2462E48B00DB3E96 /* libGLEW.2.1.0.dylib */; };
 		275FFBA52462E4EC00DB3E96 /* entity.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB942462E4EB00DB3E96 /* entity.c */; };
-		275FFBA62462E4EC00DB3E96 /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB952462E4EB00DB3E96 /* types.c */; };
 		275FFBA72462E4EC00DB3E96 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB962462E4EB00DB3E96 /* memory.c */; };
 		275FFBA82462E4EC00DB3E96 /* dynamic_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9D2462E4EB00DB3E96 /* dynamic_array.c */; };
 		275FFBA92462E4EC00DB3E96 /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFB9E2462E4EB00DB3E96 /* user_control.c */; };
@@ -27,6 +26,7 @@
 		275FFBDE246324D900DB3E96 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD4246324D800DB3E96 /* texture.c */; };
 		275FFBDF246324D900DB3E96 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD8246324D900DB3E96 /* shader.c */; };
 		275FFBE0246324D900DB3E96 /* graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD9246324D900DB3E96 /* graphics.c */; };
+		27B822D02483F0D90070FC4D /* vector2.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B822CF2483F0D90070FC4D /* vector2.c */; };
 		27DAC49424790DBF002A8F62 /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49024790DBF002A8F62 /* user_control.c */; };
 		27DAC49524790DBF002A8F62 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49224790DBF002A8F62 /* utility.c */; };
 		27DAC49824792809002A8F62 /* identify.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49724792808002A8F62 /* identify.c */; };
@@ -59,9 +59,7 @@
 		275FFB8F2462E48B00DB3E96 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		275FFB932462E4EB00DB3E96 /* physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = physics.h; path = ../../physics.h; sourceTree = "<group>"; };
 		275FFB942462E4EB00DB3E96 /* entity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entity.c; path = ../../entity.c; sourceTree = "<group>"; };
-		275FFB952462E4EB00DB3E96 /* types.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = types.c; path = ../../types.c; sourceTree = "<group>"; };
 		275FFB962462E4EB00DB3E96 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memory.c; path = ../../memory.c; sourceTree = "<group>"; };
-		275FFB972462E4EB00DB3E96 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../types.h; sourceTree = "<group>"; };
 		275FFB982462E4EB00DB3E96 /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../../entity.h; sourceTree = "<group>"; };
 		275FFB992462E4EB00DB3E96 /* dynamic_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dynamic_array.h; path = ../../dynamic_array.h; sourceTree = "<group>"; };
 		275FFB9A2462E4EB00DB3E96 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memory.h; path = ../../memory.h; sourceTree = "<group>"; };
@@ -86,6 +84,9 @@
 		275FFBD9246324D900DB3E96 /* graphics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = graphics.c; path = ../../opengl/graphics.c; sourceTree = "<group>"; };
 		275FFBDA246324D900DB3E96 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = system.h; path = ../../opengl/system.h; sourceTree = "<group>"; };
 		275FFBDB246324D900DB3E96 /* callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callback.h; path = ../../opengl/callback.h; sourceTree = "<group>"; };
+		27B822CE2483F0D90070FC4D /* vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2.h; path = ../../vector2.h; sourceTree = "<group>"; };
+		27B822CF2483F0D90070FC4D /* vector2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector2.c; path = ../../vector2.c; sourceTree = "<group>"; };
+		27B822D12483F4C90070FC4D /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../types.h; sourceTree = "<group>"; };
 		27DAC49024790DBF002A8F62 /* user_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = user_control.c; path = ../../user_control.c; sourceTree = "<group>"; };
 		27DAC49124790DBF002A8F62 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../../utility.h; sourceTree = "<group>"; };
 		27DAC49224790DBF002A8F62 /* utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utility.c; path = ../../utility.c; sourceTree = "<group>"; };
@@ -132,6 +133,8 @@
 		275FFB822462E3D200DB3E96 /* c_lang_finals_xcode */ = {
 			isa = PBXGroup;
 			children = (
+				27B822CF2483F0D90070FC4D /* vector2.c */,
+				27B822CE2483F0D90070FC4D /* vector2.h */,
 				275FFBA22462E4EB00DB3E96 /* main.c */,
 				275FFBA42462E4EC00DB3E96 /* identify.h */,
 				27DAC49724792808002A8F62 /* identify.c */,
@@ -157,8 +160,7 @@
 				275FFB9C2462E4EB00DB3E96 /* object.h */,
 				275FFB9F2462E4EB00DB3E96 /* physics.c */,
 				275FFB932462E4EB00DB3E96 /* physics.h */,
-				275FFB952462E4EB00DB3E96 /* types.c */,
-				275FFB972462E4EB00DB3E96 /* types.h */,
+				27B822D12483F4C90070FC4D /* types.h */,
 				275FFB922462E4BE00DB3E96 /* opengl */,
 			);
 			path = c_lang_finals_xcode;
@@ -262,7 +264,6 @@
 				275FFBA92462E4EC00DB3E96 /* user_control.c in Sources */,
 				275FFBAD2462E4EC00DB3E96 /* object.c in Sources */,
 				275FFBDC246324D900DB3E96 /* callback.c in Sources */,
-				275FFBA62462E4EC00DB3E96 /* types.c in Sources */,
 				27DAC49824792809002A8F62 /* identify.c in Sources */,
 				27DAC49524790DBF002A8F62 /* utility.c in Sources */,
 				27DAC49424790DBF002A8F62 /* user_control.c in Sources */,
@@ -270,6 +271,7 @@
 				275FFBAC2462E4EC00DB3E96 /* main.c in Sources */,
 				275FFBA82462E4EC00DB3E96 /* dynamic_array.c in Sources */,
 				27DAC49B24792A0F002A8F62 /* hash_table.c in Sources */,
+				27B822D02483F0D90070FC4D /* vector2.c in Sources */,
 				275FFBAA2462E4EC00DB3E96 /* physics.c in Sources */,
 				275D235D24683AB70006766F /* camera.c in Sources */,
 				275D236024683D110006766F /* control.c in Sources */,

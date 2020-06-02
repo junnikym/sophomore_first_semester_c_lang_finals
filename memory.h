@@ -6,9 +6,11 @@
 #include "object.h"
 #include "types.h"
 
+#define __CENTER_ENTITY -1
+
 static DYN_ARR g_objects;
 static OBJECT* g_user_obj;
-static int g_user_obj_i = -1;
+static int g_user_obj_i;
 
 // ------------------------------------------------------- //
 // ----- g_object functions	------------------------------
@@ -19,9 +21,12 @@ void*	g_obj_push_thing		( _OBJ_ELEM_ type, void* item, ... );	// ... => index of
 
 OBJECT*	g_obj_set_user_obj		( int i );
 ENTITY* g_obj_set_center_ent	( int obj_i, int ent_i );
+void  	g_obj_set_essential_f 	( int obj_i, int ent_i );
 
 void	update_each_g_obj		( void* elem, int i, void* pos );
 void	update_g_obj			( );
+
+void* 	g_obj_alter				( _OBJ_ELEM_ type, void* elem, ... );
 
 void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
 
