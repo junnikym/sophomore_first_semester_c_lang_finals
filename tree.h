@@ -14,6 +14,8 @@ struct _TREE_ {
 	TREE* right;
 };
 
+TREE*	tree_create		( char* _key, void* _value );
+
 TREE* 	tree_insert		( TREE* tree, TREE* rhs );
 TREE* 	tree_search		( TREE* tree, char* key );
 TREE* 	tree_search_nr	( TREE* tree, char* key );	// non-recursive
@@ -25,5 +27,8 @@ void	tree_foreach_in 	( TREE* tree, void* msger,
 
 void	tree_foreach_post 	( TREE* tree, void* msger, 
 							  void (func)(TREE* tree, void* arg) );
+
+static void tree_free ( TREE* tree, void* is_value_too );
+void tree_release ( TREE* tree, int is_value_too );
 
 #endif /* MAP_H */

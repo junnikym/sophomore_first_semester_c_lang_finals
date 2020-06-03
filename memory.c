@@ -1,8 +1,30 @@
 #include "memory.h"
 
 // ------------------------------------------------------- //
-// ----- g_object function	------------------------------
+// ----- g_textures functions	--------------------------
 
+void* g_buf_obj_load ( const char* title,
+					   GLuint texture,
+					   const BUFFER_ATTRIBUTES* attr ) {
+	TREE* inserter = NULL;
+	
+	if ( (inserter = tree_create( title, /* BUF_OBJ */ )) == NULL )
+		return NULL;
+	
+	tree_insert( g_textures, inserter );
+	
+	return inserter;
+}
+
+void* g_buf_obj_load_comp	( FILE* file ) {
+	/*
+	 *	load texture infomation from compilation file
+	 */
+	return NULL;
+}
+
+// ------------------------------------------------------- //
+// ----- g_object function	------------------------------
 
 // -- push_back elements into g_object
 
@@ -165,6 +187,8 @@ VEC2 g_obj_get_position(int index) {
 // ----- entire memory functions	----------------------
 
 void init_memory ( ) {
+	g_buf_objs = NULL;
+	
 	dyn_arr_init( &g_objects, sizeof(OBJECT) );
 	g_user_obj = NULL;
 	g_user_obj_i = -1;
@@ -172,7 +196,9 @@ void init_memory ( ) {
 
 void release_memory() {
 	int i = 0;
-	OBJECT* obj_converter = (OBJECT*)g_objects.items;
+	OBJECT* obj_converter = NULL;
+	
+	obj_converter = (OBJECT*)g_objects.items;
 
 	for ( i = 0; i <= g_objects.size; i++ ) {
 		release_obj( &obj_converter[i]);
@@ -180,6 +206,8 @@ void release_memory() {
 	obj_converter = NULL;
 
 	dyn_arr_release( &g_objects );
+	
+	tree_release( g_buf_objs, 1 );
 }
 
 // ------------------------------------------------------- //

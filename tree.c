@@ -1,5 +1,29 @@
 #include "tree.h"
 
+TREE* tree_create ( char* _key, void* _value ) {
+	TREE* result = NULL;
+	
+	if( ( result = (TREE*)malloc(sizeof(TREE)) ) == NULL ) {
+		return NULL;
+	}
+	
+	result->key 	= _key;
+	result->value 	= _value;
+	result->right	= NULL;
+	result->left	= NULL;
+	
+	return result;
+}
+
+TREE* tree_init ( TREE* tree ) {
+	tree->key 	= NULL;
+	tree->value = NULL;
+	tree->right	= NULL;
+	tree->left	= NULL;
+	
+	return tree;
+}
+
 TREE* tree_insert ( TREE* tree, TREE* rhs ) {
 	int cmp = 0;
 
@@ -68,7 +92,21 @@ void tree_foreach_post ( TREE* tree, void* msger,
 	if ( tree == NULL )
 		return;
 	
-	tree_foreach_in(tree->left, msger, func);
-	tree_foreach_in(tree->right, msger, func);
+	tree_foreach_post(tree->left, msger, func);
+	tree_foreach_post(tree->right, msger, func);
 	(*func)(tree, msger);
+}
+
+static void tree_free ( TREE* tree, void* is_value_too ) {
+	if( *(int*)is_value_too != 0 ) {
+		free ( tree->value );
+		tree->value = NULL;
+	}
+	
+	free ( tree );
+	tree = NULL;
+}
+
+void tree_release ( TREE* tree, int is_value_too ) {
+	tree_foreach_post ( tree, &is_value_too, tree_free );
 }

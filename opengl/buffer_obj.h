@@ -13,7 +13,6 @@
 // ----- Buffer Structure	------------------------------
 
 typedef struct _BUFFER_OBJECT {
-	char title[_TITLE_SIZE];
 	GLuint VBO, VAO, EBO;
 	GLuint ID;
 	GLuint texture;
@@ -56,7 +55,7 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
-void	gl_define_buf_obj	 ( const char* title, BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
+void	gl_define_buf_obj	 ( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
 void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
 
 

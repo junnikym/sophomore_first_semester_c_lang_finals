@@ -3,7 +3,7 @@
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
-void gl_define_buf_obj(const char* title, BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data) {
+void gl_define_buf_obj( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data ) {
 	glGenVertexArrays ( 1, &(p_out->VAO) );
 	glGenBuffers ( 1, &(p_out->VBO) );
 	glGenBuffers ( 1, &(p_out->EBO) );

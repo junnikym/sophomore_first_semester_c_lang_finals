@@ -6,11 +6,30 @@
 #include "object.h"
 #include "types.h"
 
+#include "tree.h"
+#include "hash_table.h"
+
+#include "opengl/buffer_obj.h"
+#include "opengl/texture.h"
+
 #define __CENTER_ENTITY -1
 
-static DYN_ARR g_objects;
+static TREE* g_buf_objs;	// item type : BUFFER_OBJECT
+
+static DYN_ARR g_objects;	// item type : OBJECT
 static OBJECT* g_user_obj;
 static int g_user_obj_i;
+
+static HASH_TABLE g_map;
+
+// ------------------------------------------------------- //
+// ----- g_textures functions	--------------------------
+
+void* 	g_buf_obj_load 			( const char* title,
+								  GLuint texture,
+								  const BUFFER_ATTRIBUTES* attr);
+
+void* 	g_buf_obj_load_comp		( FILE* file ); 	// compilation file load
 
 // ------------------------------------------------------- //
 // ----- g_object functions	------------------------------
@@ -32,6 +51,9 @@ void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
 
 void 	g_obj_foreach		( void* msger, void (*func)(void* elem, int i, void* arg) );
 VEC2	g_obj_get_position	( int index );
+
+// ------------------------------------------------------- //
+// ----- g_map functions	------------------------------
 
 // ------------------------------------------------------- //
 // ----- entire memory functions	----------------------
