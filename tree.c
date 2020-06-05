@@ -27,8 +27,10 @@ TREE* tree_init ( TREE* tree ) {
 TREE* tree_insert ( TREE* tree, TREE* rhs ) {
 	int cmp = 0;
 
-	if(tree == NULL) 
+	if(tree == NULL) {
+		tree = rhs;
 		return rhs;
+	}
 
 	cmp = strcmp(rhs->key, tree->key);
 	if(cmp == 0) {
@@ -97,7 +99,7 @@ void tree_foreach_post ( TREE* tree, void* msger,
 	(*func)(tree, msger);
 }
 
-static void tree_free ( TREE* tree, void* is_value_too ) {
+void tree_free ( TREE* tree, void* is_value_too ) {
 	if( *(int*)is_value_too != 0 ) {
 		free ( tree->value );
 		tree->value = NULL;

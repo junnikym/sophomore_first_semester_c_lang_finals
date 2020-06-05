@@ -37,26 +37,49 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	glfwSwapInterval(1);
 
 	// -!-!- for test -!-!-
-	ENTITY inserter;
-	init_ent(&inserter);
 	
 	g_buf_obj.ID = gl_load_shader (
 		"../../opengl/shader/TransformVertexShader.vs",
 		"../../opengl/shader/TextureFragmentShader.fs" 
 	);
-
-	gl_define_buf_obj ( "obj", &g_buf_obj, &g_SQUARE_DATA );
+	//-------------------
+	/*
+	gl_define_buf_obj ( &g_buf_obj, &g_SQUARE_DATA, 1 );
 
 	g_buf_obj.texture = gl_load_DDS(
 		"../../resource/texture/character/player_walk_sprite.dds"
 	);
 
 	gl_define_texture ( &g_buf_obj.ID, &g_buf_obj.texture, 0 );
+	
+	
+	
+	g_test_buf_obj.ID = g_buf_obj.ID;
+	
+	gl_define_buf_obj ( &g_test_buf_obj, &g_TESTER_DATA, 1 );
+	
+	g_test_buf_obj.texture = gl_load_BMP(
+		"../../resource/texture/wall.bmp"
+	);
+	
+	gl_define_texture ( &g_test_buf_obj.ID, &g_test_buf_obj.texture, 0 );
+	
+	//-------------------
+	
 	inserter.graphics_buf = &g_buf_obj;
 	set_essential_f_ent(&inserter);
 	
 	g_obj_alter( __ENTITY__, &inserter, g_user_obj_i, -1 );
 	
+	release_ent(&inserter);
+	
+	second_ins.graphics_buf = &g_test_buf_obj;
+	second_ins.position.x = 2.5f;
+	
+	g_obj_alter( __ENTITY__, &second_ins, 1, -1 );
+	
+	//g_buf_obj_insert ( "user_charactor",)
+	*/
 	// -!-!-!-!-!-!-!-!-!-!-
 	
 	
@@ -105,5 +128,6 @@ void gl_system_run(WINDOW* window) {
 
 void gl_system_shutdown(WINDOW* window) {
 	gl_shutdown_graphics( &g_buf_obj );
+	gl_shutdown_graphics( &g_test_buf_obj );
 	glfwTerminate();
 }

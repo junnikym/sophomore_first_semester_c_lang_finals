@@ -30,8 +30,8 @@ void gl_clear_screen ( ) {
 }
 
 void	gl_draw_sprite_obj ( const BUFFER_OBJECT* shader,
-							mat4 MVP,
-							const VEC2* current_sprite_pos ) {
+							 mat4 MVP,
+							 const VEC2* current_sprite_pos ) {
 	GLuint trans_form_location = 0;
 	GLuint mvp_id;
 	

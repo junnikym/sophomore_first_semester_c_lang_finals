@@ -16,6 +16,7 @@ typedef struct _BUFFER_OBJECT {
 	GLuint VBO, VAO, EBO;
 	GLuint ID;
 	GLuint texture;
+	GLsizei n;
 	// ! TODO : append sprite_info
 } BUFFER_OBJECT;
 
@@ -24,7 +25,6 @@ typedef struct _BUFFER_ATTRIBUTES {
 	int vertices_size;
 	GLuint* indices_data;
 	int indices_size;
-	int* attr_arr_size;
 } BUFFER_ATTRIBUTES;
 
 // ------------------------------------------------------- //
@@ -32,12 +32,13 @@ typedef struct _BUFFER_ATTRIBUTES {
 
 // --- Square Const Buffers
 
+
 const static GLfloat g_SQUARE_VERTICES[] = {
 	// positions          // colors           // texture coords
-	 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f/16, 0.0f, // top right
-	 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f/16, 1.0f, // bottom right
-	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f, // bottom left
-	-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f  // top left
+	 1.0f,  1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // top right
+	 1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 1.0f, // bottom right
+	-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f, // bottom left
+	-1.0f,  1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f  // top left
 };
 
 const static GLuint g_SQUARE_INDICES[] = {
@@ -55,8 +56,10 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
-void	gl_define_buf_obj	 ( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data );
+void	gl_define_buf_obj	 ( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data, GLsizei n);
 void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
+
+void	gl_release_buf_obj	 ( BUFFER_OBJECT* buf_obj );
 
 
 // ------------------------------------------------------- //

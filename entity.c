@@ -7,7 +7,7 @@ void init_ent( ENTITY* ent ) {
 	ent->position 		= V2_ZERO;
 	
 	ent->graphics_buf 	= NULL;
-	ent->texture_pos	= NULL;
+	ent->texture_pos	= V2_ZERO;
 }
 
 void release_ent( ENTITY* ent) {
@@ -49,8 +49,6 @@ void draw_ent ( const ENTITY* ent ) {
 	mat4 model = GLM_MAT4_IDENTITY_INIT;
 	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
 	
-	VEC2 frame_pos = (VEC2){1/16.0f, 1/16.0f};
-	
 	glm_translate_to(
 		(mat4)GLM_MAT4_IDENTITY_INIT,
 		(vec3) {
@@ -65,7 +63,7 @@ void draw_ent ( const ENTITY* ent ) {
 	gl_get_mvp(model, mvp);
 	
 	// ! TODO : for test code
-	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, frame_pos );
+	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos );
 }
 
 void set_essential_f_ent ( ENTITY* ent ) {

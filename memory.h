@@ -14,7 +14,10 @@
 
 #define __CENTER_ENTITY -1
 
+static GLuint g_shader_id;
+
 static TREE* g_buf_objs;	// item type : BUFFER_OBJECT
+static int g_buf_objs_size;
 
 static DYN_ARR g_objects;	// item type : OBJECT
 static OBJECT* g_user_obj;
@@ -25,11 +28,14 @@ static HASH_TABLE g_map;
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
 
-void* 	g_buf_obj_load 			( const char* title,
+void* 	g_buf_obj_insert 		( const char* title,
 								  GLuint texture,
-								  const BUFFER_ATTRIBUTES* attr);
+								  BUFFER_ATTRIBUTES* attr);
 
 void* 	g_buf_obj_load_comp		( FILE* file ); 	// compilation file load
+
+static void g_buf_obj_release_each ( TREE* each, void* free_value ) ;
+void	g_buf_obj_release		();
 
 // ------------------------------------------------------- //
 // ----- g_object functions	------------------------------
@@ -42,10 +48,15 @@ OBJECT*	g_obj_set_user_obj		( int i );
 ENTITY* g_obj_set_center_ent	( int obj_i, int ent_i );
 void  	g_obj_set_essential_f 	( int obj_i, int ent_i );
 
+void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
+
 void	update_each_g_obj		( void* elem, int i, void* pos );
 void	update_g_obj			( );
 
 void* 	g_obj_alter				( _OBJ_ELEM_ type, void* elem, ... );
+void*	g_obj_alter_by_func		( _OBJ_ELEM_ type,
+								  void (*func)(void* lhs, void* rhs),
+								 ... );
 
 void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
 

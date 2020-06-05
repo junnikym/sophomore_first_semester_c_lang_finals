@@ -21,7 +21,7 @@ typedef struct _ENTITY {
     DYN_ARR forces;   // VEC2
     // !TODO : Create attribute; (mass, meterial, ... )
 	BUFFER_OBJECT* graphics_buf;
-	VEC2* texture_pos;
+	VEC2 texture_pos;
 } ENTITY;
 
 void init_ent       ( ENTITY* ent );

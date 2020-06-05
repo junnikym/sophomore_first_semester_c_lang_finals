@@ -3,10 +3,12 @@
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
-void gl_define_buf_obj( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data ) {
-	glGenVertexArrays ( 1, &(p_out->VAO) );
-	glGenBuffers ( 1, &(p_out->VBO) );
-	glGenBuffers ( 1, &(p_out->EBO) );
+void gl_define_buf_obj( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data, GLsizei n ) {
+	p_out->n = n;
+	
+	glGenVertexArrays ( n, &(p_out->VAO) );
+	glGenBuffers ( n, &(p_out->VBO) );
+	glGenBuffers ( n, &(p_out->EBO) );
 
 	glBindVertexArray ( (p_out->VAO) );
 
@@ -35,6 +37,12 @@ void gl_define_texture ( const GLuint* program_id, const GLuint* texture_buf, in
 	glBindTexture(GL_TEXTURE_2D, *texture_buf);
 
 	glUniform1i ( texture_location, n );
+}
+
+void gl_release_buf_obj	( BUFFER_OBJECT* buf_obj ) {
+	glDeleteBuffers(buf_obj->ID, &buf_obj->VAO);
+	glDeleteBuffers(buf_obj->ID, &buf_obj->VBO);
+	glDeleteVertexArrays(buf_obj->ID, &buf_obj->EBO);
 }
 
 // ------------------------------------------------------- //

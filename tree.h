@@ -28,7 +28,7 @@ void	tree_foreach_in 	( TREE* tree, void* msger,
 void	tree_foreach_post 	( TREE* tree, void* msger, 
 							  void (func)(TREE* tree, void* arg) );
 
-static void tree_free ( TREE* tree, void* is_value_too );
+void tree_free ( TREE* tree, void* is_value_too );
 void tree_release ( TREE* tree, int is_value_too );
 
 #endif /* MAP_H */

@@ -3,24 +3,53 @@
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
 
-void* g_buf_obj_load ( const char* title,
-					   GLuint texture,
-					   const BUFFER_ATTRIBUTES* attr ) {
-	TREE* inserter = NULL;
+void* g_buf_obj_insert ( const char* title,
+						 GLuint texture,
+						 BUFFER_ATTRIBUTES* attr ) {
+	g_buf_objs_size++;
 	
-	if ( (inserter = tree_create( title, /* BUF_OBJ */ )) == NULL )
+	GLuint i = 0;
+	
+	printf("g_buf_obj size : %d \n", g_buf_objs_size);
+	
+	TREE* inserter = NULL;
+	BUFFER_OBJECT* buf_obj = NULL;
+	
+	buf_obj = (BUFFER_OBJECT*) malloc (sizeof(BUFFER_OBJECT));
+	
+	buf_obj->ID = g_shader_id;
+	
+	gl_define_buf_obj ( buf_obj, attr, 1 );
+	
+	gl_define_texture ( &(buf_obj->ID), &(buf_obj->texture), 0 );
+	
+	if ( (inserter = tree_create( title, buf_obj )) == NULL )
 		return NULL;
 	
-	tree_insert( g_textures, inserter );
+	g_buf_objs = tree_insert( g_buf_objs, inserter );
 	
 	return inserter;
 }
 
 void* g_buf_obj_load_comp	( FILE* file ) {
 	/*
-	 *	load texture infomation from compilation file
-	 */
+	*	load texture infomation from compilation file
+	*/
 	return NULL;
+}
+
+void g_buf_obj_release_each ( TREE* each, void* free_value ) {
+	BUFFER_OBJECT* target = each->value;
+	
+	gl_release_buf_obj( target );
+	
+	tree_free ( each, free_value );
+}
+
+void g_buf_obj_release () {
+	int free_elem_too = 1;
+	
+	tree_foreach_post ( g_buf_objs, &free_elem_too, g_buf_obj_release_each );
 }
 
 // ------------------------------------------------------- //
@@ -51,7 +80,7 @@ void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
 			
 			// -- Get chosen ENTITY
 			i = va_arg ( ap, int );
-			
+
 			if( i == __CENTER_ENTITY ) {
 				target = ((OBJECT*)target)->center;
 			}
@@ -88,7 +117,6 @@ void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
 	return NULL;
 }
 
-
 // -- Setter
 
 OBJECT* g_obj_set_user_obj ( int i ) {
@@ -100,6 +128,45 @@ OBJECT* g_obj_set_user_obj ( int i ) {
 
 ENTITY* g_obj_set_center_ent ( int obj_i, int ent_i ) {
 	return set_center_obj ( dyn_arr_get ( &g_objects, obj_i ), ent_i );
+}
+
+void g_obj_set_essential_f ( int obj_i, int ent_i ) {
+	void* target = dyn_arr_get (&g_objects, obj_i);
+	
+	if(ent_i == -1)
+		target = ((OBJECT*)target)->center;
+	else
+		target = dyn_arr_get( &(((OBJECT*)target)->entities), ent_i );
+	
+	set_essential_f_ent(target);
+}
+
+void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
+	void* result = NULL;
+	void* target = dyn_arr_get( &g_objects, obj_i );
+	
+	if( ent_i == -1 )
+		target = ((OBJECT*)target)->center;
+	
+	else
+		target = dyn_arr_get( &((OBJECT*)target)->entities, ent_i );
+	
+	result = tree_search( g_buf_objs, obj_buf_key )->value;
+	if(result == NULL)
+		return NULL;
+
+	((ENTITY*)target)->graphics_buf = result;
+	
+	return target;
+}
+// -- Update functions
+
+void update_each_g_obj ( void* elem, int i, void* arg ) {
+	update_obj ( elem );
+}
+
+void update_g_obj ( ) {
+	g_obj_foreach( NULL, update_each_g_obj );
 }
 
 void* g_obj_alter ( _OBJ_ELEM_ type, void* elem, ... ) {
@@ -152,28 +219,60 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* elem, ... ) {
 	
 	return NULL;
 }
-
-void g_obj_set_essential_f ( int obj_i, int ent_i ) {
-	void* target = dyn_arr_get (&g_objects, obj_i);
+/*
+void* g_obj_alter_by_func ( _OBJ_ELEM_ type,
+							void (*func)(void* lhs, void* rhs),
+							... ) {
+	va_list ap;
 	
-	if(ent_i == -1)
-		target = ((OBJECT*)target)->center;
-	else
-		target = dyn_arr_get( &(((OBJECT*)target)->entities), ent_i );
+	int i = 0;
+	void* target = NULL;
 	
-	set_essential_f_ent(target);
+	va_start(ap, elem);
+	
+	// -- Get OBJECT
+	i = va_arg ( ap, int );		// OBJECT[i]
+	
+	target = dyn_arr_get( &g_objects, i );
+	
+	switch ( type ) {
+		case __FORCE__:
+			// -- Get ENTITY
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
+			
+			if( i == __CENTER_ENTITY )
+				target = ((OBJECT*)target)->center;
+			else
+				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
+			
+			// -- Get FORCE
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i] -> FORCE[i]
+			target = dyn_arr_get( &(((ENTITY*)target)->forces), i );
+			
+			// -- Alter
+			copy_force ( target, elem );
+			
+			return target;
+		case __ENTITY__:
+			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
+			
+			if( i == __CENTER_ENTITY )
+				target = ((OBJECT*)target)->center;
+			else
+				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
+			
+			copy_ent ( target, elem );
+			
+			return target;
+		case __OBJECT__:
+			copy_obj ( target, elem );
+			
+			return target;
+	}
+	
+	return NULL;
 }
-
-// -- Update functions
-
-void update_each_g_obj ( void* elem, int i, void* arg ) {
-	update_obj ( elem );
-}
-
-void update_g_obj ( ) {
-	g_obj_foreach( NULL, update_each_g_obj );
-}
-
+*/
 void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
 	dyn_arr_foreach(&g_objects, msger, func);
 }
@@ -188,6 +287,7 @@ VEC2 g_obj_get_position(int index) {
 
 void init_memory ( ) {
 	g_buf_objs = NULL;
+	g_buf_objs_size = 0;
 	
 	dyn_arr_init( &g_objects, sizeof(OBJECT) );
 	g_user_obj = NULL;
@@ -198,16 +298,22 @@ void release_memory() {
 	int i = 0;
 	OBJECT* obj_converter = NULL;
 	
+	g_shader_id = gl_load_shader (
+		"../../opengl/shader/TransformVertexShader.vs",
+		"../../opengl/shader/TextureFragmentShader.fs"
+	);
+	
 	obj_converter = (OBJECT*)g_objects.items;
 
 	for ( i = 0; i <= g_objects.size; i++ ) {
+		printf("release object [%d] \n", i);
 		release_obj( &obj_converter[i]);
 	}
 	obj_converter = NULL;
 
 	dyn_arr_release( &g_objects );
 	
-	tree_release( g_buf_objs, 1 );
+	g_buf_obj_release();
 }
 
 // ------------------------------------------------------- //
