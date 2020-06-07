@@ -23,9 +23,6 @@ typedef struct _WINDOW {
     const char* title;
 } WINDOW;
 
-static BUFFER_OBJECT g_buf_obj;
-static BUFFER_OBJECT g_test_buf_obj;
-
 int     gl_system_init      (WINDOW* p_out, int width, int height, const char* title);
 void    gl_system_run       (WINDOW* window);
 void    gl_system_shutdown  (WINDOW* window);

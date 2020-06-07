@@ -12,7 +12,9 @@
 #include "opengl/buffer_obj.h"
 #include "opengl/texture.h"
 
-#define __CENTER_ENTITY -1
+#define __CENTER_I -1
+
+#define __BUFFER_GEN_N 1
 
 static GLuint g_shader_id;
 
@@ -53,10 +55,8 @@ void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
 void	update_each_g_obj		( void* elem, int i, void* pos );
 void	update_g_obj			( );
 
-void* 	g_obj_alter				( _OBJ_ELEM_ type, void* elem, ... );
-void*	g_obj_alter_by_func		( _OBJ_ELEM_ type,
-								  void (*func)(void* lhs, void* rhs),
-								 ... );
+void*	g_obj_alter				( _OBJ_ELEM_ type, void* _rhs,
+								 void (*alt_func)(void* lhs, const void* rhs), ... );
 
 void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
 

@@ -32,7 +32,6 @@ typedef struct _BUFFER_ATTRIBUTES {
 
 // --- Square Const Buffers
 
-
 const static GLfloat g_SQUARE_VERTICES[] = {
 	// positions          // colors           // texture coords
 	 1.0f,  1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // top right
@@ -56,11 +55,13 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 
+void 	buf_obj_init		 ( BUFFER_OBJECT* lhs );
+void 	set_square_vertices	 ( GLfloat p_out[32], VEC2 size, double z, VEC2 texture );
+
 void	gl_define_buf_obj	 ( BUFFER_OBJECT* p_out, const BUFFER_ATTRIBUTES* data, GLsizei n);
 void	gl_define_texture	 ( const GLuint* program_id, const GLuint* texture_buf, int n );
 
 void	gl_release_buf_obj	 ( BUFFER_OBJECT* buf_obj );
-
 
 // ------------------------------------------------------- //
 

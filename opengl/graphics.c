@@ -55,8 +55,6 @@ void	gl_draw_sprite_obj ( const BUFFER_OBJECT* shader,
  }
 
 void gl_shutdown_graphics( BUFFER_OBJECT* x ) {
-
-	// !TODO
 	glDeleteBuffers(1, &x->VAO);
 	glDeleteBuffers(1, &x->VBO);
 	glDeleteVertexArrays(1, &x->EBO);

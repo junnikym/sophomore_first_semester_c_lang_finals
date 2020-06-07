@@ -8,20 +8,19 @@ void* g_buf_obj_insert ( const char* title,
 						 BUFFER_ATTRIBUTES* attr ) {
 	g_buf_objs_size++;
 	
-	GLuint i = 0;
-	
-	printf("g_buf_obj size : %d \n", g_buf_objs_size);
-	
 	TREE* inserter = NULL;
 	BUFFER_OBJECT* buf_obj = NULL;
 	
 	buf_obj = (BUFFER_OBJECT*) malloc (sizeof(BUFFER_OBJECT));
+	buf_obj_init(buf_obj);
 	
 	buf_obj->ID = g_shader_id;
+	buf_obj->texture = texture;
+	buf_obj->n = __BUFFER_GEN_N;
 	
-	gl_define_buf_obj ( buf_obj, attr, 1 );
+	gl_define_buf_obj ( buf_obj, attr, buf_obj->n );
 	
-	gl_define_texture ( &(buf_obj->ID), &(buf_obj->texture), 0 );
+	gl_define_texture ( &buf_obj->ID, &buf_obj->texture, 0 );
 	
 	if ( (inserter = tree_create( title, buf_obj )) == NULL )
 		return NULL;
@@ -81,7 +80,7 @@ void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
 			// -- Get chosen ENTITY
 			i = va_arg ( ap, int );
 
-			if( i == __CENTER_ENTITY ) {
+			if( i == __CENTER_I ) {
 				target = ((OBJECT*)target)->center;
 			}
 			else {
@@ -145,6 +144,9 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	void* result = NULL;
 	void* target = dyn_arr_get( &g_objects, obj_i );
 	
+	ENTITY* for_debug_ent = NULL;
+	BUFFER_OBJECT* for_debug = NULL;
+	
 	if( ent_i == -1 )
 		target = ((OBJECT*)target)->center;
 	
@@ -156,6 +158,8 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 		return NULL;
 
 	((ENTITY*)target)->graphics_buf = result;
+	for_debug_ent = ((ENTITY*)target);
+	for_debug = result;
 	
 	return target;
 }
@@ -169,110 +173,68 @@ void update_g_obj ( ) {
 	g_obj_foreach( NULL, update_each_g_obj );
 }
 
-void* g_obj_alter ( _OBJ_ELEM_ type, void* elem, ... ) {
+void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
+					void (*alt_func)(void* lhs, const void* rhs), ... ) {
 	va_list ap;
 	
 	int i = 0;
 	void* target = NULL;
 	
-	va_start(ap, elem);
+	va_start(ap, alt_func);
 	
 	// -- Get OBJECT
 	i = va_arg ( ap, int );		// OBJECT[i]
 	
-	target = dyn_arr_get( &g_objects, i );
+	printf("index at [%d]", i);
+	
+	if( i == __CENTER_I ) 		// USER_OBJECT
+		target = g_user_obj;
+	else {
+		target = dyn_arr_get( &g_objects, i );
+	}
 	
 	switch ( type ) {
 		case __FORCE__:
 			// -- Get ENTITY
 			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
 			
-			if( i == __CENTER_ENTITY )
+			printf("[%d]", i);
+			
+			if( i == __CENTER_I )
 				target = ((OBJECT*)target)->center;
 			else
 				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
 			
 			// -- Get FORCE
 			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i] -> FORCE[i]
+			printf("[%d] \n", i);
+			
 			target = dyn_arr_get( &(((ENTITY*)target)->forces), i );
 			
 			// -- Alter
-			copy_force ( target, elem );
+			alt_func ( target, _rhs );
 			
 			return target;
 		case __ENTITY__:
 			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
 			
-			if( i == __CENTER_ENTITY )
+			if( i == __CENTER_I )
 				target = ((OBJECT*)target)->center;
 			else
 				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
 			
-			copy_ent ( target, elem );
+			alt_func ( target, _rhs );
 			
 			return target;
 		case __OBJECT__:
-			copy_obj ( target, elem );
+			alt_func ( target, _rhs );
 			
 			return target;
 	}
 	
 	return NULL;
 }
-/*
-void* g_obj_alter_by_func ( _OBJ_ELEM_ type,
-							void (*func)(void* lhs, void* rhs),
-							... ) {
-	va_list ap;
-	
-	int i = 0;
-	void* target = NULL;
-	
-	va_start(ap, elem);
-	
-	// -- Get OBJECT
-	i = va_arg ( ap, int );		// OBJECT[i]
-	
-	target = dyn_arr_get( &g_objects, i );
-	
-	switch ( type ) {
-		case __FORCE__:
-			// -- Get ENTITY
-			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
-			
-			if( i == __CENTER_ENTITY )
-				target = ((OBJECT*)target)->center;
-			else
-				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
-			
-			// -- Get FORCE
-			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i] -> FORCE[i]
-			target = dyn_arr_get( &(((ENTITY*)target)->forces), i );
-			
-			// -- Alter
-			copy_force ( target, elem );
-			
-			return target;
-		case __ENTITY__:
-			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
-			
-			if( i == __CENTER_ENTITY )
-				target = ((OBJECT*)target)->center;
-			else
-				target = dyn_arr_get( &(((OBJECT*)target)->entities), i );
-			
-			copy_ent ( target, elem );
-			
-			return target;
-		case __OBJECT__:
-			copy_obj ( target, elem );
-			
-			return target;
-	}
-	
-	return NULL;
-}
-*/
+
 void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
 	dyn_arr_foreach(&g_objects, msger, func);
 }
@@ -286,6 +248,11 @@ VEC2 g_obj_get_position(int index) {
 // ----- entire memory functions	----------------------
 
 void init_memory ( ) {
+	g_shader_id = gl_load_shader (
+		"../../opengl/shader/TransformVertexShader.vs",
+		"../../opengl/shader/TextureFragmentShader.fs"
+	);
+	
 	g_buf_objs = NULL;
 	g_buf_objs_size = 0;
 	
@@ -298,15 +265,9 @@ void release_memory() {
 	int i = 0;
 	OBJECT* obj_converter = NULL;
 	
-	g_shader_id = gl_load_shader (
-		"../../opengl/shader/TransformVertexShader.vs",
-		"../../opengl/shader/TextureFragmentShader.fs"
-	);
-	
 	obj_converter = (OBJECT*)g_objects.items;
 
 	for ( i = 0; i <= g_objects.size; i++ ) {
-		printf("release object [%d] \n", i);
 		release_obj( &obj_converter[i]);
 	}
 	obj_converter = NULL;

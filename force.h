@@ -25,6 +25,7 @@ typedef struct _FORCE {
 } FORCE;
 
 void 	copy_force		(void* lhs, const void* rhs);
+void	add_force		(void* lhs, const void* rhs);
 
 void 	init_force		( FORCE* f );
 void 	set_vec_force	( FORCE* f, double x, double y );

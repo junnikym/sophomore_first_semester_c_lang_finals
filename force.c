@@ -1,10 +1,21 @@
 #include "force.h"
 
 void copy_force(void* lhs, const void* rhs) {
+	FORCE* lhs_conv = lhs;
+	FORCE* rhs_conv = rhs;
+	
 	if ( rhs == NULL ) 
 		init_force( (FORCE*)lhs );
 	else {
-		*(FORCE*)lhs = *(FORCE*)rhs;
+		lhs_conv->force_vec = rhs_conv->force_vec;
+	}
+}
+
+void add_force (void* lhs, const void* rhs) {
+	if ( lhs == NULL || rhs == NULL )
+		return;
+	else {
+		vec2_add_assn( &((FORCE*)lhs)->force_vec, &((FORCE*)rhs)->force_vec);
 	}
 }
 

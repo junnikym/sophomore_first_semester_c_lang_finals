@@ -22,7 +22,6 @@ void release_obj ( OBJECT* obj ) {
 	ENTITY* ent_converter = (ENTITY*)(obj->entities.items);
 
 	for( i = 0; i <= obj->entities.size; i++) {
-		printf("release entity [%d] \n", i);
 		release_ent( &ent_converter[i] );
 	}
 
