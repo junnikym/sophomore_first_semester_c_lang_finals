@@ -3,10 +3,6 @@
 
 #include <GL/glew.h>
 
-typedef struct img_struct {
-	
-} img_struct;
-
 // Load a .BMP file using our custom loader
 GLuint gl_load_BMP (const char * imagepath);
 
