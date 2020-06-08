@@ -29,8 +29,8 @@ static double jump_time_current = __NOT_ACT_TIME_CODE;
 
 // -- Control Keys
 
-static int __LEFT_KEY = GLFW_KEY_A;			// LEFTÊ			'A'
-static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT	Ê		'D'
+static int __LEFT_KEY = GLFW_KEY_A;			// LEFT?		'A'
+static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT	?	'D'
 static int __JUMP_KEY = GLFW_KEY_SPACE;		// JUMP				'SPACE'
 static int __LONG_JUMP_KEY = GLFW_KEY_W;	// LONG_JUMP		'W'
 static int __TAB_KEY = GLFW_KEY_TAB;		// INVENTORY		'TAB'

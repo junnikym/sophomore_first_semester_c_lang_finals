@@ -8,6 +8,17 @@ void copy_force(void* lhs, const void* rhs) {
 		init_force( (FORCE*)lhs );
 	else {
 		lhs_conv->force_vec = rhs_conv->force_vec;
+
+		if ( rhs_conv->identify != 0 ) {
+			lhs_conv->identify = rhs_conv->identify;
+
+			if ( rhs_conv->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ) {
+				lhs_conv->accel_vec = rhs_conv->accel_vec;
+			}
+		}
+		
+		if ( rhs_conv->start_t != rhs_conv->start_t )
+			lhs_conv->start_t = rhs_conv->start_t;
 	}
 }
 
@@ -15,7 +26,8 @@ void add_force (void* lhs, const void* rhs) {
 	if ( lhs == NULL || rhs == NULL )
 		return;
 	else {
-		vec2_add_assn( &((FORCE*)lhs)->force_vec, &((FORCE*)rhs)->force_vec);
+		vec2_add_assn ( &((FORCE*)lhs)->force_vec, &((FORCE*)rhs)->force_vec );
+		vec2_add_assn ( &((FORCE*)lhs)->accel_vec, &((FORCE*)rhs)->accel_vec );
 	}
 }
 
@@ -30,22 +42,25 @@ void set_vec_force( FORCE* f, double x, double y ) {
 
 VEC2 output_force ( FORCE* f, double t ) {
 	VEC2 result = V2_ZERO;
+	double accel = 0.0;
 	
 	if( f->identify & (__F_PAUSE__ << __FORCE_ENUM_SHIFTER) ) {
 		f->start_t = 0.0;
 		return V2_ZERO;
 	}
-	
+
 	if( f->start_t == 0.0 )
 		f->start_t = t;
 	else {
 		
 		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ) {
-			printf("t - f->start_t : %f \n", t - f->start_t);
-			return vec2_mul( &f->force_vec, SQUARE(t - f->start_t));
+			result = vec2_mul ( &f->accel_vec, (t - f->start_t) );
+			vec2_add_assn(&f->force_vec, &result);
+
+			printf("t - f->force_vec.y : %f \n", t - f->force_vec.y);
 		}
-		
-		result = vec2_mul( &f->force_vec, (t - f->start_t) );
+
+		result = vec2_mul ( &f->force_vec, (t - f->start_t) );
 		f->start_t = t;
 	}
 	

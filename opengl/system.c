@@ -43,7 +43,7 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	gl_set_projection();
 	
 	gl_set_view (
-		(vec3) { 0, 0, 10 } ,
+		(vec3) { 0, 0, 50 } ,
 		GLM_VEC3_ZERO,
 		(vec3) { 0, 1, 0 }
 	);

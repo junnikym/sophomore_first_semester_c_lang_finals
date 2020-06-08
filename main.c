@@ -11,6 +11,9 @@ int main() {
 	OBJECT* obj_converter = 0;
 	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, __F_FOR_CONTROL__ );
 	ENTITY ent_inserter;
+
+	FORCE test_f_inserter = generate_force ( (VEC2) { 0, 0 }, __F_ACCELERATE__ );
+	test_f_inserter.accel_vec = (VEC2) { 0, 1 };
 	
 	GLfloat buf_vertice[32] = { 0 };
 	
@@ -66,6 +69,7 @@ int main() {
 /* |*/	g_obj_set_center_ent ( 0, 0 );
 /* |*/	g_obj_set_essential_f( 0, -1 );
 /* |*/	g_obj_set_obj_buf("charactor", 0, -1);	// set texture
+		g_obj_push_thing ( __FORCE__, &test_f_inserter, 0, -1);
 /* |*/
 /* |*/	g_obj_set_user_obj(0);
 /*------------------------------------------------------------------------------*/

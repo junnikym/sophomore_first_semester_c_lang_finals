@@ -3,6 +3,7 @@
 
 #include <math.h>
 #define SQUARE(x) ((x)*(x))
+#define CUBIC(x) ((x)*(x)*(x))
 
 #define _TITLE_SIZE 32
 
