@@ -3,22 +3,18 @@
 
 #include "vector2.h"
 #include "force.h"
-#include "entity.h"
 
 #include <math.h>
 
-typedef enum __PHY_FLAGS__ {
-    GRAVITY = 1 << 0,
-    FRICTION = 1 << 1,
-} _PHY_FLAGS_;
-
 // -- (append / update) force
-void transform_to_gravity ( FORCE* f, const double* g_constant, VEC2* g_direction );
+void transform_to_gravity ( FORCE* f,
+						    const double* gravity_constant,
+						    const VEC2* gravity_direction );
 
 // -- Apply to force 
 void friction( VEC2* force, const double* constant );
 
-
-void run_all_phy ( ENTITY* ent );
+// -- checking function
+void collision_detection_aabb ( );
 
 #endif

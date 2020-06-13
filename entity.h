@@ -3,6 +3,7 @@
 
 #include "force.h"
 #include "dynamic_array.h"
+#include "types.h"
 
 #include "opengl/buffer_obj.h"
 
@@ -11,9 +12,11 @@
 
 #define __I_ESSENTIAL_FORCE__CONTROL 0
 
-static const int __I_ESSENTIAL_FORCE__PHY = __N_ESSENTIAL_FORCE__CONTROL + __I_ESSENTIAL_FORCE__CONTROL;
+static const int __I_ESSENTIAL_FORCE__PHY =
+							__N_ESSENTIAL_FORCE__CONTROL + __I_ESSENTIAL_FORCE__CONTROL;
 
-static const int __N_ESSENTAL_FORCE = __N_ESSENTIAL_FORCE__CONTROL + __N_ESSENTIAL_FORCE__PHY;
+static const int __N_ESSENTAL_FORCE =
+							__N_ESSENTIAL_FORCE__CONTROL + __N_ESSENTIAL_FORCE__PHY;
 
 typedef struct _ENTITY {
     VEC2 position;
@@ -40,3 +43,5 @@ void draw_ent		( const ENTITY* ent );
 void set_essential_f_ent ( ENTITY* ent );
 
 #endif
+ 
+ 

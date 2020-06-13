@@ -1,6 +1,8 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include "physics.h"
+#include "types.h"
 #include "dynamic_array.h"
 #include "entity.h"
 
@@ -32,3 +34,13 @@ void 	detech_center_obj	( OBJECT* obj);
 // ------------------------------------------------------- //
 
 #endif
+ 
+
+
+
+
+
+
+
+
+ 

@@ -44,6 +44,8 @@ void	g_buf_obj_release		();
 
 // -- push_back elements into g_object
 
+int 	is_g_user_obj_setted	();
+
 void*	g_obj_push_thing		( _OBJ_ELEM_ type, void* item, ... );	// ... => index of thing
 
 OBJECT*	g_obj_set_user_obj		( int i );
@@ -52,7 +54,7 @@ void  	g_obj_set_essential_f 	( int obj_i, int ent_i );
 
 void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
 
-void	update_each_g_obj		( void* elem, int i, void* pos );
+void	update_each_g_obj		  ( void* elem, int i, void* pos );
 void	update_g_obj			( );
 
 void*	g_obj_alter				( _OBJ_ELEM_ type, void* _rhs,

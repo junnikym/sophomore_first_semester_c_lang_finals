@@ -16,3 +16,4 @@ int range_loop ( unsigned int min, unsigned int max, int* current ) {
 	
 	return *current;
 }
+ 

@@ -8,7 +8,7 @@
 #include <string.h>
 
 #define create_hash_table(_title, _size) 	LIST* _title[_size];\
-											init_hash_table(_title, _size);
+													init_hash_table(_title, _size);
 
 typedef struct _HASH_TABLE_NODE {
 	char*	key;
@@ -23,10 +23,22 @@ typedef LIST** HASH_TABLE;
 
 unsigned int hash ( char* str, int table_size );
 
-LIST* find_hash ( HASH_TABLE table, char* _key, int table_size, int create );
-void init_hash_table ( HASH_TABLE table, int table_size );
-void release_hash_table ( HASH_TABLE table, int table_size, void (*release_item)(void* target) );
+LIST* find_hash 				( HASH_TABLE table,
+								  char* _key, int table_size, int create );	// 해쉬를 통해 검색
+void init_hash_table 		( HASH_TABLE table, int table_size );		// 해쉬 테이블을 초기화
+void release_hash_table 	( HASH_TABLE table,							// 해쉬 테이블을 해제
+							 	  int table_size, void (*release_item)(void* target) );
 
 // ------------------------------------------------------- //
  
 #endif /* HASH_TABLE_H */
+
+
+
+
+
+
+
+
+
+ 

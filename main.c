@@ -8,6 +8,10 @@
 
 int main() {
 	int result = 0;
+	
+	int screen_w = 1200;
+	int screen_h = 800;
+	
 	OBJECT* obj_converter = 0;
 	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, __F_FOR_CONTROL__ );
 	ENTITY ent_inserter;
@@ -33,7 +37,7 @@ int main() {
 // - OpenGl
 	
 	WINDOW g_window;
-	result = gl_system_init ( &g_window, 800, 600, "Test window" );
+	result = gl_system_init ( &g_window, screen_w, screen_h, "Test window" );
 	if ( result != 0 )
 		return 0;
 
@@ -46,7 +50,7 @@ int main() {
 	
 	/*----- USER CHARACTOR	--------------------------------------------------*/
 	
-	set_square_vertices( buf_vertice, (VEC2){0.5f, 0.5f}, 0.0f, (VEC2){1.0f/16.0f, 1.0f} );
+	set_square_vertices( buf_vertice, (VEC2){5.0f, 5.0f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
 	
 	g_buf_obj_insert ( "charactor",
 					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite.dds" ),
@@ -54,7 +58,7 @@ int main() {
 	
 	/*----- WALL 1			--------------------------------------------------*/
 	
-	set_square_vertices( buf_vertice, (VEC2){2.0f, 2.0f}, 0.0f, (VEC2){1.0f, 1.0f} );
+	set_square_vertices( buf_vertice, (VEC2){5.0f, 5.0f}, 0.0f, (VEC2){1.0f, 1.0f} );
 	
 	g_buf_obj_insert ( "wall",
 					   gl_load_BMP( "../../resource/texture/wall.bmp" ),
@@ -69,19 +73,17 @@ int main() {
 /* |*/	g_obj_set_center_ent ( 0, 0 );
 /* |*/	g_obj_set_essential_f( 0, -1 );
 /* |*/	g_obj_set_obj_buf("charactor", 0, -1);	// set texture
-		g_obj_push_thing ( __FORCE__, &test_f_inserter, 0, -1);
 /* |*/
 /* |*/	g_obj_set_user_obj(0);
 /*------------------------------------------------------------------------------*/
 /*----- OBJECT 1 	------------------------------------------------------------*/
-/* |*/	g_obj_push_thing ( __OBJECT__, NULL );
+/* |*/	//g_obj_push_thing ( __OBJECT__, NULL );
 /* |		-- [1] : ENTITY 0		*/
-/* |*/	g_obj_push_thing ( __ENTITY__, NULL, 1 );
-/* |*/	g_obj_set_center_ent ( 1, 0 );
-/* |*/	g_obj_set_essential_f( 1, -1 );
-/* |*/	g_obj_set_obj_buf("wall", 1, -1);		// set texture
+/* |*/	//g_obj_push_thing ( __ENTITY__, NULL, 1 );
+/* |*/	//g_obj_set_center_ent ( 1, 0 );
+/* |*/	//g_obj_set_essential_f( 1, -1 );
+/* |*/	//g_obj_set_obj_buf("wall", 1, -1);		// set texture
 /* |*/
-/* |*/	g_obj_set_user_obj(0);
 /*------------------------------------------------------------------------------*/
 
 	// -!-!- for test -!-!-

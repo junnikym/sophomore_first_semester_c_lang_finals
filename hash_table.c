@@ -4,11 +4,11 @@
 // ----- hash functions				----------------------
 
 unsigned int hash(char* str, int table_size) {
-	unsigned int h = 0;
+	unsigned int h = 0;			// 해쉬값을 저장할 변수
 	unsigned char* p = NULL;
 	
 	for(p = (unsigned char *) str; *p != '\0'; p++)
-		h = __HASH_MULTIPLIER * h + *p;
+		h = __HASH_MULTIPLIER * h + *p;	
 	
 	return h % table_size;
 }

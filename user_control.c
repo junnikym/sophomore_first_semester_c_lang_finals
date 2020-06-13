@@ -6,6 +6,9 @@ void set_control_key(int* which_key, int key_value) {
 
 
 void game_control(const int* key, const int* key_act) {
+	VEC2 msger = { 0, 0 };
+	int identify = __F_FOR_CONTROL__;
+	
 	static int left_key_buf = 0;
 	static int right_key_buf = 0;
 	
@@ -21,14 +24,19 @@ void game_control(const int* key, const int* key_act) {
 		if (*key == __LEFT_KEY) {
 			// walk left
 			left_key_buf = 1;
+			
 			direction_buf = -g_User_Speed;
 		}
 
 		if (*key == __RIGHT_KEY) {
 			// walk right
 			right_key_buf = 1;
+			
 			direction_buf = g_User_Speed;
+			
 		}
+		
+		identify |= __F_NON_FRICTION__;
 		
 		/* ------------------------------------------------------------------ */
 		
@@ -98,6 +106,19 @@ void game_control(const int* key, const int* key_act) {
 		
 		/* ------------------------------------------------------------------ */
 	}
+	
+	if ( direction_buf != 0) {
+		identify |= __F_NON_FRICTION__;
+		msger.x = direction_buf;
+	}
+	
+	g_obj_alter ( __FORCE__, &msger, set_accel_in_f,
+				  __CENTER_I, __CENTER_I, __I_ESSENTIAL_FORCE__CONTROL );
+	
+	g_obj_alter ( __FORCE__, &identify, set_identify_in_f,
+				  __CENTER_I, __CENTER_I, __I_ESSENTIAL_FORCE__CONTROL );
+	
+	
 }
 
 void game_control_non_callback() {
@@ -106,12 +127,14 @@ void game_control_non_callback() {
 	
 	msger.identify = __F_FOR_CONTROL__;
 	
-	msger.force_vec.x += direction_buf;
+	/* ----- Move Left / Right	----------------------------------------- */
+
+	// ! DOTO : more then specific speed -> set accel to zero
 	
 	/* ----- Jump 		------------------------------------------------- */
-	
+		
 	// -- Normal Jump
-	
+	/*
 	if ( jump_time_start != __NOT_ACT_TIME_CODE ) {
 		jump_time_current = glfwGetTime() - jump_time_start;
 		
@@ -126,12 +149,11 @@ void game_control_non_callback() {
 			msger.force_vec.y = g_User_Jump;
 		}
 	}
-	
+	*/
 	// -- Long Jump
 	
 	/* ------------------------------------------------------------------ */
 	
-	g_obj_alter ( __FORCE__, &msger, copy_force,
-				  __CENTER_I, __CENTER_I, __I_ESSENTIAL_FORCE__CONTROL );
+	
 	
 }

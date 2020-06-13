@@ -1,61 +1,46 @@
 #include "graphics.h"
 
 void gl_clear_screen ( ) {
-	glClearColor ( 0.0470f, 0.0117f, 0.0431f, 1.0f );
-	glClear ( GL_COLOR_BUFFER_BIT );
+	glClearColor ( 0.0f, 0.0f, 0.0f, 1.0f );		// 화면을 검정색으로 만들어 줌
+	glClear ( GL_COLOR_BUFFER_BIT );				// 버퍼를 비워줌
 }
 
- void gl_draw_obj(const BUFFER_OBJECT* shader, mat4 MVP ) {
-	GLuint trans_form_location = 0;
+void	gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
+							 	  mat4 MVP,
+							 	  const VEC2* current_sprite_pos ) {
 	GLuint mvp_id;
-
-	/*/
-	GLint texture_location = glGetUniformLocation ( shader->ID, "Texture" );
-
-	glUniform1i ( texture_location, 0 );
-	/*/
-
-	 
-	glActiveTexture ( GL_TEXTURE0 );
-	glBindTexture ( GL_TEXTURE_2D, shader->texture );
+	GLint texture_location = 0;
 	
-	mvp_id = glGetUniformLocation(shader->ID, "MVP");
+	/* 쉐이더의 texturePos에 텍스처를 자를 위치 정보를 등록하기 위해
+	 * texturePos가 쉐이더의 어느 위치에 있는지 저장하여 해당 정보르 넘겨준다.
+	 */
+	if ( current_sprite_pos != NULL ) {	// 사용자가 텍스쳐르 자르고 싶지 않을 경우 설정하지 않음
+		texture_location = glGetUniformLocation ( obj->ID, "texturePos" );
+		glUniform2f( texture_location, current_sprite_pos->x, current_sprite_pos->y);
+	}
+	
+	glActiveTexture ( GL_TEXTURE0 );					// 텍스쳐 유닛을 활성화
+	glBindTexture ( GL_TEXTURE_2D, obj->texture );	// 해당 텍스처를 활성화된 텍스처 유닛에 바인딩
+	
+	/* MVP를 통하여 객체가 화면의 어디에 어떤식으로 표현될지 지정을 시켜준다.
+	 * MVP는 Model, View, Projection 을 순서대로 곱한 값이다.
+	 */
+	mvp_id = glGetUniformLocation ( obj->ID, "MVP" );
 	 
-	glUseProgram ( shader->ID );
+	glUseProgram ( obj->ID );		// 해당 쉐이더를 활성화 시켜준다.
 
-	glUniformMatrix4fv( mvp_id, 1, GL_FALSE, &MVP[0][0] );
-	glBindVertexArray ( shader->VAO );
-	glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
-	//glDrawArrays ( GL_TRIANGLES, 0, 6 );
+	glUniformMatrix4fv( mvp_id, 1, GL_FALSE, &MVP[0][0] );		// 쉐이더의 MVP에 mvp인자 값을 넘겨준다.
+	glBindVertexArray ( obj->VAO );									// VAO를 쉐이더에 바인딩 해준다.
+	glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );	// 객체를 그려줌.
 }
 
-void	gl_draw_sprite_obj ( const BUFFER_OBJECT* shader,
-							 mat4 MVP,
-							 const VEC2* current_sprite_pos ) {
-	GLuint trans_form_location = 0;
-	GLuint mvp_id;
-	
-	GLint texture_location = glGetUniformLocation ( shader->ID, "texturePos" );
-	//glUniform2f( texture_location, current_sprite_pos->x, current_sprite_pos->y);
-	
-	glActiveTexture ( GL_TEXTURE0 );
-	glBindTexture ( GL_TEXTURE_2D, shader->texture );
-	
-	mvp_id = glGetUniformLocation(shader->ID, "MVP");
-	 
-	glUseProgram ( shader->ID );
-
-	glUniformMatrix4fv( mvp_id, 1, GL_FALSE, &MVP[0][0] );
-	glBindVertexArray ( shader->VAO );
-	glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
-}
-
- void gl_rander ( /* OBJ Array */ ) {
-	 
+ void gl_rander (  ) {
+	 // 추후 추가 예정
  }
 
-void gl_shutdown_graphics( BUFFER_OBJECT* x ) {
-	glDeleteBuffers(1, &x->VAO);
-	glDeleteBuffers(1, &x->VBO);
-	glDeleteVertexArrays(1, &x->EBO);
-}
+
+
+
+
+
+

@@ -22,7 +22,16 @@ void copy_ent( void* lhs, const void* rhs ) {
 }
 
 void adapt_each_f_ent ( void* f_in_e, int i, void* pos ) {
-	VEC2 result_f = output_force( f_in_e, glfwGetTime() );
+	VEC2 result_f = V2_ZERO;
+	
+	// ! TODO : on ground -> activate
+	// ! TODO : if this object allow phy -> activate
+	// ! TODO : apply contextual constant
+	if( !(((FORCE*)f_in_e)->identify & __F_NON_FRICTION__) )
+		friction ( f_in_e, &__BASIC_FIRCTION_CONSTANT );
+	// ! TODO : Update gravity
+	
+	result_f = output_force( f_in_e, glfwGetTime() );
 	
 	vec2_add_assn (
 		pos,
@@ -36,6 +45,9 @@ void adapt_f_ent ( ENTITY* ent ) {
 
 VEC2 pass_by_f_ent ( ENTITY* ent) {
 	VEC2 result = V2_ZERO;
+	
+	printf("size of force : %d \n", ent->forces.size);
+	
 	dyn_arr_foreach ( &ent->forces, &result, adapt_each_f_ent );
 
 	return result;
@@ -67,9 +79,12 @@ void draw_ent ( const ENTITY* ent ) {
 }
 
 void set_essential_f_ent ( ENTITY* ent ) {
-	FORCE inserter = (FORCE)FORCE_IDENTITY_INIT;
+	FORCE inserter = { 0 };
+	init_force(&inserter);
 	
 	dyn_arr_resize( &ent->forces, __N_ESSENTAL_FORCE );
+	
+	ent->forces.size = 0;
 	
 	// -- CONTROL FORCES ------------
 	inserter.identify = __F_FOR_CONTROL__;
@@ -79,12 +94,13 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	dyn_arr_insert( &ent->forces, 0, &inserter, copy_force);
 	
 	// -- PHY FORCES ----------------
-	inserter.identify = __F_FOR_CONTROL__;
+	init_force(&inserter);
 	
-	if ( (ent->forces).size == 0 )
-		dyn_arr_push_back( &ent->forces, &inserter, copy_force );
+	// !TODO : MODIFY
+	//transform_to_gravity ( &inserter, &__EARTH_GRAVITY_CONSTANT, &D_V2_DOWN );
 	
 	dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
 	
 	// ------------------------------
 }
+      

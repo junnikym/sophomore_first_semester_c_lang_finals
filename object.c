@@ -51,7 +51,7 @@ VEC2 pass_by_f_obj ( OBJECT* obj ) {
 
 	return result;
 }
-
+   
 void update_each_obj (void* elem, int i, void* pos) {
 	adapt_each_f_obj ( elem, i, pos );
 	draw_ent( elem );
@@ -77,3 +77,4 @@ void detech_center_obj ( OBJECT* obj ) {
 }
 
 // ------------------------------------------------------- //
+ 

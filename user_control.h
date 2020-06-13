@@ -15,7 +15,7 @@
 #define __JUMP_COOL_DOWN_TIME 1
 #define __JUMP_DURATION_TIME 1
 
-static int g_User_Speed = 5;
+static int g_User_Speed = 25;
 static int g_User_Jump = 5;
 static int g_User_Long_Jump = 2;
 

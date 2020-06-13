@@ -59,3 +59,5 @@ void normalize_assn(VEC2* vec, const double* vec_size);
 // -------------------------------------------------------
 
 #endif /* VECTOR2_H */
+   
+

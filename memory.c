@@ -54,6 +54,13 @@ void g_buf_obj_release () {
 // ------------------------------------------------------- //
 // ----- g_object function	------------------------------
 
+int is_g_user_obj_setted () {
+	if(g_user_obj == NULL)
+		return 0;
+	
+	return 1;
+}
+
 // -- push_back elements into g_object
 
 void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
@@ -185,8 +192,6 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
 	// -- Get OBJECT
 	i = va_arg ( ap, int );		// OBJECT[i]
 	
-	printf("index at [%d]", i);
-	
 	if( i == __CENTER_I ) 		// USER_OBJECT
 		target = g_user_obj;
 	else {
@@ -198,8 +203,6 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
 			// -- Get ENTITY
 			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i]
 			
-			printf("[%d]", i);
-			
 			if( i == __CENTER_I )
 				target = ((OBJECT*)target)->center;
 			else
@@ -207,8 +210,6 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
 			
 			// -- Get FORCE
 			i = va_arg ( ap, int );		// OBJECT[i] -> ENTITY[i] -> FORCE[i]
-			printf("[%d] \n", i);
-			
 			target = dyn_arr_get( &(((ENTITY*)target)->forces), i );
 			
 			// -- Alter
@@ -274,7 +275,11 @@ void release_memory() {
 
 	dyn_arr_release( &g_objects );
 	
+	g_user_obj = NULL;
+	g_user_obj_i = -1;
+	
 	g_buf_obj_release();
 }
 
 // ------------------------------------------------------- //
+        

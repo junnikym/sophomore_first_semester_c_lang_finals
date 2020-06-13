@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <GL/glew.h>
-
-#include <GLFW/glfw3.h>
-
+#include "texture.h"
 
 GLuint gl_load_BMP(const char * imagepath){
 
@@ -18,122 +11,107 @@ GLuint gl_load_BMP(const char * imagepath){
 	unsigned int width, height;
 	// Actual RGB data
 	unsigned char * data;
-
-	// Open the file
-	FILE * file = fopen(imagepath,"rb");
-	if (!file)							    {printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath); getchar(); return 0;}
+	
+	GLuint textureID = 0;
+	
+	FILE * file = NULL;
+	
+	file = fopen(imagepath,"rb");		// 이미지 파일을 바이러니 읽기 전용으로 읽어들임
+	if (!file) {	// 읽지 못했을 시
+		printf("%s could not be opened. Are you in the right directory? \n", imagepath);
+		getchar();
+		return 0;
+	}
 
 	// Read the header, i.e. the 54 first bytes
 
-	// If less than 54 bytes are read, problem
-	if ( fread(header, 1, 54, file)!=54 ){ 
+	// 비트맵 파일은 최소 54byte 이상이여야 됨
+	if ( fread(header, 1, 54, file)!=54 ){
 		printf("Not a correct BMP file : read header\n");
 		return 0;
 	}
-	// A BMP files always begins with "BM"
+	// 비트맵은 항상 "BM" 으로 시작됨
 	if ( header[0]!='B' || header[1]!='M' ) {
 		printf("Not a correct BMP file : not begins with \"BM\"\n");
 		return 0;
 	}
-	
+	 
 	// Make sure this is a 24bpp file
-	//if ( *(int*)&(header[0x1E])!=0  )         {printf("Not a correct BMP file : not 24bpp (1)\n");    return 0;}
-	//if ( *(int*)&(header[0x1C])!=24 )         {printf("Not a correct BMP file : not 24bpp (2)\n");    return 0;}
-
-	// Read the information about the image
+	/*
+	if ( *(int*)&(header[0x1E])!=0  ) {
+		printf("Not a correct BMP file : not 24bpp (1)\n");
+	 	return 0;
+	}
+	if ( *(int*)&(header[0x1C])!=24 ) {
+		printf("Not a correct BMP file : not 24bpp (2)\n");
+	 	return 0;
+	}
+	*/
+	
+	// 이미지의 정보를 읽어들임
 	dataPos    = *(int*)&(header[0x0A]);
 	imageSize  = *(int*)&(header[0x22]);
 	width      = *(int*)&(header[0x12]);
 	height     = *(int*)&(header[0x16]);
+  
+	// 몇몇 비트맵 파일의 경우 이미지 정보가 없을 수도 있다. 따라서 일부 정보를 토대로 다음과 같이 이미지 정보를 완성해 준다.
+	if (imageSize==0)    imageSize=width*height*3; // 마지막 3은 R,G,B 3가지 요소를 뜻함.
+	if (dataPos==0)      dataPos=54; 				// 비트맵 정보의 크기는 총 54byte
 
-	printf("width : %d, height : %d \n", width, height);
-	
-	// Some BMP files are misformatted, guess missing information
-	if (imageSize==0)    imageSize=width*height*3; // 3 : one byte for each Red, Green and Blue component
-	if (dataPos==0)      dataPos=54; // The BMP header is done that way
-
-	// Create a buffer
+	// 데이터를 넣어줄 메모리를 할당해준다.
 	data = (unsigned char*)malloc(imageSize);
 
-	// Read the actual data from the file into the buffer
+	// 이미지로부터 데이터를 읽어들인다.
 	fread(data,1,imageSize,file);
 
-	// Everything is in memory now, the file wan be closed
+	// 데이터를 다 불러 들였으니 파일은 닫아줌.
 	fclose (file);
 
-	// Create one OpenGL texture
-	GLuint textureID;
+	// OpenGL의 텍스쳐 객체를 하나 만들어 줌.
 	glGenTextures(1, &textureID);
 	
-	// "Bind" the newly created texture : all future texture functions will modify this texture
+	// 방금 새로 생성한 텍스쳐를 프로그램으로 바인드해주어 프로그램에서 사용 할 수 있도록 만듦
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
-	// Give the image to OpenGL
+	// 이미지 데이터를 OpenGL에게 넘겨준다.
 	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
 
-	// OpenGL has now copied the data. Free our own version
+	// 할당한 메모리는 해제 시켜준다.
 	free ( data );
 
-	// Poor filtering, or ...
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-
-	// ... nice trilinear filtering.
+	// trilinear filtering.
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	// Return the ID of the texture we just created
+	// 생성된 텍스쳐 객체는 함수 밖으로 반환된다.
 	return textureID;
 }
-
-// Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library, 
-// or do it yourself (just like loadBMP_custom and loadDDS)
-//GLuint loadTGA_glfw(const char * imagepath){
-//
-//	// Create one OpenGL texture
-//	GLuint textureID;
-//	glGenTextures(1, &textureID);
-//
-//	// "Bind" the newly created texture : all future texture functions will modify this texture
-//	glBindTexture(GL_TEXTURE_2D, textureID);
-//
-//	// Read the file, call glTexImage2D with the right parameters
-//	glfwLoadTexture2D(imagepath, 0);
-//
-//	// Nice trilinear filtering.
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
-//	glGenerateMipmap(GL_TEXTURE_2D);
-//
-//	// Return the ID of the texture we just created
-//	return textureID;
-//}
-
-
-
-#define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
-#define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
-#define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
 GLuint gl_load_DDS(const char * imagepath){
 
 	unsigned char header[124];
+	unsigned int components  = 0;
 
-	FILE *fp; 
- 
-	/* try to open the file */ 
-	fp = fopen(imagepath, "rb"); 
+	unsigned char * buffer = NULL;
+	unsigned int bufsize = 0;
+	
+	GLuint textureID = 0;
+	
+	unsigned int blockSize = 0;
+	unsigned int offset = 0;
+	
+	FILE *fp = NULL;
+	fp = fopen(imagepath, "rb"); 		// 비트맵과 동일하게 파일을 읽어들임
 	if (fp == NULL){
-		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath); getchar(); 
+		printf("%s could not be opened. Are you in the right directory? \n", imagepath);
+		getchar();
 		return 0;
 	}
    
-	/* verify the type of file */ 
+	// 파일의 타입을 확인
 	char filecode[4]; 
 	fread(filecode, 1, 4, fp); 
 	if (strncmp(filecode, "DDS ", 4) != 0) { 
@@ -141,26 +119,22 @@ GLuint gl_load_DDS(const char * imagepath){
 		return 0; 
 	}
 	
-	/* get the surface desc */ 
+	// DDS파일의 표면 정보를 알아옴
 	fread(&header, 124, 1, fp); 
 
-	unsigned int height      = *(unsigned int*)&(header[8 ]);
-	unsigned int width	     = *(unsigned int*)&(header[12]);
-	unsigned int linearSize	 = *(unsigned int*)&(header[16]);
-	unsigned int mipMapCount = *(unsigned int*)&(header[24]);
-	unsigned int fourCC      = *(unsigned int*)&(header[80]);
-
- 
-	unsigned char * buffer;
-	unsigned int bufsize;
-	/* how big is it going to be including all mipmaps? */ 
+	unsigned int height      	= *(unsigned int*)&(header[8 ]);
+	unsigned int width	    = *(unsigned int*)&(header[12]);
+	unsigned int linearSize	= *(unsigned int*)&(header[16]);
+	unsigned int mipMapCount 	= *(unsigned int*)&(header[24]);
+	unsigned int fourCC      	= *(unsigned int*)&(header[80]);
+	
+	// 밉맵을 포함한 사이즈를 얻어와 데이터를 저장할 버퍼에 메모리를 할당
 	bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize; 
 	buffer = (unsigned char*)malloc(bufsize * sizeof(unsigned char)); 
-	fread(buffer, 1, bufsize, fp); 
-	/* close the file pointer */ 
+	fread(buffer, 1, bufsize, fp);
 	fclose(fp);
 
-	unsigned int components  = (fourCC == FOURCC_DXT1) ? 3 : 4; 
+	components = (fourCC == FOURCC_DXT1) ? 3 : 4;		// 압축방식을 얻어와 지정해줌
 	unsigned int format;
 	switch(fourCC) 
 	{ 
@@ -174,24 +148,22 @@ GLuint gl_load_DDS(const char * imagepath){
 		format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; 
 		break; 
 	default: 
-		free(buffer); 
+		free(buffer);
 		return 0; 
 	}
 
-	// Create one OpenGL texture
-	GLuint textureID;
+	// OpenGL의 텍스쳐 객체를 생성하여 OpenGL에게 넘겨줌
 	glGenTextures(1, &textureID);
 
-	// "Bind" the newly created texture : all future texture functions will modify this texture
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);	
 	
-	unsigned int blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16; 
-	unsigned int offset = 0;
+	
+	blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
 
-	/* load the mipmaps */ 
+	// 밉맵을 불러옴.
 	for (unsigned int level = 0; level < mipMapCount && (width || height); ++level) 
-	{ 
+	{
 		unsigned int size = ((width+3)/4)*((height+3)/4)*blockSize; 
 		glCompressedTexImage2D(GL_TEXTURE_2D, level, format, width, height,  
 			0, size, buffer + offset); 

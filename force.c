@@ -31,8 +31,26 @@ void add_force (void* lhs, const void* rhs) {
 	}
 }
 
+void set_accel_in_f (void* f, const void* accel) {
+	if ( f == NULL || accel == NULL )
+		return;
+	
+	else {
+		((FORCE*)f)->accel_vec = *(VEC2*)accel;
+	}
+}
+
+void set_identify_in_f (void* f, const void* id) {
+	if ( f == NULL || id == NULL )
+		return;
+	
+	else {
+		((FORCE*)f)->identify = *(int*)id;
+	}
+}
+
 void init_force( FORCE* f ) {
-	*f = (FORCE)FORCE_IDENTITY_INIT;
+	*f = (FORCE)FORCE_INIT;
 }
 
 void set_vec_force( FORCE* f, double x, double y ) {
@@ -53,11 +71,9 @@ VEC2 output_force ( FORCE* f, double t ) {
 		f->start_t = t;
 	else {
 		
-		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ) {
+		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ){
 			result = vec2_mul ( &f->accel_vec, (t - f->start_t) );
 			vec2_add_assn(&f->force_vec, &result);
-
-			printf("t - f->force_vec.y : %f \n", t - f->force_vec.y);
 		}
 
 		result = vec2_mul ( &f->force_vec, (t - f->start_t) );
@@ -87,3 +103,8 @@ FORCE* search_id_force( DYN_ARR* arr, int id ) {
 FORCE generate_force( VEC2 f, int id) {
 	return (FORCE){ f, id, 0 };
 }
+
+void toggle_force ( FORCE* target, int flag ) {
+	target->identify ^= flag;
+}
+ 
