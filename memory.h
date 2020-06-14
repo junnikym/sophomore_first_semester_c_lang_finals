@@ -68,11 +68,13 @@ void	update_g_obj			( );
 
 void*	g_obj_alter				( _OBJ_ELEM_ type, void* _rhs,
 								 void (*alt_func)(void* lhs, const void* rhs), ... );
+// -- Getter
 
-void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
+void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );			// ... => index of thing
+VEC2	g_obj_get_position		( int index );
+double 	g_obj_get_angle			( int index );
 
 void 	g_obj_foreach			( void* msger, void (*func)(void* elem, int i, void* arg) );
-VEC2	g_obj_get_position		( int index );
 
 void 	g_obj_init				( );
 void 	g_obj_release 			( );

@@ -261,12 +261,18 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
 	return NULL;
 }
 
-void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
-	dyn_arr_foreach(&g_objects, msger, func);
+VEC2	g_obj_get_position		( int index );
+
+double g_obj_get_angle (int index) {
+	if(index == __CENTER_I) {
+		return g_user_obj->center->angle;
+	}
+	
+	return ((OBJECT*)g_objects.items)[index].center->angle;
 }
 
-VEC2 g_obj_get_position(int index) {
-	return ((OBJECT*)g_objects.items)[index].center->position;
+void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
+	dyn_arr_foreach(&g_objects, msger, func);
 }
 
 void g_obj_init	() {

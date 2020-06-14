@@ -15,11 +15,16 @@
 #define __JUMP_COOL_DOWN_TIME 1
 #define __JUMP_DURATION_TIME 1
 
-static int g_User_Speed = 300;
+static double g_User_Speed = 300.0;
+
+static double g_User_Rotate_Speed = 0.01;
+static double g_User_thrust_Speed = 50;
+
 static int g_User_Jump = 5;
 static int g_User_Long_Jump = 2;
 
-static double direction_buf = 0.0;
+static int direction_buf = 0;
+static int space_thrust_buf = 0;
 
 static int long_jump_key_buf = 0;
 static double long_jump_time = __NOT_ACT_TIME_CODE;
@@ -31,6 +36,10 @@ static double jump_time_current = __NOT_ACT_TIME_CODE;
 
 static int __LEFT_KEY = GLFW_KEY_A;			// LEFT?			'A'
 static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT			'D'
+
+static int __FOWARD_KEY = GLFW_KEY_W;
+static int __BACK_KEY = GLFW_KEY_S;
+
 static int __JUMP_KEY = GLFW_KEY_SPACE;		// JUMP				'SPACE'
 static int __LONG_JUMP_KEY = GLFW_KEY_W;	// LONG_JUMP		'W'
 static int __TAB_KEY = GLFW_KEY_TAB;		// INVENTORY		'TAB'

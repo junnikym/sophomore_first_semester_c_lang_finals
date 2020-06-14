@@ -34,17 +34,17 @@ void release_obj ( OBJECT* obj ) {
 void adapt_each_f_obj (void* elem, int i, void* msger) {
 	MOMENTUM ent_momentum = pass_by_f_ent ( elem );
 	
-	if(ent_momentum.angle == 0)
-		*(((MOMENTUM_PTR*)msger)->angle) += ent_momentum.angle;
-	else
-		vec2_add_assn (
-			((MOMENTUM_PTR*)msger)->vector,
-			&(ent_momentum.vector)
-		);
+	*(((MOMENTUM_PTR*)msger)->angle) += ent_momentum.angle;
+
+	vec2_add_assn (
+		((MOMENTUM_PTR*)msger)->vector,
+		&(ent_momentum.vector)
+	);
 }
    
 void update_each_obj (void* elem, int i, void* msger) {
 	adapt_each_f_obj ( elem, i, msger );
+	
 	draw_ent( elem );
 }
 

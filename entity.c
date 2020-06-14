@@ -57,8 +57,6 @@ MOMENTUM pass_by_f_ent ( ENTITY* ent) {
 	MOMENTUM_PTR msger = { &result.vector, &result.angle};
 	
 	dyn_arr_foreach ( &ent->forces, &msger, adapt_each_f_ent );
-	
-	printf("activate rotated / in pass_by_f_ent : %lf \n", *(msger.angle));
 
 	return result;
 }
@@ -80,10 +78,11 @@ void draw_ent ( const ENTITY* ent ) {
 		},
 		model
 	);
-	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});
 	
 	gl_update_cam();
 	gl_get_mvp(model, mvp);
+	
+	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});
 	
 	// ! TODO : for test code
 	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos );
@@ -96,23 +95,37 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	if ( ent->forces.capacity < __N_ESSENTAL_FORCE )
 		dyn_arr_resize( &ent->forces, __N_ESSENTAL_FORCE );
 	
-	ent->forces.size = 0;
+	// !TODO : modify
+	if ( (ent->forces).size < __N_ESSENTAL_FORCE )
+		ent->forces.size = 1;
+		//ent->forces.size = __N_ESSENTAL_FORCE;
 	
 	// -- CONTROL FORCES ------------
-	inserter.identify = __F_FOR_CONTROL__;
-	if ( (ent->forces).size == -1 )
-		dyn_arr_push_back( &ent->forces, &inserter, copy_force );
 	
-	dyn_arr_insert( &ent->forces, 0, &inserter, copy_force);
+	// normal control force
+	inserter.identify = __F_FOR_CONTROL__;
+	
+	dyn_arr_insert( &ent->forces,
+				    __I_ESSENTIAL_FORCE__CONTROL + 0,
+				    &inserter,
+				    copy_force);
+	
+	// rotate control force
+	init_force(&inserter);
+	inserter.identify = __F_ROTATE__ | __F_FOR_CONTROL__;
+	
+	dyn_arr_insert( &ent->forces,
+					__I_ESSENTIAL_FORCE__CONTROL + 1,
+					&inserter,
+					copy_force);
 	
 	// -- PHY FORCES ----------------
-	init_force(&inserter);
+	//init_force(&inserter);
 	
 	// !TODO : MODIFY
 	//transform_to_gravity ( &inserter, &__EARTH_GRAVITY_CONSTANT, &D_V2_DOWN );
 	
-	dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
-	
+	//dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
 	// ------------------------------
 }
       

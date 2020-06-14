@@ -63,7 +63,7 @@ int main() {
 // - Set g_object
 	
 	init_force ( &f_inserter );
-	f_inserter.force_vec = (VEC2){5, 5};
+	f_inserter.force_vec = (VEC2){1, 1};
 	f_inserter.identify = __F_ROTATE__ | __F_NON_FRICTION__;
 	
 /*----- OBJECT 0 	------------------------------------------------------------*/
@@ -76,8 +76,6 @@ int main() {
 /* |*/	g_obj_set_center_ent ( 0, 0 );
 /* |*/	g_obj_set_essential_f( 0, -1 );
 /* |*/	g_obj_set_obj_buf("charactor", 0, -1);	// set texture
-/* |*/  g_obj_push_thing ( __FORCE__, &f_inserter, 0, -1 );
-		init_force ( &f_inserter );
 /* |*/
 /*------------------------------------------------------------------------------*/
 /*----- OBJECT 1 	------------------------------------------------------------*/

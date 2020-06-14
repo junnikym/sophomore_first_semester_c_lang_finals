@@ -7,7 +7,7 @@
 
 #include "opengl/buffer_obj.h"
 
-#define __N_ESSENTIAL_FORCE__CONTROL 1
+#define __N_ESSENTIAL_FORCE__CONTROL 2
 #define __N_ESSENTIAL_FORCE__PHY 1
 
 #define __I_ESSENTIAL_FORCE__CONTROL 0

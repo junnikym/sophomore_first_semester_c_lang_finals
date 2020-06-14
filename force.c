@@ -71,26 +71,42 @@ MOMENTUM output_force ( FORCE* f, double t ) {
 	if( f->start_t == 0.0 )
 		f->start_t = t;
 	else {
-		// -- rotational momentum -----	// 회전 운동
-		
-		if( f->identify & (__F_ROTATE__ << __FORCE_ENUM_SHIFTER) ){
-			
-			vec_size = sqrt( SQUARE(f->force_vec.x) + SQUARE(f->force_vec.y) );
-			vec = normalize( f->force_vec, &vec_size );
-			
-			result.angle = acos(vec.x) * vec_size;
-			
-			printf("activate rotated / in output_force : %lf \n", result.angle);
-			
-			return result;
-		}
-		
-		// -- normal force momentum --- // 일반 힘 처리
 		
 		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ){
 			result.vector = vec2_mul ( &f->accel_vec, (t - f->start_t) );
 			vec2_add_assn( &f->force_vec, &(result.vector) );
 		}
+		
+		// -- rotational momentum -----	// 회전 운동
+		
+		if( f->identify & (__F_ROTATE__ << __FORCE_ENUM_SHIFTER) ){
+			
+			vec_size = sqrt( SQUARE(f->force_vec.x) + SQUARE(f->force_vec.y) );
+			
+			if( vec_size == 0 ) {
+				result.angle = 0;
+			}
+			else {
+				if (f->force_vec.x == 0) {
+					result.angle = f->force_vec.y;
+				}
+				else if (f->force_vec.y == 0) {
+					result.angle = f->force_vec.x;
+				}
+				else {
+					vec = normalize( f->force_vec, &vec_size );
+					
+					result.angle = acos(vec.x) * vec_size;
+				}
+			}
+			
+			//printf("activate rotated / in output_force : %lf (speed : %lf)\n", result.angle, acos(vec.x) * vec_size);
+			//printf("so vec ? : %lf, %lf // size : %lf \n", f->force_vec.x, f->force_vec.y, vec_size);
+			
+			return result;
+		}
+		
+		// -- normal force momentum --- // 일반 힘 처리
 
 		result.vector = vec2_mul ( &f->force_vec, (t - f->start_t) );
 		f->start_t = t;

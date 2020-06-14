@@ -42,7 +42,7 @@ void* dyn_arr_push_back ( DYN_ARR* a, const void* elem,				// 요소를 맨 뒤�
 }
 
 void* dyn_arr_insert( DYN_ARR* a, int index, void* elem,			// 배열 중간의 값을 변경해주는 함수
-					 	  void (*copy__)(void*, const void*) ) {
+					  void (*copy__)(void*, const void*) ) {
 	void* target = ((char*)(a->items) + (a->type_size * index));	// 변경할 자리의 주소값을 계산
 	
 	if(index >= 0 && index <= a->size) {	// 만약 범위 안이라면 값을 복사
