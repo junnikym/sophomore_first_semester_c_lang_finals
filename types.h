@@ -14,11 +14,10 @@
 const static double __EARTH_GRAVITY_CONSTANT = 4.0;
 
 // 마찰 상수
-const static double __BASIC_FIRCTION_CONSTANT = 0.98;
+const static double __BASIC_FIRCTION_CONSTANT = 0.94;
 
 // OBJECT 구조체에 요소를 추가할때 어떤 요소를 추가할지 구분하기
 // 위해 만든 열거형
-
 typedef enum __OBJECT_ELEMENT__ {
 	__FORCE__,
 	__ENTITY__,

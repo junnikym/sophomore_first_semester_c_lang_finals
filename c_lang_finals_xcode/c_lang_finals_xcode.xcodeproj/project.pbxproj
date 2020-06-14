@@ -27,6 +27,7 @@
 		275FFBDF246324D900DB3E96 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD8246324D900DB3E96 /* shader.c */; };
 		275FFBE0246324D900DB3E96 /* graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 275FFBD9246324D900DB3E96 /* graphics.c */; };
 		2798D56C248B717E002207AC /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 2798D56B248B717E002207AC /* user_control.c */; };
+		27B643272495408D00BE85EA /* world.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B643262495408D00BE85EA /* world.c */; };
 		27B822D02483F0D90070FC4D /* vector2.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B822CF2483F0D90070FC4D /* vector2.c */; };
 		27DAC49524790DBF002A8F62 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49224790DBF002A8F62 /* utility.c */; };
 		27DAC49824792809002A8F62 /* identify.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49724792808002A8F62 /* identify.c */; };
@@ -86,6 +87,8 @@
 		275FFBDB246324D900DB3E96 /* callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callback.h; path = ../../opengl/callback.h; sourceTree = "<group>"; };
 		2798D56A248B717E002207AC /* user_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = user_control.h; path = ../../user_control.h; sourceTree = "<group>"; };
 		2798D56B248B717E002207AC /* user_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = user_control.c; path = ../../user_control.c; sourceTree = "<group>"; };
+		27B643252495408D00BE85EA /* world.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = world.h; path = ../../world.h; sourceTree = "<group>"; };
+		27B643262495408D00BE85EA /* world.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = world.c; path = ../../world.c; sourceTree = "<group>"; };
 		27B822CE2483F0D90070FC4D /* vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2.h; path = ../../vector2.h; sourceTree = "<group>"; };
 		27B822CF2483F0D90070FC4D /* vector2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector2.c; path = ../../vector2.c; sourceTree = "<group>"; };
 		27B822D12483F4C90070FC4D /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../types.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				27DAC49124790DBF002A8F62 /* utility.h */,
 				27B822CF2483F0D90070FC4D /* vector2.c */,
 				27B822CE2483F0D90070FC4D /* vector2.h */,
+				27B643252495408D00BE85EA /* world.h */,
+				27B643262495408D00BE85EA /* world.c */,
 			);
 			path = c_lang_finals_xcode;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				275FFBA72462E4EC00DB3E96 /* memory.c in Sources */,
 				275FFBAD2462E4EC00DB3E96 /* object.c in Sources */,
 				275FFBDC246324D900DB3E96 /* callback.c in Sources */,
+				27B643272495408D00BE85EA /* world.c in Sources */,
 				270243782486B21C00C69F4C /* tree.c in Sources */,
 				27DAC49824792809002A8F62 /* identify.c in Sources */,
 				27DAC49524790DBF002A8F62 /* utility.c in Sources */,

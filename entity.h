@@ -20,7 +20,7 @@ static const int __N_ESSENTAL_FORCE =
 
 typedef struct _ENTITY {
     VEC2 position;
-    VEC2 direction_vec;
+    double angle;
     DYN_ARR forces;   // VEC2
     // !TODO : Create attribute; (mass, meterial, ... )
 	BUFFER_OBJECT* graphics_buf;
@@ -36,7 +36,7 @@ void adapt_each_f_ent ( void* f_in_e, int i, void* pos );
 void adapt_f_ent    ( ENTITY* ent );
 
 // ! TODO : change function name -> pass_by_... -> pass_...
-VEC2 pass_by_f_ent  ( ENTITY* ent );
+MOMENTUM pass_by_f_ent  ( ENTITY* ent );
 
 void draw_ent		( const ENTITY* ent );
 

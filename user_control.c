@@ -19,43 +19,86 @@ void game_control(const int* key, const int* key_act) {
 	 * ---------------------------------------------------------------------- */
 	if (*key_act == __KEY_PRESS) {
 		
-		/* ----- Direction Key	--------------------------------------------- */
-		
-		if (*key == __LEFT_KEY) {
-			// walk left
-			left_key_buf = 1;
+		/* ------------------------- *
+		 *     On the ground 		 *
+		 * ------------------------- */
+		if( 1 /* is on ground */) {
+			/* ----- Direction Key	--------------------------------------------- */
 			
-			direction_buf = -g_User_Speed;
-		}
+			if (*key == __LEFT_KEY) {
+				// walk left
+				left_key_buf = 1;
+				
+				direction_buf = -g_User_Speed;
+			}
 
-		if (*key == __RIGHT_KEY) {
-			// walk right
-			right_key_buf = 1;
-			
-			direction_buf = g_User_Speed;
-			
-		}
-		
-		identify |= __F_NON_FRICTION__;
-		
-		/* ------------------------------------------------------------------ */
-		
-		/* ----- Jump 		------------------------------------------------- */
-		
-		if (*key == __LONG_JUMP_KEY) {
-			if( jump_time_start != 0 )
-				long_jump_key_buf = 2;	// fully clked
-		}
-		
-		if (*key == __JUMP_KEY) {
-			jump_time_start = glfwGetTime();
-			
-			if( long_jump_key_buf != 2) {
+			if (*key == __RIGHT_KEY) {
+				// walk right
+				right_key_buf = 1;
+				
+				direction_buf = g_User_Speed;
 				
 			}
-		}
 			
-		/* ------------------------------------------------------------------ */
+			identify |= __F_NON_FRICTION__;
+			
+			/* ------------------------------------------------------------------ */
+			
+			/* ----- Jump 		------------------------------------------------- */
+			
+			if (*key == __LONG_JUMP_KEY) {
+				if( jump_time_start != 0 )
+					long_jump_key_buf = 2;	// fully clked
+			}
+			
+			if (*key == __JUMP_KEY) {
+				jump_time_start = glfwGetTime();
+				
+				if( long_jump_key_buf != 2) {
+					
+				}
+			}
+			
+			/* ------------------------------------------------------------------ */
+		}
+		
+		/* ------------------------- *
+		 *     Not on the ground 	 *
+		 * ------------------------- */
+		
+		else {
+			/* ----- Direction Key	--------------------------------------------- */
+			
+			if (*key == __LEFT_KEY) {
+				// turn left
+			}
+
+			if (*key == __RIGHT_KEY) {
+				// turn right
+				
+			}
+			
+			identify |= __F_NON_FRICTION__;
+			
+			/* ------------------------------------------------------------------ */
+			
+			/* ----- Jump 		------------------------------------------------- */
+			
+			if (*key == __LONG_JUMP_KEY) {
+				if( jump_time_start != 0 )
+					long_jump_key_buf = 2;	// fully clked
+			}
+			
+			if (*key == __JUMP_KEY) {
+				jump_time_start = glfwGetTime();
+				
+				if( long_jump_key_buf != 2) {
+					
+				}
+			}
+			
+			/* ------------------------------------------------------------------ */
+		}
 	}
 	
 	/* ---------------------------------------------------------------------- *
@@ -110,6 +153,10 @@ void game_control(const int* key, const int* key_act) {
 	if ( direction_buf != 0) {
 		identify |= __F_NON_FRICTION__;
 		msger.x = direction_buf;
+	}
+	
+	if (jump_time_start != __NOT_ACT_TIME_CODE) {
+		msger.y = g_User_Jump;
 	}
 	
 	g_obj_alter ( __FORCE__, &msger, set_accel_in_f,

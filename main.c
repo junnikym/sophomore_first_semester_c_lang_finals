@@ -13,11 +13,9 @@ int main() {
 	int screen_h = 800;
 	
 	OBJECT* obj_converter = 0;
-	FORCE f_inserter = generate_force( (VEC2){ 0,  0 }, __F_FOR_CONTROL__ );
 	ENTITY ent_inserter;
 
-	FORCE test_f_inserter = generate_force ( (VEC2) { 0, 0 }, __F_ACCELERATE__ );
-	test_f_inserter.accel_vec = (VEC2) { 0, 1 };
+	FORCE f_inserter = { 0 };
 	
 	GLfloat buf_vertice[32] = { 0 };
 	
@@ -27,8 +25,6 @@ int main() {
 		g_SQUARE_INDICES,
 		sizeof(g_SQUARE_INDICES)
 	};
-	
-	init_ent ( &ent_inserter );
 	
 	 memcpy(buf_vertice, g_SQUARE_VERTICES, sizeof(buf_vertice));
 
@@ -50,7 +46,7 @@ int main() {
 	
 	/*----- USER CHARACTOR	--------------------------------------------------*/
 	
-	set_square_vertices( buf_vertice, (VEC2){5.0f, 5.0f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
+	set_square_vertices( buf_vertice, (VEC2){2.5f, 2.5f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
 	
 	g_buf_obj_insert ( "charactor",
 					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite.dds" ),
@@ -66,23 +62,33 @@ int main() {
 	
 // - Set g_object
 	
+	init_force ( &f_inserter );
+	f_inserter.force_vec = (VEC2){5, 5};
+	f_inserter.identify = __F_ROTATE__ | __F_NON_FRICTION__;
+	
 /*----- OBJECT 0 	------------------------------------------------------------*/
 /* |*/	g_obj_push_thing ( __OBJECT__, NULL );
+/* |*/  g_obj_set_collision_box ( 0, (VEC2){2.5f, 2.5f} );
+/* |*/	g_obj_set_user_obj(0);
+/* |*/
 /* |		-- [0] : ENTITY 0		*/
 /* |*/	g_obj_push_thing ( __ENTITY__, NULL, 0 );
 /* |*/	g_obj_set_center_ent ( 0, 0 );
 /* |*/	g_obj_set_essential_f( 0, -1 );
 /* |*/	g_obj_set_obj_buf("charactor", 0, -1);	// set texture
+/* |*/  g_obj_push_thing ( __FORCE__, &f_inserter, 0, -1 );
+		init_force ( &f_inserter );
 /* |*/
-/* |*/	g_obj_set_user_obj(0);
 /*------------------------------------------------------------------------------*/
 /*----- OBJECT 1 	------------------------------------------------------------*/
-/* |*/	//g_obj_push_thing ( __OBJECT__, NULL );
+/* |*/	g_obj_push_thing ( __OBJECT__, NULL );
+/* |*/  g_obj_set_collision_box ( 1, (VEC2){5.0f, 5.0f} );
+/* |*/
 /* |		-- [1] : ENTITY 0		*/
-/* |*/	//g_obj_push_thing ( __ENTITY__, NULL, 1 );
-/* |*/	//g_obj_set_center_ent ( 1, 0 );
-/* |*/	//g_obj_set_essential_f( 1, -1 );
-/* |*/	//g_obj_set_obj_buf("wall", 1, -1);		// set texture
+/* |*/	g_obj_push_thing ( __ENTITY__, NULL, 1 );
+/* |*/	g_obj_set_center_ent ( 1, 0 );
+/* |*/	g_obj_set_essential_f( 1, -1 );
+/* |*/	g_obj_set_obj_buf("wall", 1, -1);		// set texture
 /* |*/
 /*------------------------------------------------------------------------------*/
 

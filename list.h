@@ -11,15 +11,18 @@ struct _LIST {
 	LIST* next;		// 다음 순서의 리스트
 };
 
-LIST* 	create_list 		( void* elem );				// list를 하나 생성해주는 함수
-void 	init_list			( LIST* p_list );			// list를 초기화 해주는 함수
-LIST* 	push_front_list 	( LIST* p_list, LIST* p_new_list );	// list의 앞에 요소를 추가
-LIST* 	push_back_list 	( LIST* p_list, LIST* p_new_list );	// list의 뒤에 요소를 추가
-LIST*	get_list			( LIST* p_list, int i );		// i번째 리스트를 반환
-int		get_size_list	( LIST* p_list );				// list의 크기를 반환
-LIST* 	insert_list		( LIST* p_list, LIST* p_new_list, int i);		// 리스트의 중간에 요소를 추가
-LIST*	delete_list		( LIST* p_list, int i );		// 중간 요소를 삭제
-void	release_list		( LIST* p_list, void (*release_elem)(void* elem) );	// 리스트 전체의 메모리 해제
+LIST* 	list_create 		( void* elem );										// list를 하나 생성해주는 함수
+void 	list_init			( LIST* p_list );									// list를 초기화 해주는 함수
+
+LIST* 	list_push_front 	( LIST* p_list, LIST* p_new_list );					// list의 앞에 요소를 추가
+LIST* 	list_push_back 		( LIST* p_list, LIST* p_new_list );					// list의 뒤에 요소를 추가
+LIST* 	list_insert			( LIST* p_list, LIST* p_new_list, int i);			// 리스트의 중간에 요소를 추가
+
+LIST*	list_get			( LIST* p_list, int i );							// i번째 리스트를 반환
+int		list_get_size		( LIST* p_list );									// list의 크기를 반환
+
+LIST*	list_delete			( LIST* p_list, int i );							// 중간 요소를 삭제
+void	list_release		( LIST* p_list, void (*release_elem)(void* elem) );	// 리스트 전체의 메모리 해제
 
 // 리스트 처음부터 끝까지 각 요소들을 인자로 들어온 함수 포인터에 전달하여 함수를 실행시켜주는 함수
 void foreach_list ( LIST* p_list, void* msger, void (*func)(void* elem, int i, void* arg) );

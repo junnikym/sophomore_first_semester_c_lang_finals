@@ -1,6 +1,6 @@
 #include "list.h"
 
-LIST* create_list(void* elem) {
+LIST* list_create(void* elem) {
 	LIST* new_list;
 
 	new_list = (LIST*)malloc(sizeof(LIST));		// 리스트만큼 메모리를 할당하여
@@ -10,13 +10,13 @@ LIST* create_list(void* elem) {
 	return new_list;			// 생성된 리스트를 넘겨줌
 }
 
-LIST* push_front_list ( LIST* p_list, LIST* p_new_list ) {	// 리스트의 앞에 새로운 리스트를 추가
+LIST* list_push_front ( LIST* p_list, LIST* p_new_list ) {	// 리스트의 앞에 새로운 리스트를 추가
 	p_new_list->next = p_list;		// 새로 들어온 리스트가 가장 앞이므로 새 리스트의 next가
 									// 현재 가장 앞 리스트가 되어야 한다.
 	return p_new_list;		// p_new_list가 기준이 되므로 새 리스트를 리턴해 준다.
 }
 
-LIST* push_back_list ( LIST* p_list, LIST* p_new_list ) {		// 리스트의 맨 뒤에 새 리스트를 추가
+LIST* list_push_back ( LIST* p_list, LIST* p_new_list ) {		// 리스트의 맨 뒤에 새 리스트를 추가
 	LIST* p;
 
 	if( p_list == NULL ) 		// 만약 p_list가 없을 경우 새 리스트를 반환
@@ -28,7 +28,24 @@ LIST* push_back_list ( LIST* p_list, LIST* p_new_list ) {		// 리스트의 맨 �
 	return p_list;
 }
 
-LIST* get_list ( LIST* p_list, int i ) {	// i번째 리스트를 가져오는 함수
+// 리스트 중간에 새로운 리스트를 추가
+LIST* list_insert ( LIST* p_list, LIST* p_new_list, int i ) {
+	LIST* p = NULL;
+	LIST* p_next = NULL;
+	           
+	if( i <= 0)		// i가 0보다 클 경우만 추가가 가능
+		return NULL;
+	
+	p = list_get ( p_list, i-1 );		// i번째 바로 앞 list를 가져옴
+	p_next = p->next;					// 받아온 리스트의 바로 뒤에 새로운 리스트를 넣고
+	
+	p->next = p_new_list;				// 원래 받아온 리스트의 뒤에 있던 리스트는
+	p_new_list = p_next;				// 새로 추가된 리스트의 다음 리스트로 설정해준다.
+	
+	return p_list;
+}
+
+LIST* list_get ( LIST* p_list, int i ) {	// i번째 리스트를 가져오는 함수
 	int compare_i = 0;		// 다음 변수를 통하여 i번째인지 알아옴
 	LIST* result = p_list;
 	
@@ -39,7 +56,7 @@ LIST* get_list ( LIST* p_list, int i ) {	// i번째 리스트를 가져오는 �
 	return result;		// 찾아낸 값을 반환
 }
 
-int	 get_size_list ( LIST* p_list ) {		// 리스트의 총 사이즈를 알려주는 함수
+int	 list_get_size ( LIST* p_list ) {		// 리스트의 총 사이즈를 알려주는 함수
 	int compare_i = 0;
 	
 	while(p_list->next != NULL) {	// 다음 리스트가 없을 때 까지 반복하며
@@ -50,24 +67,7 @@ int	 get_size_list ( LIST* p_list ) {		// 리스트의 총 사이즈를 알려�
 	return compare_i;
 }
 
-// 리스트 중간에 새로운 리스트를 추가
-LIST* insert_list ( LIST* p_list, LIST* p_new_list, int i ) {
-	LIST* p = NULL;
-	LIST* p_next = NULL;
-	           
-	if( i <= 0)		// i가 0보다 클 경우만 추가가 가능
-		return NULL;
-	
-	p = get_list ( p_list, i-1 );		// i번째 바로 앞 list를 가져옴
-	p_next = p->next;					// 받아온 리스트의 바로 뒤에 새로운 리스트를 넣고
-	
-	p->next = p_new_list;				// 원래 받아온 리스트의 뒤에 있던 리스트는
-	p_new_list = p_next;				// 새로 추가된 리스트의 다음 리스트로 설정해준다.
-	
-	return p_list;
-}
-
-LIST* delete_list ( LIST* p_list, int i ) {	// i번째 리스트를 삭제
+LIST* list_delete ( LIST* p_list, int i ) {	// i번째 리스트를 삭제
 	LIST* p = NULL;
 	LIST* p_next = NULL;
 	
@@ -77,7 +77,7 @@ LIST* delete_list ( LIST* p_list, int i ) {	// i번째 리스트를 삭제
 		p_list = p;
 	}
 	
-	p = get_list( p_list, i-1 );
+	p = list_get( p_list, i-1 );
 	p_next = p->next->next;
 	free ( p->next );
 	p->next = p_next;
@@ -85,9 +85,9 @@ LIST* delete_list ( LIST* p_list, int i ) {	// i번째 리스트를 삭제
 	return p_list;
 }
 
-void release_list ( LIST* p_list, void (*release_elem)(void* elem) ) {
+void list_release ( LIST* p_list, void (*release_elem)(void* elem) ) {
 	if(p_list->next != NULL) {
-		release_list( p_list->next, release_elem );	// 다음 리스트가 존재 시
+		list_release( p_list->next, release_elem );	// 다음 리스트가 존재 시
 	}													// 다음 리스트를 해제시켜줌
 
 	if(release_elem != NULL)
@@ -96,7 +96,7 @@ void release_list ( LIST* p_list, void (*release_elem)(void* elem) ) {
 	free(p_list);	// 현 리스트를 해제
 }
 
-void foreach_list ( LIST* p_list, void* msger, void (*func)(void* elem, int i, void* arg) ) {
+void list_foreach ( LIST* p_list, void* msger, void (*func)(void* elem, int i, void* arg) ) {
 	int count = 0;
 
 	for( ; p_list != NULL; p_list = p_list->next ) {

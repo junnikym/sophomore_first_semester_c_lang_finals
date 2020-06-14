@@ -54,13 +54,6 @@ void g_buf_obj_release () {
 // ------------------------------------------------------- //
 // ----- g_object function	------------------------------
 
-int is_g_user_obj_setted () {
-	if(g_user_obj == NULL)
-		return 0;
-	
-	return 1;
-}
-
 // -- push_back elements into g_object
 
 void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
@@ -139,7 +132,7 @@ ENTITY* g_obj_set_center_ent ( int obj_i, int ent_i ) {
 void g_obj_set_essential_f ( int obj_i, int ent_i ) {
 	void* target = dyn_arr_get (&g_objects, obj_i);
 	
-	if(ent_i == -1)
+	if(ent_i == __CENTER_I)
 		target = ((OBJECT*)target)->center;
 	else
 		target = dyn_arr_get( &(((OBJECT*)target)->entities), ent_i );
@@ -170,6 +163,38 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	
 	return target;
 }
+
+void g_obj_set_collision_box ( int obj_i, VEC2 box ) {
+	OBJECT* target = dyn_arr_get ( &g_objects, obj_i );
+	
+	target->collision_box = box;
+}
+
+// -- check function
+
+int is_g_user_obj_setted () {
+	if(g_user_obj == NULL)
+		return 0;
+	
+	return 1;
+}
+
+int g_obj_is_collision	( int lhs_i, int rhs_i ){
+	if(lhs_i == rhs_i)	return -1;
+	
+	OBJECT* lhs = dyn_arr_get( &g_objects, lhs_i );
+	OBJECT* rhs = dyn_arr_get( &g_objects, rhs_i );
+	
+	return collision_detection_obb (
+		&lhs->center->position,
+		&lhs->collision_box,
+		&lhs->center->angle,
+		&rhs->center->position,
+		&rhs->collision_box,
+		&rhs->center->angle
+	);
+}
+
 // -- Update functions
 
 void update_each_g_obj ( void* elem, int i, void* arg ) {
@@ -244,25 +269,17 @@ VEC2 g_obj_get_position(int index) {
 	return ((OBJECT*)g_objects.items)[index].center->position;
 }
 
-
-// ------------------------------------------------------- //
-// ----- entire memory functions	----------------------
-
-void init_memory ( ) {
-	g_shader_id = gl_load_shader (
-		"../../opengl/shader/TransformVertexShader.vs",
-		"../../opengl/shader/TextureFragmentShader.fs"
-	);
-	
+void g_obj_init	() {
 	g_buf_objs = NULL;
 	g_buf_objs_size = 0;
 	
-	dyn_arr_init( &g_objects, sizeof(OBJECT) );
 	g_user_obj = NULL;
 	g_user_obj_i = -1;
+	
+	dyn_arr_init( &g_objects, sizeof(OBJECT) );
 }
 
-void release_memory() {
+void g_obj_release() {
 	int i = 0;
 	OBJECT* obj_converter = NULL;
 	
@@ -277,8 +294,37 @@ void release_memory() {
 	
 	g_user_obj = NULL;
 	g_user_obj_i = -1;
+}
+
+
+// ------------------------------------------------------- //
+// ----- g_map function		------------------------------
+/*
+void g_map_init ( ) {
+	init_hash_table ( g_map, __G_HASH_TABLE_SIZE );
+}
+
+void g_map_insert_hash ( char* key, void* item ) {
+
 	
-	g_buf_obj_release();
+	hash_table_find(&g_map, key, item, __G_HASH_TABLE_SIZE, 1)
+}
+*/
+// ------------------------------------------------------- //
+// ----- entire memory functions	----------------------
+
+void init_memory ( ) {
+	g_shader_id = gl_load_shader (
+		"../../opengl/shader/TransformVertexShader.vs",
+		"../../opengl/shader/TextureFragmentShader.fs"
+	);
+	
+	g_obj_init ();
+}
+
+void release_memory() {
+	g_obj_release ();
+	g_buf_obj_release ();
 }
 
 // ------------------------------------------------------- //

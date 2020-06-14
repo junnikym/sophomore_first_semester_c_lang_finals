@@ -1,7 +1,5 @@
 #include "utility.h"
 
-#include <stdio.h>
-
 int range_loop ( unsigned int min, unsigned int max, int* current ) {
 	if ( *current > (int)max ) {
 		*current = min + ( *current - 1 - max );
@@ -16,4 +14,3 @@ int range_loop ( unsigned int min, unsigned int max, int* current ) {
 	
 	return *current;
 }
- 

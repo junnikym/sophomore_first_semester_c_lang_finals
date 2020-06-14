@@ -3,6 +3,10 @@
 
 #include <math.h>
 
+#include "types.h"
+
+#define __ONE_RADIAN 0.017453292519943295769
+
 // - D  : Direction
 // - N  : Number (integer)
 // - V2 : VEC2 (struct)
@@ -56,6 +60,16 @@ void append_array_vec2(void* arr, int index, void* elem_addr);
 VEC2 normalize(VEC2 vec, const double* vec_size);
 void normalize_assn(VEC2* vec, const double* vec_size);
 
+double deg_to_rad(double deg);
+
+double vec2_dot(const VEC2* lhs, const VEC2* rhs);
+
+VEC2 vec2_get_distance ( const VEC2* lhs, const VEC2* rhs );
+
+VEC2 vec2_get_height 	( const VEC2* scale,const double* angle);
+VEC2 vec2_get_width 	( const VEC2* scale, const double* angle);
+
+VEC2 vec2_get_unit (const VEC2* a);
 // -------------------------------------------------------
 
 #endif /* VECTOR2_H */

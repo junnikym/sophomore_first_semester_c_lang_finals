@@ -5,9 +5,10 @@
 
 void init_obj ( OBJECT* obj ) {
 	dyn_arr_init( &(obj->entities), sizeof(ENTITY) );
-	
 	obj->center = NULL;
-	obj->direction = NULL;
+	
+	obj->collision_box = (VEC2){-1.0f, -1.0f};
+	obj->collision_indicator = 0;
 } 
 
 void copy_obj( void* lhs, const void* rhs) {
@@ -28,37 +29,32 @@ void release_obj ( OBJECT* obj ) {
 	dyn_arr_release( &obj->entities );
 
 	obj->center = NULL;
-	obj->direction = NULL;
 }
 
-void adapt_each_f_obj (void* elem, int i, void* pos) {
-	VEC2 ent_f = pass_by_f_ent ( elem );
+void adapt_each_f_obj (void* elem, int i, void* msger) {
+	MOMENTUM ent_momentum = pass_by_f_ent ( elem );
 	
-	vec2_add_assn (
-		pos,
-		&ent_f
-	);
-}
-
-void adapt_f_obj ( OBJECT* obj ) {
-	VEC2 result = V2_ZERO;
-	dyn_arr_foreach(&obj->entities, &obj->center->position, adapt_each_f_obj);
-}
-
-VEC2 pass_by_f_obj ( OBJECT* obj ) {
-	VEC2 result = V2_ZERO;
-	dyn_arr_foreach(&obj->entities, &result, adapt_each_f_obj);
-
-	return result;
+	if(ent_momentum.angle == 0)
+		*(((MOMENTUM_PTR*)msger)->angle) += ent_momentum.angle;
+	else
+		vec2_add_assn (
+			((MOMENTUM_PTR*)msger)->vector,
+			&(ent_momentum.vector)
+		);
 }
    
-void update_each_obj (void* elem, int i, void* pos) {
-	adapt_each_f_obj ( elem, i, pos );
+void update_each_obj (void* elem, int i, void* msger) {
+	adapt_each_f_obj ( elem, i, msger );
 	draw_ent( elem );
 }
 
 void update_obj ( OBJECT* obj ) {
-	dyn_arr_foreach(&obj->entities, &obj->center->position, update_each_obj);
+	MOMENTUM_PTR info_msger = {
+		&(obj->center->position),
+		&(obj->center->angle)
+	};
+	
+	dyn_arr_foreach(&obj->entities, &info_msger, update_each_obj);
 }
 
 // -- setting function

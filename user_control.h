@@ -15,7 +15,7 @@
 #define __JUMP_COOL_DOWN_TIME 1
 #define __JUMP_DURATION_TIME 1
 
-static int g_User_Speed = 25;
+static int g_User_Speed = 300;
 static int g_User_Jump = 5;
 static int g_User_Long_Jump = 2;
 
@@ -29,8 +29,8 @@ static double jump_time_current = __NOT_ACT_TIME_CODE;
 
 // -- Control Keys
 
-static int __LEFT_KEY = GLFW_KEY_A;			// LEFT?		'A'
-static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT	?	'D'
+static int __LEFT_KEY = GLFW_KEY_A;			// LEFT?			'A'
+static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT			'D'
 static int __JUMP_KEY = GLFW_KEY_SPACE;		// JUMP				'SPACE'
 static int __LONG_JUMP_KEY = GLFW_KEY_W;	// LONG_JUMP		'W'
 static int __TAB_KEY = GLFW_KEY_TAB;		// INVENTORY		'TAB'

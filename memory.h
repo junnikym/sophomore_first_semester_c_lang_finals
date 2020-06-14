@@ -25,7 +25,7 @@ static DYN_ARR g_objects;	// item type : OBJECT
 static OBJECT* g_user_obj;
 static int g_user_obj_i;
 
-static HASH_TABLE g_map;
+//static LIST* g_map[__G_HASH_TABLE_SIZE];
 
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
@@ -44,17 +44,26 @@ void	g_buf_obj_release		();
 
 // -- push_back elements into g_object
 
-int 	is_g_user_obj_setted	();
-
 void*	g_obj_push_thing		( _OBJ_ELEM_ type, void* item, ... );	// ... => index of thing
+
+// -- Setter
 
 OBJECT*	g_obj_set_user_obj		( int i );
 ENTITY* g_obj_set_center_ent	( int obj_i, int ent_i );
 void  	g_obj_set_essential_f 	( int obj_i, int ent_i );
+void 	g_obj_set_collision_box ( int obj_i, VEC2 box );
 
 void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
 
-void	update_each_g_obj		  ( void* elem, int i, void* pos );
+// -- check functions();
+
+int 	is_g_user_obj_setted	();
+
+int 	g_obj_is_collision		( int lhs_i, int rhs_i );
+
+// -- Update functions
+
+void	update_each_g_obj		( void* elem, int i, void* pos );
 void	update_g_obj			( );
 
 void*	g_obj_alter				( _OBJ_ELEM_ type, void* _rhs,
@@ -62,12 +71,19 @@ void*	g_obj_alter				( _OBJ_ELEM_ type, void* _rhs,
 
 void*	g_obj_get_thing			( _OBJ_ELEM_ type, ... );				// ... => index of thing
 
-void 	g_obj_foreach		( void* msger, void (*func)(void* elem, int i, void* arg) );
-VEC2	g_obj_get_position	( int index );
+void 	g_obj_foreach			( void* msger, void (*func)(void* elem, int i, void* arg) );
+VEC2	g_obj_get_position		( int index );
+
+void 	g_obj_init				( );
+void 	g_obj_release 			( );
 
 // ------------------------------------------------------- //
 // ----- g_map functions	------------------------------
+/*
+void 	g_map_init				( );
 
+void 	g_map_insert_hash 		( char* key, void* item );
+*/
 // ------------------------------------------------------- //
 // ----- entire memory functions	----------------------
 

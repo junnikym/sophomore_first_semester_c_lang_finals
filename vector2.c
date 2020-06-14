@@ -76,5 +76,49 @@ VEC2 normalize(VEC2 vec, const double* vec_size) {
     return vec;
 }
 
+double deg_to_rad(double deg) {
+	return deg * __ONE_RADIAN;
+}
+
+double vec2_dot(const VEC2* lhs, const VEC2* rhs) {
+	return fabs(lhs->x * rhs->x + lhs->y * rhs->y);
+}
+
+VEC2 vec2_get_distance ( const VEC2* lhs, const VEC2* rhs ) {
+	VEC2 result;
+	result.x = lhs->x - rhs->x;
+	result.y = lhs->y - rhs->y;
+	return result;
+}
+
+VEC2 vec2_get_height ( const VEC2* scale, const double* angle){	//height vector
+	VEC2 result;
+	
+	result.x = scale->y * sinf( deg_to_rad(*angle) );
+	result.y = scale->y * cosf( deg_to_rad(*angle) );
+	
+	return result;
+}
+
+VEC2 vec2_get_width ( const VEC2* scale, const double* angle){ 	//height vector
+	VEC2 result;
+	
+	result.x = scale->x * cosf( deg_to_rad(*angle) );
+	result.y = scale->x * sinf( deg_to_rad(*angle) );
+	
+  	return result;
+}
+
+VEC2 vec2_get_unit (const VEC2* a){ 								//unit vector
+	VEC2 result;
+	double size;
+	
+	size = sqrt(SQUARE(a->x) + SQUARE(a->y));
+	
+	result.x = a->x / size;
+	result.y = a->y / size;
+	
+	return result;
+}
 // ───────────────────────────────────────────────────────
  

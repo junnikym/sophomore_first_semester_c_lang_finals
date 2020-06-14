@@ -6,6 +6,9 @@
 
 #include <math.h>
 
+// 16 = 1 << 5
+#define __NO_COLLIDE 0x10
+
 // -- (append / update) force
 void transform_to_gravity ( FORCE* f,
 						    const double* gravity_constant,
@@ -15,6 +18,11 @@ void transform_to_gravity ( FORCE* f,
 void friction( VEC2* force, const double* constant );
 
 // -- checking function
-void collision_detection_aabb ( );
+int collision_detection_obb ( const VEC2* lhs_pos,
+							  const VEC2* lhs_size,
+							  const double* lhs_angel,
+							  const VEC2* rhs_pos,
+							  const VEC2* rhs_size,
+							  const double* rhs_angle );
 
 #endif

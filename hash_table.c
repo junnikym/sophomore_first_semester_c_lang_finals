@@ -13,15 +13,7 @@ unsigned int hash(char* str, int table_size) {
 	return h % table_size;
 }
 
-void init_hash_table ( HASH_TABLE table, int table_size ) {
-	int i = 0;
-
-	for( i = 0; i < table_size; i++ ) {
-		table[i] = NULL;
-	}
-}
-
-LIST* find_hash ( HASH_TABLE table, char* _key, int table_size, int create ) {
+LIST* hash_talbe_find ( HASH_TABLE table, char* _key, void* _item, int table_size, int create ) {
 	unsigned int h = 0;
 	LIST* node = NULL;
 	HASH_TABLE_NODE* inserter = NULL;
@@ -38,9 +30,10 @@ LIST* find_hash ( HASH_TABLE table, char* _key, int table_size, int create ) {
 		inserter = (HASH_TABLE_NODE*)malloc(sizeof(HASH_TABLE_NODE));
 
 		inserter->key 			= _key;
+		inserter->item			= _item;
 		inserter->hash_value 	= h;
 
-		node = create_list(inserter);
+		node = list_create(inserter);
 		node->next = table[h];
 		table[h] = node;
 
@@ -50,12 +43,20 @@ LIST* find_hash ( HASH_TABLE table, char* _key, int table_size, int create ) {
 	return NULL;
 }
 
-void release_hash_table ( HASH_TABLE table, int table_size, void (*release_item)(void* target) ) {
+void hash_table_init ( HASH_TABLE table, int table_size ) {
+	int i = 0;
+
+	for( i = 0; i < table_size; i++ ) {
+		table[i] = NULL;
+	}
+}
+
+void hash_table_release ( HASH_TABLE table, int table_size, void (*release_item)(void* target) ) {
 	int i = 0;
 
 	for( i = 0; i < table_size; i++ ) {
 		if(table[i] != NULL) 
-			release_list( table[i], release_item );
+			list_release( table[i], release_item );
 	}
 }
 

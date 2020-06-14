@@ -6,10 +6,12 @@
 #include "dynamic_array.h"
 #include "entity.h"
 
-typedef struct {
+typedef struct _OBJECT_ {
 	DYN_ARR entities;
 	ENTITY* center;
-	VEC2* direction;
+	
+	VEC2 collision_box;
+	int collision_indicator;
 } OBJECT;
 
 // ------------------------------------------------------- //
@@ -20,8 +22,6 @@ void copy_obj 		( void* lhs, const void* rhs);
 void release_obj 	( OBJECT* obj );
 
 void adapt_each_f_obj ( void* elem, int i, void* pos );
-void adapt_f_obj 	( OBJECT* obj );
-VEC2 pass_by_f_obj 	( OBJECT* obj );
 
 void update_each_obj (void* elem, int i, void* pos);
 void update_obj		( OBJECT* obj );
