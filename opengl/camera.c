@@ -27,17 +27,42 @@ void gl_set_projection() {
 }
 
 void gl_set_view ( vec3 pos, vec3 at, vec3 up_vec ) {
+	vec3 pos_at;
+	
+	glm_vec3_copy(pos, g_cam_view_pos);
+	glm_vec3_copy(at, g_cam_view_at);
+	glm_vec3_copy(up_vec, g_cam_view_up);
+	
+	glm_vec3_add(g_cam_view_pos, g_cam_view_at, pos_at);
+	
 	glm_lookat (
-		pos,
-		at,
-		up_vec,
+		g_cam_view_pos,
+		pos_at,
+		g_cam_view_up,
 		g_cam_view
 	);
 	
-	printf("pos    : %f      %f     %f \n", pos[0], pos[1], pos[2]);
-	printf("at     : %f      %f     %f \n", at[0], at[1], at[2]);
-	printf("up_vec : %f      %f     %f \n\n\n", up_vec[0], up_vec[1], up_vec[2]);
+}
+
+void gl_set_view_mat ( mat4 look_at ) {
+	glm_mat4_copy(look_at, g_cam_view);
+}
+
+void gl_set_view_pos ( vec3 pos ) {
+	vec3 pos_at;
 	
+	glm_vec3_copy(pos, g_cam_view_pos);
+	
+	glm_vec3_add(g_cam_view_pos, g_cam_view_at, pos_at);
+	
+	glm_lookat (
+		g_cam_view_pos,
+		pos_at,
+		g_cam_view_up,
+		g_cam_view
+	);
+	
+	printf("pos: %f      %f     %f\n", g_cam_view[0], g_cam_view[1], g_cam_view[2]);
 	printf("lookat [0]: %f      %f     %f     %f \n",
 		   	g_cam_view[0][0], g_cam_view[0][1], g_cam_view[0][2], g_cam_view[0][3]);
 	printf("lookat [1]: %f      %f     %f     %f \n",
@@ -46,10 +71,9 @@ void gl_set_view ( vec3 pos, vec3 at, vec3 up_vec ) {
 			g_cam_view[2][0], g_cam_view[2][1], g_cam_view[2][2], g_cam_view[2][3]);
 	printf("lookat [3]: %f      %f     %f     %f \n",
 			g_cam_view[3][0], g_cam_view[3][1], g_cam_view[3][2], g_cam_view[3][3]);
-}
-
-void gl_set_view_mat ( mat4 look_at ) {
-	glm_mat4_copy(look_at, g_cam_view);
+	printf("\n\n");
+	
+	gl_update_cam();
 }
 
 void gl_update_cam() {

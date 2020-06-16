@@ -46,8 +46,8 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	gl_set_projection();	// 원근법을 적용한 투사를 구현하기위해 값을 셋팅
 	  
 	gl_set_view (
-		(vec3) { 0, 0, 250 } ,	// 카메라의 위치
-		GLM_VEC3_ZERO,			// 초점 방향
+		(vec3) { 0, 0, g_cam_dist } ,	// 카메라의 위치
+		(vec3) { 0, 0, -1 },			// 초점 방향
 		(vec3) { 0, 1, 0 }		// 카메라 방향
 	);
   
@@ -55,6 +55,9 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 }
 
 void gl_system_run(WINDOW* window) {
+	VEC2 user_pos = V2_ZERO;
+	VEC2 update_section = V2_ZERO;
+	
 	gl_clear_screen();			// 화면의 모든 요소를 지워 검정화면으로 만든다.
 	
 	glEnable(GL_DEPTH_TEST);	// 화면의 깊이값을 측정하여 프레그먼트를 사용할지
@@ -63,14 +66,24 @@ void gl_system_run(WINDOW* window) {
 	int is_collision = 0;
 	
 	do {
-			
+
 		// 화면과 깊이 버퍼를 비워줌
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		if ( is_g_user_obj_setted() )
-			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
+		// 키보드나 마우스에 이벤트가 발생했는지 체크
+		glfwPollEvents();
 		
-		update_g_obj();		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
+		if ( is_g_user_obj_setted() ) {
+			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
+		}
+		
+		user_pos = g_obj_get_position(__CENTER_I);
+		update_section = world_where(user_pos);
+		
+		g_world_update(update_section.x, update_section.y);
+		//update_g_obj();		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
+		
+		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		
@@ -78,9 +91,6 @@ void gl_system_run(WINDOW* window) {
 		
 		// 스왑 체인 / back buffer를 front buffer로 swap 시켜줌
 		glfwSwapBuffers(window->window);
-		
-		// 키보드나 마우스에 이벤트가 발생했는지 체크
-		glfwPollEvents();
 
 	} while ( !glfwWindowShouldClose(window->window) );	// 종료 명령이 발생할 때 까지 루프
 

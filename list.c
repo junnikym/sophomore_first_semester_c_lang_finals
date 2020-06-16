@@ -90,8 +90,10 @@ void list_release ( LIST* p_list, void (*release_elem)(void* elem) ) {
 		list_release( p_list->next, release_elem );	// 다음 리스트가 존재 시
 	}													// 다음 리스트를 해제시켜줌
 
-	if(release_elem != NULL)
-		release_elem(p_list->elem);		// 만약 해제시켜줄 요소가 존재한다면 해제
+	if(release_elem != NULL) {
+		if(release_elem != NULL)
+			release_elem(p_list->elem);		// 만약 해제시켜줄 요소가 존재한다면 해제
+	}
 	
 	free(p_list);	// 현 리스트를 해제
 }

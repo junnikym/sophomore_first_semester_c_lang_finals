@@ -261,7 +261,12 @@ void* g_obj_alter ( _OBJ_ELEM_ type, void* _rhs,
 	return NULL;
 }
 
-VEC2	g_obj_get_position		( int index );
+VEC2 g_obj_get_position ( int index ) {
+	if ( index == __CENTER_I ) {
+		return g_user_obj->center->position;
+	}
+	return ((OBJECT*) dyn_arr_get (&g_objects, index))->center->position;
+}
 
 double g_obj_get_angle (int index) {
 	if(index == __CENTER_I) {
@@ -305,17 +310,30 @@ void g_obj_release() {
 
 // ------------------------------------------------------- //
 // ----- g_map function		------------------------------
-/*
-void g_map_init ( ) {
-	init_hash_table ( g_map, __G_HASH_TABLE_SIZE );
+
+void g_world_init( int _x_size, _y_size) {
+	world_init(&g_world, _x_size, _y_size);
 }
 
-void g_map_insert_hash ( char* key, void* item ) {
+void g_world_release() {
+	world_release(&g_world);
+}
 
+void g_world_insert_obj ( int g_obj_index ) {
+	OBJECT* obj_ptr = dyn_arr_get( &g_objects, g_obj_index );
 	
-	hash_table_find(&g_map, key, item, __G_HASH_TABLE_SIZE, 1)
+	world_insert(&g_world, obj_ptr->center->position, obj_ptr, g_obj_index);
 }
-*/
+
+void g_world_update_obj ( void* obj, VEC2* return_pos ) {
+	update_obj ( obj );
+	*return_pos = ((OBJECT*)obj)->center->position;
+}
+
+void g_world_update ( int section_x, int section_y ) {
+	world_update( &g_world, section_x, section_y, g_world_update_obj);
+}
+
 // ------------------------------------------------------- //
 // ----- entire memory functions	----------------------
 
@@ -326,11 +344,14 @@ void init_memory ( ) {
 	);
 	
 	g_obj_init ();
+	
+	g_world_init ( __WORLD_EARLY_SIZE, __WORLD_EARLY_SIZE );
 }
 
 void release_memory() {
 	g_obj_release ();
 	g_buf_obj_release ();
+	g_world_release ();
 }
 
 // ------------------------------------------------------- //
