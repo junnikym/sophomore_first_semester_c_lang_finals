@@ -62,17 +62,6 @@ void gl_set_view_pos ( vec3 pos ) {
 		g_cam_view
 	);
 	
-	printf("pos: %f      %f     %f\n", g_cam_view[0], g_cam_view[1], g_cam_view[2]);
-	printf("lookat [0]: %f      %f     %f     %f \n",
-		   	g_cam_view[0][0], g_cam_view[0][1], g_cam_view[0][2], g_cam_view[0][3]);
-	printf("lookat [1]: %f      %f     %f     %f \n",
-			g_cam_view[1][0], g_cam_view[1][1], g_cam_view[1][2], g_cam_view[1][3]);
-	printf("lookat [2]: %f      %f     %f     %f \n",
-			g_cam_view[2][0], g_cam_view[2][1], g_cam_view[2][2], g_cam_view[2][3]);
-	printf("lookat [3]: %f      %f     %f     %f \n",
-			g_cam_view[3][0], g_cam_view[3][1], g_cam_view[3][2], g_cam_view[3][3]);
-	printf("\n\n");
-	
 	gl_update_cam();
 }
 

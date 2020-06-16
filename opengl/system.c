@@ -80,6 +80,8 @@ void gl_system_run(WINDOW* window) {
 		user_pos = g_obj_get_position(__CENTER_I);
 		update_section = world_where(user_pos);
 		
+		printf("player pos : %lf %lf \n", user_pos.x, user_pos.y);
+		printf("update_section : %lf, %lf \n\n", update_section.x, update_section.y);
 		g_world_update(update_section.x, update_section.y);
 		//update_g_obj();		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
 		
@@ -88,6 +90,7 @@ void gl_system_run(WINDOW* window) {
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		
 		is_collision = g_obj_is_collision(0, 1);
+		printf("collision : %d \n", is_collision);
 		
 		// 스왑 체인 / back buffer를 front buffer로 swap 시켜줌
 		glfwSwapBuffers(window->window);

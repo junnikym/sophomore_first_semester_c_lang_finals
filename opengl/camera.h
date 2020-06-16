@@ -12,10 +12,11 @@ static GLfloat g_FOV = 0.0f;
 static mat4 g_cam_projection = GLM_MAT4_IDENTITY_INIT;
 
 // Camera matrix
-static vec3 g_cam_view_at = GLM_MAT4_IDENTITY_INIT;
-static vec3 g_cam_view_up = GLM_MAT4_IDENTITY_INIT;
-static vec3 g_cam_view_pos = GLM_MAT4_IDENTITY_INIT;
-static mat4 g_cam_view = GLM_MAT4_IDENTITY_INIT;
+static vec3 g_cam_view_at 		= GLM_VEC3_ZERO_INIT;
+static vec3 g_cam_view_up 		= GLM_VEC3_ZERO_INIT;
+static vec3 g_cam_view_pos 	= GLM_VEC3_ZERO_INIT;
+
+static mat4 g_cam_view 			= GLM_MAT4_IDENTITY_INIT;
 
 static double g_cam_dist = 250.0;
 
