@@ -20,11 +20,11 @@ void friction(VEC2* force, const double* constant) {
 }
 
 int collision_detection_obb ( const VEC2* lhs_pos,
-							  const VEC2* lhs_size,
-							  const double* lhs_angle,
-							  const VEC2* rhs_pos,
-							  const VEC2* rhs_size,
-							  const double* rhs_angle ) {
+								    const VEC2* lhs_size,
+								    const double* lhs_angle,
+								    const VEC2* rhs_pos,
+								    const VEC2* rhs_size,
+								    const double* rhs_angle ) {
 	int i = 0;	int j = 0;
 	double sum = 0;
 	
@@ -54,6 +54,8 @@ int collision_detection_obb ( const VEC2* lhs_pos,
 			collision_flag |= 1 << i;
 		}
 	}
+	
+	printf("");
 	
 	return collision_flag;
 }

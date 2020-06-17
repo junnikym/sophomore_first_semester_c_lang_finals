@@ -9,6 +9,11 @@
 // 16 = 1 << 5
 #define __NO_COLLIDE 0x10
 
+#define __COLLISION_DETECTED_Y 			0x1
+#define __COLLISION_DETECTED_X 			0x4
+#define __COLLISION_DETECTED_OTHER_Y	0x2
+#define __COLLISION_DETECTED_OTHER_X	0x8
+
 // -- (append / update) force
 void transform_to_gravity ( FORCE* f,
 						    const double* gravity_constant,

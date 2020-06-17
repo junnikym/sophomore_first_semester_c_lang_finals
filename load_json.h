@@ -6,6 +6,11 @@
 #include <stdbool.h>   // bool, true, false가 정의된 헤더 파일
 #include <string.h>    // strchr, strcmp, memset, memcpy 함수가 선언된 헤더 파일
 
+#include "opengl/texture.h"
+
+#include "tree.h"
+#include "vector2.h"
+
 // 토큰 종류 열거형
 typedef enum _TOKEN_TYPE {
     TOKEN_STRING,    // 문자열 토큰
@@ -37,5 +42,6 @@ char *json_getArrayString(JSON *json, char *key, int index);
 int json_getArrayCount(JSON *json, char *key);
 double json_getNumber(JSON *json, char *key);
 
+int load_texture_package(char* path, TREE* memory);
 
 #endif

@@ -71,8 +71,8 @@ void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
 // -- check functions();
 
 int 	is_g_user_obj_setted	();
-
 int 	g_obj_is_collision		( int lhs_i, int rhs_i );
+void 	g_obj_coliision_proccess ( void* elem, int i, void* arg );
 
 // -- Update functions
 

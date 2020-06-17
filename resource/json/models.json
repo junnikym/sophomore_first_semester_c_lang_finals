@@ -1,0 +1,23 @@
+{
+	"textures" : [
+
+		{ "main_character_walk": [
+			{
+				"extension": "dds",
+				"path": "character/player_walk_sprite.dds",
+				"size_x": "25.0",
+				"size_y": "25.0",
+				"texture_begin_x": "0.0625"
+			}
+		]},
+
+		{ "item_oxy": [
+			{
+				"extension": "bmp",
+				"path": "item/item_co.dds",
+				"size_x": "5.0",
+				"size_y": "5.0"
+			}
+		]}
+	]
+}

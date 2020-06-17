@@ -5,6 +5,7 @@
 
 #include "vector2.h"
 #include "memory.h"
+#include "load_json.h"
 
 int main() {
 	int result = 0;
@@ -43,6 +44,8 @@ int main() {
 	printf(" * init_complate \n\n");
 	
 // - Load textures
+	
+	load_texture_package("../../resource/json/models.json", NULL);
 	
 	/*----- USER CHARACTOR	--------------------------------------------------*/
 	

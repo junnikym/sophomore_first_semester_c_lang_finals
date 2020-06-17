@@ -249,3 +249,76 @@ double json_getNumber(JSON *json, char *key)    // 키에 해당하는 숫자를
 
     return 0.0;    // 키를 찾지 못했으면 0.0을 반환
 }
+
+int load_texture_package(char* path, TREE* memory) {
+	int inner_i = 0, outer_i = 0;
+	
+	int size = 0, inner_size = 0;
+	int arr_size = 0;
+	char* bring_str = "";
+	
+	char* title = "";
+	char* ext = "";
+	char* texture_path = "";
+	VEC2 texture_begin = (VEC2){1, 1};
+	VEC2 texture_size = (VEC2){1, 1};
+	
+	GLuint texture = 0;
+	
+	char *doc = json_readFile (path, &size);
+	if(doc == NULL)
+		return -1;
+
+	JSON json = { 0, };
+
+	json_parseJSON(doc, size, &json);
+
+	printf("loading textures :\n");
+	arr_size = json_getArrayCount(&json, "textures");
+	for(outer_i = 0; outer_i < arr_size; outer_i++) {
+		
+		bring_str = json_getArrayString(&json, "textures", outer_i);
+		inner_size = json_getArrayCount(&json, bring_str);
+		for (inner_i = 0; inner_i < inner_size; inner_i+=2) {
+			
+			bring_str = json_getArrayString(&json, bring_str, inner_i);
+			
+			if ( strcmp(bring_str, "extension") == 0 ) {
+				ext = json_getArrayString(&json, bring_str, inner_i+1);
+			}
+			
+			else if ( strcmp(bring_str, "path") == 0 ) {
+				texture_path = json_getArrayString(&json, bring_str, inner_i+1);
+			}
+			
+			else if ( strcmp(bring_str, "size_x") == 0 ) {
+				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				texture_size.x = atof(bring_str);
+			}
+			else if ( strcmp(bring_str, "size_y") == 0 ) {
+				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				texture_size.y = atof(bring_str);
+			}
+			
+			else if ( strcmp(bring_str, "texture_begin_x") == 0 ) {
+				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				texture_begin.x = atof(bring_str);
+			}
+			else if ( strcmp(bring_str, "texture_begin_y") == 0 ) {
+				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				texture_begin.y = atof(bring_str);
+			}
+			
+		}
+		
+		printf("size : %lf %lf \n", texture_size.x, texture_size.y);
+		printf("begi : %lf %lf \n", texture_begin.x, texture_begin.y);
+		
+	}
+
+	json_freeJSON(&json);
+
+	free(doc);
+	
+	return 0;
+}

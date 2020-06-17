@@ -195,6 +195,19 @@ int g_obj_is_collision	( int lhs_i, int rhs_i ){
 	);
 }
 
+void g_obj_coliision_proccess ( void* elem, int i, void* arg ) {
+	int surplus = 0;
+	int detected = 0;
+	
+	for( surplus = 0; surplus < *(int*)arg; surplus++ ) {
+		detected = g_obj_is_collision( i, i+surplus );
+		
+		if( detected == __COLLISION_DETECTED_X ) {
+			
+		}
+	}
+}
+
 // -- Update functions
 
 void update_each_g_obj ( void* elem, int i, void* arg ) {

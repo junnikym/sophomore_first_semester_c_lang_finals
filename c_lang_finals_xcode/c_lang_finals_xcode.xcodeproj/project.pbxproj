@@ -29,6 +29,7 @@
 		2798D56C248B717E002207AC /* user_control.c in Sources */ = {isa = PBXBuildFile; fileRef = 2798D56B248B717E002207AC /* user_control.c */; };
 		27B643272495408D00BE85EA /* world.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B643262495408D00BE85EA /* world.c */; };
 		27B822D02483F0D90070FC4D /* vector2.c in Sources */ = {isa = PBXBuildFile; fileRef = 27B822CF2483F0D90070FC4D /* vector2.c */; };
+		27D1A4AF249A2C7E003C1E11 /* load_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 27D1A4AD249A2C7D003C1E11 /* load_json.c */; };
 		27DAC49524790DBF002A8F62 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49224790DBF002A8F62 /* utility.c */; };
 		27DAC49824792809002A8F62 /* identify.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49724792808002A8F62 /* identify.c */; };
 		27DAC49B24792A0F002A8F62 /* hash_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 27DAC49A24792A0F002A8F62 /* hash_table.c */; };
@@ -92,6 +93,8 @@
 		27B822CE2483F0D90070FC4D /* vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2.h; path = ../../vector2.h; sourceTree = "<group>"; };
 		27B822CF2483F0D90070FC4D /* vector2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector2.c; path = ../../vector2.c; sourceTree = "<group>"; };
 		27B822D12483F4C90070FC4D /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../types.h; sourceTree = "<group>"; };
+		27D1A4AD249A2C7D003C1E11 /* load_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = load_json.c; path = ../../load_json.c; sourceTree = "<group>"; };
+		27D1A4AE249A2C7E003C1E11 /* load_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = load_json.h; path = ../../load_json.h; sourceTree = "<group>"; };
 		27DAC49124790DBF002A8F62 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../../utility.h; sourceTree = "<group>"; };
 		27DAC49224790DBF002A8F62 /* utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utility.c; path = ../../utility.c; sourceTree = "<group>"; };
 		27DAC49624791732002A8F62 /* img_sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = img_sprite.h; path = ../../opengl/img_sprite.h; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 		275FFB822462E3D200DB3E96 /* c_lang_finals_xcode */ = {
 			isa = PBXGroup;
 			children = (
+				27D1A4AD249A2C7D003C1E11 /* load_json.c */,
+				27D1A4AE249A2C7E003C1E11 /* load_json.h */,
 				275FFB9D2462E4EB00DB3E96 /* dynamic_array.c */,
 				275FFB992462E4EB00DB3E96 /* dynamic_array.h */,
 				275FFB942462E4EB00DB3E96 /* entity.c */,
@@ -284,6 +289,7 @@
 				275FFBDD246324D900DB3E96 /* system.c in Sources */,
 				275FFBAB2462E4EC00DB3E96 /* force.c in Sources */,
 				27DAC49E247933F6002A8F62 /* list.c in Sources */,
+				27D1A4AF249A2C7E003C1E11 /* load_json.c in Sources */,
 				275FFBDE246324D900DB3E96 /* texture.c in Sources */,
 				275FFBDF246324D900DB3E96 /* shader.c in Sources */,
 			);

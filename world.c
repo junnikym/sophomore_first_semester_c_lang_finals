@@ -180,8 +180,14 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 	node = first_node[quadrant_index];
 	
 	printf("update : (%d, %d)[%d] : list ptr : %p \n", section_x, section_y, quadrant_index, first_node);
+	printf("node [0][0] : \p // [0]: %p, [1]: %p \n",
+		   _world->world[0][0].part[0],
+		   _world->world[0][0].part[0]->elem,
+		   _world->world[0][0].part[0]->next->elem );
 	
 	while(node != NULL) {
+		printf("-- node_ %p \n", node);
+		
 		elem = node->elem;						// 리스트에 저장된 요소를 가져옴
 		
 		update(elem->elem, &elem_pos);			// 해당 요소를 업데이트
@@ -218,4 +224,5 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 
 		node = node->next;		// 다음 리스트 업데이트 진행
 	}
+	printf("\n\n");
 }
