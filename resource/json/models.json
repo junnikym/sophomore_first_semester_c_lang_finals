@@ -1,6 +1,5 @@
 {
 	"textures" : [
-
 		{ "main_character_walk": [
 			{
 				"extension": "dds",
@@ -10,7 +9,6 @@
 				"texture_begin_x": "0.0625"
 			}
 		]},
-
 		{ "item_oxy": [
 			{
 				"extension": "bmp",

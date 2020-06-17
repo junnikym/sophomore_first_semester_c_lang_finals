@@ -42,7 +42,7 @@ typedef struct _QUADRANT_ {
 
 typedef struct _WORLD_NODE_ {
 	void* elem;					// 물체를 저장하고있는 메모리의 위치
-	int index;						// g_object 등 해당 배열에서의 위치
+	int index;					// g_object 등 해당 배열에서의 위치
 	LIST* pre_list;				// 이중 리스트를 활용하여 값을 옮길 시 사용
 } WORLD_NODE;
 

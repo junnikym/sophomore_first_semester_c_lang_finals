@@ -103,11 +103,11 @@ void resize_world ( WORLD* _world, int _x_size, int _y_size ) {
 		return;
 	
 	// world 의 가로 크기를 늘려줌
-	_world->world = ( QUADRANT** ) realloc ( _world->world[i], sizeof(QUADRANT*)*_x_size );
+	_world->world = ( QUADRANT** )realloc( _world->world[i], sizeof(QUADRANT*)*_x_size );
 	
 	// world 의 세로 크기를 늘려줌
 	for( i = 0; i < _x_size; i++) {
-		_world->world[i] = ( QUADRANT* ) realloc ( _world->world[i], sizeof(QUADRANT)*_y_size );
+		_world->world[i] = ( QUADRANT* )realloc( _world->world[i], sizeof(QUADRANT)*_y_size );
 		
 		for( j = _world->height; j < _y_size; j++ ) {
 			quadrant_init( &((_world->world)[i][j]) );	// 새로 할당된 메모리를 초기화
@@ -152,7 +152,7 @@ int world_insert ( WORLD* _world, VEC2 where, void* elem, int index  ) {
 	
 	where = world_where( where );
 	
-	inserter_w = (WORLD_NODE*) malloc (sizeof(WORLD_NODE));
+	inserter_w = (WORLD_NODE*)malloc(sizeof(WORLD_NODE));
 	inserter_w->index = index;
 	inserter_w->elem = elem;
 	
@@ -174,18 +174,21 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 	LIST** first_node = NULL;
 	LIST** new_quadrant = NULL;
 	LIST* node = NULL;
+	LIST* loop_node = NULL;
 	int quadrant_index = quadrant_get_index( (VEC2){section_x, section_y} );
+	int new_quadrant_index = 0;
 	
 	first_node = _world->world[section_x][section_y].part;
-	node = first_node[quadrant_index];
+	loop_node = first_node[quadrant_index];
 	
 	printf("update : (%d, %d)[%d] : list ptr : %p \n", section_x, section_y, quadrant_index, first_node);
 	printf("node [0][0] : \p // [0]: %p, [1]: %p \n",
 		   _world->world[0][0].part[0],
-		   _world->world[0][0].part[0]->elem,
-		   _world->world[0][0].part[0]->next->elem );
+		   _world->world[0][0].part[0],
+		   _world->world[0][0].part[0]->next );
 	
-	while(node != NULL) {
+	while( loop_node != NULL ) {
+		node = loop_node;
 		printf("-- node_ %p \n", node);
 		
 		elem = node->elem;						// 리스트에 저장된 요소를 가져옴
@@ -196,33 +199,43 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 		
 		// -- 해당 구역을 넘어갔을 경우 --
 		if ( (int)elem_pos.x != section_x || (int)elem_pos.y != section_y ) {
-		
-			// 해당 구역의 list 순서를 업데이트
-			if(elem->pre_list == NULL) {			// 첫번째 노드일 경우
-				first_node[quadrant_index] = node->next;			// 시작점 노드를 다음 노드로 변경
+			loop_node = node->next;		// 미리 다음 순서의 list를 불러옴
+			
+			// list가 해당 구역의 맨 앞에 있을 경우
+			if ( elem->pre_list == NULL ) {		// -> 맨 앞이므로 앞에 아무것도 없음
+				first_node[quadrant_index] = node->next;
 			}
-			else {										// 첫번째가 아닐 경우
-				elem->pre_list->next = node->next;	// 이전 노드의 다음 포인터를 다다음으로 변경
+			// list가 해당 구역의 중간 또는 맨 뒤에 있을 경우
+			else {
+				// 이전 노드의 다음연결, 다음 노드의 이전연결을 변경하여 순서를 바꾸어줌
 				
-				if( node->next != NULL )				// 다음 노드가 존재 시
-					((WORLD_NODE*)(node->next->elem))->pre_list = elem->pre_list;
+				if ( node->next == NULL ) { 
+					(elem->pre_list)->next = NULL;
+				}
+				else {
+					elem->pre_list->next = node->next;
+					((WORLD_NODE*)((node->next)->elem))->pre_list = elem->pre_list;
+				}
 			}
-			
-			node->next = NULL;
-			
-			printf("\n\nworld : %d, %d \n\n", ((int)elem_pos.x), ((int)elem_pos.y));
-			
-			// 해당 요소의 구역을 바꾸어줌
-			quadrant_index = quadrant_get_index( elem_pos );
-			new_quadrant = _world->world[(int)elem_pos.x][(int)elem_pos.y].part;
-			
-			if( new_quadrant[quadrant_index] != NULL )
-				((WORLD_NODE*)((new_quadrant[quadrant_index])->elem))->pre_list = node;
-			
-			new_quadrant[quadrant_index] = list_push_front ( new_quadrant[quadrant_index], node );
-		}
 
-		node = node->next;		// 다음 리스트 업데이트 진행
+			elem->pre_list = NULL;		// 연결 리스트를 초기화
+			node->next = NULL;
+
+			// 변경 물체의 좌표에 알맞은 구역을 계산
+			new_quadrant_index = quadrant_get_index ( elem_pos );
+			new_quadrant = _world->world[(int)elem_pos.x][(int)elem_pos.y].part;
+
+			// 해당 요소의 구역을 변경
+			if ( new_quadrant[new_quadrant_index] != NULL ) {
+				((WORLD_NODE*)((new_quadrant[new_quadrant_index])->elem))->pre_list = node;
+			}
+
+			new_quadrant[new_quadrant_index] = 
+				list_push_front ( new_quadrant[new_quadrant_index], node );
+		}
+		else {
+			loop_node = node->next;		// 변경사항 X -> 다음 리스트 업데이트 진행
+		}
 	}
 	printf("\n\n");
 }

@@ -148,6 +148,7 @@
     <ClCompile Include="..\..\hash_table.c" />
     <ClCompile Include="..\..\identify.c" />
     <ClCompile Include="..\..\list.c" />
+    <ClCompile Include="..\..\load_json.c" />
     <ClCompile Include="..\..\main.c" />
     <ClCompile Include="..\..\memory.c" />
     <ClCompile Include="..\..\object.c" />
@@ -164,6 +165,7 @@
     <ClCompile Include="..\..\vector2.c" />
     <ClCompile Include="..\..\user_control.c" />
     <ClCompile Include="..\..\utility.c" />
+    <ClCompile Include="..\..\world.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\dynamic_array.h" />
@@ -172,6 +174,7 @@
     <ClInclude Include="..\..\hash_table.h" />
     <ClInclude Include="..\..\identify.h" />
     <ClInclude Include="..\..\list.h" />
+    <ClInclude Include="..\..\load_json.h" />
     <ClInclude Include="..\..\memory.h" />
     <ClInclude Include="..\..\object.h" />
     <ClInclude Include="..\..\opengl\buffer_obj.h" />
@@ -189,6 +192,7 @@
     <ClInclude Include="..\..\vector2.h" />
     <ClInclude Include="..\..\user_control.h" />
     <ClInclude Include="..\..\utility.h" />
+    <ClInclude Include="..\..\world.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\opengl\shader\TextureFragmentShader.fs" />

@@ -95,7 +95,7 @@ void 	g_obj_release 			( );
 // ------------------------------------------------------- //
 // ----- g_world functions	------------------------------
 
-void 	g_world_init		( int _x_size, _y_size );
+void 	g_world_init		( int _x_size, int _y_size );
 void 	g_world_release	( );
 
 void	g_world_insert_obj ( int g_obj_index );

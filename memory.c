@@ -324,7 +324,7 @@ void g_obj_release() {
 // ------------------------------------------------------- //
 // ----- g_map function		------------------------------
 
-void g_world_init( int _x_size, _y_size) {
+void g_world_init( int _x_size, int _y_size) {
 	world_init(&g_world, _x_size, _y_size);
 }
 

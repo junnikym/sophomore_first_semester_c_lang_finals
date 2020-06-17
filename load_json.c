@@ -39,6 +39,7 @@ void json_parseJSON(char *doc, int size, JSON *json)    // JSON 파싱 함수
 {
     int tokenIndex = 0;    // 토큰 인덱스
     int pos = 0;           // 문자 검색 위치를 저장하는 변수
+    int arr_continue = 0;
 
     if (doc[pos] != '{')   // 문서의 시작이 {인지 검사
         return;
@@ -81,11 +82,20 @@ void json_parseJSON(char *doc, int size, JSON *json)    // JSON 파싱 함수
         case '[':            // 문자가 [이면 배열
         {
             pos++;           // 다음 문자로
+            arr_continue++;
 
-            while (doc[pos] != ']')    // 닫는 ]가 나오면 반복 종료
+            while (arr_continue != 0)    // 닫는 ]가 나오면 반복 종료
             {
+                if ( doc[pos] == '[' ) {
+                    arr_continue++;
+                }
+
+                else if ( doc[pos] == ']' ) {
+                    arr_continue--;
+                }
+
                 // 여기서는 문자열만 처리
-                if (doc[pos] == '"')   // 문자가 "이면 문자열
+                else if (doc[pos] == '"')   // 문자가 "이면 문자열
                 {
                     // 문자열의 시작 위치를 구함. 맨 앞의 "를 제외하기 위해 + 1
                     char *begin = doc + pos + 1;
@@ -277,35 +287,37 @@ int load_texture_package(char* path, TREE* memory) {
 	arr_size = json_getArrayCount(&json, "textures");
 	for(outer_i = 0; outer_i < arr_size; outer_i++) {
 		
-		bring_str = json_getArrayString(&json, "textures", outer_i);
-		inner_size = json_getArrayCount(&json, bring_str);
+        title = json_getArrayString(&json, "textures", outer_i);
+		inner_size = json_getArrayCount(&json, title );
+        
 		for (inner_i = 0; inner_i < inner_size; inner_i+=2) {
+            outer_i++;
 			
-			bring_str = json_getArrayString(&json, bring_str, inner_i);
-			
+			bring_str = json_getArrayString(&json, title, inner_i);
+
 			if ( strcmp(bring_str, "extension") == 0 ) {
-				ext = json_getArrayString(&json, bring_str, inner_i+1);
+				ext = json_getArrayString(&json, title, inner_i+1);
 			}
 			
 			else if ( strcmp(bring_str, "path") == 0 ) {
-				texture_path = json_getArrayString(&json, bring_str, inner_i+1);
+				texture_path = json_getArrayString(&json, title, inner_i+1);
 			}
 			
 			else if ( strcmp(bring_str, "size_x") == 0 ) {
-				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				bring_str = json_getArrayString(&json, title, inner_i+1);
 				texture_size.x = atof(bring_str);
 			}
 			else if ( strcmp(bring_str, "size_y") == 0 ) {
-				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				bring_str = json_getArrayString(&json, title, inner_i+1);
 				texture_size.y = atof(bring_str);
 			}
 			
 			else if ( strcmp(bring_str, "texture_begin_x") == 0 ) {
-				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				bring_str = json_getArrayString(&json, title, inner_i+1);
 				texture_begin.x = atof(bring_str);
 			}
 			else if ( strcmp(bring_str, "texture_begin_y") == 0 ) {
-				bring_str = json_getArrayString(&json, bring_str, inner_i+1);
+				bring_str = json_getArrayString(&json, title, inner_i+1);
 				texture_begin.y = atof(bring_str);
 			}
 			

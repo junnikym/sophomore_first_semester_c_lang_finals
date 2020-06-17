@@ -87,6 +87,12 @@
     <ClCompile Include="..\..\opengl\buffer_obj.c">
       <Filter>소스 파일\opengl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\world.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\load_json.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\opengl\system.h">
@@ -157,6 +163,12 @@
     </ClInclude>
     <ClInclude Include="..\..\opengl\buffer_obj.h">
       <Filter>헤더 파일\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\world.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\load_json.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
