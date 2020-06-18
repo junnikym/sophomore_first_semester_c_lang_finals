@@ -17,8 +17,9 @@ void copy_force(void* lhs, const void* rhs) {
 			}
 		}
 		
-		if ( rhs_conv->start_t != rhs_conv->start_t )
+		if ( lhs_conv->start_t != rhs_conv->start_t ) {
 			lhs_conv->start_t = rhs_conv->start_t;
+		}
 	}
 }
 
@@ -68,8 +69,9 @@ MOMENTUM output_force ( FORCE* f, double t ) {
 		return (MOMENTUM)MOMENTUM_INIT;
 	}
 
-	if( f->start_t == 0.0 )
+	if ( f->start_t == 0.0 ) {
 		f->start_t = t;
+	}
 	else {
 		
 		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ){

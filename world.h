@@ -68,11 +68,11 @@ int		quadrant_get_index	( VEC2 pos );
 
 // -- allocate and release world
 
-void 	world_init		( WORLD* _world, int _x_size, int _y_size );	// world 를 초기화
+void 	world_init		( WORLD* _world, int _x_size, int _y_size );		// world 를 초기화
 void 	resize_world		( WORLD* _world, int _x_size, int _y_size );	// world 의 크기를 늘려줌
-void 	world_release 	( WORLD* _world );								// world 전체를 해제
+void 	world_release 	( WORLD* _world );									// world 전체를 해제
 
-void	world_node_free	( void* node );
+void	world_node_free	( void* node );		// world 노드 하나를 해제
 
 // -- set world
 
@@ -80,6 +80,5 @@ int 	world_insert 		( WORLD* _world, VEC2 where, void* elem, int index );
 
 void 	world_update		( WORLD* _world, int section_x, int section_y,
 						  	  void (*update)(void* elem, VEC2* get_pos));
-				// world_node 하나를 해제
 
 #endif /* WORLD_H */

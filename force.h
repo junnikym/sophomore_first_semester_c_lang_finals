@@ -11,7 +11,7 @@
 
 #include <GL/glew.h>
 
-#define FORCE_INIT 		{V2_ZERO, -1, 0}
+#define FORCE_INIT 		{V2_ZERO, -1, 0.0, V2_ZERO}
 
 #define MOMENTUM_INIT 	{V2_ZERO, 0.0}
 

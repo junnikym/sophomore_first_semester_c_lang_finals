@@ -23,8 +23,12 @@ void copy_ent( void* lhs, const void* rhs ) {
 
 void adapt_each_f_ent ( void* f_in_e, int i, void* msger ) {
 	MOMENTUM result = MOMENTUM_INIT;
+	static double timer = 0;
 	
-	result = output_force( f_in_e, glfwGetTime() );
+	if(i == 0)
+		timer = glfwGetTime();
+	
+	result = output_force( f_in_e, timer );
 	
 	if ( result.angle != 0 ) {
 		*(((MOMENTUM_PTR*)msger)->angle) += result.angle;
@@ -81,7 +85,7 @@ void draw_ent ( const ENTITY* ent ) {
 	
 	gl_update_cam();
 	gl_get_mvp(model, mvp);
-	
+
 	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});
 	
 	// ! TODO : for test code
@@ -114,7 +118,7 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	init_force(&inserter);
 	inserter.identify = __F_ROTATE__ | __F_FOR_CONTROL__;
 	
-	dyn_arr_insert( &ent->forces,
+	FORCE* test = dyn_arr_insert( &ent->forces,
 					__I_ESSENTIAL_FORCE__CONTROL + 1,
 					&inserter,
 					copy_force);
