@@ -5,7 +5,7 @@ void gl_clear_screen ( ) {
 	glClear ( GL_COLOR_BUFFER_BIT );				// 버퍼를 비워줌
 }
 
-void	gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
+void gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
 							 	  mat4 MVP,
 							 	  const VEC2* current_sprite_pos ) {
 	GLuint mvp_id;
@@ -14,12 +14,16 @@ void	gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
 	/* 쉐이더의 texturePos에 텍스처를 자를 위치 정보를 등록하기 위해
 	 * texturePos가 쉐이더의 어느 위치에 있는지 저장하여 해당 정보르 넘겨준다.
 	 */
-	if ( current_sprite_pos != NULL ) {	// 사용자가 텍스쳐르 자르고 싶지 않을 경우 설정하지 않음
+	if ( current_sprite_pos != NULL ) {	// 사용자가 텍스처를 자르고 싶을 경우 실행
 		texture_location = glGetUniformLocation ( obj->ID, "texturePos" );
 		glUniform2f( texture_location, current_sprite_pos->x, current_sprite_pos->y);
 	}
+
+	texture_location = glGetUniformLocation ( obj->ID, "spriteColor" );
+	glUniform4f ( texture_location, 1.0f, 1.0f, 1.0f, 1.0f );
 	
 	glActiveTexture ( GL_TEXTURE0 );					// 텍스쳐 유닛을 활성화
+
 	glBindTexture ( GL_TEXTURE_2D, obj->texture );	// 해당 텍스처를 활성화된 텍스처 유닛에 바인딩
 	
 	/* MVP를 통하여 객체가 화면의 어디에 어떤식으로 표현될지 지정을 시켜준다.

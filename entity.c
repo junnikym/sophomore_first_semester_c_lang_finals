@@ -83,7 +83,6 @@ void draw_ent ( const ENTITY* ent ) {
 		model
 	);
 	
-	gl_update_cam();
 	gl_get_mvp(model, mvp);
 
 	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});

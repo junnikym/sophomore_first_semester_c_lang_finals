@@ -52,7 +52,7 @@ int main() {
 	set_square_vertices( buf_vertice, (VEC2){2.5f, 2.5f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
 	
 	g_buf_obj_insert ( "charactor",
-					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite.dds" ),
+					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite_mask.dds" ),
 					   &buf_obj_attr );
 	
 	/*----- WALL 1			--------------------------------------------------*/

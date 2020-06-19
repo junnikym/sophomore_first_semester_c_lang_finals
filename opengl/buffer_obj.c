@@ -74,7 +74,7 @@ void gl_define_texture ( const GLuint* program_id, const GLuint* texture_buf, in
 	// 쉐이더의 Texture ( Sampler2D ) 의 위치를 알아옴.
 	GLint texture_location = glGetUniformLocation ( *program_id, "Texture" );
                   
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture(GL_TEXTURE_2D, *texture_buf);	// 알아온 위치에 텍스처 데이터를 등록
 
 	glUniform1i ( texture_location, n );

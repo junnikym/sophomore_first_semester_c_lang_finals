@@ -77,14 +77,20 @@ void gl_system_run(WINDOW* window) {
 			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
 		}
 		
+
+		glEnable ( GL_BLEND );
+		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
 		user_pos = g_obj_get_position ( __CENTER_I );
 		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
 		//g_world_update(update_section.x, update_section.y);
 		update_g_obj();		
 
+		glDisable ( GL_BLEND );
+
 		// 화면에 표시될 뷰를 업데이트된 위치로 적용
-		user_pos = g_obj_get_position ( __CENTER_I );
 		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );
+		gl_update_cam ( );
 
 		is_collision = g_obj_is_collision ( 0, 1 );
 		printf ( "collision : %d \n", is_collision );
