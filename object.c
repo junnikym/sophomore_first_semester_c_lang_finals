@@ -6,8 +6,10 @@
 void init_obj ( OBJECT* obj ) {
 	dyn_arr_init( &(obj->entities), sizeof(ENTITY) );
 	obj->center = NULL;
-	
-	obj->collision_box = (VEC2){-1.0f, -1.0f};
+
+	dyn_arr_init ( &(obj->collision_box), sizeof(BOX) );
+	dyn_arr_init ( &(obj->collision_circle), sizeof ( CIRCLE ) );
+
 	obj->collision_indicator = 0;
 } 
 
@@ -25,6 +27,9 @@ void release_obj ( OBJECT* obj ) {
 	for( i = 0; i <= obj->entities.size; i++) {
 		release_ent( &ent_converter[i] );
 	}
+
+	dyn_arr_release ( &(obj->collision_box) );
+	dyn_arr_release ( &(obj->collision_circle) );
 
 	dyn_arr_release( &obj->entities );
 
@@ -71,6 +76,3 @@ void* set_center_obj ( OBJECT* obj, int index ) {
 void detech_center_obj ( OBJECT* obj ) {
 	
 }
-
-// ------------------------------------------------------- //
- 

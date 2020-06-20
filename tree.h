@@ -32,14 +32,3 @@ void tree_free ( TREE* tree, void* is_value_too );		// 트리 하나에 할당�
 void tree_release ( TREE* tree, int is_value_too );	// 트리 전체의 메모리를 헤제
 
 #endif /* MAP_H */
-
-
-
-
-
-
-
-
-
-
-   

@@ -239,3 +239,26 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 	}
 	printf("\n\n");
 }
+
+// -- collision function 
+
+void world_collision_process ( WORLD* _world, const VEC2* world_section ) {
+	int focus_i = 0, loop_i = 0;
+
+	int quad_sect = quadrant_get_index ( *world_section );
+
+	int sect_size = list_get_size (
+		_world->world[(int)world_section->x][(int)world_section->y].part[quad_sect]
+	);
+
+	// 1. 직선을 통해 추돌이 일어날지 미리 예측
+	for ( focus_i = 0; focus_i < sect_size; focus_i++ ) {
+
+
+		for ( loop_i = focus_i; loop_i < sect_size; loop_i ) {
+
+		}
+	}
+}
+
+// ------------------------------------------------------- //

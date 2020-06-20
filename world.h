@@ -48,8 +48,8 @@ typedef struct _WORLD_NODE_ {
 
 typedef struct _WORLD_ {
 	int width;					// 객체의 좌표값을 절대값으로 변환하여
-	int height;				// +가 된 좌표값에 해당하는 배열 위치 QUADRANT
-	QUADRANT** world;		// 구조체에 값을 저장한다.
+	int height;					// +가 된 좌표값에 해당하는 배열 위치 QUADRANT
+	QUADRANT** world;			// 구조체에 값을 저장한다.
 } WORLD;
 
 VEC2 	world_where 	( VEC2 pos );	// 배열상에 저장될 위치를 계산
@@ -80,5 +80,11 @@ int 	world_insert 		( WORLD* _world, VEC2 where, void* elem, int index );
 
 void 	world_update		( WORLD* _world, int section_x, int section_y,
 						  	  void (*update)(void* elem, VEC2* get_pos));
+
+// -- collision function 
+
+void    world_collision_process ( WORLD* _world, const VEC2* world_section );
+
+// ------------------------------------------------------- //
 
 #endif /* WORLD_H */

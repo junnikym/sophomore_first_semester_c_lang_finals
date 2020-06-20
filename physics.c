@@ -23,10 +23,10 @@ void friction(VEC2* force, const double* constant) {
 
 // -- checking collision function
 
-int intersection_line ( const double lhs_slope,
-						const double lhs_height,
-						const double rhs_slope,
-						const double rhs_height,
+int intersection_line ( double lhs_slope,
+						double lhs_height,
+						double rhs_slope,
+						double rhs_height,
 						VEC2* result ) {
 
 	if(lhs_slope == rhs_slope) 

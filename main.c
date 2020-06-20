@@ -71,7 +71,7 @@ int main() {
 	
 /*----- OBJECT 0 	------------------------------------------------------------*/
 /* |*/	g_obj_push_thing ( __OBJECT__, NULL );
-/* |*/	g_obj_set_collision_box ( 0, (VEC2){2.5f, 2.5f} );
+/* |*/	//g_obj_set_collision_box ( 0, (VEC2){2.5f, 2.5f} );
 /* |*/	g_obj_set_user_obj(0);
 /* |*/
 /* |		-- [0] : ENTITY 0		*/
@@ -82,7 +82,7 @@ int main() {
 /*------------------------------------------------------------------------------*/
 /*----- OBJECT 1 	------------------------------------------------------------*/
 /* |*/	g_obj_push_thing ( __OBJECT__, NULL );
-/* |*/	g_obj_set_collision_box ( 1, (VEC2){5.0f, 5.0f} );
+/* |*/	//g_obj_set_collision_box ( 1, (VEC2){5.0f, 5.0f} );
 /* |*/
 /* |		-- [1] : ENTITY 0		*/
 /* |*/	g_obj_push_thing ( __ENTITY__, NULL, 1 );

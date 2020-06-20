@@ -163,13 +163,13 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	
 	return target;
 }
-
+/*
 void g_obj_set_collision_box ( int obj_i, VEC2 box ) {
 	OBJECT* target = dyn_arr_get ( &g_objects, obj_i );
 	
 	target->collision_box = box;
 }
-
+*/
 // -- check function
 
 int is_g_user_obj_setted () {
@@ -193,19 +193,6 @@ int g_obj_is_collision	( int lhs_i, int rhs_i ){
 		&rhs->collision_box,
 		&rhs->center->angle
 	);
-}
-
-void g_obj_coliision_proccess ( void* elem, int i, void* arg ) {
-	int surplus = 0;
-	int detected = 0;
-	
-	for( surplus = 0; surplus < *(int*)arg; surplus++ ) {
-		detected = g_obj_is_collision( i, i+surplus );
-		
-		if( detected == __COLLISION_DETECTED_X ) {
-			
-		}
-	}
 }
 
 // -- Update functions
@@ -340,6 +327,7 @@ void g_world_insert_obj ( int g_obj_index ) {
 
 void g_world_update_obj ( void* obj, VEC2* return_pos ) {
 	update_obj ( obj );
+
 	*return_pos = ((OBJECT*)obj)->center->position;
 }
 
@@ -368,4 +356,3 @@ void release_memory() {
 }
 
 // ------------------------------------------------------- //
-        

@@ -43,7 +43,7 @@ static WORLD g_world;
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
 
-void* 	m 		( const char* title,
+void*   g_buf_obj_insert        ( const char* title,
 								  GLuint texture,
 								  BUFFER_ATTRIBUTES* attr);
 
@@ -95,12 +95,12 @@ void 	g_obj_release 			( );
 // ----- g_world functions	------------------------------
 
 void 	g_world_init		( int _x_size, int _y_size );
-void 	g_world_release	( );
+void 	g_world_release	    ( );
 
-void	g_world_insert_obj ( int g_obj_index );
+void	g_world_insert_obj  ( int g_obj_index );
 
-void 	g_world_update_obj ( void* obj, VEC2* return_pos );
-void 	g_world_update	( int section_x, int section_y );
+void 	g_world_update_obj  ( void* obj, VEC2* return_pos );
+void 	g_world_update	    ( int section_x, int section_y );
 
 // ------------------------------------------------------- //
 // ----- entire memory functions	----------------------
@@ -109,5 +109,6 @@ void 	init_memory 		( );
 void 	release_memory	( );
 
 // ------------------------------------------------------- //
+
 
 #endif
