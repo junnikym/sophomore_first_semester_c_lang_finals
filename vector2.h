@@ -63,6 +63,7 @@ void normalize_assn(VEC2* vec, const double* vec_size);
 double deg_to_rad(double deg);
 
 double vec2_dot(const VEC2* lhs, const VEC2* rhs);
+double vec2_cross(const VEC2* lhs, const VEC2* rhs);
 
 VEC2 vec2_get_distance ( const VEC2* lhs, const VEC2* rhs );
 

@@ -113,7 +113,7 @@ void json_parseJSON(char *doc, int size, JSON *json)    // JSON 파싱 함수
                     // 문자열 길이 + NULL 공간만큼 메모리 할당
                     json->tokens[tokenIndex].string = malloc(stringLength + 1);
                     // 현재 문자열은 배열의 요소
-                    json->tokens[tokenIndex].isArray = true;
+                    json->tokens[tokenIndex].isArray = arr_continue;
                     // 할당한 메모리를 0으로 초기화
                     memset(json->tokens[tokenIndex].string, 0, stringLength + 1);
 
@@ -215,7 +215,7 @@ char *json_getArrayString(JSON *json, char *key, int index)
             // 바로 뒤의 토큰(i + 1)부터 배열의 요소
             // 인덱스를 지정한 토큰이 문자열이면서 배열이면
             if (json->tokens[i + 1 + index].type == TOKEN_STRING && 
-                json->tokens[i + 1 + index].isArray == true)
+                json->tokens[i + 1 + index].isArray != 0)
                 return json->tokens[i + 1 + index].string;    // 해당 토큰의 문자열 반환
         }
     }
@@ -233,7 +233,7 @@ int json_getArrayCount(JSON *json, char *key)     // 키에 해당하는 배열�
         {
             // 바로 뒤의 토큰(i + 1)부터 isArray가 true인 토큰의 개수를 세어서 반환
             int j = 0;
-            while (json->tokens[i + 1 + j].isArray == true)
+            while (json->tokens[i + 1 + j].isArray != 0)
                 j++;
 
             return j;
@@ -261,19 +261,34 @@ double json_getNumber(JSON *json, char *key)    // 키에 해당하는 숫자를
 }
 
 int load_texture_package(char* path, TREE* memory) {
-	int inner_i = 0, outer_i = 0;
-	
+
+	// - VARIABLE FOR JSON
+
+    int inner_i = 0, outer_i = 0;
 	int size = 0, inner_size = 0;
 	int arr_size = 0;
 	char* bring_str = "";
 	
+    // - VARIABLE FOR TEXTURE
+
 	char* title = "";
 	char* ext = "";
-	char* texture_path = "";
+	char texture_path[256] = "";
 	VEC2 texture_begin = (VEC2){1, 1};
 	VEC2 texture_size = (VEC2){1, 1};
 	
 	GLuint texture = 0;
+
+    GLfloat buf_vertice[32] = { 0 };
+
+    memcpy ( buf_vertice, g_SQUARE_VERTICES, sizeof ( buf_vertice ) );
+
+    BUFFER_ATTRIBUTES buf_obj_attr = {
+        buf_vertice,
+        sizeof ( buf_vertice ),
+        g_SQUARE_INDICES,
+        sizeof ( g_SQUARE_INDICES )
+    };
 	
 	char *doc = json_readFile (path, &size);
 	if(doc == NULL)
@@ -286,12 +301,12 @@ int load_texture_package(char* path, TREE* memory) {
 	printf("loading textures :\n");
 	arr_size = json_getArrayCount(&json, "textures");
 	for(outer_i = 0; outer_i < arr_size; outer_i++) {
-		
+
         title = json_getArrayString(&json, "textures", outer_i);
 		inner_size = json_getArrayCount(&json, title );
         
 		for (inner_i = 0; inner_i < inner_size; inner_i+=2) {
-            outer_i++;
+            outer_i +=2;
 			
 			bring_str = json_getArrayString(&json, title, inner_i);
 
@@ -300,7 +315,11 @@ int load_texture_package(char* path, TREE* memory) {
 			}
 			
 			else if ( strcmp(bring_str, "path") == 0 ) {
-				texture_path = json_getArrayString(&json, title, inner_i+1);
+                texture_path[0] = '\0';
+
+                sprintf ( texture_path, "%s%s", 
+                          TEXTURE_FOLDER_PATH, 
+                          json_getArrayString ( &json, title, inner_i + 1 ) );
 			}
 			
 			else if ( strcmp(bring_str, "size_x") == 0 ) {
@@ -320,12 +339,32 @@ int load_texture_package(char* path, TREE* memory) {
 				bring_str = json_getArrayString(&json, title, inner_i+1);
 				texture_begin.y = atof(bring_str);
 			}
+
+            else if ( strcmp ( bring_str, "end" ) == 0 ) {
+                //outer_i += 1;
+                inner_size = inner_i;
+            }
 			
 		}
 		
-		printf("size : %lf %lf \n", texture_size.x, texture_size.y);
-		printf("begi : %lf %lf \n", texture_begin.x, texture_begin.y);
-		
+        // ! TODO : set z-buffer
+        set_square_vertices ( buf_vertice, texture_size, 1.0f, texture_begin );
+
+        if ( strcmp(ext, "dds") == 0 ) {
+            texture = gl_load_DDS ( texture_path );
+        }
+        else if ( strcmp ( ext, "bmp" ) == 0 ) {
+            printf("called by BMP : %s \n", title);
+            texture = gl_load_BMP ( texture_path );
+        }
+
+        if ( texture == 0 )
+            return -1;
+
+        g_buf_obj_insert ( title,
+                           texture,
+                           &buf_obj_attr );
+
 	}
 
 	json_freeJSON(&json);

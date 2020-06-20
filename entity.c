@@ -88,7 +88,7 @@ void draw_ent ( const ENTITY* ent ) {
 	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});
 	
 	// ! TODO : for test code
-	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos );
+	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos, NULL );
 }
 
 void set_essential_f_ent ( ENTITY* ent ) {

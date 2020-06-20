@@ -7,9 +7,13 @@
 #include <string.h>    // strchr, strcmp, memset, memcpy 함수가 선언된 헤더 파일
 
 #include "opengl/texture.h"
+#include "opengl/buffer_obj.h"
 
 #include "tree.h"
 #include "vector2.h"
+#include "memory.h"
+
+#define TEXTURE_FOLDER_PATH "../../resource/texture/"
 
 // 토큰 종류 열거형
 typedef enum _TOKEN_TYPE {
@@ -24,7 +28,7 @@ typedef struct _TOKEN {
         char *string;     // 문자열 포인터
         double number;    // 실수형 숫자
     };
-    bool isArray;         // 현재 토큰이 배열인지 표시
+    int isArray;         // 현재 토큰이 배열인지 표시
 } TOKEN;
 
 #define TOKEN_COUNT 128    // 토큰의 최대 개수

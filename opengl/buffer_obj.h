@@ -51,7 +51,7 @@ const static BUFFER_ATTRIBUTES g_SQUARE_DATA = {
 	&g_SQUARE_INDICES,
 	sizeof(g_SQUARE_INDICES)
 };
-  
+
 // ------------------------------------------------------- //
 // ----- OpenGL Graphics functions		------------------
 

@@ -8,7 +8,7 @@
 typedef struct _TREE_ TREE;
 
 struct _TREE_ {
-	char* key;
+	char key[32];
 	void* value;
 	TREE* left;		// key가 현재보다 작을 경우
 	TREE* right;		// key가 현재보다 클 경우

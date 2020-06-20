@@ -4,17 +4,19 @@
 			{
 				"extension": "dds",
 				"path": "character/player_walk_sprite.dds",
-				"size_x": "25.0",
-				"size_y": "25.0",
-				"texture_begin_x": "0.0625"
+				"size_x": "2.5",
+				"size_y": "2.5",
+				"texture_begin_x": "0.0625",
+				"end": "end"
 			}
 		]},
 		{ "item_oxy": [
 			{
 				"extension": "bmp",
-				"path": "item/item_co.dds",
+				"path": "item/item_co.bmp",
 				"size_x": "5.0",
-				"size_y": "5.0"
+				"size_y": "5.0",
+				"end": "end"
 			}
 		]}
 	]

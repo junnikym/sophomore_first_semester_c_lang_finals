@@ -6,8 +6,9 @@ void gl_clear_screen ( ) {
 }
 
 void gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
-							 	  mat4 MVP,
-							 	  const VEC2* current_sprite_pos ) {
+						  mat4 MVP,
+						  const VEC2* current_sprite_pos,
+						  const vec4* bland_color) {
 	GLuint mvp_id;
 	GLint texture_location = 0;
 	
@@ -20,7 +21,11 @@ void gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
 	}
 
 	texture_location = glGetUniformLocation ( obj->ID, "spriteColor" );
-	glUniform4f ( texture_location, 1.0f, 1.0f, 1.0f, 1.0f );
+	if ( bland_color == NULL ) 
+		glUniform4f ( texture_location, 1.0f, 1.0f, 1.0f, 1.0f );
+	else
+		glUniform4f ( texture_location, 
+					  (*bland_color)[0], (*bland_color)[1], (*bland_color)[2], (*bland_color)[3] );
 	
 	glActiveTexture ( GL_TEXTURE0 );					// 텍스쳐 유닛을 활성화
 

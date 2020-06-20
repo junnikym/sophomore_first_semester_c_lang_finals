@@ -8,7 +8,7 @@ TREE* tree_create ( char* _key, void* _value ) {		// 새로운 트리 요소 생
 		return NULL;
 	}
 	
-	result->key 	= _key;		// 값을 설정 및 초기화 후 반환
+	strcpy(result->key, _key);		// 값을 설정 및 초기화 후 반환
 	result->value 	= _value;
 	result->right	= NULL;
 	result->left	= NULL;
@@ -17,7 +17,7 @@ TREE* tree_create ( char* _key, void* _value ) {		// 새로운 트리 요소 생
 }
 
 TREE* tree_init ( TREE* tree ) {		// Tree를 초기화 해주는 함수
-	tree->key 	= NULL;
+	tree->key[0] 	= "\0";
 	tree->value = NULL;
 	tree->right	= NULL;
 	tree->left	= NULL;

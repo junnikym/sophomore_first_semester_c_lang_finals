@@ -45,23 +45,23 @@ int main() {
 	
 // - Load textures
 	
-	load_texture_package("../../resource/json/models.json", NULL);
+	//load_texture_package("../../resource/json/models.json", NULL);
 	
 	/*----- USER CHARACTOR	--------------------------------------------------*/
 	
 	set_square_vertices( buf_vertice, (VEC2){2.5f, 2.5f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
 	
 	g_buf_obj_insert ( "charactor",
-					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite_mask.dds" ),
+					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite.dds" ),
+					   &buf_obj_attr );
+
+	set_square_vertices ( buf_vertice, (VEC2) { 5.0f, 5.0f }, 0.0f, (VEC2) { 2.0f / 16.0f, 1.0f } );
+
+	g_buf_obj_insert ( "wall",
+					   gl_load_DDS ( "../../resource/texture/character/player_walk_sprite.dds" ),
 					   &buf_obj_attr );
 	
 	/*----- WALL 1			--------------------------------------------------*/
-	
-	set_square_vertices( buf_vertice, (VEC2){5.0f, 5.0f}, 0.0f, (VEC2){1.0f, 1.0f} );
-	
-	g_buf_obj_insert ( "wall",
-					   gl_load_BMP( "../../resource/texture/wall.bmp" ),
-					   &buf_obj_attr );
 	
 // - Set g_object
 	

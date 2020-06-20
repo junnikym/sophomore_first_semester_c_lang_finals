@@ -84,6 +84,10 @@ double vec2_dot(const VEC2* lhs, const VEC2* rhs) {
 	return fabs(lhs->x * rhs->x + lhs->y * rhs->y);
 }
 
+double vec2_cross ( const VEC2* lhs, const VEC2* rhs ) {
+    return lhs->x * rhs->y - lhs->y * rhs->x;
+}
+
 VEC2 vec2_get_distance ( const VEC2* lhs, const VEC2* rhs ) {
 	VEC2 result;
 	result.x = lhs->x - rhs->x;

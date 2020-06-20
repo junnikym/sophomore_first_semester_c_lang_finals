@@ -19,25 +19,11 @@
 void	gl_clear_screen		( );	// 화면을 모두 지워주는 함수
 
 void	gl_draw_sprite_obj 	( const BUFFER_OBJECT* obj,		// 객체를 그려주는 함수
-								  mat4 MVP,
-								  const VEC2* current_sprite_pos );
+							  mat4 MVP,
+							  const VEC2* current_sprite_pos,
+							  const vec4* bland_color );
 void	gl_rander			 	( );	// system의 run과 같은 역할
 
 // ------------------------------------------------------- //
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

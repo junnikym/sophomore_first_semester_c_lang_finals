@@ -32,7 +32,7 @@ static double long_jump_time = __NOT_ACT_TIME_CODE;
 static double jump_time_start = __NOT_ACT_TIME_CODE;
 static double jump_time_current = __NOT_ACT_TIME_CODE;
 
-// -- Control Keys
+// -- Control Keysgg
 
 static int __LEFT_KEY = GLFW_KEY_A;			// LEFT?			'A'
 static int __RIGHT_KEY = GLFW_KEY_D;		// RIHGT			'D'

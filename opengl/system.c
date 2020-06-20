@@ -77,7 +77,6 @@ void gl_system_run(WINDOW* window) {
 			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
 		}
 		
-
 		glEnable ( GL_BLEND );
 		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
@@ -93,7 +92,7 @@ void gl_system_run(WINDOW* window) {
 		gl_update_cam ( );
 
 		is_collision = g_obj_is_collision ( 0, 1 );
-		printf ( "collision : %d \n", is_collision );
+		//printf ( "collision : %d \n", is_collision );
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		
