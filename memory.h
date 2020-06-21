@@ -47,8 +47,6 @@ void*   g_buf_obj_insert        ( const char* title,
 								  GLuint texture,
 								  BUFFER_ATTRIBUTES* attr);
 
-void* 	g_buf_obj_load_comp		( FILE* file ); 	// compilation file load
-
 static void g_buf_obj_release_each ( TREE* each, void* free_value ) ;
 void	g_buf_obj_release		();
 
@@ -67,6 +65,8 @@ void  	g_obj_set_essential_f 	( int obj_i, int ent_i );
 void 	g_obj_set_collision_box ( int obj_i, VEC2 box );
 
 void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
+
+void 	g_obj_append_collision_box ( int obj_index, BOX box );
 
 // -- check functions();
 
@@ -93,6 +93,8 @@ void 	g_obj_release 			( );
 
 // ------------------------------------------------------- //
 // ----- g_world functions	------------------------------
+
+void 	world_collsion_process ( int sect_x, int sect_y );
 
 void 	g_world_init		( int _x_size, int _y_size );
 void 	g_world_release	    ( );

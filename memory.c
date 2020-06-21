@@ -30,13 +30,6 @@ void* g_buf_obj_insert ( const char* title,
 	return inserter;
 }
 
-void* g_buf_obj_load_comp	( FILE* file ) {
-	/*
-	*	load texture infomation from compilation file
-	*/
-	return NULL;
-}
-
 void g_buf_obj_release_each ( TREE* each, void* free_value ) {
 	BUFFER_OBJECT* target = each->value;
 	
@@ -163,6 +156,7 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	
 	return target;
 }
+
 /*
 void g_obj_set_collision_box ( int obj_i, VEC2 box ) {
 	OBJECT* target = dyn_arr_get ( &g_objects, obj_i );
@@ -170,6 +164,17 @@ void g_obj_set_collision_box ( int obj_i, VEC2 box ) {
 	target->collision_box = box;
 }
 */
+
+void g_obj_append_collision_box ( int obj_index, BOX box ) {
+	OBJECT* target = dyn_arr_get(&g_objects, obj_index);
+	
+	dyn_arr_push_back(
+		&(target->collision_box),
+		&box,
+		copy_box
+	);
+}
+
 // -- check function
 
 int is_g_user_obj_setted () {
@@ -177,22 +182,6 @@ int is_g_user_obj_setted () {
 		return 0;
 	
 	return 1;
-}
-
-int g_obj_is_collision	( int lhs_i, int rhs_i ){
-	if(lhs_i == rhs_i)	return -1;
-	
-	OBJECT* lhs = dyn_arr_get( &g_objects, lhs_i );
-	OBJECT* rhs = dyn_arr_get( &g_objects, rhs_i );
-	
-	return collision_detection_obb (
-		&lhs->center->position,
-		&lhs->collision_box,
-		&lhs->center->angle,
-		&rhs->center->position,
-		&rhs->collision_box,
-		&rhs->center->angle
-	);
 }
 
 // -- Update functions
@@ -309,7 +298,45 @@ void g_obj_release() {
 
 
 // ------------------------------------------------------- //
-// ----- g_map function		------------------------------
+// ----- g_world function		------------------------------
+
+void world_collsion_process ( int sect_x, int sect_y ) {
+	LIST** quads = NULL;
+	int quad_i = quadrant_get_index( (VEC2){sect_x, sect_y} );
+	
+	LIST* current = NULL;
+	LIST* loop_node = NULL;
+	VEC2 normalized_current = V2_ZERO;
+	VEC2 normalized_loop = V2_ZERO;
+	
+	OBJECT* current_obj = NULL;
+	OBJECT* loop_obj = NULL;
+	
+	int indicator = 0;
+	
+	quads = (g_world.world)[sect_x][sect_y].part;
+	
+	if(quads[quad_i] == NULL || quads[quad_i]->next == NULL)
+		return;				// 비교 대상까지 2개 이상의 리스트가 존재해야함.
+	
+	for ( current = quads[quad_i]; current->next != NULL; current = current->next ) {
+		current_obj = ((WORLD_NODE*)(current->elem))->elem;
+		
+		for ( loop_node = current->next; loop_node != NULL; loop_node = loop_node->next ) {
+			loop_obj = ((WORLD_NODE*)(loop_node->elem))->elem;
+
+			indicator = obj_is_collision(current_obj, loop_obj);
+			
+			if( indicator == __NO_COLLIDE )
+				continue;
+			
+			
+		}
+		
+		printf("how much exec \n");
+	}
+	printf("end of exec \n");
+}
 
 void g_world_init( int _x_size, int _y_size) {
 	world_init(&g_world, _x_size, _y_size);

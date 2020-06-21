@@ -15,6 +15,12 @@
 
 #define MOMENTUM_INIT 	{V2_ZERO, 0.0}
 
+/*		[ FORCE ]
+ *
+ *		물체에 Force 구조체를 활용하여 물체를 시간당 원하는 만큼 움직일 수 있도록 설정
+ */
+
+// 해당 Force가 어떤 용도로 쓰이는지, 어떤 상태인지를 나타내기 위한 열거형
 typedef enum __FORCE_FLAGS__ {
 	__F_ACCELERATE__	= (1 << 0),		// for control
 	__F_NON_FRICTION__	= (1 << 1),
@@ -28,19 +34,22 @@ typedef struct _FORCE {
     VEC2 force_vec;
 	int identify;				// INSERT FLAGS INTO FORCE->ID
 	double start_t;
-	VEC2 accel_vec;
+	VEC2 accel_vec;			// 가속도 사용 시 쓰임
 } FORCE;
 
+// 힘이 작용된 정도를 외부로 전달하기 위해 선언된 구조체
 typedef struct _MOMENTUM_ {
 	VEC2 vector;
 	double angle;
 } MOMENTUM;
 
+// (포인트형)
 typedef struct _MOMENTUM_PTR_ {
 	VEC2* vector;
 	double* angle;
 } MOMENTUM_PTR;
 
+// -- setting function
 void 	copy_force		(void* lhs, const void* rhs);
 void	add_force		(void* lhs, const void* rhs);
 void 	set_accel_in_f 	(void* f, const void* accel);
@@ -49,6 +58,7 @@ void 	set_identify_in_f (void* f, const void* id);
 void 	init_force		( FORCE* f );
 void 	set_vec_force	( FORCE* f, double x, double y );
 
+// -- getter
 MOMENTUM output_force 	( FORCE* force, double t );
 
 FORCE*	search_id_force	( DYN_ARR* arr, int id );

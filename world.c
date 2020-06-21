@@ -181,15 +181,8 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 	first_node = _world->world[section_x][section_y].part;
 	loop_node = first_node[quadrant_index];
 	
-	printf("update : (%d, %d)[%d] : list ptr : %p \n", section_x, section_y, quadrant_index, first_node);
-	printf("node [0][0] : \p // [0]: %p, [1]: %p \n",
-		   _world->world[0][0].part[0],
-		   _world->world[0][0].part[0],
-		   _world->world[0][0].part[0]->next );
-	
 	while( loop_node != NULL ) {
 		node = loop_node;
-		printf("-- node_ %p \n", node);
 		
 		elem = node->elem;						// 리스트에 저장된 요소를 가져옴
 		
@@ -235,28 +228,6 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 		}
 		else {
 			loop_node = node->next;		// 변경사항 X -> 다음 리스트 업데이트 진행
-		}
-	}
-	printf("\n\n");
-}
-
-// -- collision function 
-
-void world_collision_process ( WORLD* _world, const VEC2* world_section ) {
-	int focus_i = 0, loop_i = 0;
-
-	int quad_sect = quadrant_get_index ( *world_section );
-
-	int sect_size = list_get_size (
-		_world->world[(int)world_section->x][(int)world_section->y].part[quad_sect]
-	);
-
-	// 1. 직선을 통해 추돌이 일어날지 미리 예측
-	for ( focus_i = 0; focus_i < sect_size; focus_i++ ) {
-
-
-		for ( loop_i = focus_i; loop_i < sect_size; loop_i ) {
-
 		}
 	}
 }

@@ -57,8 +57,10 @@ VEC2 vec2_div(const VEC2* target, double a);
 
 void append_array_vec2(void* arr, int index, void* elem_addr);
 
-VEC2 normalize(VEC2 vec, const double* vec_size);
-void normalize_assn(VEC2* vec, const double* vec_size);
+double vec2_get_size (VEC2* vector);
+
+VEC2 vec2_normalize(VEC2 vec, const double* vec_size);
+void vec2_normalize_assn(VEC2* vec, const double* vec_size);
 
 double deg_to_rad(double deg);
 

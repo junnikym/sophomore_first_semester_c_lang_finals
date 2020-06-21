@@ -81,9 +81,13 @@ void gl_system_run(WINDOW* window) {
 		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
 		user_pos = g_obj_get_position ( __CENTER_I );
+		
 		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
-		//g_world_update(update_section.x, update_section.y);
-		update_g_obj();		
+		update_section = world_where(user_pos);
+		g_world_update(update_section.x, update_section.y);
+		
+		// 충돌 체크
+		world_collsion_process(update_section.x, update_section.y);
 
 		glDisable ( GL_BLEND );
 
@@ -91,7 +95,7 @@ void gl_system_run(WINDOW* window) {
 		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );
 		gl_update_cam ( );
 
-		is_collision = g_obj_is_collision ( 0, 1 );
+		//is_collision = g_obj_is_collision ( 0, 1 );
 		//printf ( "collision : %d \n", is_collision );
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌

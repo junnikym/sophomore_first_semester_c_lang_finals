@@ -64,12 +64,16 @@ void append_array_vec2(void* arr, int index, void* elem_addr) {
     ((VEC2*)(arr))[index] = *(VEC2*)elem_addr;
 }
 
-void normalize_assn(VEC2* vec, const double* vec_size) {
+double vec2_get_size (VEC2* vector) {
+	return sqrt(SQUARE(vector->x) + SQUARE(vector->x));
+}
+
+void vec2_normalize_assn(VEC2* vec, const double* vec_size) {
     vec->x /= *vec_size;
     vec->y /= *vec_size;
 }
 
-VEC2 normalize(VEC2 vec, const double* vec_size) {
+VEC2 vec2_normalize(VEC2 vec, const double* vec_size) {
     vec.x /= *vec_size;
     vec.y /= *vec_size;
 

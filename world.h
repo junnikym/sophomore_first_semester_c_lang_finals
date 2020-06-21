@@ -81,10 +81,6 @@ int 	world_insert 		( WORLD* _world, VEC2 where, void* elem, int index );
 void 	world_update		( WORLD* _world, int section_x, int section_y,
 						  	  void (*update)(void* elem, VEC2* get_pos));
 
-// -- collision function 
-
-void    world_collision_process ( WORLD* _world, const VEC2* world_section );
-
 // ------------------------------------------------------- //
 
 #endif /* WORLD_H */
