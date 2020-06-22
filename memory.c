@@ -157,15 +157,7 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	return target;
 }
 
-/*
-void g_obj_set_collision_box ( int obj_i, VEC2 box ) {
-	OBJECT* target = dyn_arr_get ( &g_objects, obj_i );
-	
-	target->collision_box = box;
-}
-*/
-
-void g_obj_append_collision_box ( int obj_index, BOX box ) {
+void g_obj_append_o_box ( int obj_index, BOX box ) {
 	OBJECT* target = dyn_arr_get(&g_objects, obj_index);
 	
 	dyn_arr_push_back(
@@ -300,7 +292,7 @@ void g_obj_release() {
 // ------------------------------------------------------- //
 // ----- g_world function		------------------------------
 
-void world_collsion_process ( int sect_x, int sect_y ) {
+void g_world_collsion_process ( int sect_x, int sect_y ) {
 	LIST** quads = NULL;
 	int quad_i = quadrant_get_index( (VEC2){sect_x, sect_y} );
 	
@@ -325,17 +317,23 @@ void world_collsion_process ( int sect_x, int sect_y ) {
 		for ( loop_node = current->next; loop_node != NULL; loop_node = loop_node->next ) {
 			loop_obj = ((WORLD_NODE*)(loop_node->elem))->elem;
 
-			indicator = obj_is_collision(current_obj, loop_obj);
+			indicator = g_obj_is_collision(current_obj, loop_obj);
+			
+			if( indicator == -1 )
+				continue;
 			
 			if( indicator == __NO_COLLIDE )
 				continue;
 			
-			
+			else {
+				printf(" %.2f object %p, and %p crashed ! \n", glfwGetTime(), current, loop_node);
+				printf("\t indicator : %d (no collide : %d)\n", indicator, __NO_COLLIDE);
+				
+				
+			}
 		}
 		
-		printf("how much exec \n");
 	}
-	printf("end of exec \n");
 }
 
 void g_world_init( int _x_size, int _y_size) {

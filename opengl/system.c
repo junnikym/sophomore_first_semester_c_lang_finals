@@ -50,6 +50,8 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 		(vec3) { 0, 0, -1 },			// 초점 방향
 		(vec3) { 0, 1, 0 }		// 카메라 방향
 	);
+	glEnable ( GL_BLEND );
+	glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
   
 	return 0;
 }
@@ -76,9 +78,6 @@ void gl_system_run(WINDOW* window) {
 		if ( is_g_user_obj_setted() ) {
 			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
 		}
-		
-		glEnable ( GL_BLEND );
-		glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
 		user_pos = g_obj_get_position ( __CENTER_I );
 		
@@ -87,16 +86,11 @@ void gl_system_run(WINDOW* window) {
 		g_world_update(update_section.x, update_section.y);
 		
 		// 충돌 체크
-		world_collsion_process(update_section.x, update_section.y);
-
-		glDisable ( GL_BLEND );
+		g_world_collsion_process(update_section.x, update_section.y);
 
 		// 화면에 표시될 뷰를 업데이트된 위치로 적용
 		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );
 		gl_update_cam ( );
-
-		//is_collision = g_obj_is_collision ( 0, 1 );
-		//printf ( "collision : %d \n", is_collision );
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		
@@ -108,6 +102,7 @@ void gl_system_run(WINDOW* window) {
 }
 
 void gl_system_shutdown(WINDOW* window) {		// 종료함수
+	glDisable ( GL_BLEND );
 	glfwTerminate();		// GLFW와 관련된 요소들을 해제
 }
 

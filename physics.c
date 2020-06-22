@@ -74,7 +74,7 @@ int collision_detection_obb ( const VEC2* lhs_pos,
 		}
 	}
 	
-	printf("");
+	printf(" in collision function : flag : %d \n", collision_flag);
 	
 	return collision_flag;
 }

@@ -131,4 +131,3 @@ void set_essential_f_ent ( ENTITY* ent ) {
 	//dyn_arr_insert( &ent->forces, 1, &inserter, copy_force);
 	// ------------------------------
 }
-      

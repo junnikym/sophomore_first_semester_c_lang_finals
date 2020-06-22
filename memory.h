@@ -71,7 +71,7 @@ void 	g_obj_append_collision_box ( int obj_index, BOX box );
 // -- check functions();
 
 int 	is_g_user_obj_setted	();
-int 	g_obj_is_collision		( int lhs_i, int rhs_i );
+//int 	g_obj_is_collision		( int lhs_i, int rhs_i );
 void 	g_obj_coliision_proccess ( void* elem, int i, void* arg );
 
 // -- Update functions
@@ -94,7 +94,7 @@ void 	g_obj_release 			( );
 // ------------------------------------------------------- //
 // ----- g_world functions	------------------------------
 
-void 	world_collsion_process ( int sect_x, int sect_y );
+void 	g_world_collsion_process ( int sect_x, int sect_y );
 
 void 	g_world_init		( int _x_size, int _y_size );
 void 	g_world_release	    ( );
