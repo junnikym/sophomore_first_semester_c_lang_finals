@@ -304,6 +304,9 @@ int load_texture_package(char* path, TREE* memory) {
 
         title = json_getArrayString(&json, "textures", outer_i);
 		inner_size = json_getArrayCount(&json, title );
+
+        texture_begin = (VEC2) { 1, 1 };
+        texture_size = (VEC2) { 1, 1 };
         
 		for (inner_i = 0; inner_i < inner_size; inner_i+=2) {
             outer_i +=2;

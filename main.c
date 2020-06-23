@@ -45,21 +45,7 @@ int main() {
 	
 // - Load textures
 	
-	//load_texture_package("../../resource/json/models.json", NULL);
-	
-	/*----- USER CHARACTOR	--------------------------------------------------*/
-	
-	set_square_vertices( buf_vertice, (VEC2){2.5f, 2.5f}, 1.0f, (VEC2){1.0f/16.0f, 1.0f} );
-	
-	g_buf_obj_insert ( "charactor",
-					    gl_load_DDS( "../../resource/texture/character/player_walk_sprite.dds" ),
-					   &buf_obj_attr );
-
-	set_square_vertices ( buf_vertice, (VEC2) { 5.0f, 5.0f }, 0.0f, (VEC2) { 2.0f / 16.0f, 1.0f } );
-
-	g_buf_obj_insert ( "wall",
-					   gl_load_BMP ( "../../resource/texture/item/item_co.bmp" ),
-					   &buf_obj_attr );
+	load_texture_package("../../resource/json/models.json", NULL);
 	
 	/*----- WALL 1			--------------------------------------------------*/
 	
@@ -78,7 +64,7 @@ int main() {
 /* |*/	g_obj_push_thing ( __ENTITY__, NULL, 0 );
 /* |*/	g_obj_set_center_ent ( 0, 0 );
 /* |*/	g_obj_set_essential_f( 0, -1 );
-/* |*/	g_obj_set_obj_buf("charactor", 0, -1);	// set texture
+/* |*/	g_obj_set_obj_buf("main_character_walk", 0, -1);	// set texture
 /* |*/	g_obj_append_collision_box(0, (BOX){(VEC2){0.0f, 0.0f}, (VEC2){2.5f, 2.5f}});
 /*------------------------------------------------------------------------------*/
 /*----- OBJECT 1 	------------------------------------------------------------*/
@@ -89,7 +75,7 @@ int main() {
 /* |*/	g_obj_push_thing ( __ENTITY__, NULL, 1 );
 /* |*/	g_obj_set_center_ent ( 1, 0 );
 /* |*/	g_obj_set_essential_f( 1, -1 );
-/* |*/	g_obj_set_obj_buf("wall", 1, -1);		// set texture
+/* |*/	g_obj_set_obj_buf("item_oxy", 1, -1);		// set texture
 /* |*/	g_obj_append_collision_box(1, (BOX){(VEC2){0.0f, 0.0f}, (VEC2){5.0f, 5.0f}});
 /*------------------------------------------------------------------------------*/
 /* |*/	g_world_insert_obj(0);

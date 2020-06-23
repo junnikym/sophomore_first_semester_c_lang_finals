@@ -86,7 +86,7 @@ void gl_system_run(WINDOW* window) {
 		g_world_update(update_section.x, update_section.y);
 		
 		// 충돌 체크
-		g_world_collsion_process(update_section.x, update_section.y);
+		//g_world_collsion_process(update_section.x, update_section.y);
 
 		// 화면에 표시될 뷰를 업데이트된 위치로 적용
 		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );

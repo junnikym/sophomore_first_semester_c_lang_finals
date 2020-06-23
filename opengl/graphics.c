@@ -1,7 +1,7 @@
 #include "graphics.h"
 
 void gl_clear_screen ( ) {
-	glClearColor ( 0.0f, 0.0f, 0.0f, 1.0f );		// 화면을 검정색으로 만들어 줌
+	glClearColor ( 1.0f, 1.0f, 1.0f, 1.0f );		// 화면을 검정색으로 만들어 줌
 	glClear ( GL_COLOR_BUFFER_BIT );				// 버퍼를 비워줌
 }
 

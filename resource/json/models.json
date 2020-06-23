@@ -12,13 +12,40 @@
 		]},
 		{ "item_oxy": [
 			{
-				"extension": "bmp",
-				"path": "item/item_co.bmp",
+				"extension": "dds",
+				"path": "item/item_co.dds",
 				"size_x": "5.0",
 				"size_y": "5.0",
 				"end": "end"
 			}
 		]},
+		{ "ship_a_body": [
+			{
+				"extension": "dds",
+				"path": "ship_module/body_a.dds",
+				"size_x": "5.0",
+				"size_y": "5.0",
+				"end": "end"
+			}
+		]},
+		{ "ship_a_docker": [
+			{
+				"extension": "dds",
+				"path": "ship_module/docker_a.dds",
+				"size_x": "5.0",
+				"size_y": "5.0",
+				"end": "end"
+			}
+		]},
+		{ "ship_a_truster": [
+			{
+				"extension": "dds",
+				"path": "ship_module/truster_a.dds",
+				"size_x": "5.0",
+				"size_y": "5.0",
+				"end": "end"
+			}
+		]}
 		
 	]
 }

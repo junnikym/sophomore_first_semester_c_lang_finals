@@ -31,7 +31,7 @@ typedef struct _TOKEN {
     int isArray;         // 현재 토큰이 배열인지 표시
 } TOKEN;
 
-#define TOKEN_COUNT 128    // 토큰의 최대 개수
+#define TOKEN_COUNT 256    // 토큰의 최대 개수
 
 // JSON 구조체
 typedef struct _JSON {

@@ -157,7 +157,7 @@ void* g_obj_set_obj_buf ( char* obj_buf_key, int obj_i, int ent_i) {
 	return target;
 }
 
-void g_obj_append_o_box ( int obj_index, BOX box ) {
+void g_obj_append_collision_box ( int obj_index, BOX box ) {
 	OBJECT* target = dyn_arr_get(&g_objects, obj_index);
 	
 	dyn_arr_push_back(
@@ -317,7 +317,7 @@ void g_world_collsion_process ( int sect_x, int sect_y ) {
 		for ( loop_node = current->next; loop_node != NULL; loop_node = loop_node->next ) {
 			loop_obj = ((WORLD_NODE*)(loop_node->elem))->elem;
 
-			indicator = g_obj_is_collision(current_obj, loop_obj);
+			indicator = obj_is_collision (current_obj, loop_obj);
 			
 			if( indicator == -1 )
 				continue;
