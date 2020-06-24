@@ -35,7 +35,7 @@ TREE* tree_insert ( TREE* tree, TREE* rhs ) {	// Tree를 삽입하는 함수
 
 	cmp = strcmp(rhs->key, tree->key);	// key값을 비교하여
 	if(cmp == 0) {							// 같을 경우 중복 오류를 출력
-		printf("ERROR : tree_insert function : 'same key' \n");
+		printf("ERROR : tree_insert function : '%p' '%p' \n", tree->key, rhs->key);
 		return NULL;
 	}
 	else if (cmp < 0) 						// 작을 경우 tree의 왼쪽에

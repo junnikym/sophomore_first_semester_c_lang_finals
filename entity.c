@@ -1,5 +1,29 @@
 #include "entity.h"
 
+void ent_toggle_brake(void* ent, const void* brake) {
+	int i = 0;
+	ENTITY* e = (ENTITY*)ent;
+	FORCE* f = NULL;
+
+	if (e->is_breke != *(int*)brake) {
+		e->is_breke = *(int*)brake;
+
+		if (e->is_breke != 0) {
+			for (i = 0; i <= e->forces.size; i++) {
+				f = dyn_arr_get(&e->forces, i);
+				f->identify |= __F_BRAKE__;
+			}
+		}
+		else {
+			for (i = 0; i <= e->forces.size; i++) {
+				f = dyn_arr_get(&e->forces, i);
+				f->identify ^= __F_BRAKE__;
+			}
+		}
+	}
+	
+}
+
 void init_ent( ENTITY* ent ) {
 	dyn_arr_init( &ent->forces, sizeof(FORCE) );
 
@@ -10,6 +34,13 @@ void init_ent( ENTITY* ent ) {
 	ent->texture_pos	= V2_ZERO;
 
 	ent->buf_z			= 0.0;
+	ent->blend_color[0] = 1.0f;
+	ent->blend_color[1] = 1.0f;
+	ent->blend_color[2] = 1.0f;
+	ent->blend_color[3] = 1.0f;
+
+	ent->animate = NULL;
+	ent->is_breke = 0;
 }
 
 void release_ent( ENTITY* ent) {
@@ -39,6 +70,21 @@ void modify_ent_texture_pos(void* lhs, const void* rhs) {
 		((ENTITY*)lhs)->texture_pos = *(VEC2*)rhs;
 }
 
+void set_blend_in_ent(void* lhs, const void* blend) {
+	vec4 a = GLM_VEC4_ZERO_INIT;
+	glm_vec4_copy(blend, a);
+
+	((ENTITY*)lhs)->blend_color[0] = a[0];
+	((ENTITY*)lhs)->blend_color[1] = a[1];
+	((ENTITY*)lhs)->blend_color[2] = a[2];
+	((ENTITY*)lhs)->blend_color[3] = a[3];
+}
+
+void append_animate_in_ent(void* lhs, const void* rhs_tree) {
+	TREE* lhs_tree = ((ENTITY*)lhs)->animate;
+	lhs_tree = tree_insert(lhs_tree, rhs_tree);
+}
+
 void adapt_each_f_ent ( void* f_in_e, int i, void* msger ) {
 	MOMENTUM result = MOMENTUM_INIT;
 	static double timer = 0;
@@ -57,7 +103,9 @@ void adapt_each_f_ent ( void* f_in_e, int i, void* msger ) {
 		// ! TODO : on ground -> activate
 		// ! TODO : if this object allow phy -> activate
 		// ! TODO : apply contextual constant
-		if( !(((FORCE*)f_in_e)->identify & __F_NON_FRICTION__) )
+
+		if( !(((FORCE*)f_in_e)->identify & (__F_NON_FRICTION__)) |
+			(((FORCE*)f_in_e)->identify & (__F_BRAKE__)))
 			friction ( f_in_e, &__BASIC_FIRCTION_CONSTANT );
 		// ! TODO : Update gravity
 		
@@ -90,13 +138,13 @@ void draw_ent ( const ENTITY* ent ) {
 	
 	mat4 model = GLM_MAT4_IDENTITY_INIT;
 	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
-	
+
 	glm_translate_to(
 		(mat4)GLM_MAT4_IDENTITY_INIT,
 		(vec3) {
 			ent->position.x,
 			ent->position.y,
-			0.0f
+			ent->buf_z
 		},
 		model
 	);
@@ -106,7 +154,29 @@ void draw_ent ( const ENTITY* ent ) {
 	glm_rotate(mvp, glm_rad(ent->angle), (vec3){0.0f, 0.0f, 1.0f});
 	
 	// ! TODO : for test code
-	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos, NULL );
+	gl_draw_sprite_obj ( ent->graphics_buf, *mvp, &ent->texture_pos, &ent->blend_color );
+}
+
+void fixed_draw_ent(const ENTITY* ent) {
+	if (ent->graphics_buf == NULL)
+		return;
+
+	mat4 model = GLM_MAT4_IDENTITY_INIT;
+	mat4 mvp = GLM_MAT4_IDENTITY_INIT;
+
+	glm_translate_to(
+		(mat4)GLM_MAT4_IDENTITY_INIT,
+		(vec3) {
+			ent->position.x,
+			ent->position.y,
+			ent->buf_z
+		},
+		model
+	);
+
+	gl_get_fixed_mvp(model, mvp);
+
+	gl_draw_sprite_obj(ent->graphics_buf, *mvp, &ent->texture_pos, &ent->blend_color);
 }
 
 void set_essential_f_ent ( ENTITY* ent ) {

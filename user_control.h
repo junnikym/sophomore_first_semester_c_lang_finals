@@ -26,6 +26,7 @@ static int g_User_Long_Jump = 2;
 static int direction_buf = 0;
 static int space_thrust_buf = 0;
 
+static int jump_key_buf = 0;
 static int long_jump_key_buf = 0;
 static double long_jump_time = __NOT_ACT_TIME_CODE;
 
@@ -42,7 +43,7 @@ static int __BACK_KEY = GLFW_KEY_S;
 
 static int __JUMP_KEY = GLFW_KEY_SPACE;		// JUMP				'SPACE'
 static int __LONG_JUMP_KEY = GLFW_KEY_W;	// LONG_JUMP		'W'
-static int __TAB_KEY = GLFW_KEY_TAB;		// INVENTORY		'TAB'
+static int __INVENTRY_KEY = GLFW_KEY_TAB;	// INVENTORY		'TAB'
 static int __E_KEY = GLFW_KEY_E;			// INTERACTOIN		'E'
 static int __ESC_KEY = GLFW_KEY_ESCAPE;		// MENU ( IN GAME)	'ESC'
 

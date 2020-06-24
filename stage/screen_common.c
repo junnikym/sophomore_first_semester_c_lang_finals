@@ -1,6 +1,8 @@
 #include "screen_common.h"
 
 void init_screen() {				//초기화 함수
+	init_game();
+	reset_loaded_time();
 	title_img_load();				// 이미지 로드
 	current_screen = title_test;	// 화면을 현재 화면에 넣어준다.
 }
@@ -13,6 +15,7 @@ void transe_screen(int screen_code ) {
 	// 3. 옵션
 	// 4. 종료
 
+	reset_loaded_time();
 	g_obj_release();	// 해제
 	g_obj_init();		// 초기화
 
@@ -25,14 +28,22 @@ void transe_screen(int screen_code ) {
 		break;
 
 	case __NEW_GAME_SCREEN:		//New_game
+		init_game();
+		new_game_load();
+		current_screen = new_game;
 	
-		
+		break;
+
+	case __COUNTINUE:		// countinue
+		init_game();
+
 		break;
 			
-	case 3:						//Option
-		//Option();
+	case __OPTION_SCREEN:		//Option
 
-	case 4:						//Exit
+		break;
+
+	case __EXIT:						//Exit
 		exit(1);
 
 	default:

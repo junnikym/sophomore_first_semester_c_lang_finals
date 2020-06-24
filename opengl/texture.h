@@ -13,7 +13,7 @@
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-// Load a .BMP file using our custom loader
+// Load a .BMP file using our custom loadert
 GLuint gl_load_BMP (const char * imagepath);
 
 // Load a .DDS file using GLFW's own loader

@@ -1,14 +1,14 @@
 {
 	"textures" : [
 		{ "main_character_walk": [
-			{
-				"extension": "dds",
-				"path": "character/player_walk_sprite.dds",
-				"size_x": "2.5",
-				"size_y": "2.5",
-				"texture_begin_x": "0.0625",
-				"end": "end"
-			}
+      {
+        "extension": "dds",
+        "path": "character/player_walk_sprite.dds",
+        "size_x": "2.5",
+        "size_y": "2.5",
+        "texture_begin_x": "0.0625",
+        "end": "end"
+      }
 		]},
 		{ "item_oxy": [
 			{
@@ -45,6 +45,24 @@
 				"size_y": "5.0",
 				"end": "end"
 			}
+		]},
+		{ "ship_a_truster": [
+			{
+				"extension": "dds",
+				"path": "ship_module/truster_a.dds",
+				"size_x": "5.0",
+				"size_y": "5.0",
+				"end": "end"
+			}
+		]},
+		{ "ship_b": [
+      {
+        "extension": "dds",
+        "path": "integral_ship/ship_b.dds",
+        "size_x": "18.0",
+        "size_y": "6.0",
+        "end": "end"
+      }
 		]}
 		
 	]

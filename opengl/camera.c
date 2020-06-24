@@ -20,6 +20,18 @@ void gl_add_FOV ( GLfloat how_much ) {
 		g_FOV = 45.0f;
 }
 
+GLfloat get_g_FOV() {
+	return g_FOV;
+}
+
+void gl_init_fixed_projection() {
+	glm_perspective(glm_rad(90), 1280.0f / 960.0f, 0.1f, 300.0f, g_fixed_cam_projection);
+}
+
+void gl_get_fixed_mvp(const mat4 model, mat4 result) {
+	glm_mat4_mul(g_fixed_VP, model, result);
+}
+
 void gl_set_projection() {
 	// ! TODO : Change screen ratio
 	
@@ -67,6 +79,8 @@ void gl_set_view_pos ( vec3 pos ) {
 
 void gl_update_cam() {
 	glm_mat4_mul ( g_cam_projection, g_cam_view, g_VP );
+
+	glm_mat4_mul(g_fixed_cam_projection, g_cam_view, g_fixed_VP);
 }
 
 // ------------------------------------------------------- //

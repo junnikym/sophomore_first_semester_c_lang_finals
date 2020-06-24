@@ -44,6 +44,8 @@ static WORLD g_world;
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
 
+void* g_buf_obj_init();
+
 void*   g_buf_obj_insert        ( const char* title,
 								  GLuint texture,
 								  BUFFER_ATTRIBUTES* attr);

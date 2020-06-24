@@ -43,9 +43,9 @@ void	init_obj 			( OBJECT* obj );
 void	copy_obj 			( void* lhs, const void* rhs);
 void	release_obj 		( OBJECT* obj );
 
-void	adapt_each_f_obj	( void* elem, int i, void* pos );
+void	draw_obj			(OBJECT* obj, int fixed);
 
-void	update_each_obj		(void* elem, int i, void* pos);
+void	adapt_each_f_obj	( void* elem, int i, void* pos );
 void	update_obj			( OBJECT* obj );
 
 // -- setting function

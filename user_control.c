@@ -22,6 +22,10 @@ void game_control(const int* key, const int* key_act) {
 	 * 	KEY PRESSED
 	 * ---------------------------------------------------------------------- */
 	if (*key_act == __KEY_PRESS) {
+
+		if (*key == __INVENTRY_KEY) {
+			toggle_inventory();
+		}
 		
 		/* ----- Direction Key	--------------------------------------------- */
 		
@@ -44,20 +48,10 @@ void game_control(const int* key, const int* key_act) {
 		
 		/* ----- Jump 		------------------------------------------------- */
 		
-		if(/* is on ground */ 0) {
-			if (*key == __LONG_JUMP_KEY) {
-				if( jump_time_start != 0 )
-					long_jump_key_buf = 2;	// fully clked
-			}
-			
-			if (*key == __JUMP_KEY) {
-				jump_time_start = glfwGetTime();
-				
-				if( long_jump_key_buf != 2) {
-					
-				}
-			}
+		if (*key == __JUMP_KEY) {
+			jump_key_buf = 1;
 		}
+
 		/* ------------------------------------------------------------------ */
 		
 		/* ----- Space Control 		----------------------------------------- */
@@ -111,19 +105,10 @@ void game_control(const int* key, const int* key_act) {
 		/* ------------------------------------------------------------------ */
 		
 		/* ----- Jump 		------------------------------------------------- */
-		if(/* is on ground */ 0) {
-			if (*key == __LONG_JUMP_KEY) {
-				long_jump_key_buf = 1;
-				// not clked ( if jump key is clkedsd than alter buf to 0 )
-			}
-			
-			if (*key == __JUMP_KEY) {
-				if ( long_jump_key_buf == 0 ) {
-					jump_time_start = __NOT_ACT_TIME_CODE;
-					jump_time_current = __NOT_ACT_TIME_CODE;
-				}
-			}
+		if (*key == __JUMP_KEY) {
+			jump_key_buf = 0;
 		}
+
 		/* ------------------------------------------------------------------ */
 		/* ----- Space Control 		----------------------------------------- */
 		else {
@@ -189,6 +174,8 @@ void game_control(const int* key, const int* key_act) {
 		
 		g_obj_alter ( __FORCE__, &identify, set_identify_in_f,
 					  __CENTER_I, __CENTER_I, __I_ESSENTIAL_FORCE__CONTROL );
+
+		g_obj_alter(__ENTITY__, &jump_key_buf, ent_toggle_brake, __CENTER_I, __CENTER_I);
 	}
 
 }

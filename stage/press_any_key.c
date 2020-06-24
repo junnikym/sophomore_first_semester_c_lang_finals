@@ -1,6 +1,11 @@
 #include "press_any_key.h"
 #include "../text.h"
 #include "../sound.h"
+#include "../inventory.h"
+
+void reset_loaded_time() {
+	loaded_time = glfwGetTime();
+}
 
 void title_img_load() {
 	// 처음 화면의 press_any_key.
@@ -30,16 +35,6 @@ void title_img_load() {
 
 	//-------------------- background
 
-	set_square_vertices(buf_vertice, (VEC2) { 42.0f, -28.0f }, 0.0f, (VEC2) { 1.0f, 1.0f });
-	
-	g_buf_obj_insert("background",
-		gl_load_BMP("../../resource/texture/background/background_S01.bmp"),
-		&buf_obj_attr);
-
-	//-------------------- press any key
-
-
-
 	/*----- OBJECT 0 	------------------------------------------------------------*/
 	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
 	/* |		-- [0] : ENTITY 0		*/
@@ -48,18 +43,21 @@ void title_img_load() {
 	/* |*/	g_obj_set_obj_buf("background", 0, 0);		// set texture
 	//g_obj_alter(__ENTITY__, &pos0, modify_ent, 0, 0);
 	/*------------------------------------------------------------------------------*/
-
-	PlayMusic(background_bgm);
 }
 
 void title_test() {
-	
+
 	if (g_input.key_action == GLFW_PRESS && g_input.key == GLFW_KEY_2) {
 		
 		PlayEffect(click_event);
+	
 		transe_screen(__MAIN_SCREEN);		// go to mainscreen
 		
 	}
+	//-------------------- press any key
 
-	Text_drew("press any key", -3.0, -5.0, 1.0, 0.2);
+	if ( (int)((glfwGetTime() - loaded_time)*2) % 2 == 1 ) {
+		Text_drew("press any key", -3.0, -5.0, 1.0, 0.2);
+	}
+
 }

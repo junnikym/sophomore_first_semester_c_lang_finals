@@ -126,6 +126,15 @@
     <ClCompile Include="..\..\sound.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\inventory.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\info_indicator.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\inventory.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\opengl\system.h">
@@ -220,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="..\..\sound.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inventory.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\stage\inventory.h">
+      <Filter>헤더 파일\stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

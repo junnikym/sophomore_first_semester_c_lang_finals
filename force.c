@@ -77,16 +77,24 @@ MOMENTUM output_force ( FORCE* f, double t ) {
 	}
 	else {		// 시간이 적용 되어 있다면 시간에 대한 force값을 계산한다.
 		
-		// Force 옵션에 가속도가 설정되어 있다면 force에 적용될 벡터를 가속도만큼 증가시켜준다.
-		if( f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER) ){
-			result.vector = vec2_mul ( &f->accel_vec, (t - f->start_t) );
-			vec2_add_assn( &f->force_vec, &(result.vector) );
+		if ( !(f->identify & __F_BRAKE__ << __FORCE_ENUM_SHIFTER) ) {
+
+			// Force 옵션에 가속도가 설정되어 있다면 force에 적용될 벡터를 가속도만큼 증가시켜준다.
+			if (f->identify & (__F_ACCELERATE__ << __FORCE_ENUM_SHIFTER)) {
+				result.vector = vec2_mul(&f->accel_vec, (t - f->start_t));
+				vec2_add_assn(&f->force_vec, &(result.vector));
+			}
+
 		}
 		
 		// -- rotational momentum -----	// 회전 운동
 		
 		if( f->identify & (__F_ROTATE__ << __FORCE_ENUM_SHIFTER) ){
-			
+
+			if (f->identify & __F_BRAKE__ << __FORCE_ENUM_SHIFTER) {
+				vec2_mul_assn(&f->force_vec, 0.9);
+			}
+
 			vec_size = sqrt( SQUARE(f->force_vec.x) + SQUARE(f->force_vec.y) );
 			
 			if( vec_size == 0 ) {

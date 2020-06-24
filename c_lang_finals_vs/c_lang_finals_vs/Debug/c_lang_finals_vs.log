@@ -1,57 +1,50 @@
-﻿  main.c
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\system.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\callback.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\types.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\memory.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\physics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\force.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-  C:\C_2TEST\sophomore_first_semester_c_lang_finals\dynamic_array.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+﻿  inventory.c
   C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  C:\C_2TEST\sophomore_first_semester_c_lang_finals\types.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005:  '_CRT_SECURE_NO_WARNINGS': 매크로 재정의
-C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c: note: '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
+C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c: note: '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\vec2.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\quat.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\simd\sse2\quat.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\ray.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047:  '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047:  '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\physics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\force.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\dynamic_array.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\tree.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\memory.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\hash_table.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\list.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\world.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\graphics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\system.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(52,11): warning C4013:  'text_load'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(25,1): warning C4090:  '초기화 중': 'const' 한정자가 서로 다릅니다.
-  press_any_key.c
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101:  'f_inserter' :참조되지 않은 지역 변수입니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\system.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\callback.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\types.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\memory.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\physics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\force.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\dynamic_array.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\main.c(17,8): warning C4101: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  new_game.c
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090:  '초기화 중': 'const' 한정자가 서로 다릅니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\system.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\callback.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\types.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\memory.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\physics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\force.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\dynamic_array.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\tree.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\inventory.c(23,1): warning C4090: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005:  '_CRT_SECURE_NO_WARNINGS': 매크로 재정의
-C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c: note: '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
+C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c: note: '_CRT_SECURE_NO_WARNINGS'의 이전 정의를 참조하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\vec2.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\quat.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\simd\sse2\quat.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\cglm\include\cglm\common.h(12,1): warning C4005: C:\cglm\include\cglm\ray.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047:  '초기화 중': 'GLfloat *'의 간접 참조 수준이 'const GLfloat (*)[32]'과(와) 다릅니다.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047:  '초기화 중': 'GLuint *'의 간접 참조 수준이 'const GLuint (*)[6]'과(와) 다릅니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\tree.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\hash_table.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\list.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\world.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\buffer_obj.h(48,1): warning C4047: C:\C_2TEST\sophomore_first_semester_c_lang_finals\opengl\graphics.h: warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130,1): warning C4005:  'APIENTRY': 매크로 재정의
-D:\C_2TEST\vcpkg-master\installed\x86-windows\include\GLFW\glfw3.h(123): message :  'APIENTRY'의 이전 정의를 참조하십시오.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c(22,1): warning C4090:  '초기화 중': 'const' 한정자가 서로 다릅니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c(14,7): warning C4101:  'pos0' :참조되지 않은 지역 변수입니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c(15,7): warning C4101:  'pos1' :참조되지 않은 지역 변수입니다.
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c(64,33): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(61,33): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(61,51): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(64,43): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(64,61): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(80,12): warning C4013:  'Text_drew'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
   코드를 생성하고 있습니다...
-C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\press_any_key.c(64,39): warning C4244:  '함수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\C_2TEST\sophomore_first_semester_c_lang_finals\stage\new_game.c(67,1): warning C4244:  '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   c_lang_finals_vs.vcxproj -> C:\C_2TEST\sophomore_first_semester_c_lang_finals\c_lang_finals_vs\Debug\c_lang_finals_vs.exe

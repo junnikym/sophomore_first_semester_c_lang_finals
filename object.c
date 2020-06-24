@@ -47,6 +47,41 @@ void release_obj ( OBJECT* obj ) {
 	obj->center = NULL;
 }
 
+void draw_obj(OBJECT* obj, int fixed) {
+	int i = 0;
+	ENTITY* ent = NULL;
+	VEC2 temp_pos = V2_ZERO;
+
+	if (obj->center == NULL) {
+		for (i = 0; i <= obj->entities.size; i++) 
+			draw_ent(dyn_arr_get(&obj->entities, i));
+		
+		return;
+	}
+
+	for (i = 0; i <= obj->entities.size; i++) {
+		ent = dyn_arr_get(&obj->entities, i);
+
+		if (ent == obj->center) {
+			if (fixed == 0)
+				draw_ent(ent);
+			else
+				fixed_draw_ent(ent);
+		}
+		else {
+			temp_pos = ent->position;
+			vec2_add_assn(&ent->position, &(obj->center->position));
+
+			if (fixed == 0)
+				draw_ent(ent);
+			else
+				fixed_draw_ent(ent);
+
+			ent->position = temp_pos;
+		}
+	}
+}
+
 void adapt_each_f_obj (void* elem, int i, void* msger) {
 	MOMENTUM ent_momentum = pass_by_f_ent ( elem );
 	
@@ -59,12 +94,6 @@ void adapt_each_f_obj (void* elem, int i, void* msger) {
 	
 	((OBJECT*)msger)->head_for = ent_momentum.vector;
 }
-   
-void update_each_obj (void* elem, int i, void* msger) {
-	adapt_each_f_obj ( elem, i, msger );
-	
-	draw_ent( elem );
-}
 
 void update_obj ( OBJECT* obj ) {
 	MOMENTUM_PTR info_msger = {
@@ -72,7 +101,9 @@ void update_obj ( OBJECT* obj ) {
 		&(obj->center->angle)
 	};
 	
-	dyn_arr_foreach(&obj->entities, obj, update_each_obj);
+	dyn_arr_foreach(&obj->entities, obj, adapt_each_f_obj);
+
+	draw_obj(obj, 0);
 }
 
 // -- setting function

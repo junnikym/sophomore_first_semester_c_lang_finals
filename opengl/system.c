@@ -41,6 +41,8 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 	
 	// --- camera setting	:: camera.h 에 정의된 함수 사용
 	
+	gl_init_fixed_projection();
+
 	gl_set_FOV(18.0f);		// 시야각 설정
 	
 	gl_set_projection();	// 원근법을 적용한 투사를 구현하기위해 값을 셋팅

@@ -43,6 +43,7 @@ void gl_draw_sprite_obj ( const BUFFER_OBJECT* obj,
 	glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );	// 객체를 그려줌.
 }
 
+
  void gl_rander (  ) {
 	 // 추후 추가 예정
  }

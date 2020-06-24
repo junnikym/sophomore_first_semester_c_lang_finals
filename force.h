@@ -28,6 +28,7 @@ typedef enum __FORCE_FLAGS__ {
 	__F_ROTATE__		= (1 << 3),
 	__F_FOR_CONTROL__	= (1 << 4) | __F_ACCELERATE__,
 	__F_PHY_GRAVITY__	= (1 << 5) | __F_ACCELERATE__,		// for physics
+	__F_BRAKE__			= (1 << 6),
 } _FORCE_FALGS_;
 
 typedef struct _FORCE {

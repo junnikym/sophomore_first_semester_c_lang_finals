@@ -3,6 +3,11 @@
 // ------------------------------------------------------- //
 // ----- g_textures functions	--------------------------
 
+void* g_buf_obj_init() {
+	g_buf_objs = NULL;
+	g_buf_objs_size = 0;
+}
+
 void* g_buf_obj_insert ( const char* title,
 						 GLuint texture,
 						 BUFFER_ATTRIBUTES* attr ) {
@@ -265,9 +270,6 @@ void g_obj_foreach ( void* msger, void (*func)(void* elem, int i, void* arg) ) {
 }
 
 void g_obj_init	() {
-	g_buf_objs = NULL;
-	g_buf_objs_size = 0;
-	
 	g_user_obj = NULL;
 	g_user_obj_i = -1;
 	
@@ -371,6 +373,8 @@ void init_memory ( ) {
 		"../../opengl/shader/TransformVertexShader.vs",
 		"../../opengl/shader/TextureFragmentShader.fs"
 	);
+
+	g_buf_obj_init;
 	
 	g_obj_init ();
 	

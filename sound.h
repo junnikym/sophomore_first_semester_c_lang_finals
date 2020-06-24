@@ -16,7 +16,7 @@ MCI_PLAY_PARMS mciPlay;
 int dwID_bgm;
 int dwID_eff;
 
-#define background_bgm "../../resource/sound/title_bgm.mp3"
+#define background_bgm "../../resource/sound/start.wav"
 #define click_event "../../resource/sound/event.wav"
 
 void PlayMusic(fileName);

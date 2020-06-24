@@ -49,10 +49,27 @@ int main() {
 
 	// - Load textures
 
+	load_texture_package("../../resource/json/models.json", NULL);
+
+	init_indicator();
+
+	set_square_vertices(buf_vertice, (VEC2) { 42.0f, -28.0f }, 0.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("background",
+		gl_load_BMP("../../resource/texture/background/background_S01.bmp"),
+		&buf_obj_attr);
+
+	set_square_vertices(buf_vertice, (VEC2) { 10.0f, -10.0f }, 0.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("inventory",
+		gl_load_DDS("../../resource/texture/item/inventory.dds"),
+		&buf_obj_attr);
+
 	text_load();
 	init_screen();						// 스크린 초기화
 
 	// - run
+	PlayMusic(background_bgm);		// 음악 시작
 
 	gl_system_run(&g_window);			//
 
