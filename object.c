@@ -114,11 +114,7 @@ int obj_is_collision ( OBJECT* lhs, OBJECT* rhs ) {
 			rhs_box = *(BOX*)dyn_arr_get( &(rhs->collision_box), rhs_i );
 			vec2_add_assn ( &rhs_box.position, &rhs->center->position );
 			
-			printf("lhs : %.4lf, %.4lf. %.4lf, %.4lf // lhs : %.4lf, %.4lf. %.4lf, %.4lf \n",
-				   lhs_box.position.x, lhs_box.position.y, lhs_box.size.x, lhs_box.size.y,
-				   rhs_box.position.x, rhs_box.position.y, rhs_box.size.x, rhs_box.size.y);
-			
-			indicator = collision_detection_obb (
+			indicator |= collision_detection_obb (
 				&lhs_box.position,
 				&lhs_box.size,
 				&lhs->center->angle,
@@ -126,8 +122,6 @@ int obj_is_collision ( OBJECT* lhs, OBJECT* rhs ) {
 				&rhs_box.size,
 				&rhs->center->angle
 			);
-			
-			printf("%t%t the indicator in object collision check fucntion : %d \n", indicator);
 		}
 		
 		// ( Box and Circle )

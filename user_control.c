@@ -194,38 +194,5 @@ void game_control(const int* key, const int* key_act) {
 }
 
 void game_control_non_callback() {
-	FORCE msger = { 0 };
-	init_force(&msger);
-	
-	msger.identify = __F_FOR_CONTROL__;
-	
-	/* ----- Move Left / Right	----------------------------------------- */
-
-	// ! DOTO : more then specific speed -> set accel to zero
-	
-	/* ----- Jump 		------------------------------------------------- */
-		
-	// -- Normal Jump
-	/*
-	if ( jump_time_start != __NOT_ACT_TIME_CODE ) {
-		jump_time_current = glfwGetTime() - jump_time_start;
-		
-		if( jump_time_current >= __JUMP_DURATION_TIME ) {
-			// ! TODO : APPEND THIS CODE
-			//
-			// if ( is_entity_on_grond() ) {
-			//	jump_time_start = glfwGetTime();
-			// }
-		}
-		else {
-			msger.force_vec.y = g_User_Jump;
-		}
-	}
-	*/
-	// -- Long Jump
-	
-	/* ------------------------------------------------------------------ */
-	
-	
 	
 }

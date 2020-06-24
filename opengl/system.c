@@ -57,8 +57,6 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 }
 
 void gl_system_run(WINDOW* window) {
-	VEC2 user_pos = V2_ZERO;
-	VEC2 update_section = V2_ZERO;
 	
 	gl_clear_screen();			// 화면의 모든 요소를 지워 검정화면으로 만든다.
 	
@@ -75,22 +73,7 @@ void gl_system_run(WINDOW* window) {
 		// 키보드나 마우스에 이벤트가 발생했는지 체크
 		glfwPollEvents();
 		
-		if ( is_g_user_obj_setted() ) {
-			game_control_non_callback();	// 유저의 컨트롤을 위한 함수
-		}
-
-		user_pos = g_obj_get_position ( __CENTER_I );
-		
-		// 게임에 사용될 객체들을 모두 업데이트 시켜줌
-		update_section = world_where(user_pos);
-		g_world_update(update_section.x, update_section.y);
-		
-		// 충돌 체크
-		//g_world_collsion_process(update_section.x, update_section.y);
-
-		// 화면에 표시될 뷰를 업데이트된 위치로 적용
-		gl_set_view_pos( (vec3){user_pos.x, user_pos.y, g_cam_dist} );
-		gl_update_cam ( );
+		in_game_run();
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		

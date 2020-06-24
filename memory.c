@@ -112,6 +112,9 @@ void* g_obj_push_thing ( _OBJ_ELEM_ type, void* item, ... ) {
 // -- Setter
 
 OBJECT* g_obj_set_user_obj ( int i ) {
+	if ( i == -1 )				// 제일 끝의 요소를 사용
+		i = g_objects.size;
+
 	g_user_obj_i = i;
 	g_user_obj = dyn_arr_get ( &g_objects, i );
 
@@ -322,12 +325,12 @@ void g_world_collsion_process ( int sect_x, int sect_y ) {
 			if( indicator == -1 )
 				continue;
 			
-			if( indicator == __NO_COLLIDE )
+			if( indicator & __NO_COLLIDE )
 				continue;
 			
 			else {
 				printf(" %.2f object %p, and %p crashed ! \n", glfwGetTime(), current, loop_node);
-				printf("\t indicator : %d (no collide : %d)\n", indicator, __NO_COLLIDE);
+				printf("\t indicator : %d (no collide : %d)\n\n", indicator& __NO_COLLIDE& __NO_COLLIDE, __NO_COLLIDE);
 				
 				
 			}

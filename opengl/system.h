@@ -9,11 +9,8 @@
 
 #include "callback.h"
 #include "graphics.h"
-#include "camera.h"
 
-#include "../memory.h"
-#include "../object.h"
-#include "../utility.h"
+#include "../in_game.h"
 
 typedef struct _WINDOW {
     GLFWwindow* window;

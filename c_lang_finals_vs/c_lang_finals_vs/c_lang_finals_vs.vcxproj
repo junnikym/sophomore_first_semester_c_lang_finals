@@ -147,6 +147,7 @@
     <ClCompile Include="..\..\force.c" />
     <ClCompile Include="..\..\hash_table.c" />
     <ClCompile Include="..\..\identify.c" />
+    <ClCompile Include="..\..\in_game.c" />
     <ClCompile Include="..\..\list.c" />
     <ClCompile Include="..\..\load_json.c" />
     <ClCompile Include="..\..\main.c" />
@@ -161,6 +162,7 @@
     <ClCompile Include="..\..\opengl\system.c" />
     <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
+    <ClCompile Include="..\..\random_generator.c" />
     <ClCompile Include="..\..\tree.c" />
     <ClCompile Include="..\..\vector2.c" />
     <ClCompile Include="..\..\user_control.c" />
@@ -173,6 +175,7 @@
     <ClInclude Include="..\..\force.h" />
     <ClInclude Include="..\..\hash_table.h" />
     <ClInclude Include="..\..\identify.h" />
+    <ClInclude Include="..\..\in_game.h" />
     <ClInclude Include="..\..\list.h" />
     <ClInclude Include="..\..\load_json.h" />
     <ClInclude Include="..\..\memory.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="..\..\opengl\system.h" />
     <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
+    <ClInclude Include="..\..\random_generator.h" />
     <ClInclude Include="..\..\tree.h" />
     <ClInclude Include="..\..\types.h" />
     <ClInclude Include="..\..\vector2.h" />
