@@ -19,6 +19,12 @@
     <Filter Include="소스 파일\opengl">
       <UniqueIdentifier>{694b5139-bb96-4201-8b3d-3448867e1618}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\stage">
+      <UniqueIdentifier>{d728bed6-41fe-40b2-8478-9929ddbabbef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\stage">
+      <UniqueIdentifier>{ee5cc19a-e8ef-43b8-9a25-1e72086ac15d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\opengl\system.c">
@@ -97,6 +103,27 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="..\..\random_generator.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\text.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\screen_common.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\main_screen.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\new_game.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\option.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stage\press_any_key.c">
+      <Filter>소스 파일\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\sound.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -180,6 +207,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\random_generator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\text.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\stage\press_any_key.h">
+      <Filter>헤더 파일\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\stage\screen_common.h">
+      <Filter>헤더 파일\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sound.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

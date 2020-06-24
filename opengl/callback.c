@@ -1,11 +1,14 @@
 #include "callback.h"
-#include <stdio.h>
+
 
 void err_callback(int err_code, const char* err_description) {	// 에러 콜백 함수
 	fprintf(stderr, "Error : %s\n", err_description);				// 에러를 출력
 }
 
 void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mods) {
+	g_input.key = key;
+	g_input.key_action = action;
+
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)		// esc를 입력시
 		glfwSetWindowShouldClose(window, GLFW_TRUE);		// 프로그램을 종료해준다.
 	
@@ -14,7 +17,7 @@ void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mo
 }
 
 void mouse_cursor_callback(GLFWwindow* window, double pos_x, double pos_y) {
-	
+	g_input.mouse_pos = (VEC2){ pos_x, pos_y };
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double x_offset, double y_offset) {

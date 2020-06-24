@@ -1,0 +1,105 @@
+int result = 0;
+
+	VEC2 pos0 = (VEC2){ 0, 0 }; //background
+	VEC2 pos1 = (VEC2){ 0, 0 }; //New game button
+	VEC2 pos2 = (VEC2){ 0, -5 }; //Continue button
+	VEC2 pos3 = (VEC2){ 0, -10 }; //Option button
+	VEC2 pos4 = (VEC2){ 0, -15 }; //Exit button
+
+	FORCE test_f_inserter = generate_force((VEC2) { 0, 0 }, __F_ACCELERATE__);
+	test_f_inserter.accel_vec = (VEC2){ 0, 1 };
+
+	GLfloat buf_vertice[32] = { 0 };
+
+	BUFFER_ATTRIBUTES buf_obj_attr = {
+		buf_vertice,
+		sizeof(buf_vertice),
+		g_SQUARE_INDICES,
+		sizeof(g_SQUARE_INDICES)
+	};
+
+	memcpy(buf_vertice, g_SQUARE_VERTICES, sizeof(buf_vertice));
+
+	set_square_vertices(buf_vertice, (VEC2) { 42.0f, -28.0f }, 0.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("background",
+		gl_load_BMP("../../resource/texture/background/background_S02.bmp"),
+		&buf_obj_attr);
+
+	//New game button
+
+	set_square_vertices(buf_vertice, (VEC2) {8.0f, -2.0f }, 1.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("New game button",
+		gl_load_BMP("../../resource/texture/text/새로운시작.bmp"),
+		&buf_obj_attr);
+
+	//Continue button
+
+	set_square_vertices(buf_vertice, (VEC2) { 8.0f, -2.0f }, 1.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("Continue button",
+		gl_load_BMP("../../resource/texture/text/계속하기.bmp"),
+		&buf_obj_attr);
+
+	//Option button
+
+	set_square_vertices(buf_vertice, (VEC2) { 8.0f, -2.0f }, 1.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("Option button",
+		gl_load_BMP("../../resource/texture/text/옵션.bmp"),
+		&buf_obj_attr);
+
+	//Exit button
+
+	set_square_vertices(buf_vertice, (VEC2) { 8.0f, -2.0f }, 1.0f, (VEC2) { 1.0f, 1.0f });
+
+	g_buf_obj_insert("Exit button",
+		gl_load_BMP("../../resource/texture/text/종료.bmp"),
+		&buf_obj_attr);
+
+	/*----- OBJECT 0 	------------------------------------------------------------*/
+	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
+	/* |		-- [0] : ENTITY 0		*/
+	/* |*/	g_obj_push_thing(__ENTITY__, NULL, 0);
+	/* |*/	g_obj_set_center_ent(0, 0);
+	/* |*/	g_obj_set_obj_buf("background", 0, 0);		// set texture
+	g_obj_alter(__ENTITY__, &pos0, modify_ent, 0, 0);
+	/*------------------------------------------------------------------------------*/
+
+	/*----- New game button 	------------------------------------------------------------*/
+	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
+	/* |		-- [0] : ENTITY 0		*/
+	/* |*/	g_obj_push_thing(__ENTITY__, NULL, 1);
+	/* |*/	g_obj_set_center_ent(1, 0);
+	/* |*/	g_obj_set_obj_buf("New game button", 1, 0);	    	// set texture
+	g_obj_alter(__ENTITY__, &pos1, modify_ent, 1, 0);    //( 0 obj, 0 entity )	
+	/*------------------------------------------------------------------------------*/
+
+	/*----- Continue button	------------------------------------------------------------*/
+	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
+	/* |		-- [0] : ENTITY 0		*/
+	/* |*/	g_obj_push_thing(__ENTITY__, NULL, 2);
+	/* |*/	g_obj_set_center_ent(2, 0);
+	/* |*/	g_obj_set_obj_buf("Continue button", 2, 0);	    	// set texture
+	g_obj_alter(__ENTITY__, &pos2, modify_ent, 2, 0);    //( 0 obj, 0 entity )	
+	/*------------------------------------------------------------------------------*/
+
+	/*----- Option button 	------------------------------------------------------------*/
+	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
+	/* |		-- [0] : ENTITY 0		*/
+	/* |*/	g_obj_push_thing(__ENTITY__, NULL, 3);
+	/* |*/	g_obj_set_center_ent(3, 0);
+	/* |*/	g_obj_set_obj_buf("Option button", 3, 0);	    	// set texture
+	g_obj_alter(__ENTITY__, &pos3, modify_ent, 3, 0);    //( 0 obj, 0 entity )	
+	/*------------------------------------------------------------------------------*/
+
+	/*----- Exit button	------------------------------------------------------------*/
+	/* |*/	g_obj_push_thing(__OBJECT__, NULL);
+	/* |		-- [0] : ENTITY 0		*/
+	/* |*/	g_obj_push_thing(__ENTITY__, NULL, 4);
+	/* |*/	g_obj_set_center_ent(4, 0);
+	/* |*/	g_obj_set_obj_buf("Exit button", 4, 0);	    	// set texture
+	g_obj_alter(__ENTITY__, &pos4, modify_ent, 4, 0);    //( 0 obj, 0 entity )	
+	/*------------------------------------------------------------------------------*/
+}

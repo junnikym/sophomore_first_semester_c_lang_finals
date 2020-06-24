@@ -8,6 +8,8 @@ void init_ent( ENTITY* ent ) {
 	
 	ent->graphics_buf 	= NULL;
 	ent->texture_pos	= V2_ZERO;
+
+	ent->buf_z			= 0.0;
 }
 
 void release_ent( ENTITY* ent) {
@@ -19,6 +21,22 @@ void copy_ent( void* lhs, const void* rhs ) {
 		init_ent( (ENTITY*)lhs );
 	else
 		*(ENTITY*)lhs = *(ENTITY*)rhs;
+}
+
+void modify_ent(void* lhs, const void* rhs) {
+	if (rhs == NULL || lhs == NULL)
+		return;
+
+	else
+		((ENTITY*)lhs)->position = *(VEC2*)rhs;
+}
+
+void modify_ent_texture_pos(void* lhs, const void* rhs) {
+	if (rhs == NULL || lhs == NULL)
+		return;
+
+	else
+		((ENTITY*)lhs)->texture_pos = *(VEC2*)rhs;
 }
 
 void adapt_each_f_ent ( void* f_in_e, int i, void* msger ) {

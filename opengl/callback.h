@@ -4,10 +4,22 @@
 #include "../user_control.h"
 #include "camera.h"
 
+#include "../vector2.h"
+
 #include <stdio.h>
 
 #include <GL/glew.h>
 #include  <GLFW/glfw3.h>
+
+typedef struct _INPUT_COMPONANT_ {
+	int key;
+	int key_action;
+	VEC2 mouse_pos;
+	int left_clk;
+	int right_clk;
+} INPUT_COMPONANT;
+
+extern INPUT_COMPONANT g_input;
 
 static GLuint frame_buf_width = 0, frame_buf_height = 0;
 

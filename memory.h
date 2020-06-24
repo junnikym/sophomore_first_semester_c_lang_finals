@@ -30,7 +30,7 @@
  *		하였으며 헤더 밖에서는 다음 함수를 사용하여 수정이 가능하다.
  */
 
-static GLuint g_shader_id;
+extern GLuint g_shader_id;
 
 static TREE* g_buf_objs;	// item type : BUFFER_OBJECT
 static int g_buf_objs_size;

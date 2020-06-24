@@ -1,4 +1,4 @@
-u#ifndef USER_CONTROL_H
+#ifndef USER_CONTROL_H
 #define USER_CONTROL_H
 
 #include "vector2.h"

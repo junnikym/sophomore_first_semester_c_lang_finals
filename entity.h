@@ -24,13 +24,17 @@ typedef struct _ENTITY {
     DYN_ARR forces;   // VEC2
     // !TODO : Create attribute; (mass, meterial, ... )
 	BUFFER_OBJECT* graphics_buf;
-	VEC2 texture_pos;
+	VEC2 texture_pos; 
+	double buf_z;
 } ENTITY;
 
 void init_ent       ( ENTITY* ent );
 void release_ent    ( ENTITY* ent );
 
 void copy_ent       ( void* lhs, const void* rhs );
+
+void modify_ent(void* lhs, const void* rhs);
+void modify_ent_texture_pos(void* lhs, const void* rhs);
 
 void adapt_each_f_ent ( void* f_in_e, int i, void* pos );
 void adapt_f_ent    ( ENTITY* ent );

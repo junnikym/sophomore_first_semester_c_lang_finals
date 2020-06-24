@@ -23,7 +23,7 @@ void gl_add_FOV ( GLfloat how_much ) {
 void gl_set_projection() {
 	// ! TODO : Change screen ratio
 	
-	glm_perspective ( glm_rad(g_FOV), 1024.0f / 768.0f, 0.1f, 300.0f, g_cam_projection );
+	glm_perspective ( glm_rad(g_FOV), 1280.0f / 960.0f, 0.1f, 300.0f, g_cam_projection );
 }
 
 void gl_set_view ( vec3 pos, vec3 at, vec3 up_vec ) {

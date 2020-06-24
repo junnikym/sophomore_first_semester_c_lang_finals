@@ -163,6 +163,13 @@
     <ClCompile Include="..\..\opengl\texture.c" />
     <ClCompile Include="..\..\physics.c" />
     <ClCompile Include="..\..\random_generator.c" />
+    <ClCompile Include="..\..\sound.c" />
+    <ClCompile Include="..\..\stage\main_screen.c" />
+    <ClCompile Include="..\..\stage\new_game.c" />
+    <ClCompile Include="..\..\stage\option.c" />
+    <ClCompile Include="..\..\stage\press_any_key.c" />
+    <ClCompile Include="..\..\stage\screen_common.c" />
+    <ClCompile Include="..\..\text.c" />
     <ClCompile Include="..\..\tree.c" />
     <ClCompile Include="..\..\vector2.c" />
     <ClCompile Include="..\..\user_control.c" />
@@ -191,6 +198,10 @@
     <ClInclude Include="..\..\opengl\texture.h" />
     <ClInclude Include="..\..\physics.h" />
     <ClInclude Include="..\..\random_generator.h" />
+    <ClInclude Include="..\..\sound.h" />
+    <ClInclude Include="..\..\stage\press_any_key.h" />
+    <ClInclude Include="..\..\stage\screen_common.h" />
+    <ClInclude Include="..\..\text.h" />
     <ClInclude Include="..\..\tree.h" />
     <ClInclude Include="..\..\types.h" />
     <ClInclude Include="..\..\vector2.h" />

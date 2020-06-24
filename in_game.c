@@ -1,8 +1,8 @@
 #include "in_game.h"
-
+/*
 void new_game_init ( ) {
 
-/*----- User Object 	------------------------------------------------------------*/
+
 	g_obj_push_thing ( __OBJECT__, NULL );
 	g_obj_set_user_obj ( 0 );
 	
@@ -14,7 +14,7 @@ void new_game_init ( ) {
 	g_obj_append_collision_box ( 0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } } );
 
 	g_obj_set_user_obj(-1);
-/*----------------------------------------------------------------------------------*/
+
 
 }
 
@@ -40,3 +40,5 @@ void in_game_run ( ) {
 	gl_update_cam ( );
 
 }
+
+*/

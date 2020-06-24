@@ -50,6 +50,9 @@ int gl_system_init(WINDOW* p_out, int width, int height, const char* title) {
 		(vec3) { 0, 0, -1 },			// 초점 방향
 		(vec3) { 0, 1, 0 }		// 카메라 방향
 	);
+
+	gl_update_cam();
+
 	glEnable ( GL_BLEND );
 	glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
   
@@ -73,7 +76,9 @@ void gl_system_run(WINDOW* window) {
 		// 키보드나 마우스에 이벤트가 발생했는지 체크
 		glfwPollEvents();
 		
-		in_game_run();
+		run_current_screen();
+
+		update_g_obj();
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		

@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 #include <cglm/cglm.h>
 
-static GLfloat g_FOV = 0.0f;
+static GLfloat g_FOV = 45.0f;
 
 // Projection matrix : 45 Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 static mat4 g_cam_projection = GLM_MAT4_IDENTITY_INIT;
@@ -14,11 +14,11 @@ static mat4 g_cam_projection = GLM_MAT4_IDENTITY_INIT;
 // Camera matrix
 static vec3 g_cam_view_at 		= GLM_VEC3_ZERO_INIT;
 static vec3 g_cam_view_up 		= GLM_VEC3_ZERO_INIT;
-static vec3 g_cam_view_pos 	= GLM_VEC3_ZERO_INIT;
+static vec3 g_cam_view_pos	 	= GLM_VEC3_ZERO_INIT;
 
 static mat4 g_cam_view 			= GLM_MAT4_IDENTITY_INIT;
 
-static double g_cam_dist = 250.0;
+static double g_cam_dist = 175.0;
 
 static mat4 g_VP =GLM_MAT4_IDENTITY_INIT;		// MVP -> M | VP
 

@@ -10,7 +10,7 @@
 #include "callback.h"
 #include "graphics.h"
 
-#include "../in_game.h"
+#include "../stage/screen_common.h"
 
 typedef struct _WINDOW {
     GLFWwindow* window;
