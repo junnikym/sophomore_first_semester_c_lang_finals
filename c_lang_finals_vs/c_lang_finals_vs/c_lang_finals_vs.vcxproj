@@ -147,9 +147,6 @@
     <ClCompile Include="..\..\force.c" />
     <ClCompile Include="..\..\hash_table.c" />
     <ClCompile Include="..\..\identify.c" />
-    <ClCompile Include="..\..\inventory.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\in_game.c" />
     <ClCompile Include="..\..\list.c" />
     <ClCompile Include="..\..\load_json.c" />
@@ -187,9 +184,6 @@
     <ClInclude Include="..\..\force.h" />
     <ClInclude Include="..\..\hash_table.h" />
     <ClInclude Include="..\..\identify.h" />
-    <ClInclude Include="..\..\inventory.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\..\in_game.h" />
     <ClInclude Include="..\..\list.h" />
     <ClInclude Include="..\..\load_json.h" />

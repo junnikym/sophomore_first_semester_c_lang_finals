@@ -175,6 +175,16 @@ void g_obj_append_collision_box ( int obj_index, BOX box ) {
 	);
 }
 
+void g_obj_append_interaction_box(int obj_index, BOX box) {
+	OBJECT* target = dyn_arr_get(&g_objects, obj_index);
+
+	dyn_arr_push_back(
+		&(target->interaction),
+		&box,
+		copy_box
+	);
+}
+
 // -- check function
 
 int is_g_user_obj_setted () {
@@ -297,19 +307,22 @@ void g_obj_release() {
 // ------------------------------------------------------- //
 // ----- g_world function		------------------------------
 
-void g_world_collsion_process ( int sect_x, int sect_y ) {
+void g_world_process ( int sect_x, int sect_y, int* interaction) {
 	LIST** quads = NULL;
 	int quad_i = quadrant_get_index( (VEC2){sect_x, sect_y} );
 	
 	LIST* current = NULL;
 	LIST* loop_node = NULL;
-	VEC2 normalized_current = V2_ZERO;
-	VEC2 normalized_loop = V2_ZERO;
 	
 	OBJECT* current_obj = NULL;
 	OBJECT* loop_obj = NULL;
 	
 	int indicator = 0;
+	int interaction_indic = 0;
+	WORLD_NODE* non_user = 0;
+
+	int x_i = -1, y_i = 0;
+	int interaction_stack = 0;
 	
 	quads = (g_world.world)[sect_x][sect_y].part;
 	
@@ -318,9 +331,31 @@ void g_world_collsion_process ( int sect_x, int sect_y ) {
 	
 	for ( current = quads[quad_i]; current->next != NULL; current = current->next ) {
 		current_obj = ((WORLD_NODE*)(current->elem))->elem;
+		x_i++;
+		y_i = x_i;
 		
 		for ( loop_node = current->next; loop_node != NULL; loop_node = loop_node->next ) {
+			non_user = NULL;
+
 			loop_obj = ((WORLD_NODE*)(loop_node->elem))->elem;
+			y_i++;
+
+			if (x_i == g_user_obj_i) {
+				non_user = ((WORLD_NODE*)(loop_node->elem));
+			}
+			if (y_i == g_user_obj_i) {
+				non_user = ((WORLD_NODE*)(current->elem));
+			}
+
+			if(non_user != NULL) {
+				interaction_indic = obj_is_interaction_range(current_obj, loop_obj);
+
+				printf("interaction collision : %d \n", interaction_indic);
+
+				if (!(interaction_indic & __NO_COLLIDE)) {
+					interaction[interaction_stack] = non_user->index;
+				}
+			}
 
 			indicator = obj_is_collision (current_obj, loop_obj);
 			

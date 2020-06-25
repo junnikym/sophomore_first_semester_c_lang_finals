@@ -1,7 +1,7 @@
 #include "press_any_key.h"
 #include "../text.h"
 #include "../sound.h"
-#include "../inventory.h"
+#include "inventory.h"
 
 void reset_loaded_time() {
 	loaded_time = glfwGetTime();

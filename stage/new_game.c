@@ -17,8 +17,10 @@ void new_game_load() {
 	g_obj_set_essential_f(0, -1);
 	g_obj_set_obj_buf("main_character_walk", 0, -1);	// set texture
 	g_obj_append_collision_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
+	g_obj_append_interaction_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
 
-	g_obj_set_user_obj(-1);
+	g_obj_set_user_obj(0);
+	g_world_insert_obj(0);
 
 	/*-------------------------------------------------------------------------- */
 	/*----- MAIN SHIP	 ------------------------------------------------------- */
@@ -31,6 +33,9 @@ void new_game_load() {
 	g_obj_set_essential_f(1, -1);
 	g_obj_set_obj_buf("ship_b", 1, -1);	// set texture
 	g_obj_append_collision_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
+	g_obj_append_interaction_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
+
+	g_world_insert_obj(1);
 
 	/*-------------------------------------------------------------------------- */
 }
@@ -45,8 +50,11 @@ void new_game() {
 		"return to your ship"
 	};
 
+	VEC2 tut_pos = V2_ZERO;
 	VEC2 user_pos = V2_ZERO;
 	VEC2 update_section = V2_ZERO;
+
+	int interaction_i[4] = { 0 };
 
 	double tut_range = 0.0;
 
@@ -61,7 +69,10 @@ void new_game() {
 	g_world_update(update_section.x, update_section.y);
 
 	// 충돌 체크
-	g_world_collsion_process(update_section.x, update_section.y);
+	g_world_process(update_section.x, update_section.y, interaction_i);
+
+	printf("interaction %d, %d, %d, %d \n",
+		interaction_i[0], interaction_i[1], interaction_i[2], interaction_i[3]);
 
 	// 화면에 표시될 뷰를 업데이트된 위치로 적용
 	gl_set_view_pos((vec3) { user_pos.x, user_pos.y, g_cam_dist });
@@ -72,12 +83,13 @@ void new_game() {
 
 	tut_range = vec2_get_size(&user_pos);
 
-	if(tut_range > 100*(tut_sequence+1)) {
+	if(tut_range > 50*(tut_sequence+1)) {
+		tut_pos = user_pos;
 		tut_sequence++;
 	}
 
 	if (tut_sequence < 3) {
-		Text_drew(tut_phrase[tut_sequence], (int)user_pos.x, (int)user_pos.y + 5, 1.0f, 0.2f);
+		Text_drew(tut_phrase[tut_sequence], (int)tut_pos.x, (int)tut_pos.y + 5, 1.0f, 0.2f);
 	}
 
 	if (is_open_inventory() != 0)

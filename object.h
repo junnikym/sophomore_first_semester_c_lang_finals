@@ -27,6 +27,8 @@ typedef struct _OBJECT_ {
 	int collision_indicator;
 	
 	VEC2 head_for;
+
+	DYN_ARR interaction;
 } OBJECT;
 
 

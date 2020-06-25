@@ -70,6 +70,7 @@ void 	g_obj_set_collision_box ( int obj_i, VEC2 box );
 void* 	g_obj_set_obj_buf		( char* obj_buf_key, int obj_i, int ent_i);
 
 void 	g_obj_append_collision_box ( int obj_index, BOX box );
+void	g_obj_append_interaction_box (int obj_index, BOX box);
 
 // -- check functions();
 
@@ -97,7 +98,7 @@ void 	g_obj_release 			( );
 // ------------------------------------------------------- //
 // ----- g_world functions	------------------------------
 
-void 	g_world_collsion_process ( int sect_x, int sect_y );
+void 	g_world_process		( int sect_x, int sect_y, int* intersection );
 
 void 	g_world_init		( int _x_size, int _y_size );
 void 	g_world_release	    ( );
