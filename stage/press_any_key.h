@@ -8,6 +8,7 @@
 
 #include "../vector2.h"
 #include "../memory.h"
+#include "../random_generator.h"
 
 #define __HEART_SIZE 5
 #define __HEART_INTERVAL 12.5

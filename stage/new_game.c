@@ -7,6 +7,8 @@ void init_game() {
 }
 
 void new_game_load() {
+	VEC2 position = {0, 0};
+
 	/*----- USER OBJECT	------------------------------------------------------- */
 
 	g_obj_push_thing(__OBJECT__, NULL);
@@ -32,15 +34,20 @@ void new_game_load() {
 	g_obj_set_center_ent(1, 0);
 	g_obj_set_essential_f(1, -1);
 	g_obj_set_obj_buf("ship_b", 1, -1);	// set texture
-	g_obj_append_collision_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
-	g_obj_append_interaction_box(0, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
+	g_obj_append_collision_box(1, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
+	g_obj_append_interaction_box(1, (BOX) { (VEC2) { 0.0f, 0.0f }, (VEC2) { 2.5f, 2.5f } });
 
-	g_world_insert_obj(1);
+	position.x = 100;	position.y = 0;
+	g_obj_alter(__ENTITY__, &position, modify_ent, 1, __CENTER_I);
+
+	g_world_insert_obj ( 1 );
 
 	/*-------------------------------------------------------------------------- */
+
+	generate_rand_asteroid ( (VEC2) { 0.0f, 0.0f }, 50 );
 }
 
-void new_game() {
+void new_game ( ) {
 	static int tut_sequence = 0;
 
 	static char* tut_phrase[] = {
@@ -50,29 +57,34 @@ void new_game() {
 		"return to your ship"
 	};
 
-	VEC2 tut_pos = V2_ZERO;
+	static VEC2 tut_pos = { 0, 0 };
 	VEC2 user_pos = V2_ZERO;
 	VEC2 update_section = V2_ZERO;
 
-	int interaction_i[4] = { 0 };
+	int interaction_i = 0;
+	int i = 0, j = 0;
 
 	double tut_range = 0.0;
 
-	if (is_g_user_obj_setted()) {
-		game_control_non_callback();	// 유저의 컨트롤을 위한 함수
+	if ( is_g_user_obj_setted ( ) ) {
+		game_control_non_callback ( );	// 유저의 컨트롤을 위한 함수
 	}
 
-	user_pos = g_obj_get_position(__CENTER_I);
+	user_pos = g_obj_get_position ( __CENTER_I );
 
-	// 게임에 사용될 객체들을 모두 업데이트 시켜줌
-	update_section = world_where(user_pos);
-	g_world_update(update_section.x, update_section.y);
+	update_section = world_where ( user_pos );
 
-	// 충돌 체크
-	g_world_process(update_section.x, update_section.y, interaction_i);
+	for ( i = -1; i < 2; i++ ) {
+		for ( j = -1; j < 2; j++ ) {
+			// 게임에 사용될 객체들을 모두 업데이트 시켜줌
+			g_world_update ( update_section.x + i, update_section.y + j );
 
-	printf("interaction %d, %d, %d, %d \n",
-		interaction_i[0], interaction_i[1], interaction_i[2], interaction_i[3]);
+			// 충돌 체크
+			g_world_process ( update_section.x + i, update_section.y + j, &interaction_i );
+		}
+	}
+
+	printf(" interaction : %d \n", interaction_i);
 
 	// 화면에 표시될 뷰를 업데이트된 위치로 적용
 	gl_set_view_pos((vec3) { user_pos.x, user_pos.y, g_cam_dist });

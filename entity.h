@@ -35,26 +35,31 @@ typedef struct _ENTITY {
 	int is_breke;
 } ENTITY;
 
-void ent_toggle_brake(void* ent, const void* brake);
+// 엔티티를 제동을 껏다 켜줄 함수
+void ent_toggle_brake(void* ent, const void* brake);		
 
-void init_ent       ( ENTITY* ent );
-void release_ent    ( ENTITY* ent );
+void init_ent       ( ENTITY* ent );	// entity 초기화 함수
+void release_ent    ( ENTITY* ent );	// entity 를 해제해주는 함수
 
-void copy_ent       ( void* lhs, const void* rhs );
+// ----- 함수포인터로 전달되어 entity요소들을 변경해주는 함수들 -----
+void copy_ent				( void* lhs, const void* rhs );
+void modify_ent				(void* lhs, const void* rhs);
+void modify_ent_texture_pos	(void* lhs, const void* rhs);
+void set_blend_in_ent		(void* lhs, const void* blend);
+// ------------------------------------------------------------------
 
-void modify_ent(void* lhs, const void* rhs);
-void modify_ent_texture_pos(void* lhs, const void* rhs);
-void set_blend_in_ent(void* lhs, const void* blend);
-
+// entity에 force를 적용 시키는 함수
 void adapt_each_f_ent ( void* f_in_e, int i, void* pos );
 void adapt_f_ent    ( ENTITY* ent );
 
-// ! TODO : change function name -> pass_by_... -> pass_...
+// entity에 force를 종합하여 넘겨주는 함수
 MOMENTUM pass_by_f_ent  ( ENTITY* ent );
 
+// entity를 화면에 출력하는 함수
 void draw_ent		( const ENTITY* ent );
 void fixed_draw_ent	( const ENTITY* ent );
 
+// 게임에 필요한 조작에 필요한 힘, 물리에 필요한 힘 등을 추가해주는 함수
 void set_essential_f_ent ( ENTITY* ent );
 
 #endif

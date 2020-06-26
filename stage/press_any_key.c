@@ -56,6 +56,8 @@ void title_test() {
 	}
 	//-------------------- press any key
 
+	update_g_obj ( );
+
 	if ( (int)((glfwGetTime() - loaded_time)*2) % 2 == 1 ) {
 		Text_drew("press any key", -3.0, -5.0, 1.0, 0.2);
 	}

@@ -8,6 +8,7 @@
 
 static OBJECT g_INVENTORY;
 static int open_inventory = 0;
+
 static int items_in_inventory[9] = { 0 };
 
 void toggle_inventory();

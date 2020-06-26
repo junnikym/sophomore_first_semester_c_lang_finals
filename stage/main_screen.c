@@ -79,4 +79,6 @@ void main_screen() {
 	Text_drew("EXIT ( KEY 4 )", -3.0, -7.0, 1.0, 0.2);
 
 	//g_obj_alter(__ENTITY__, blend, set_blend_in_ent, 0, 0);
+
+	update_g_obj ( );
 }

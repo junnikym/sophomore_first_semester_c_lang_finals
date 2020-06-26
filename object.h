@@ -58,9 +58,9 @@ void 	detech_center_obj	( OBJECT* obj);
 // -- collision function
 
 int obj_is_collision ( OBJECT* lhs, OBJECT* rhs );
+int obj_is_interaction_range ( OBJECT* lhs, OBJECT* rhs );
 
 // ------------------------------------------------------- //
-
 
 #endif
  

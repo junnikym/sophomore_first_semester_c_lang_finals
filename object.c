@@ -177,7 +177,9 @@ int obj_is_interaction_range(OBJECT* lhs, OBJECT* rhs) {
 	int lhs_i = 0, rhs_i = 0;
 	BOX lhs_box = { V2_ZERO, V2_ZERO }, rhs_box = { V2_ZERO, V2_ZERO };
 
-	if (lhs == NULL || rhs == NULL)	return -1;
+	if ( lhs == NULL || rhs == NULL ) {
+		return -1;
+	}
 
 	if (lhs->interaction.size == -1 && rhs->interaction.size == -1) {
 		return -1;
@@ -186,11 +188,11 @@ int obj_is_interaction_range(OBJECT* lhs, OBJECT* rhs) {
 	for (lhs_i = 0; lhs_i <= lhs->interaction.size; lhs_i++) {
 		lhs_box = *(BOX*)dyn_arr_get(&(lhs->interaction), lhs_i);
 		vec2_add_assn(&lhs_box.position, &lhs->center->position);
-	
+
 		for (rhs_i = 0; rhs_i <= rhs->interaction.size; rhs_i++) {
 			rhs_box = *(BOX*)dyn_arr_get(&(rhs->interaction), rhs_i);
 			vec2_add_assn(&rhs_box.position, &rhs->center->position);
-			
+
 			indicator |= collision_detection_obb(
 				&lhs_box.position,
 				&lhs_box.size,

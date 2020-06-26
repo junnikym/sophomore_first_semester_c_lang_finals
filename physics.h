@@ -53,11 +53,4 @@ int collision_detection_circle ( const VEC2* lhs_pos,
 								 const VEC2* rhs_pos, 
 								 const double* rhs_range );
 
-	// 원과 네모 간의 충돌
-int collision_detection_cir_box ( const VEC2* circle_pos,
-								  const double* circle_range,
-								  const VEC2* box_pos,
-								  const VEC2* box_size,
-								  const double* box_angle );
-
 #endif

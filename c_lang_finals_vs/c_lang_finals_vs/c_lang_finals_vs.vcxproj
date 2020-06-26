@@ -156,7 +156,6 @@
     <ClCompile Include="..\..\opengl\buffer_obj.c" />
     <ClCompile Include="..\..\opengl\callback.c" />
     <ClCompile Include="..\..\opengl\camera.c" />
-    <ClCompile Include="..\..\opengl\control.c" />
     <ClCompile Include="..\..\opengl\graphics.c" />
     <ClCompile Include="..\..\opengl\shader.c" />
     <ClCompile Include="..\..\opengl\system.c" />
@@ -192,7 +191,6 @@
     <ClInclude Include="..\..\opengl\buffer_obj.h" />
     <ClInclude Include="..\..\opengl\callback.h" />
     <ClInclude Include="..\..\opengl\camera.h" />
-    <ClInclude Include="..\..\opengl\control.h" />
     <ClInclude Include="..\..\opengl\graphics.h" />
     <ClInclude Include="..\..\opengl\img_sprite.h" />
     <ClInclude Include="..\..\opengl\shader.h" />

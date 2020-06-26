@@ -46,23 +46,23 @@
 				"end": "end"
 			}
 		]},
-		{ "ship_a_truster": [
+		{ "ship_b": [
 			{
 				"extension": "dds",
-				"path": "ship_module/truster_a.dds",
-				"size_x": "5.0",
-				"size_y": "5.0",
+				"path": "integral_ship/ship_b.dds",
+				"size_x": "18.0",
+				"size_y": "6.0",
 				"end": "end"
 			}
 		]},
-		{ "ship_b": [
-      {
-        "extension": "dds",
-        "path": "integral_ship/ship_b.dds",
-        "size_x": "18.0",
-        "size_y": "6.0",
-        "end": "end"
-      }
+		{ "asteroid": [
+			{
+				"extension": "dds",
+				"path": "asteroid.dds",
+				"size_x": "12.0",
+				"size_y": "10.0",
+				"end": "end"
+			}
 		]}
 		
 	]

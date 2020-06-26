@@ -127,6 +127,10 @@ OBJECT* g_obj_set_user_obj ( int i ) {
 }
 
 ENTITY* g_obj_set_center_ent ( int obj_i, int ent_i ) {
+	if(obj_i == -1) {
+		obj_i = g_objects.size;
+	}
+
 	return set_center_obj ( dyn_arr_get ( &g_objects, obj_i ), ent_i );
 }
 
@@ -323,8 +327,13 @@ void g_world_process ( int sect_x, int sect_y, int* interaction) {
 
 	int x_i = -1, y_i = 0;
 	int interaction_stack = 0;
+
+	// 처음으로 비교 시 무조건 비교대상으로 들어가야 하기 때문에 가장 큰 수를 넣어줌
+	double interaction_comp = (double)__WORLD_UNIT;
+	VEC2 dist = V2_ZERO;
+	double dist_size = 0.0;
 	
-	quads = (g_world.world)[sect_x][sect_y].part;
+	quads = (g_world.world)[abs(sect_x)][abs(sect_y)].part;
 	
 	if(quads[quad_i] == NULL || quads[quad_i]->next == NULL)
 		return;				// 비교 대상까지 2개 이상의 리스트가 존재해야함.
@@ -348,12 +357,22 @@ void g_world_process ( int sect_x, int sect_y, int* interaction) {
 			}
 
 			if(non_user != NULL) {
-				interaction_indic = obj_is_interaction_range(current_obj, loop_obj);
-
-				printf("interaction collision : %d \n", interaction_indic);
+				interaction_indic = obj_is_interaction_range(current_obj, loop_obj );
 
 				if (!(interaction_indic & __NO_COLLIDE)) {
-					interaction[interaction_stack] = non_user->index;
+
+					dist = vec2_get_distance(
+								&current_obj->center->position, 
+								&loop_obj->center->position
+							);
+
+					dist_size = vec2_get_size(&dist);
+
+					if ( interaction_comp > dist_size ) {
+						interaction_comp = dist_size;
+						*interaction = non_user->index;
+					}
+
 				}
 			}
 
@@ -366,8 +385,8 @@ void g_world_process ( int sect_x, int sect_y, int* interaction) {
 				continue;
 			
 			else {
-				printf(" %.2f object %p, and %p crashed ! \n", glfwGetTime(), current, loop_node);
-				printf("\t indicator : %d (no collide : %d)\n\n", indicator& __NO_COLLIDE& __NO_COLLIDE, __NO_COLLIDE);
+			//	printf(" %.2f object %p, and %p crashed ! \n", glfwGetTime(), current, loop_node);
+			//	printf("\t indicator : %d (no collide : %d)\n\n", indicator& __NO_COLLIDE& __NO_COLLIDE, __NO_COLLIDE);
 				
 				
 			}
@@ -385,9 +404,14 @@ void g_world_release() {
 }
 
 void g_world_insert_obj ( int g_obj_index ) {
-	OBJECT* obj_ptr = dyn_arr_get( &g_objects, g_obj_index );
-	
-	world_insert(&g_world, obj_ptr->center->position, obj_ptr, g_obj_index);
+	OBJECT* obj_ptr = NULL;
+
+	if(g_obj_index == -1)
+		obj_ptr = dyn_arr_get ( &g_objects, g_objects.size );
+	else
+		obj_ptr = dyn_arr_get ( &g_objects, g_obj_index );
+
+	world_insert ( &g_world, obj_ptr->center->position, obj_ptr, g_obj_index );
 }
 
 void g_world_update_obj ( void* obj, VEC2* return_pos ) {

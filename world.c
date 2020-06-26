@@ -155,7 +155,8 @@ int world_insert ( WORLD* _world, VEC2 where, void* elem, int index  ) {
 	inserter_w = (WORLD_NODE*)malloc(sizeof(WORLD_NODE));
 	inserter_w->index = index;
 	inserter_w->elem = elem;
-	
+	inserter_w ->pre_list = NULL;
+
 	inserter_l = list_create(inserter_w);
 	
 	target = _world->world[(int)where.x][(int)where.y].part;
@@ -178,7 +179,8 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 	int quadrant_index = quadrant_get_index( (VEC2){section_x, section_y} );
 	int new_quadrant_index = 0;
 	
-	first_node = _world->world[section_x][section_y].part;
+	first_node = _world->world[abs(section_x)][abs(section_y)].part;
+	
 	loop_node = first_node[quadrant_index];
 	
 	while( loop_node != NULL ) {
@@ -203,7 +205,8 @@ void world_update ( WORLD* _world, int section_x, int section_y,
 				// 이전 노드의 다음연결, 다음 노드의 이전연결을 변경하여 순서를 바꾸어줌
 				
 				if ( node->next == NULL ) { 
-					(elem->pre_list)->next = NULL;
+					if(elem->pre_list != NULL)
+						(elem->pre_list)->next = NULL;
 				}
 				else {
 					elem->pre_list->next = node->next;

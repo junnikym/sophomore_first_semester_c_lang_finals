@@ -77,10 +77,8 @@ void gl_system_run(WINDOW* window) {
 		
 		// 키보드나 마우스에 이벤트가 발생했는지 체크
 		glfwPollEvents();
-		
-		run_current_screen();
 
-		update_g_obj();
+		run_current_screen();
 
 		gl_rander();			// 그래픽에 필요한 함수들을 실행시켜줌
 		
